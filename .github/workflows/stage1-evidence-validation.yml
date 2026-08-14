@@ -7,6 +7,8 @@ on:
       - anhui_zsb_data/config/phase1_evidence_inventory.json
       - anhui_zsb_data/reports/hfnu_reference_books_check.*
       - anhui_zsb_data/reports/stage1_evidence_collection_report.*
+      - anhui_zsb_data/reports/pilot_b_selection.md
+      - anhui_zsb_data/scripts/collect_stage1_evidence*.py
       - anhui_zsb_data/scripts/verify_stage1_evidence.py
       - .github/workflows/stage1-evidence-validation.yml
   push:
@@ -17,6 +19,8 @@ on:
       - anhui_zsb_data/config/phase1_evidence_inventory.json
       - anhui_zsb_data/reports/hfnu_reference_books_check.*
       - anhui_zsb_data/reports/stage1_evidence_collection_report.*
+      - anhui_zsb_data/reports/pilot_b_selection.md
+      - anhui_zsb_data/scripts/collect_stage1_evidence*.py
       - anhui_zsb_data/scripts/verify_stage1_evidence.py
       - .github/workflows/stage1-evidence-validation.yml
   workflow_dispatch:
