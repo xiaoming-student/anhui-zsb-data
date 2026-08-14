@@ -23,6 +23,25 @@ from fetch_stage1_evidence import (
 MIN_DISTINCT_SOURCES = 3
 
 
+def embedded_pdf_section(report: dict[str, Any]) -> str:
+    embedded = report.get("embedded_pdf_fetch")
+    if not isinstance(embedded, dict):
+        return ""
+    unmet = report.get("required_document_failure_source_ids", [])
+    lines = [
+        "## 页面内嵌 PDF 补抓",
+        "",
+        f"- 成功发现并归档：{int(embedded.get('discovered_count', 0))} 个",
+        f"- 下载失败或内容异常：{int(embedded.get('failed_count', 0))} 个",
+        f"- 强制文档证据未满足：{len(unmet)} 个",
+        "",
+    ]
+    if unmet:
+        lines.append("未满足来源：" + "、".join(f"`{source_id}`" for source_id in unmet))
+        lines.append("")
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     if not REPORT_JSON.is_file():
         raise SystemExit(f"Missing fetch report: {REPORT_JSON}")
@@ -89,6 +108,10 @@ def main() -> int:
     )
 
     markdown = build_markdown(report)
+    sections: list[str] = []
+    embedded = embedded_pdf_section(report)
+    if embedded:
+        sections.append(embedded)
     if filtered_groups:
         lines = [
             "## 自动排除的跨页面共享图片",
@@ -103,8 +126,9 @@ def main() -> int:
                 f"- `{group['sha256']}`：出现在 {group['distinct_source_count']} 个来源页面，"
                 f"删除 {len(group['removed_paths'])} 份重复副本。"
             )
-        section = "\n".join(lines) + "\n\n"
-        markdown = markdown.replace("## 边界\n", section + "## 边界\n", 1)
+        sections.append("\n".join(lines) + "\n")
+    if sections:
+        markdown = markdown.replace("## 边界\n", "\n".join(sections) + "\n## 边界\n", 1)
     write_text_if_changed(REPORT_MD, markdown)
 
     print(
