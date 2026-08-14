@@ -1,0 +1,108 @@
+name: Stage 1 Evidence Collection
+
+on:
+  push:
+    branches:
+      - data/stage1-evidence-collection
+    paths:
+      - .github/workflows/stage1-evidence-collection.yml
+      - anhui_zsb_data/scripts/collect_stage1_evidence.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage1-evidence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - name: Checkout evidence branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Collect official evidence
+        id: collect
+        shell: bash
+        run: |
+          mkdir -p anhui_zsb_data/ci-logs
+          set +e
+          python3 anhui_zsb_data/scripts/collect_stage1_evidence.py \
+            2>&1 | tee anhui_zsb_data/ci-logs/stage1-evidence-collection.log
+          status=${PIPESTATUS[0]}
+          set -e
+          echo "status=${status}" >> "${GITHUB_OUTPUT}"
+
+      - name: Run existing quality gate
+        id: quality
+        shell: bash
+        run: |
+          set +e
+          cd anhui_zsb_data
+          python3 scripts/run_quality_gate.py \
+            2>&1 | tee -a ci-logs/stage1-evidence-collection.log
+          status=${PIPESTATUS[0]}
+          set -e
+          echo "status=${status}" >> "${GITHUB_OUTPUT}"
+
+      - name: Commit collected evidence and reports
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            anhui_zsb_data/raw/2024/HFNU \
+            anhui_zsb_data/raw/2025/HFNU \
+            anhui_zsb_data/raw/2026/HFNU \
+            anhui_zsb_data/raw/2024/AHUA \
+            anhui_zsb_data/raw/2026/AHUA \
+            anhui_zsb_data/config/phase1_evidence_inventory.json \
+            anhui_zsb_data/reports/stage1_evidence_collection_report.json \
+            anhui_zsb_data/reports/stage1_evidence_collection_report.md \
+            anhui_zsb_data/reports/pilot_b_selection.md
+
+          if git diff --cached --quiet; then
+            echo "No evidence changes to commit."
+          else
+            git commit -m "data(evidence): archive stage 1 official sources"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Upload collection logs and reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: stage1-evidence-collection
+          path: |
+            anhui_zsb_data/ci-logs/stage1-evidence-collection.log
+            anhui_zsb_data/config/phase1_evidence_inventory.json
+            anhui_zsb_data/reports/stage1_evidence_collection_report.json
+            anhui_zsb_data/reports/stage1_evidence_collection_report.md
+            anhui_zsb_data/reports/pilot_b_selection.md
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Enforce collection and quality results
+        if: always()
+        shell: bash
+        run: |
+          collect_status="${{ steps.collect.outputs.status }}"
+          quality_status="${{ steps.quality.outputs.status }}"
+          if [[ "${collect_status}" != "0" || "${quality_status}" != "0" ]]; then
+            echo "Collection status: ${collect_status}"
+            echo "Quality gate status: ${quality_status}"
+            exit 1
+          fi
