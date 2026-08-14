@@ -8,6 +8,7 @@ on:
       - .github/workflows/stage1-evidence-fetch.yml
       - anhui_zsb_data/config/stage1_sources.json
       - anhui_zsb_data/scripts/fetch_stage1_evidence.py
+      - anhui_zsb_data/scripts/fetch_embedded_stage1_assets.py
       - anhui_zsb_data/scripts/clean_stage1_evidence.py
   workflow_dispatch:
 
@@ -52,6 +53,12 @@ jobs:
           mkdir -p ci-logs
           python3 scripts/fetch_stage1_evidence.py 2>&1 \
             | tee ci-logs/stage1-evidence-fetch.log
+
+      - name: Fetch JavaScript-embedded PDFs
+        working-directory: anhui_zsb_data
+        run: |
+          python3 scripts/fetch_embedded_stage1_assets.py 2>&1 \
+            | tee -a ci-logs/stage1-evidence-fetch.log
 
       - name: Remove repeated site-chrome images
         working-directory: anhui_zsb_data
