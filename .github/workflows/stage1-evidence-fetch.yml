@@ -1,0 +1,95 @@
+name: Stage 1 Evidence Fetch
+
+on:
+  push:
+    branches:
+      - data/stage1-pilot-a-pilot-b-evidence
+    paths:
+      - .github/workflows/stage1-evidence-fetch.yml
+      - anhui_zsb_data/config/stage1_sources.json
+      - anhui_zsb_data/scripts/fetch_stage1_evidence.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage1-evidence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch-official-evidence:
+    name: Fetch official evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Guard the evidence branch
+        run: |
+          if [[ "${GITHUB_REF_NAME}" != "data/stage1-pilot-a-pilot-b-evidence" ]]; then
+            echo "Refusing to write evidence outside the dedicated Stage 1 branch."
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Validate source configuration
+        working-directory: anhui_zsb_data
+        run: python3 scripts/fetch_stage1_evidence.py --check-config
+
+      - name: Fetch official pages and direct public assets
+        working-directory: anhui_zsb_data
+        run: |
+          mkdir -p ci-logs
+          python3 scripts/fetch_stage1_evidence.py 2>&1 \
+            | tee ci-logs/stage1-evidence-fetch.log
+
+      - name: Upload fetch result before committing
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: stage1-official-evidence
+          path: |
+            anhui_zsb_data/ci-logs/stage1-evidence-fetch.log
+            anhui_zsb_data/config/stage1_sources.json
+            anhui_zsb_data/raw/2024/HFNU/DOC-HFNU-2024-*
+            anhui_zsb_data/raw/2025/HFNU/DOC-HFNU-2025-*
+            anhui_zsb_data/raw/2026/HFNU/DOC-HFNU-2026-*
+            anhui_zsb_data/raw/2024/AHUA/**
+            anhui_zsb_data/raw/2025/AHUA/**
+            anhui_zsb_data/raw/2026/AHUA/**
+            anhui_zsb_data/reports/stage1_evidence_fetch_report.json
+            anhui_zsb_data/reports/stage1_evidence_fetch_report.md
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit archived evidence to the Stage 1 branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            anhui_zsb_data/raw/2024/HFNU \
+            anhui_zsb_data/raw/2025/HFNU \
+            anhui_zsb_data/raw/2026/HFNU \
+            anhui_zsb_data/raw/2024/AHUA \
+            anhui_zsb_data/raw/2025/AHUA \
+            anhui_zsb_data/raw/2026/AHUA \
+            anhui_zsb_data/reports/stage1_evidence_fetch_report.json \
+            anhui_zsb_data/reports/stage1_evidence_fetch_report.md
+
+          if git diff --cached --quiet; then
+            echo "No evidence changes to commit."
+            exit 0
+          fi
+
+          git commit -m "data(stage1): archive Pilot A and Pilot B official evidence"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

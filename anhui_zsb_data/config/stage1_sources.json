@@ -1,0 +1,466 @@
+{
+  "schema_version": "1.0",
+  "scope": {
+    "stage": 1,
+    "years": [
+      2024,
+      2025,
+      2026
+    ],
+    "pilot_a_school_id": "HFNU",
+    "pilot_b_school_id": "AHUA",
+    "privacy_policy": "aggregate_only",
+    "notes": [
+      "仅归档官方公开页面及其直接附件，不抓取需要身份证号查询的录取系统。",
+      "不归档含考生姓名、考生号或身份证号的名单型页面。",
+      "遇到验证码、登录或访问控制时只记录阻断状态，不绕过限制。"
+    ]
+  },
+  "pilot_b_selection": {
+    "school_id": "AHUA",
+    "school_name": "安徽艺术学院",
+    "official_site": "https://www.ahua.edu.cn/zsw/",
+    "selection_reason": [
+      "同时存在校本部培养和多所高职院校联合培养，培养地点结构与 HFNU 不同。",
+      "专业课包含表演、视唱、速写、色彩等实操考试，能够检验非标准笔试科目模型。",
+      "2026 年新增网络与新媒体笔试型专业，形成实操考试与笔试考试并存的结构。",
+      "2024—2026 年招生章程、考试内容、录取分数和调剂结论均有官方公开页面。"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "SRC-HFNU-2024-ZC",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2024,
+      "document_type": "admission_policy",
+      "title": "合肥师范学院2024年普通高校专升本招生章程",
+      "url": "https://zsb.hfnu.edu.cn/info/1003/2715.htm",
+      "output_path": "raw/2024/HFNU/DOC-HFNU-2024-ZC.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "招生章程",
+        "招生计划",
+        "专业及培养地点",
+        "报考范围",
+        "考试科目",
+        "录取规则",
+        "调剂规则"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2024-LQ",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2024,
+      "document_type": "admission_scores",
+      "title": "合肥师范学院2024年专升本录取分数线",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/3065.htm",
+      "output_path": "raw/2024/HFNU/DOC-HFNU-2024-LQ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "录取分数",
+        "录取结果",
+        "调剂结论"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2025-LQ",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2025,
+      "document_type": "admission_scores",
+      "title": "合肥师范学院2025年专升本录取分数线",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm",
+      "output_path": "raw/2025/HFNU/DOC-HFNU-2025-LQ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "录取分数",
+        "录取结果",
+        "调剂结论"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2026-LQ",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2026,
+      "document_type": "admission_scores",
+      "title": "关于公布我校2026年专升本招生考试录取分数线及录取结果查询的通知",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/3885.htm",
+      "output_path": "raw/2026/HFNU/DOC-HFNU-2026-LQ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "2026录取分数",
+        "录取结果",
+        "调剂结论"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2024-DG",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2024,
+      "document_type": "exam_syllabus_and_reference_books",
+      "title": "关于公布我校2024年普通高校专升本拟招生专业、计划等相关事宜的通知",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/2695.htm",
+      "output_path": "raw/2024/HFNU/DOC-HFNU-2024-DG.html",
+      "discover_assets": true,
+      "required_page": true,
+      "expected_assets": {
+        "min_documents": 1,
+        "preferred_extensions": [
+          ".pdf"
+        ]
+      },
+      "covers": [
+        "招生计划",
+        "专业及培养地点",
+        "考试科目",
+        "考试大纲",
+        "参考书目",
+        "报考范围"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2025-DG",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2025,
+      "document_type": "exam_syllabus_and_reference_books",
+      "title": "关于公布我校2025年普通高校专升本拟招生专业范围、考试科目等相关事宜的通知",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/3215.htm",
+      "output_path": "raw/2025/HFNU/DOC-HFNU-2025-DG.html",
+      "discover_assets": true,
+      "required_page": true,
+      "expected_assets": {
+        "min_documents": 1,
+        "preferred_extensions": [
+          ".pdf"
+        ]
+      },
+      "covers": [
+        "专业及培养地点",
+        "考试科目",
+        "考试大纲",
+        "参考书目",
+        "报考范围"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2026-DG",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2026,
+      "document_type": "exam_syllabus",
+      "title": "关于公布我校2026年普通高校专升本拟招生专业范围、考试科目等相关事宜的通知",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/3625.htm",
+      "output_path": "raw/2026/HFNU/DOC-HFNU-2026-DG.html",
+      "discover_assets": true,
+      "required_page": true,
+      "expected_assets": {
+        "min_documents": 1,
+        "preferred_extensions": [
+          ".pdf"
+        ]
+      },
+      "covers": [
+        "考试科目",
+        "考试大纲",
+        "参考书目"
+      ]
+    },
+    {
+      "source_id": "SRC-HFNU-2024-BMRS",
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "year": 2024,
+      "document_type": "application_statistics",
+      "title": "合肥师范学院2024年普通专升本招生分专业报考人数",
+      "url": "https://zsb.hfnu.edu.cn/info/1002/2775.htm",
+      "output_path": "raw/2024/HFNU/DOC-HFNU-2024-BMRS.html",
+      "discover_assets": true,
+      "required_page": false,
+      "covers": [
+        "报名人数",
+        "报录数据"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2024-ZYGG",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2024,
+      "document_type": "major_and_training_location",
+      "title": "安徽艺术学院关于2024年专升本招生专业的公告",
+      "url": "https://www.ahua.edu.cn/zsw/2023/0927/c201a26375/page.htm",
+      "output_path": "raw/2024/AHUA/DOC-AHUA-2024-ZYGG.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "专业",
+        "培养学校",
+        "培养地点"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2024-ZC",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2024,
+      "document_type": "admission_policy",
+      "title": "安徽艺术学院2024年普通高校专升本招生章程",
+      "url": "https://www.ahua.edu.cn/zsw/2024/0321/c201a29345/page.htm",
+      "output_path": "raw/2024/AHUA/DOC-AHUA-2024-ZC.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "招生章程",
+        "招生计划",
+        "专业及培养地点",
+        "考试科目",
+        "报考范围",
+        "录取规则",
+        "调剂规则"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2024-KSNR",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2024,
+      "document_type": "exam_syllabus",
+      "title": "安徽艺术学院2024年普通高校专升本招生各专业考试内容",
+      "url": "https://www.ahua.edu.cn/zsw/2024/0313/c201a29133/page.htm",
+      "output_path": "raw/2024/AHUA/DOC-AHUA-2024-KSNR.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "考试科目",
+        "考试大纲",
+        "实操要求",
+        "参考材料适用性"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2024-LQ",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2024,
+      "document_type": "admission_scores_and_adjustment",
+      "title": "关于公布2024年专升本招生考试拟录取名单查询的通知",
+      "url": "https://www.ahua.edu.cn/zsw/2024/0524/c201a31068/page.htm",
+      "output_path": "raw/2024/AHUA/DOC-AHUA-2024-LQ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "录取分数",
+        "校内计划调整",
+        "不接收校外调剂"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2024-BMRS",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2024,
+      "document_type": "application_statistics",
+      "title": "2024年专升本招生考试各专业报考人数一览表",
+      "url": "https://www.ahua.edu.cn/zsw/2024/0406/c201a29560/page.htm",
+      "output_path": "raw/2024/AHUA/DOC-AHUA-2024-BMRS.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "招生计划",
+        "报名人数",
+        "报录数据"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2025-YG",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2025,
+      "document_type": "pre_admission_plan",
+      "title": "关于公布我校2025年普通高校专升本拟招生专业及考试方案的通知",
+      "url": "https://www.ahua.edu.cn/zsw/2024/1031/c201a33492/page.htm",
+      "output_path": "raw/2025/AHUA/DOC-AHUA-2025-YG.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "专业",
+        "报考范围",
+        "考试科目"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2025-ZC",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2025,
+      "document_type": "admission_policy",
+      "title": "安徽艺术学院2025年普通高校专升本招生章程",
+      "url": "https://www.ahua.edu.cn/zsw/2025/0318/c201a36548/page.htm",
+      "output_path": "raw/2025/AHUA/DOC-AHUA-2025-ZC.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "招生章程",
+        "招生计划",
+        "专业及培养地点",
+        "考试科目",
+        "报考范围",
+        "录取规则",
+        "调剂规则"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2025-KSNR",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2025,
+      "document_type": "exam_syllabus",
+      "title": "安徽艺术学院2025年普通高校专升本招生各专业考试内容",
+      "url": "https://www.ahua.edu.cn/zsw/2025/0318/c201a36549/page.htm",
+      "output_path": "raw/2025/AHUA/DOC-AHUA-2025-KSNR.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "考试科目",
+        "考试大纲",
+        "实操要求",
+        "参考材料适用性"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2025-LQ",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2025,
+      "document_type": "admission_scores_and_adjustment",
+      "title": "关于发布2025年专升本招生考试拟录取名单查询的通知",
+      "url": "https://www.ahua.edu.cn/zsw/2025/0523/c201a37719/page.htm",
+      "output_path": "raw/2025/AHUA/DOC-AHUA-2025-LQ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "录取分数",
+        "校内计划调整",
+        "不接收校外调剂"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2026-YG",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2026,
+      "document_type": "pre_admission_plan",
+      "title": "关于公布我校2026年普通高校专升本拟招生专业及考试方案的通知",
+      "url": "https://www.ahua.edu.cn/zsw/2025/1031/c201a44096/page.htm",
+      "output_path": "raw/2026/AHUA/DOC-AHUA-2026-YG.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "专业",
+        "报考范围",
+        "考试科目"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2026-XZ",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2026,
+      "document_type": "new_major_syllabus_and_reference_books",
+      "title": "关于发布我校2026年普通高校专升本新增招生专业的通知",
+      "url": "https://www.ahua.edu.cn/zsw/2026/0205/c201a45646/page.htm",
+      "output_path": "raw/2026/AHUA/DOC-AHUA-2026-XZ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "招生计划",
+        "专业及培养地点",
+        "考试科目",
+        "考试大纲",
+        "参考书目",
+        "报考范围"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2026-ZC",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2026,
+      "document_type": "admission_policy",
+      "title": "安徽艺术学院2026年普通高校专升本招生章程",
+      "url": "https://www.ahua.edu.cn/zsw/2026/0318/c201a46012/page.htm",
+      "output_path": "raw/2026/AHUA/DOC-AHUA-2026-ZC.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "招生章程",
+        "招生计划",
+        "专业及培养地点",
+        "考试科目",
+        "报考范围",
+        "录取规则",
+        "调剂规则"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2026-KSNR",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2026,
+      "document_type": "exam_syllabus",
+      "title": "安徽艺术学院2026年普通高校专升本招生各专业考试内容",
+      "url": "https://www.ahua.edu.cn/zsw/2026/0318/c201a46013/page.htm",
+      "output_path": "raw/2026/AHUA/DOC-AHUA-2026-KSNR.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "考试科目",
+        "考试大纲",
+        "实操要求",
+        "参考材料适用性"
+      ]
+    },
+    {
+      "source_id": "SRC-AHUA-2026-LQ",
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "year": 2026,
+      "document_type": "admission_scores_and_adjustment",
+      "title": "关于发布2026年专升本招生考试拟录取名单查询的通知",
+      "url": "https://www.ahua.edu.cn/zsw/2026/0520/c201a46973/page.htm",
+      "output_path": "raw/2026/AHUA/DOC-AHUA-2026-LQ.html",
+      "discover_assets": true,
+      "required_page": true,
+      "covers": [
+        "录取分数",
+        "校内计划调整",
+        "不接收校外调剂"
+      ]
+    }
+  ],
+  "expected_but_not_found": [
+    {
+      "school_id": "AHUA",
+      "year": 2025,
+      "document_type": "application_statistics",
+      "status": "official_not_found_after_search",
+      "notes": "未找到2025年官方分专业报名人数或报录数据公开页；保留为缺失，不使用第三方补值。"
+    },
+    {
+      "school_id": "AHUA",
+      "year": 2026,
+      "document_type": "application_statistics",
+      "status": "official_not_found_after_search",
+      "notes": "未找到2026年官方分专业报名人数或报录数据公开页；保留为缺失，不使用第三方补值。"
+    }
+  ]
+}
