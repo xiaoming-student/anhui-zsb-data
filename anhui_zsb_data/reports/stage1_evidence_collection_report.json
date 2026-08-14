@@ -1,7 +1,7 @@
 {
   "asset_count": 27,
   "collected_count": 27,
-  "generated_at": "2026-08-14T17:22:59+00:00",
+  "generated_at": "2026-08-14T17:30:41+00:00",
   "ok": true,
   "pilot_b_category_coverage": {
     "专业及培养地点": [
@@ -88,6 +88,48 @@
     ]
   },
   "pilot_b_missing_categories": [],
+  "reference_books_check": {
+    "generated_at": "2026-08-14T17:30:41+00:00",
+    "ok": true,
+    "results": [
+      {
+        "error": "",
+        "ok": true,
+        "parsed_text_path": "evidence/pilot_a/HFNU/2024/DOC-HFNU-2024-DG.txt",
+        "pdf_asset_id": "HFNU-2024-DG-PDF",
+        "pdf_path": "evidence/pilot_a/HFNU/2024/DOC-HFNU-2024-DG.pdf",
+        "reference_markers": [
+          "参考书目",
+          "参考书"
+        ],
+        "year": 2024
+      },
+      {
+        "error": "",
+        "ok": true,
+        "parsed_text_path": "evidence/pilot_a/HFNU/2025/DOC-HFNU-2025-DG.txt",
+        "pdf_asset_id": "HFNU-2025-DG-PDF",
+        "pdf_path": "evidence/pilot_a/HFNU/2025/DOC-HFNU-2025-DG.pdf",
+        "reference_markers": [
+          "参考书目",
+          "参考书"
+        ],
+        "year": 2025
+      },
+      {
+        "error": "",
+        "ok": true,
+        "parsed_text_path": "evidence/pilot_a/HFNU/2026/DOC-HFNU-2026-DG.txt",
+        "pdf_asset_id": "HFNU-2026-DG-PDF",
+        "pdf_path": "evidence/pilot_a/HFNU/2026/DOC-HFNU-2026-DG.pdf",
+        "reference_markers": [
+          "参考书目",
+          "参考书"
+        ],
+        "year": 2026
+      }
+    ]
+  },
   "required_failures": [],
   "source_count": 15
 }
