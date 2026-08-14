@@ -83,8 +83,8 @@ CI 配置位于 `.github/workflows/quality-gate.yml`，采用只读仓库权限�
 
 触发方式：
 
-- 创建或更新 Pull Request；
-- push 到 `main` 以外的开发分支；
+- 创建或更新目标分支为 `main` 的 Pull Request；
+- 合并或直接 push 到 `main`；
 - 在 GitHub Actions 页面手动运行。
 
 每次 CI 都会在 Ubuntu 上分别使用 Python 3.10、3.11、3.12 执行同一条门禁命令：

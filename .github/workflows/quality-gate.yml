@@ -2,8 +2,10 @@ name: Quality Gate
 
 on:
   pull_request:
+    branches:
+      - main
   push:
-    branches-ignore:
+    branches:
       - main
   workflow_dispatch:
 
