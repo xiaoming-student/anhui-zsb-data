@@ -34,6 +34,12 @@ PDF_LITERAL_RE = re.compile(
 )
 ATTACHMENT_INDEX_RE = re.compile(r"-ATT-(\d+)", flags=re.IGNORECASE)
 
+# These sources are known to publish their substantive evidence as a PDF
+# literal inside JavaScript rather than as a clickable attachment.
+REQUIRED_DOCUMENT_COUNTS = {
+    "SRC-HFNU-2026-LQ": 1,
+}
+
 
 def next_attachment_index(source: dict[str, Any]) -> int:
     indexes: list[int] = []
@@ -46,7 +52,9 @@ def next_attachment_index(source: dict[str, Any]) -> int:
 
 def source_expected_documents(source: dict[str, Any]) -> int:
     expected = source.get("expected_assets", {})
-    return int(expected.get("min_documents", 0) or 0)
+    configured = int(expected.get("min_documents", 0) or 0)
+    required = int(REQUIRED_DOCUMENT_COUNTS.get(str(source.get("source_id", "")), 0))
+    return max(configured, required)
 
 
 def refresh_expected_state(source: dict[str, Any]) -> None:
@@ -54,7 +62,10 @@ def refresh_expected_state(source: dict[str, Any]) -> None:
     document_count = sum(
         1 for asset in source.get("assets", []) if asset.get("kind") == "document"
     )
-    min_documents = int(expected.get("min_documents", 0) or 0)
+    min_documents = source_expected_documents(source)
+    expected["min_documents"] = min_documents
+    if min_documents and not expected.get("preferred_extensions"):
+        expected["preferred_extensions"] = [".pdf"]
     expected["document_count"] = document_count
     expected["met"] = document_count >= min_documents
     if source.get("page") and expected["met"]:
