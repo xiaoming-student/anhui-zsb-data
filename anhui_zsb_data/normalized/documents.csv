@@ -1,0 +1,6 @@
+﻿document_id,source_id,year,school_id,document_type,title,publish_date,url,file_name,local_path,file_type,content_hash,source_level,retrieved_at,status
+DOC-HFNU-2024-ZC,SRC-HFNU-2024-ZC,2024,HFNU,admission_policy,合肥师范学院2024年普通高校专升本招生章程,2024-03-21,https://zsb.hfnu.edu.cn/info/1003/2715.htm,,,html,,S,2026-08-14,extracted_unarchived
+DOC-HFNU-2025-ZC,SRC-HFNU-2025-ZC,2025,HFNU,admission_policy,合肥师范学院2025年普通高校专升本招生章程,2025-03-18,https://zsb.hfnu.edu.cn/__local/C/06/BF/6566D5FB847FE419FF2AF089452_4BA9E5C4_62ECA.pdf,DOC-HFNU-2025-ZC.pdf,raw/2025/HFNU/DOC-HFNU-2025-ZC.pdf,pdf,52259c218fdb48295fb782c99244dbeb4af8efe237d8ddb63bf27f46af59168e,S,2026-08-14,verified
+DOC-HFNU-2026-ZC,SRC-HFNU-2026-ZC,2026,HFNU,admission_policy,合肥师范学院2026年普通高校专升本招生章程,2026-03-18,https://zsb.hfnu.edu.cn/__local/D/FA/83/9951276A93A385951864563370B_6C3346BD_70835.pdf,DOC-HFNU-2026-ZC.pdf,raw/2026/HFNU/DOC-HFNU-2026-ZC.pdf,pdf,dc078db203863ceaf67cab0ccd3ad89b88305753c3604709dd17f2b0c80d7a0d,S,2026-08-14,verified
+DOC-HFNU-2024-LQ,SRC-HFNU-2024-LQ,2024,HFNU,admission_scores,合肥师范学院2024年专升本录取分数线,2024-05-24,https://zsb.hfnu.edu.cn/info/1002/3065.htm,,,html,,S,2026-08-14,extracted_unarchived
+DOC-HFNU-2025-LQ,SRC-HFNU-2025-LQ,2025,HFNU,admission_scores,合肥师范学院2025年专升本录取分数线,2025-05-26,https://zsb.hfnu.edu.cn/info/1002/3475.htm,,,html,,S,2026-08-14,extracted_unarchived

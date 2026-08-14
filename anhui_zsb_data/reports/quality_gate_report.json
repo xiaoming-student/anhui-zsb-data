@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-08-14T13:35:54+00:00",
+  "ok": true,
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "python_version": "3.13.5",
+  "steps": [
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "run_pipeline.py",
+        "normalize.py",
+        "extract.py",
+        "scripts",
+        "tests"
+      ],
+      "duration_seconds": 0.643,
+      "name": "Python 语法编译",
+      "ok": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "extract.py"
+      ],
+      "duration_seconds": 0.626,
+      "name": "Staging 只读验证",
+      "ok": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "HFNU/2024: staging checked\nHFNU/2025: staging checked\nHFNU/2026: staging checked\nStaging verification passed: 14 JSON files checked; no files were modified.\n"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "run_pipeline.py"
+      ],
+      "duration_seconds": 0.879,
+      "name": "完整 canonical 流水线",
+      "ok": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "QA/report generated: conflicts=0, missing=47\n========================================================================\n安徽专升本数据系统验证报告\n========================================================================\n[INFO] Raw manifest verified: 3 assets\n[INFO] PK unique: source_sites.csv.source_site_id (1 rows)\n[INFO] PK unique: source_documents.csv.source_document_id (5 rows)\n[INFO] PK unique: source_assets.csv.asset_id (3 rows)\n[INFO] FK valid: source_documents.csv.source_site_id -> source_sites.csv.source_site_id\n[INFO] FK valid: source_assets.csv.source_document_id -> source_documents.csv.source_document_id\n[INFO] PK unique: institutions.csv.institution_id (5 rows)\n[INFO] PK unique: program_years.csv.program_year_id (82 rows)\n[INFO] PK unique: program_offerings.csv.offering_id (89 rows)\n[INFO] PK unique: enrollment_plans.csv.enrollment_plan_id (356 rows)\n[INFO] PK unique: exam_subjects.csv.exam_subject_id (328 rows)\n[INFO] PK unique: exam_sessions.csv.exam_session_id (246 rows)\n[INFO] PK unique: major_eligibility.csv.eligibility_id (82 rows)\n[INFO] PK unique: eligibility_rule_sets.csv.eligibility_rule_set_id (82 rows)\n[INFO] PK unique: eligibility_rule_items.csv.eligibility_rule_item_id (295 rows)\n[INFO] PK unique: admission_scores.csv.admission_score_id (305 rows)\n[INFO] PK unique: admission_rules.csv.rule_id (15 rows)\n[INFO] PK unique: fact_sources.csv.fact_source_id (1585 rows)\n[INFO] FK valid: program_years.csv.admission_school_id -> institutions.csv.institution_id\n[INFO] FK valid: program_offerings.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: program_offerings.csv.training_institution_id -> institutions.csv.institution_id\n[INFO] FK valid: enrollment_plans.csv.offering_id -> program_offerings.csv.offering_id\n[INFO] FK valid: exam_subjects.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: exam_sessions.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: major_eligibility.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: eligibility_rule_sets.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: eligibility_rule_items.csv.eligibility_rule_set_id -> eligibility_rule_sets.csv.eligibility_rule_set_id\n[INFO] FK valid: admission_scores.csv.offering_id -> program_offerings.csv.offering_id\n------------------------------------------------------------------------\nP0 errors: 0 | P1 warnings: 0\nPASS\n\nPipeline complete:\n  institutions: 5\n  program_years: 82\n  program_offerings: 89\n  enrollment_plans: 356\n  exam_subjects: 328\n  exam_sessions: 246\n  major_eligibility: 82\n  eligibility_rule_items: 295\n  admission_scores: 305\n  admission_rules: 15\n"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "duration_seconds": 1.742,
+      "name": "单元与集成测试",
+      "ok": true,
+      "returncode": 0,
+      "stderr": "test_canonical_manifest_has_no_ghost_tables (test_pipeline.PipelineTestCase.test_canonical_manifest_has_no_ghost_tables) ... ok\ntest_core_counts (test_pipeline.PipelineTestCase.test_core_counts) ... ok\ntest_eligibility_exact_coverage_and_foreign_keys (test_pipeline.PipelineTestCase.test_eligibility_exact_coverage_and_foreign_keys) ... ok\ntest_exam_session_model (test_pipeline.PipelineTestCase.test_exam_session_model) ... ok\ntest_fact_source_links_are_complete (test_pipeline.PipelineTestCase.test_fact_source_links_are_complete) ... ok\ntest_main_school_training_semantics (test_pipeline.PipelineTestCase.test_main_school_training_semantics) ... ok\ntest_plan_slots_and_business_english_regression (test_pipeline.PipelineTestCase.test_plan_slots_and_business_english_regression) ... ok\ntest_score_matrix_ids_and_numeric_values (test_pipeline.PipelineTestCase.test_score_matrix_ids_and_numeric_values) ... ok\ntest_score_parser (test_pipeline.PipelineTestCase.test_score_parser) ... ok\ntest_source_assets_hashes_and_all_locators_resolve (test_pipeline.PipelineTestCase.test_source_assets_hashes_and_all_locators_resolve) ... ok\ntest_sqlite_integrity_and_views (test_pipeline.PipelineTestCase.test_sqlite_integrity_and_views) ... ok\ntest_stable_ids_and_idempotent_canonical_build (test_pipeline.PipelineTestCase.test_stable_ids_and_idempotent_canonical_build) ... ok\ntest_validator_and_staging_verifier (test_pipeline.PipelineTestCase.test_validator_and_staging_verifier) ... ok\ntest_yearly_counts (test_pipeline.PipelineTestCase.test_yearly_counts) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 1.124s\n\nOK\n",
+      "stdout": "QA/report generated: conflicts=0, missing=47\n========================================================================\n安徽专升本数据系统验证报告\n========================================================================\n[INFO] Raw manifest verified: 3 assets\n[INFO] PK unique: source_sites.csv.source_site_id (1 rows)\n[INFO] PK unique: source_documents.csv.source_document_id (5 rows)\n[INFO] PK unique: source_assets.csv.asset_id (3 rows)\n[INFO] FK valid: source_documents.csv.source_site_id -> source_sites.csv.source_site_id\n[INFO] FK valid: source_assets.csv.source_document_id -> source_documents.csv.source_document_id\n[INFO] PK unique: institutions.csv.institution_id (5 rows)\n[INFO] PK unique: program_years.csv.program_year_id (82 rows)\n[INFO] PK unique: program_offerings.csv.offering_id (89 rows)\n[INFO] PK unique: enrollment_plans.csv.enrollment_plan_id (356 rows)\n[INFO] PK unique: exam_subjects.csv.exam_subject_id (328 rows)\n[INFO] PK unique: exam_sessions.csv.exam_session_id (246 rows)\n[INFO] PK unique: major_eligibility.csv.eligibility_id (82 rows)\n[INFO] PK unique: eligibility_rule_sets.csv.eligibility_rule_set_id (82 rows)\n[INFO] PK unique: eligibility_rule_items.csv.eligibility_rule_item_id (295 rows)\n[INFO] PK unique: admission_scores.csv.admission_score_id (305 rows)\n[INFO] PK unique: admission_rules.csv.rule_id (15 rows)\n[INFO] PK unique: fact_sources.csv.fact_source_id (1585 rows)\n[INFO] FK valid: program_years.csv.admission_school_id -> institutions.csv.institution_id\n[INFO] FK valid: program_offerings.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: program_offerings.csv.training_institution_id -> institutions.csv.institution_id\n[INFO] FK valid: enrollment_plans.csv.offering_id -> program_offerings.csv.offering_id\n[INFO] FK valid: exam_subjects.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: exam_sessions.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: major_eligibility.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: eligibility_rule_sets.csv.program_year_id -> program_years.csv.program_year_id\n[INFO] FK valid: eligibility_rule_items.csv.eligibility_rule_set_id -> eligibility_rule_sets.csv.eligibility_rule_set_id\n[INFO] FK valid: admission_scores.csv.offering_id -> program_offerings.csv.offering_id\n------------------------------------------------------------------------\nP0 errors: 0 | P1 warnings: 0\nPASS\n\nPipeline complete:\n  institutions: 5\n  program_years: 82\n  program_offerings: 89\n  enrollment_plans: 356\n  exam_subjects: 328\n  exam_sessions: 246\n  major_eligibility: 82\n  eligibility_rule_items: 295\n  admission_scores: 305\n  admission_rules: 15\n"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/check_idempotence.py"
+      ],
+      "duration_seconds": 1.115,
+      "name": "连续重建幂等测试",
+      "ok": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Idempotence: PASS (27 files)\n"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/check_clean_rebuild.py"
+      ],
+      "duration_seconds": 1.587,
+      "name": "Clean-room 完整重建测试",
+      "ok": true,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Clean rebuild: PASS (27 files)\n"
+    }
+  ]
+}

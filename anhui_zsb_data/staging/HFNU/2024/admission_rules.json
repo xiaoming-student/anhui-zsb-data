@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "rule_raw_text": "总分=公共课1+公共课2+专业课1+专业课2，满分600分",
+      "rule_scope": "all_applicable_candidates",
+      "rule_structured_json": {
+        "formula": "public1+public2+prof1+prof2",
+        "max_score": 600
+      },
+      "rule_type": "score_formula",
+      "source_locator": {
+        "section": "录取规则",
+        "url": "https://zsb.hfnu.edu.cn/info/1003/2715.htm"
+      }
+    },
+    {
+      "rule_raw_text": "公共课须达到省考试院划定的公共课考试合格分数线",
+      "rule_scope": "all_applicable_candidates",
+      "rule_structured_json": {
+        "requirement": "pass_provincial_minimum"
+      },
+      "rule_type": "public_course_requirement",
+      "source_locator": {
+        "section": "录取规则",
+        "url": "https://zsb.hfnu.edu.cn/info/1003/2715.htm"
+      }
+    },
+    {
+      "rule_raw_text": "专业课考试总分（专业课科目1+专业课科目2）不低于100分",
+      "rule_scope": "all_applicable_candidates",
+      "rule_structured_json": {
+        "requirement": "prof1+prof2>=100"
+      },
+      "rule_type": "professional_course_requirement",
+      "source_locator": {
+        "section": "录取规则",
+        "url": "https://zsb.hfnu.edu.cn/info/1003/2715.htm"
+      }
+    },
+    {
+      "rule_raw_text": "按考试科目成绩总和从高分到低分排序，择优录取",
+      "rule_scope": "all_applicable_candidates",
+      "rule_structured_json": {
+        "method": "total_score_descending"
+      },
+      "rule_type": "ranking_rule",
+      "source_locator": {
+        "section": "录取规则",
+        "url": "https://zsb.hfnu.edu.cn/info/1003/2715.htm"
+      }
+    },
+    {
+      "rule_raw_text": "同分排序：专业课科目1>专业课科目2>大学语文/高等数学>英语",
+      "rule_scope": "all_applicable_candidates",
+      "rule_structured_json": {
+        "order": [
+          "prof1",
+          "prof2",
+          "public1",
+          "public2"
+        ]
+      },
+      "rule_type": "tie_break_rule",
+      "source_locator": {
+        "section": "录取规则",
+        "url": "https://zsb.hfnu.edu.cn/info/1003/2715.htm"
+      }
+    }
+  ],
+  "extracted_at": "2026-08-14T00:00:00",
+  "extraction_method": "migrated_from_verified_pilot_rules",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2024-ZC",
+  "source_school_id": "HFNU",
+  "source_year": "2024"
+}

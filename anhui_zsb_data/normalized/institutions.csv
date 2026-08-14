@@ -1,0 +1,6 @@
+﻿institution_id,institution_name_std,institution_name_raw,institution_type,institution_role,city,official_code,official_url,address,address_source_id,address_source_locator
+HFNU,合肥师范学院,合肥师范学院,本科,admission_school,合肥市,11305,https://www.hfnu.edu.cn/,合肥市经济技术开发区莲花路1688号(锦绣校区);合肥市黄麓科教园区书香路(滨湖校区);合肥市金寨路327号(三孝口校区),SRC-HFNU-2026-ZC,"{""asset_id"":""ASSET-HFNU-2026-ZC-PDF"",""page"":1,""section"":""办学地址""}"
+INST-ba913151-a036-5ef8-9abf-cf675a406053,合肥职业技术学院,合肥职业技术学院,高职,joint_training_school,合肥市,,,合肥市新站区岱河路2号(汇心湖校区);合肥市巢湖市凤凰山路(鼓山校区),SRC-HFNU-2025-ZC,"{""asset_id"":""ASSET-HFNU-2025-ZC-PDF"",""page"":1,""section"":""联合培养院校""}"
+INST-e2cfbe51-cbcd-5428-b931-f09be0315b25,安徽工业经济职业技术学院,安徽工业经济职业技术学院,高职,joint_training_school,合肥市,,,安徽省合肥市包河区祁门路66号,SRC-HFNU-2026-ZC,"{""asset_id"":""ASSET-HFNU-2026-ZC-PDF"",""page"":1,""section"":""联合培养院校""}"
+INST-74f42226-13e9-5f75-8981-59ceb33b8573,淮北职业技术学院,淮北职业技术学院,高职,joint_training_school,淮北市,,,安徽省淮北市烈山区职教园区元培路1号,SRC-HFNU-2026-ZC,"{""asset_id"":""ASSET-HFNU-2026-ZC-PDF"",""page"":1,""section"":""联合培养院校""}"
+INST-d94aba63-82b9-56a4-b842-fa4e6eb73179,马鞍山师范高等专科学校,马鞍山师范高等专科学校,高职,joint_training_school,马鞍山市,,,安徽省马鞍山市雨山区湖西中路85号,SRC-HFNU-2026-ZC,"{""asset_id"":""ASSET-HFNU-2026-ZC-PDF"",""page"":1,""section"":""联合培养院校""}"

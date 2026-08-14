@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.3.0",
+  "assets": [
+    {
+      "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+      "source_document_id": "SRC-HFNU-2025-ZC",
+      "local_path": "raw/2025/HFNU/DOC-HFNU-2025-ZC.pdf",
+      "original_file_name": "2025_合肥师范学院_招生章程_官方.pdf",
+      "asset_type": "raw_document",
+      "retrieved_at": "2026-08-14",
+      "parent_asset_id": "",
+      "parser_name": "",
+      "parser_version": "",
+      "generated_at": ""
+    },
+    {
+      "asset_id": "ASSET-HFNU-2025-ZC-PARSED-TXT",
+      "source_document_id": "SRC-HFNU-2025-ZC",
+      "local_path": "raw/2025/HFNU/DOC-HFNU-2025-ZC_parsed.txt",
+      "original_file_name": "2025_招生章程_parsed.txt",
+      "asset_type": "parsed_text",
+      "retrieved_at": "2026-08-14",
+      "parent_asset_id": "ASSET-HFNU-2025-ZC-PDF",
+      "parser_name": "legacy_pdf_parser",
+      "parser_version": "unknown",
+      "generated_at": "2026-08-14"
+    },
+    {
+      "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+      "source_document_id": "SRC-HFNU-2026-ZC",
+      "local_path": "raw/2026/HFNU/DOC-HFNU-2026-ZC.pdf",
+      "original_file_name": "2026_合肥师范学院_招生章程_官方.pdf",
+      "asset_type": "raw_document",
+      "retrieved_at": "2026-08-14",
+      "parent_asset_id": "",
+      "parser_name": "",
+      "parser_version": "",
+      "generated_at": ""
+    }
+  ]
+}

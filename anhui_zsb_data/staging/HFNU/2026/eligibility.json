@@ -1,0 +1,374 @@
+{
+  "data": [
+    {
+      "allowed_major_categories_raw": "教育与体育大类",
+      "allowed_major_categories_std": "教育与体育大类",
+      "restriction_raw_text": "教育与体育大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "学前教育",
+        "row_number": 1,
+        "table": 2
+      },
+      "undergraduate_major_raw": "学前教育（师范）",
+      "undergraduate_major_std": "学前教育"
+    },
+    {
+      "allowed_major_categories_raw": "教育与体育大类",
+      "allowed_major_categories_std": "教育与体育大类",
+      "restriction_raw_text": "教育与体育大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "小学教育",
+        "row_number": 2,
+        "table": 2
+      },
+      "undergraduate_major_raw": "小学教育（师范）",
+      "undergraduate_major_std": "小学教育"
+    },
+    {
+      "allowed_major_categories_raw": "财经商贸大类、旅游大类、文化艺术大类、公共管理与服务大类、新闻传播大类、公安与司法大类",
+      "allowed_major_categories_std": "财经商贸大类、旅游大类、文化艺术大类、公共管理与服务大类、新闻传播大类、公安与司法大类",
+      "restriction_raw_text": "财经商贸大类、旅游大类、文化艺术大类、公共管理与服务大类、新闻传播大类、公安与司法大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "人力资源管理",
+        "row_number": 3,
+        "table": 2
+      },
+      "undergraduate_major_raw": "人力资源管理",
+      "undergraduate_major_std": "人力资源管理"
+    },
+    {
+      "allowed_major_categories_raw": "财经商贸大类",
+      "allowed_major_categories_std": "财经商贸大类",
+      "restriction_raw_text": "财经商贸大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "财务管理",
+        "row_number": 4,
+        "table": 2
+      },
+      "undergraduate_major_raw": "财务管理",
+      "undergraduate_major_std": "财务管理"
+    },
+    {
+      "allowed_major_categories_raw": "财经商贸大类、旅游大类、公共管理与服务大类、新闻传播大类",
+      "allowed_major_categories_std": "财经商贸大类、旅游大类、公共管理与服务大类、新闻传播大类",
+      "restriction_raw_text": "财经商贸大类、旅游大类、公共管理与服务大类、新闻传播大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "市场营销",
+        "row_number": 5,
+        "table": 2
+      },
+      "undergraduate_major_raw": "市场营销",
+      "undergraduate_major_std": "市场营销"
+    },
+    {
+      "allowed_major_categories_raw": "财经商贸大类、电子与信息大类、旅游大类、公共管理与服务大类",
+      "allowed_major_categories_std": "财经商贸大类、电子与信息大类、旅游大类、公共管理与服务大类",
+      "restriction_raw_text": "财经商贸大类、电子与信息大类、旅游大类、公共管理与服务大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "互联网金融",
+        "row_number": 6,
+        "table": 2
+      },
+      "undergraduate_major_raw": "互联网金融",
+      "undergraduate_major_std": "互联网金融"
+    },
+    {
+      "allowed_major_categories_raw": "新闻传播大类、电子与信息大类、文化艺术大类",
+      "allowed_major_categories_std": "新闻传播大类、电子与信息大类、文化艺术大类",
+      "restriction_raw_text": "新闻传播大类、电子与信息大类、文化艺术大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "网络与新媒体",
+        "row_number": 7,
+        "table": 2
+      },
+      "undergraduate_major_raw": "网络与新媒体",
+      "undergraduate_major_std": "网络与新媒体"
+    },
+    {
+      "allowed_major_categories_raw": "教育与体育大类、财经商贸大类、旅游大类、新闻传播大类、文化艺术大类、公共管理与服务大类",
+      "allowed_major_categories_std": "教育与体育大类、财经商贸大类、旅游大类、新闻传播大类、文化艺术大类、公共管理与服务大类",
+      "restriction_raw_text": "教育与体育大类、财经商贸大类、旅游大类、新闻传播大类、文化艺术大类、公共管理与服务大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "商务英语",
+        "row_number": 8,
+        "table": 2
+      },
+      "undergraduate_major_raw": "商务英语",
+      "undergraduate_major_std": "商务英语"
+    },
+    {
+      "allowed_major_categories_raw": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、新闻传播大类（限于影视动画专业）",
+      "allowed_major_categories_std": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、新闻传播大类（限于影视动画专业）",
+      "restriction_raw_text": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、新闻传播大类（限于影视动画专业）",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "动画",
+        "row_number": 9,
+        "table": 2
+      },
+      "undergraduate_major_raw": "动画",
+      "undergraduate_major_std": "动画"
+    },
+    {
+      "allowed_major_categories_raw": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、轻工纺织大类（限于印刷类所包含专业）",
+      "allowed_major_categories_std": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、轻工纺织大类（限于印刷类所包含专业）",
+      "restriction_raw_text": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、轻工纺织大类（限于印刷类所包含专业）",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "视觉传达设计",
+        "row_number": 10,
+        "table": 2
+      },
+      "undergraduate_major_raw": "视觉传达设计",
+      "undergraduate_major_std": "视觉传达设计"
+    },
+    {
+      "allowed_major_categories_raw": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、轻工纺织大类（限于纺织服装类所包含专业）",
+      "allowed_major_categories_std": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、轻工纺织大类（限于纺织服装类所包含专业）",
+      "restriction_raw_text": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、轻工纺织大类（限于纺织服装类所包含专业）",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "服装与服饰设计",
+        "row_number": 11,
+        "table": 2
+      },
+      "undergraduate_major_raw": "服装与服饰设计",
+      "undergraduate_major_std": "服装与服饰设计"
+    },
+    {
+      "allowed_major_categories_raw": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、土木建筑类（限于园林工程技术、风景园林设计2个专业）",
+      "allowed_major_categories_std": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、土木建筑类（限于园林工程技术、风景园林设计2个专业）",
+      "restriction_raw_text": "文化艺术大类、教育与体育大类（限于美术教育、艺术教育2个专业）、电子与信息大类（限于数字媒体技术、动漫制作技术、动漫设计与制作3个专业）、土木建筑类（限于园林工程技术、风景园林设计2个专业）",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "环境设计",
+        "row_number": 12,
+        "table": 2
+      },
+      "undergraduate_major_raw": "环境设计",
+      "undergraduate_major_std": "环境设计"
+    },
+    {
+      "allowed_major_categories_raw": "教育与体育大类（限于教育类所包含专业）、文化艺术大类（限于表演艺术类所包含专业和民族文化艺术类所包含专业）",
+      "allowed_major_categories_std": "教育与体育大类（限于教育类所包含专业）、文化艺术大类（限于表演艺术类所包含专业和民族文化艺术类所包含专业）",
+      "restriction_raw_text": "教育与体育大类（限于教育类所包含专业）、文化艺术大类（限于表演艺术类所包含专业和民族文化艺术类所包含专业）",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "音乐学",
+        "row_number": 13,
+        "table": 2
+      },
+      "undergraduate_major_raw": "音乐学（师范）",
+      "undergraduate_major_std": "音乐学"
+    },
+    {
+      "allowed_major_categories_raw": "医药卫生大类、教育与体育大类（限于体育类所包含专业）",
+      "allowed_major_categories_std": "医药卫生大类、教育与体育大类（限于体育类所包含专业）",
+      "restriction_raw_text": "医药卫生大类、教育与体育大类（限于体育类所包含专业）",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "运动康复",
+        "row_number": 14,
+        "table": 2
+      },
+      "undergraduate_major_raw": "运动康复",
+      "undergraduate_major_std": "运动康复"
+    },
+    {
+      "allowed_major_categories_raw": "食品药品与粮食大类、生物与化工大类、医药卫生大类",
+      "allowed_major_categories_std": "食品药品与粮食大类、生物与化工大类、医药卫生大类",
+      "restriction_raw_text": "食品药品与粮食大类、生物与化工大类、医药卫生大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "药物制剂",
+        "row_number": 15,
+        "table": 2
+      },
+      "undergraduate_major_raw": "药物制剂",
+      "undergraduate_major_std": "药物制剂"
+    },
+    {
+      "allowed_major_categories_raw": "资源环境与安全大类、电子与信息大类、食品药品与粮食大类、能源动力与材料大类、生物与化工大类、医药卫生大类",
+      "allowed_major_categories_std": "资源环境与安全大类、电子与信息大类、食品药品与粮食大类、能源动力与材料大类、生物与化工大类、医药卫生大类",
+      "restriction_raw_text": "资源环境与安全大类、电子与信息大类、食品药品与粮食大类、能源动力与材料大类、生物与化工大类、医药卫生大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 3,
+        "row_key": "化学工程与工艺",
+        "row_number": 16,
+        "table": 2
+      },
+      "undergraduate_major_raw": "化学工程与工艺",
+      "undergraduate_major_std": "化学工程与工艺"
+    },
+    {
+      "allowed_major_categories_raw": "资源环境与安全大类、电子与信息大类、装备制造大类、生物与化工大类、医药卫生大类、交通运输大类、能源动力与材料大类",
+      "allowed_major_categories_std": "资源环境与安全大类、电子与信息大类、装备制造大类、生物与化工大类、医药卫生大类、交通运输大类、能源动力与材料大类",
+      "restriction_raw_text": "资源环境与安全大类、电子与信息大类、装备制造大类、生物与化工大类、医药卫生大类、交通运输大类、能源动力与材料大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "新能源材料与器件",
+        "row_number": 17,
+        "table": 2
+      },
+      "undergraduate_major_raw": "新能源材料与器件",
+      "undergraduate_major_std": "新能源材料与器件"
+    },
+    {
+      "allowed_major_categories_raw": "财经商贸大类、电子与信息大类、公共管理与服务大类",
+      "allowed_major_categories_std": "财经商贸大类、电子与信息大类、公共管理与服务大类",
+      "restriction_raw_text": "财经商贸大类、电子与信息大类、公共管理与服务大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "经济统计学",
+        "row_number": 18,
+        "table": 2
+      },
+      "undergraduate_major_raw": "经济统计学",
+      "undergraduate_major_std": "经济统计学"
+    },
+    {
+      "allowed_major_categories_raw": "电子与信息大类、装备制造大类、交通运输大类、土木建筑大类",
+      "allowed_major_categories_std": "电子与信息大类、装备制造大类、交通运输大类、土木建筑大类",
+      "restriction_raw_text": "电子与信息大类、装备制造大类、交通运输大类、土木建筑大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "电子信息工程",
+        "row_number": 19,
+        "table": 2
+      },
+      "undergraduate_major_raw": "电子信息工程",
+      "undergraduate_major_std": "电子信息工程"
+    },
+    {
+      "allowed_major_categories_raw": "电子与信息大类、装备制造大类、交通运输大类、土木建筑大类",
+      "allowed_major_categories_std": "电子与信息大类、装备制造大类、交通运输大类、土木建筑大类",
+      "restriction_raw_text": "电子与信息大类、装备制造大类、交通运输大类、土木建筑大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "通信工程",
+        "row_number": 20,
+        "table": 2
+      },
+      "undergraduate_major_raw": "通信工程",
+      "undergraduate_major_std": "通信工程"
+    },
+    {
+      "allowed_major_categories_raw": "电子与信息大类、装备制造大类、能源动力与材料大类、交通运输大类、土木建筑大类、水利大类",
+      "allowed_major_categories_std": "电子与信息大类、装备制造大类、能源动力与材料大类、交通运输大类、土木建筑大类、水利大类",
+      "restriction_raw_text": "电子与信息大类、装备制造大类、能源动力与材料大类、交通运输大类、土木建筑大类、水利大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "电气工程及其自动化",
+        "row_number": 21,
+        "table": 2
+      },
+      "undergraduate_major_raw": "电气工程及其自动化",
+      "undergraduate_major_std": "电气工程及其自动化"
+    },
+    {
+      "allowed_major_categories_raw": "电子与信息大类",
+      "allowed_major_categories_std": "电子与信息大类",
+      "restriction_raw_text": "电子与信息大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "计算机科学与技术",
+        "row_number": 22,
+        "table": 2
+      },
+      "undergraduate_major_raw": "计算机科学与技术",
+      "undergraduate_major_std": "计算机科学与技术"
+    },
+    {
+      "allowed_major_categories_raw": "电子与信息大类、装备制造大类、交通运输大类、财经商贸大类",
+      "allowed_major_categories_std": "电子与信息大类、装备制造大类、交通运输大类、财经商贸大类",
+      "restriction_raw_text": "电子与信息大类、装备制造大类、交通运输大类、财经商贸大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "网络工程",
+        "row_number": 23,
+        "table": 2
+      },
+      "undergraduate_major_raw": "网络工程",
+      "undergraduate_major_std": "网络工程"
+    },
+    {
+      "allowed_major_categories_raw": "电子与信息大类、装备制造大类、交通运输大类、财经商贸大类",
+      "allowed_major_categories_std": "电子与信息大类、装备制造大类、交通运输大类、财经商贸大类",
+      "restriction_raw_text": "电子与信息大类、装备制造大类、交通运输大类、财经商贸大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "软件工程",
+        "row_number": 24,
+        "table": 2
+      },
+      "undergraduate_major_raw": "软件工程",
+      "undergraduate_major_std": "软件工程"
+    },
+    {
+      "allowed_major_categories_raw": "食品药品与粮食大类、生物与化工大类、医药卫生大类",
+      "allowed_major_categories_std": "食品药品与粮食大类、生物与化工大类、医药卫生大类",
+      "restriction_raw_text": "食品药品与粮食大类、生物与化工大类、医药卫生大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "生物制药",
+        "row_number": 25,
+        "table": 2
+      },
+      "undergraduate_major_raw": "生物制药",
+      "undergraduate_major_std": "生物制药"
+    },
+    {
+      "allowed_major_categories_raw": "食品药品与粮食大类、生物与化工大类、医药卫生大类、资源环境与安全大类、电子与信息大类、农林牧渔大类",
+      "allowed_major_categories_std": "食品药品与粮食大类、生物与化工大类、医药卫生大类、资源环境与安全大类、电子与信息大类、农林牧渔大类",
+      "restriction_raw_text": "食品药品与粮食大类、生物与化工大类、医药卫生大类、资源环境与安全大类、电子与信息大类、农林牧渔大类",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-ZC-PDF",
+        "page": 4,
+        "row_key": "食品质量与安全",
+        "row_number": 26,
+        "table": 2
+      },
+      "undergraduate_major_raw": "食品质量与安全",
+      "undergraduate_major_std": "食品质量与安全"
+    }
+  ],
+  "extracted_at": "2026-08-14T19:51:12.060291",
+  "extraction_method": "manual_verified_from_official_document",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2026-ZC",
+  "source_school_id": "HFNU",
+  "source_year": "2026"
+}

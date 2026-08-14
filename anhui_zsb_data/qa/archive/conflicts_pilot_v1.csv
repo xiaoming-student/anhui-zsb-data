@@ -1,0 +1,5 @@
+﻿conflict_id,year,school_id,major_name_std,field_name,value_a,source_a,value_b,source_b,preferred_value,preference_reason,conflict_type,status,resolution_note
+CFT-001,2024,HFNU,电气工程及其自动化,plan_total,40,OFF-2024-021 (安工经联培),60,OFF-2024-027 (淮北联培),,,schema_key_collision,resolved,Pilot 2.0 引入 offering_id 后，不同培养点已有独立标识
+CFT-002,2024,HFNU,计算机科学与技术,plan_total,40,OFF-2024-023 (安工经联培),120,OFF-2024-029 (马师专联培),,,schema_key_collision,resolved,Pilot 2.0 引入 offering_id 后，不同培养点已有独立标识
+CFT-003,2025,HFNU,网络工程,plan_total,40,OFF-2025-022 (安工经联培),80,OFF-2025-024 (合职联培),,,schema_key_collision,resolved,Pilot 2.0 引入 offering_id 后，不同培养点已有独立标识
+CFT-004,2025,HFNU,计算机科学与技术,plan_total,40,OFF-2025-023 (安工经联培),70,OFF-2025-029 (马师专联培),,,schema_key_collision,resolved,Pilot 2.0 引入 offering_id 后，不同培养点已有独立标识

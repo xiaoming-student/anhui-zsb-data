@@ -1,0 +1,6 @@
+﻿source_id,organization_type,organization_name,domain,section_name,entry_url,source_level,search_supported,attachment_supported,notes,last_checked_at
+SRC-PROV-001,government,安徽省教育招生考试院,ahzsks.cn,专升本专栏,https://www.ahzsks.cn/zyyx/,S,true,true,省级专升本政策、报名、考试、录取等所有公告,
+SRC-PROV-002,government,安徽省教育招生考试院,cx.ahzsks.cn,成绩查询,https://cx.ahzsks.cn/,S,false,false,公共课成绩查询入口,
+SRC-PROV-003,government,安徽省教育招生考试院,zsbbm.ahzsks.cn,报名系统,https://zsbbm.ahzsks.cn/,S,false,false,专升本网上报名系统,
+SRC-PROV-004,government,安徽省教育厅,ahedu.gov.cn,高教处,https://www.ahedu.gov.cn/,S,false,false,省级教育政策发布,
+SRC-HFNU-001,university,合肥师范学院,zsb.hfnu.edu.cn,本科招生网,https://zsb.hfnu.edu.cn/,S,false,true,合肥师范学院专升本招生信息唯一发布渠道,

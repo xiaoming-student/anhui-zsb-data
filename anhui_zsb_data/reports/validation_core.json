@@ -1,0 +1,91 @@
+{
+  "errors": [],
+  "info": [
+    "Raw manifest verified: 3 assets",
+    "PK unique: source_sites.csv.source_site_id (1 rows)",
+    "PK unique: source_documents.csv.source_document_id (5 rows)",
+    "PK unique: source_assets.csv.asset_id (3 rows)",
+    "FK valid: source_documents.csv.source_site_id -> source_sites.csv.source_site_id",
+    "FK valid: source_assets.csv.source_document_id -> source_documents.csv.source_document_id",
+    "PK unique: institutions.csv.institution_id (5 rows)",
+    "PK unique: program_years.csv.program_year_id (82 rows)",
+    "PK unique: program_offerings.csv.offering_id (89 rows)",
+    "PK unique: enrollment_plans.csv.enrollment_plan_id (356 rows)",
+    "PK unique: exam_subjects.csv.exam_subject_id (328 rows)",
+    "PK unique: exam_sessions.csv.exam_session_id (246 rows)",
+    "PK unique: major_eligibility.csv.eligibility_id (82 rows)",
+    "PK unique: eligibility_rule_sets.csv.eligibility_rule_set_id (82 rows)",
+    "PK unique: eligibility_rule_items.csv.eligibility_rule_item_id (295 rows)",
+    "PK unique: admission_scores.csv.admission_score_id (305 rows)",
+    "PK unique: admission_rules.csv.rule_id (15 rows)",
+    "PK unique: fact_sources.csv.fact_source_id (1585 rows)",
+    "FK valid: program_years.csv.admission_school_id -> institutions.csv.institution_id",
+    "FK valid: program_offerings.csv.program_year_id -> program_years.csv.program_year_id",
+    "FK valid: program_offerings.csv.training_institution_id -> institutions.csv.institution_id",
+    "FK valid: enrollment_plans.csv.offering_id -> program_offerings.csv.offering_id",
+    "FK valid: exam_subjects.csv.program_year_id -> program_years.csv.program_year_id",
+    "FK valid: exam_sessions.csv.program_year_id -> program_years.csv.program_year_id",
+    "FK valid: major_eligibility.csv.program_year_id -> program_years.csv.program_year_id",
+    "FK valid: eligibility_rule_sets.csv.program_year_id -> program_years.csv.program_year_id",
+    "FK valid: eligibility_rule_items.csv.eligibility_rule_set_id -> eligibility_rule_sets.csv.eligibility_rule_set_id",
+    "FK valid: admission_scores.csv.offering_id -> program_offerings.csv.offering_id"
+  ],
+  "metrics": {
+    "admission_score_status": {
+      "blank_in_source": 105,
+      "published_value": 200
+    },
+    "canonical_counts": {
+      "admission_rules": 15,
+      "admission_scores": 305,
+      "eligibility_rule_items": 295,
+      "eligibility_rule_sets": 82,
+      "enrollment_plans": 356,
+      "exam_sessions": 246,
+      "exam_subjects": 328,
+      "fact_sources": 1585,
+      "institutions": 5,
+      "major_eligibility": 82,
+      "program_offerings": 89,
+      "program_years": 82,
+      "source_assets": 3,
+      "source_documents": 5,
+      "source_sites": 1
+    },
+    "exam_sessions_by_year": {
+      "2024": 84,
+      "2025": 84,
+      "2026": 78
+    },
+    "exam_subjects_by_year": {
+      "2024": 112,
+      "2025": 112,
+      "2026": 104
+    },
+    "major_eligibility_by_year": {
+      "2024": 28,
+      "2025": 28,
+      "2026": 26
+    },
+    "plan_status": {
+      "blank_in_source": 21,
+      "explicit_value": 335
+    },
+    "program_offerings_by_year": {
+      "2024": 30,
+      "2025": 31,
+      "2026": 28
+    },
+    "program_years_by_year": {
+      "2024": 28,
+      "2025": 28,
+      "2026": 26
+    },
+    "raw_asset_count": 3,
+    "source_locator_coverage": 1.0
+  },
+  "ok": true,
+  "p0_error_count": 0,
+  "p1_warning_count": 0,
+  "warnings": []
+}

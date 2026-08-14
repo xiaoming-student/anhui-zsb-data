@@ -1,0 +1,48 @@
+﻿missing_id,entity_type,entity_id,year,school_id,field_name,missing_reason,source_id,attempt_count,last_checked_at,status,next_action
+MISS-80c846c5-c046-5f18-9712-7a688ace5fc9,school_year,SY-5b28da16-8511-5d93-af95-a3e1c2845673,2024,HFNU,adjustments,not_found,SRC-HFNU-2024-ZC,2,2026-08-14T13:35:50+00:00,open,继续检索院校历史调剂公告和附件
+MISS-552b1f6b-4a40-5800-a0c5-75aa5105af03,school_year,SY-5b28da16-8511-5d93-af95-a3e1c2845673,2024,HFNU,application_statistics,official_not_published,SRC-HFNU-2024-ZC,2,2026-08-14T13:35:50+00:00,open,仅在找到官方来源时补录报名人数
+MISS-de25affb-910d-5040-9756-1a1e3be8ed67,school_year,SY-5b28da16-8511-5d93-af95-a3e1c2845673,2024,HFNU,reference_books,not_collected,SRC-HFNU-2024-ZC,2,2026-08-14T13:35:50+00:00,open,从官方考试大纲中提取参考教材
+MISS-ed1f18d3-350e-5b72-987f-5101d7cb439c,school_year,SY-5b28da16-8511-5d93-af95-a3e1c2845673,2024,HFNU,syllabus,not_collected,SRC-HFNU-2024-ZC,2,2026-08-14T13:35:50+00:00,open,下载并解析官方专业课考试大纲
+MISS-a2a20619-24bf-5df7-bfcc-8bbac46a4cb2,source_document,SRC-HFNU-2024-LQ,2024,HFNU,raw_snapshot,not_archived,SRC-HFNU-2024-LQ,0,2026-08-14T13:35:50+00:00,open,公开页面仍可访问时保存HTML、清洗文本和SHA-256；无法访问则改为unavailable
+MISS-62355ccf-a66f-5f33-b776-bb74143cb67b,source_document,SRC-HFNU-2024-ZC,2024,HFNU,raw_snapshot,not_archived,SRC-HFNU-2024-ZC,0,2026-08-14T13:35:50+00:00,open,公开页面仍可访问时保存HTML、清洗文本和SHA-256；无法访问则改为unavailable
+MISS-46c589c9-f651-51c0-b4ab-9ab0014e92b7,offering,OFF-5ec7e8f4-ac71-5dd2-93b5-4fc4e62b163a,2025,HFNU,admission_scores,source_content_incomplete,SRC-HFNU-2025-LQ,1,2026-08-14T13:35:50+00:00,open,补查 环境设计（马鞍山师范高等专科学校）官方录取数据
+MISS-e5349bc8-2d75-51a9-971e-86912bcc8b6a,offering,OFF-705c408c-f84f-5fb3-88cb-1e1c6bcb8639,2025,HFNU,admission_scores,source_content_incomplete,SRC-HFNU-2025-LQ,1,2026-08-14T13:35:50+00:00,open,补查 食品质量与安全（马鞍山师范高等专科学校）官方录取数据
+MISS-b5862ffa-7a04-56f7-9f5b-8745ab2def93,offering,OFF-cd6346ab-06d2-5a63-877c-6af9c98e69b4,2025,HFNU,admission_scores,source_content_incomplete,SRC-HFNU-2025-LQ,1,2026-08-14T13:35:50+00:00,open,补查 计算机科学与技术（马鞍山师范高等专科学校）官方录取数据
+MISS-5c89856e-7556-5170-9fe2-d5f48973aa26,offering,OFF-ebbf4cce-ddbc-5db3-a9b8-1bc92ce768fa,2025,HFNU,admission_scores,source_content_incomplete,SRC-HFNU-2025-LQ,1,2026-08-14T13:35:50+00:00,open,补查 电气工程及其自动化（淮北职业技术学院）官方录取数据
+MISS-ef261631-cc0d-5d35-93f4-f70aa7eb0115,school_year,SY-2ab1da1a-44ce-5a8b-83d4-19a8a62aaa32,2025,HFNU,adjustments,not_found,SRC-HFNU-2025-ZC,2,2026-08-14T13:35:50+00:00,open,继续检索院校历史调剂公告和附件
+MISS-8d9c521e-211e-5f2d-8950-128a53720690,school_year,SY-2ab1da1a-44ce-5a8b-83d4-19a8a62aaa32,2025,HFNU,application_statistics,official_not_published,SRC-HFNU-2025-ZC,2,2026-08-14T13:35:50+00:00,open,仅在找到官方来源时补录报名人数
+MISS-c9af2150-1def-5565-88cd-bc5b6d74b07d,school_year,SY-2ab1da1a-44ce-5a8b-83d4-19a8a62aaa32,2025,HFNU,reference_books,not_collected,SRC-HFNU-2025-ZC,2,2026-08-14T13:35:50+00:00,open,从官方考试大纲中提取参考教材
+MISS-05aedd7f-44da-572f-b6b7-f01d03280dae,school_year,SY-2ab1da1a-44ce-5a8b-83d4-19a8a62aaa32,2025,HFNU,syllabus,not_collected,SRC-HFNU-2025-ZC,2,2026-08-14T13:35:50+00:00,open,下载并解析官方专业课考试大纲
+MISS-f6d59d51-dc4c-539a-9034-d199dc6b137a,source_document,SRC-HFNU-2025-LQ,2025,HFNU,raw_snapshot,not_archived,SRC-HFNU-2025-LQ,0,2026-08-14T13:35:50+00:00,open,公开页面仍可访问时保存HTML、清洗文本和SHA-256；无法访问则改为unavailable
+MISS-613b57d3-7037-5273-a74f-93dcd25e9996,offering,OFF-09dac911-ccf0-5ae1-8365-5aaf4d660be4,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 视觉传达设计（合肥师范学院）2026官方录取数据
+MISS-1fc23480-4ce7-53e4-8ee2-95fd0d7c282b,offering,OFF-0f51ed51-145c-57bd-916a-08d750831d2a,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 经济统计学（合肥师范学院）2026官方录取数据
+MISS-7bb7462b-eb95-5ac4-872d-8f2a6c46367c,offering,OFF-151e9b32-64e0-53e7-b0e5-503daa63c802,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 电子信息工程（合肥师范学院）2026官方录取数据
+MISS-dff81102-45a7-5ed2-b184-8b2bdee9c15f,offering,OFF-18879191-3702-5d84-a8e3-8286c8faaeb2,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 电气工程及其自动化（安徽工业经济职业技术学院）2026官方录取数据
+MISS-b05920cd-5a62-5d5d-8e12-e3d112dfbb22,offering,OFF-35f943d4-6b54-5577-a554-11fe0e9010a1,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 通信工程（合肥师范学院）2026官方录取数据
+MISS-a807867b-933a-58c3-b72f-16a2a40ea1af,offering,OFF-36968f67-2082-553e-8754-6252767775ce,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 化学工程与工艺（合肥师范学院）2026官方录取数据
+MISS-2dcae1d2-c083-5638-9144-aa2f85671c6d,offering,OFF-39654e83-9c6e-5ee9-9adf-6ee13330c87e,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 食品质量与安全（马鞍山师范高等专科学校）2026官方录取数据
+MISS-ffd07054-0826-5690-beff-013eb3b6e453,offering,OFF-4812c188-85b3-520b-ad45-6cb879dea86f,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 市场营销（合肥师范学院）2026官方录取数据
+MISS-38ab3ced-9165-5cd9-935e-f1d8d7f0201d,offering,OFF-4da1d572-b70e-54bf-9990-5eed30613bca,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 动画（合肥师范学院）2026官方录取数据
+MISS-bd4fce0b-63f5-5cf8-b7e6-285e6c953e47,offering,OFF-4dca2114-009e-5ec0-a9ff-8fd097745fad,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 音乐学（合肥师范学院）2026官方录取数据
+MISS-dc330cd0-d1aa-560e-bc9a-76ab62e7a8c5,offering,OFF-5532447a-b352-52ad-b96f-6d25f7a71506,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 药物制剂（合肥师范学院）2026官方录取数据
+MISS-5c201497-ce1a-5061-b4b5-896045bfbc30,offering,OFF-55f04809-af03-5402-920f-2356cf993aac,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 互联网金融（合肥师范学院）2026官方录取数据
+MISS-6f3fb3d2-0cb5-5a07-b6df-0606b37a984e,offering,OFF-5c47fd31-3b5d-5286-940d-97de923e61ff,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 计算机科学与技术（安徽工业经济职业技术学院）2026官方录取数据
+MISS-5879d3de-abc5-508c-85b2-b2e6c0501945,offering,OFF-6c4195f9-eb3b-5a10-81b8-a94abecd140f,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 生物制药（合肥师范学院）2026官方录取数据
+MISS-dce65fa5-84cf-587a-b4bf-d0785ca03794,offering,OFF-7c49d94d-dcf1-5297-938c-f78353bf9dbe,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 服装与服饰设计（合肥师范学院）2026官方录取数据
+MISS-43fb4e6c-85a1-525b-97de-79f9de8eafca,offering,OFF-89dca1c2-dc14-5f81-85c6-c52e75766c57,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 网络与新媒体（合肥师范学院）2026官方录取数据
+MISS-956df884-2506-5596-9446-d3213807f183,offering,OFF-8c6b080e-243d-5459-9ef3-449fbb1c6365,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 电气工程及其自动化（淮北职业技术学院）2026官方录取数据
+MISS-904af93f-fed8-52ec-bf03-4657fba3fddb,offering,OFF-a0a75204-65b8-5059-921f-1534ddbde620,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 学前教育（合肥师范学院）2026官方录取数据
+MISS-89bc52fc-e0b4-5e64-9579-87671eb287d6,offering,OFF-a32033ea-d17c-5f12-bb75-9a68fc234b39,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 商务英语（合肥师范学院）2026官方录取数据
+MISS-5315703b-665b-5fa0-9cac-0857599f602a,offering,OFF-a5dd4961-959d-5b4d-a579-a70ceabb328e,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 人力资源管理（合肥师范学院）2026官方录取数据
+MISS-88bc2dd3-7963-5c5a-8c65-94670cf6daf6,offering,OFF-ab253dc5-496c-53f8-b0bd-e63bd65c7e39,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 软件工程（合肥师范学院）2026官方录取数据
+MISS-0bb9dec9-263e-5067-ba13-f11de36fceb4,offering,OFF-b37f2332-c2b6-5a0c-b24a-a1e9c0f2f797,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 计算机科学与技术（马鞍山师范高等专科学校）2026官方录取数据
+MISS-76a49d68-6345-587c-976d-d5bfbab1a6f2,offering,OFF-ba0cd868-eef6-5b9d-a98b-2a9e60700b49,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 财务管理（安徽工业经济职业技术学院）2026官方录取数据
+MISS-fdadb526-2d0b-516c-953b-c8c3b9c830cb,offering,OFF-bcf67dd3-ee10-5b16-ac09-42636f865bd0,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 新能源材料与器件（合肥师范学院）2026官方录取数据
+MISS-3b8e09f9-2aac-51eb-8a3f-eb4523463f00,offering,OFF-c565073a-48ab-5762-a843-56926b366e8c,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 环境设计（马鞍山师范高等专科学校）2026官方录取数据
+MISS-6ca66ab7-5a23-5f19-89db-118a9b3d761f,offering,OFF-cf7e9b8f-93e4-5c83-bac4-774a8f40294f,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 网络工程（安徽工业经济职业技术学院）2026官方录取数据
+MISS-431c33f5-7191-5c56-a0b4-ad6cba89296c,offering,OFF-f19fdbba-2852-5d77-ac44-b9d178ca7b7c,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 运动康复（合肥师范学院）2026官方录取数据
+MISS-bd27a1ca-d994-565f-a4ab-98a2495abe18,offering,OFF-f452a414-b935-520d-aa10-04def9d00944,2026,HFNU,admission_scores,not_collected,,1,2026-08-14T13:35:50+00:00,open,抓取 小学教育（淮北职业技术学院）2026官方录取数据
+MISS-61518054-1c10-5ffb-b41c-e3d019821ea8,school_year,SY-ff226ccb-5289-51f2-ba72-8886a1d43795,2026,HFNU,adjustments,not_found,SRC-HFNU-2026-ZC,2,2026-08-14T13:35:50+00:00,open,继续检索院校历史调剂公告和附件
+MISS-8cc0556b-7f47-5569-ab61-0edf523f63b3,school_year,SY-ff226ccb-5289-51f2-ba72-8886a1d43795,2026,HFNU,application_statistics,official_not_published,SRC-HFNU-2026-ZC,2,2026-08-14T13:35:50+00:00,open,仅在找到官方来源时补录报名人数
+MISS-a75c5c7a-ae9c-57c8-b57b-f92a0d6a4ab8,school_year,SY-ff226ccb-5289-51f2-ba72-8886a1d43795,2026,HFNU,reference_books,not_collected,SRC-HFNU-2026-ZC,2,2026-08-14T13:35:50+00:00,open,从官方考试大纲中提取参考教材
+MISS-6a422b4b-5dd0-5945-8d9b-18fc6ea6c2a4,school_year,SY-ff226ccb-5289-51f2-ba72-8886a1d43795,2026,HFNU,syllabus,not_collected,SRC-HFNU-2026-ZC,2,2026-08-14T13:35:50+00:00,open,下载并解析官方专业课考试大纲

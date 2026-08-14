@@ -1,0 +1,475 @@
+{
+  "data": [
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "商务英语",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4600
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "电子信息工程",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 5390
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "药物制剂",
+      "plan_registered_poor_family": 11,
+      "plan_retired_soldier_culture_exam_exempt": 11,
+      "plan_retired_soldier_non_exempt": 3,
+      "plan_total": 140,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 5200
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "人力资源管理",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 3,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4600
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "市场营销",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 3,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4600
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "网络与新媒体",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 5060
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "通信工程",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "化学工程与工艺",
+      "plan_registered_poor_family": 8,
+      "plan_retired_soldier_culture_exam_exempt": 8,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 100,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "软件工程",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "数据科学与大数据技术",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "互联网金融",
+      "plan_registered_poor_family": 7,
+      "plan_retired_soldier_culture_exam_exempt": 7,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 90,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4600
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "学前教育",
+      "plan_registered_poor_family": 4,
+      "plan_retired_soldier_culture_exam_exempt": 4,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 50,
+      "remarks_source_raw": "师范",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4600
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "生物制药",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "经济统计学",
+      "plan_registered_poor_family": 10,
+      "plan_retired_soldier_culture_exam_exempt": 10,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 120,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4600
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "新能源材料与器件",
+      "plan_registered_poor_family": 8,
+      "plan_retired_soldier_culture_exam_exempt": 8,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 100,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "艺术(文)",
+      "major_name_raw": "音乐学",
+      "plan_registered_poor_family": 2,
+      "plan_retired_soldier_culture_exam_exempt": 2,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 30,
+      "remarks_source_raw": "师范",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 8000
+    },
+    {
+      "admission_track_raw": "艺术(文)",
+      "major_name_raw": "视觉传达设计",
+      "plan_registered_poor_family": 7,
+      "plan_retired_soldier_culture_exam_exempt": 7,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 80,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 8000
+    },
+    {
+      "admission_track_raw": "艺术(文)",
+      "major_name_raw": "服装与服饰设计",
+      "plan_registered_poor_family": 4,
+      "plan_retired_soldier_culture_exam_exempt": 4,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 50,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 8000
+    },
+    {
+      "admission_track_raw": "艺术(文)",
+      "major_name_raw": "动画",
+      "plan_registered_poor_family": 4,
+      "plan_retired_soldier_culture_exam_exempt": 4,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 50,
+      "remarks_source_raw": "",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 1
+      },
+      "training_type": "main_school",
+      "tuition_value": 8000
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "财务管理",
+      "plan_registered_poor_family": 3,
+      "plan_retired_soldier_culture_exam_exempt": 3,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 40,
+      "remarks_source_raw": "与安徽工业经济职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 5060
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "电气工程及其自动化",
+      "plan_registered_poor_family": 3,
+      "plan_retired_soldier_culture_exam_exempt": 3,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 40,
+      "remarks_source_raw": "与安徽工业经济职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 5390
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "网络工程",
+      "plan_registered_poor_family": 3,
+      "plan_retired_soldier_culture_exam_exempt": 3,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 40,
+      "remarks_source_raw": "与安徽工业经济职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "计算机科学与技术",
+      "plan_registered_poor_family": 3,
+      "plan_retired_soldier_culture_exam_exempt": 3,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 40,
+      "remarks_source_raw": "与安徽工业经济职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 5390
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "网络工程",
+      "plan_registered_poor_family": 6,
+      "plan_retired_soldier_culture_exam_exempt": 6,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 80,
+      "remarks_source_raw": "与合肥职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "制药工程",
+      "plan_registered_poor_family": 3,
+      "plan_retired_soldier_culture_exam_exempt": 3,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 40,
+      "remarks_source_raw": "与合肥职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "体育(文)",
+      "major_name_raw": "运动康复",
+      "plan_registered_poor_family": 7,
+      "plan_retired_soldier_culture_exam_exempt": 7,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 100,
+      "remarks_source_raw": "与合肥职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 4900
+    },
+    {
+      "admission_track_raw": "文",
+      "major_name_raw": "小学教育",
+      "plan_registered_poor_family": 5,
+      "plan_retired_soldier_culture_exam_exempt": 5,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 70,
+      "remarks_source_raw": "与淮北职业技术学院联合培养, 师范",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 5060
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "电气工程及其自动化",
+      "plan_registered_poor_family": 3,
+      "plan_retired_soldier_culture_exam_exempt": 3,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 40,
+      "remarks_source_raw": "与淮北职业技术学院联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 5390
+    },
+    {
+      "admission_track_raw": "艺术(文)",
+      "major_name_raw": "环境设计",
+      "plan_registered_poor_family": 7,
+      "plan_retired_soldier_culture_exam_exempt": 7,
+      "plan_retired_soldier_non_exempt": 2,
+      "plan_total": 80,
+      "remarks_source_raw": "与马鞍山师范高等专科学校联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 8000
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "计算机科学与技术",
+      "plan_registered_poor_family": 5,
+      "plan_retired_soldier_culture_exam_exempt": 5,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 70,
+      "remarks_source_raw": "与马鞍山师范高等专科学校联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 5390
+    },
+    {
+      "admission_track_raw": "理",
+      "major_name_raw": "食品质量与安全",
+      "plan_registered_poor_family": 5,
+      "plan_retired_soldier_culture_exam_exempt": 5,
+      "plan_retired_soldier_non_exempt": 1,
+      "plan_total": 70,
+      "remarks_source_raw": "与马鞍山师范高等专科学校联合培养",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2025-ZC-PDF",
+        "page": 2
+      },
+      "training_type": "joint_training",
+      "tuition_value": 4900
+    }
+  ],
+  "extracted_at": "2026-08-14T19:51:12.060291",
+  "extraction_method": "manual_verified_from_official_source",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2025-ZC",
+  "source_school_id": "HFNU",
+  "source_year": "2025"
+}
