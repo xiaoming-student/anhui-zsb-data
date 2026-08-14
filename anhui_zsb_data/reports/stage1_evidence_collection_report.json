@@ -1,0 +1,93 @@
+{
+  "asset_count": 27,
+  "collected_count": 27,
+  "generated_at": "2026-08-14T17:22:59+00:00",
+  "ok": true,
+  "pilot_b_category_coverage": {
+    "专业及培养地点": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2026-XZYX-HTML",
+      "AHUA-2024-ZC-HTML",
+      "AHUA-2024-ZC-ATT-01",
+      "AHUA-2024-ZC-ATT-02"
+    ],
+    "参考教材": [
+      "AHUA-2026-XZYX-HTML"
+    ],
+    "录取分数": [
+      "AHUA-2026-LQ-HTML",
+      "AHUA-2024-LQ-HTML"
+    ],
+    "录取规则": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2024-ZC-HTML",
+      "AHUA-2024-ZC-ATT-01",
+      "AHUA-2024-ZC-ATT-02"
+    ],
+    "报名人数或报录数据": [
+      "AHUA-2024-BKRS-HTML"
+    ],
+    "报录数据": [
+      "AHUA-2024-LQ-HTML"
+    ],
+    "报考范围": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2026-FA-HTML",
+      "AHUA-2026-XZYX-HTML",
+      "AHUA-2024-ZC-HTML",
+      "AHUA-2024-ZC-ATT-01",
+      "AHUA-2024-ZC-ATT-02"
+    ],
+    "招生专业": [
+      "AHUA-2026-FA-HTML"
+    ],
+    "招生章程": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2024-ZC-HTML",
+      "AHUA-2024-ZC-ATT-01",
+      "AHUA-2024-ZC-ATT-02"
+    ],
+    "招生计划": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2026-XZYX-HTML",
+      "AHUA-2024-ZC-HTML",
+      "AHUA-2024-ZC-ATT-01",
+      "AHUA-2024-ZC-ATT-02"
+    ],
+    "考试大纲": [
+      "AHUA-2026-XZYX-HTML",
+      "AHUA-2026-KSNR-HTML"
+    ],
+    "考试科目": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2026-FA-HTML",
+      "AHUA-2026-XZYX-HTML",
+      "AHUA-2026-KSNR-HTML",
+      "AHUA-2024-ZC-HTML",
+      "AHUA-2024-ZC-ATT-01",
+      "AHUA-2024-ZC-ATT-02"
+    ],
+    "调剂信息": [
+      "AHUA-2026-ZC-HTML",
+      "AHUA-2026-ZC-ATT-01",
+      "AHUA-2026-ZC-ATT-02",
+      "AHUA-2026-LQ-HTML",
+      "AHUA-2024-LQ-HTML"
+    ]
+  },
+  "pilot_b_missing_categories": [],
+  "required_failures": [],
+  "source_count": 15
+}
