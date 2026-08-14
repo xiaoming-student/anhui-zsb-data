@@ -1,0 +1,65 @@
+name: Stage 1 Evidence Validation
+
+on:
+  pull_request:
+    paths:
+      - anhui_zsb_data/evidence/**
+      - anhui_zsb_data/config/phase1_evidence_inventory.json
+      - anhui_zsb_data/reports/hfnu_reference_books_check.*
+      - anhui_zsb_data/reports/stage1_evidence_collection_report.*
+      - anhui_zsb_data/scripts/verify_stage1_evidence.py
+      - .github/workflows/stage1-evidence-validation.yml
+  push:
+    branches:
+      - data/stage1-evidence-collection
+    paths:
+      - anhui_zsb_data/evidence/**
+      - anhui_zsb_data/config/phase1_evidence_inventory.json
+      - anhui_zsb_data/reports/hfnu_reference_books_check.*
+      - anhui_zsb_data/reports/stage1_evidence_collection_report.*
+      - anhui_zsb_data/scripts/verify_stage1_evidence.py
+      - .github/workflows/stage1-evidence-validation.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: anhui_zsb_data
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Verify committed evidence hashes and coverage
+        run: python3 scripts/verify_stage1_evidence.py
+
+      - name: Run existing project quality gate
+        run: python3 scripts/run_quality_gate.py
+
+      - name: Upload validation reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: stage1-evidence-validation
+          path: |
+            anhui_zsb_data/config/phase1_evidence_inventory.json
+            anhui_zsb_data/reports/hfnu_reference_books_check.json
+            anhui_zsb_data/reports/hfnu_reference_books_check.md
+            anhui_zsb_data/reports/stage1_evidence_collection_report.json
+            anhui_zsb_data/reports/stage1_evidence_collection_report.md
+            anhui_zsb_data/reports/quality_gate_report.json
+            anhui_zsb_data/reports/quality_gate_report.md
+          if-no-files-found: warn
+          retention-days: 30
