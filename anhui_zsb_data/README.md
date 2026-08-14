@@ -1,5 +1,7 @@
 # 安徽专升本数据系统
 
+[![Quality Gate](https://github.com/xiaoming-student/anhui-zsb-data/actions/workflows/quality-gate.yml/badge.svg)](https://github.com/xiaoming-student/anhui-zsb-data/actions/workflows/quality-gate.yml)
+
 这是一个面向“安徽专升本院校报考、录取分析与智能出题”场景的数据底座项目。
 
 当前版本为 **Schema v0.3.0 / HFNU Pilot 2.3**，覆盖合肥师范学院 2024—2026 年核心招生数据。代码已从早期的 append-only、Python 硬编码数组模式，重构为：
@@ -37,7 +39,7 @@ canonical CSV + SQLite
 
 ## 快速运行
 
-在项目根目录执行：
+在项目根目录 `anhui_zsb_data/` 执行：
 
 ```bash
 python3 extract.py
@@ -67,6 +69,37 @@ PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
 ```bash
 python3 scripts/run_quality_gate.py
 ```
+
+从 Git 仓库根目录运行时：
+
+```bash
+cd anhui_zsb_data
+python3 scripts/run_quality_gate.py
+```
+
+## 持续集成（GitHub Actions）
+
+CI 配置位于 `.github/workflows/quality-gate.yml`，采用只读仓库权限，不会自动提交生成文件或修改 `main`。
+
+触发方式：
+
+- 创建或更新 Pull Request；
+- push 到 `main` 以外的开发分支；
+- 在 GitHub Actions 页面手动运行。
+
+每次 CI 都会在 Ubuntu 上分别使用 Python 3.10、3.11、3.12 执行同一条门禁命令：
+
+```bash
+python3 scripts/run_quality_gate.py
+```
+
+三个 Python Matrix Job 必须分别通过。CI 状态以本页顶部的 `Quality Gate` 徽章和 Pull Request 的 Checks 为准。
+
+每个 Job 无论成功或失败，都会保留并上传 14 天的 Actions Artifact，包括：
+
+- `ci-logs/` 中的完整质量门禁日志；
+- `qa/*.csv` 当前 QA 结果；
+- `reports/*.json` 和 `reports/*.md` 验证、幂等、clean-room 重建及质量门禁报告。
 
 ## 目录结构
 
