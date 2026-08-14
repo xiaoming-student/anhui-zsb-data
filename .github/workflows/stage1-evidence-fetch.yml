@@ -15,12 +15,12 @@ permissions:
 
 concurrency:
   group: stage1-evidence-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   fetch-official-evidence:
     name: Fetch official evidence
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     steps:
