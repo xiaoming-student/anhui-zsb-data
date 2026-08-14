@@ -8,6 +8,7 @@ on:
       - .github/workflows/stage1-evidence-fetch.yml
       - anhui_zsb_data/config/stage1_sources.json
       - anhui_zsb_data/scripts/fetch_stage1_evidence.py
+      - anhui_zsb_data/scripts/clean_stage1_evidence.py
   workflow_dispatch:
 
 permissions:
@@ -52,6 +53,18 @@ jobs:
           python3 scripts/fetch_stage1_evidence.py 2>&1 \
             | tee ci-logs/stage1-evidence-fetch.log
 
+      - name: Remove repeated site-chrome images
+        working-directory: anhui_zsb_data
+        run: |
+          python3 scripts/clean_stage1_evidence.py 2>&1 \
+            | tee -a ci-logs/stage1-evidence-fetch.log
+
+      - name: Run existing quality gate
+        working-directory: anhui_zsb_data
+        run: |
+          python3 scripts/run_quality_gate.py 2>&1 \
+            | tee -a ci-logs/stage1-evidence-fetch.log
+
       - name: Upload fetch result before committing
         if: always()
         uses: actions/upload-artifact@v7
@@ -66,8 +79,11 @@ jobs:
             anhui_zsb_data/raw/2024/AHUA/**
             anhui_zsb_data/raw/2025/AHUA/**
             anhui_zsb_data/raw/2026/AHUA/**
+            anhui_zsb_data/qa/*.csv
             anhui_zsb_data/reports/stage1_evidence_fetch_report.json
             anhui_zsb_data/reports/stage1_evidence_fetch_report.md
+            anhui_zsb_data/reports/quality_gate_report.json
+            anhui_zsb_data/reports/quality_gate_report.md
           if-no-files-found: warn
           retention-days: 30
 
@@ -91,5 +107,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "data(stage1): archive Pilot A and Pilot B official evidence"
+          git commit -m "data(stage1): refresh audited official evidence"
           git push origin "HEAD:${GITHUB_REF_NAME}"
