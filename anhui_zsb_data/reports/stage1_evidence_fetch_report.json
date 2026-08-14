@@ -1,5 +1,9 @@
 {
   "config_path": "config/stage1_sources.json",
+  "embedded_pdf_fetch": {
+    "discovered_count": 2,
+    "failed_count": 0
+  },
   "expected_but_not_found": [
     {
       "document_type": "application_statistics",
@@ -16,7 +20,89 @@
       "year": 2026
     }
   ],
-  "generated_at": "2026-08-14T16:52:23+00:00",
+  "filtered_shared_images": [
+    {
+      "distinct_source_count": 14,
+      "reason": "identical image reused across multiple official pages; classified as site chrome",
+      "removed_paths": [
+        "raw/2024/AHUA/DOC-AHUA-2024-BMRS-ATT-01.png",
+        "raw/2024/AHUA/DOC-AHUA-2024-KSNR-ATT-01.png",
+        "raw/2024/AHUA/DOC-AHUA-2024-LQ-ATT-01.png",
+        "raw/2024/AHUA/DOC-AHUA-2024-ZC-ATT-03.png",
+        "raw/2024/AHUA/DOC-AHUA-2024-ZYGG-ATT-01.png",
+        "raw/2025/AHUA/DOC-AHUA-2025-KSNR-ATT-01.png",
+        "raw/2025/AHUA/DOC-AHUA-2025-LQ-ATT-01.png",
+        "raw/2025/AHUA/DOC-AHUA-2025-YG-ATT-01.png",
+        "raw/2025/AHUA/DOC-AHUA-2025-ZC-ATT-03.png",
+        "raw/2026/AHUA/DOC-AHUA-2026-KSNR-ATT-01.png",
+        "raw/2026/AHUA/DOC-AHUA-2026-LQ-ATT-01.png",
+        "raw/2026/AHUA/DOC-AHUA-2026-XZ-ATT-01.png",
+        "raw/2026/AHUA/DOC-AHUA-2026-YG-ATT-01.png",
+        "raw/2026/AHUA/DOC-AHUA-2026-ZC-ATT-03.png"
+      ],
+      "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
+      "source_ids": [
+        "SRC-AHUA-2024-BMRS",
+        "SRC-AHUA-2024-KSNR",
+        "SRC-AHUA-2024-LQ",
+        "SRC-AHUA-2024-ZC",
+        "SRC-AHUA-2024-ZYGG",
+        "SRC-AHUA-2025-KSNR",
+        "SRC-AHUA-2025-LQ",
+        "SRC-AHUA-2025-YG",
+        "SRC-AHUA-2025-ZC",
+        "SRC-AHUA-2026-KSNR",
+        "SRC-AHUA-2026-LQ",
+        "SRC-AHUA-2026-XZ",
+        "SRC-AHUA-2026-YG",
+        "SRC-AHUA-2026-ZC"
+      ],
+      "source_urls": [
+        "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
+      ]
+    },
+    {
+      "distinct_source_count": 14,
+      "reason": "identical image reused across multiple official pages; classified as site chrome",
+      "removed_paths": [
+        "raw/2024/AHUA/DOC-AHUA-2024-BMRS-ATT-02.jpg",
+        "raw/2024/AHUA/DOC-AHUA-2024-KSNR-ATT-02.jpg",
+        "raw/2024/AHUA/DOC-AHUA-2024-LQ-ATT-02.jpg",
+        "raw/2024/AHUA/DOC-AHUA-2024-ZC-ATT-04.jpg",
+        "raw/2024/AHUA/DOC-AHUA-2024-ZYGG-ATT-02.jpg",
+        "raw/2025/AHUA/DOC-AHUA-2025-KSNR-ATT-02.jpg",
+        "raw/2025/AHUA/DOC-AHUA-2025-LQ-ATT-02.jpg",
+        "raw/2025/AHUA/DOC-AHUA-2025-YG-ATT-02.jpg",
+        "raw/2025/AHUA/DOC-AHUA-2025-ZC-ATT-04.jpg",
+        "raw/2026/AHUA/DOC-AHUA-2026-KSNR-ATT-02.jpg",
+        "raw/2026/AHUA/DOC-AHUA-2026-LQ-ATT-02.jpg",
+        "raw/2026/AHUA/DOC-AHUA-2026-XZ-ATT-02.jpg",
+        "raw/2026/AHUA/DOC-AHUA-2026-YG-ATT-02.jpg",
+        "raw/2026/AHUA/DOC-AHUA-2026-ZC-ATT-04.jpg"
+      ],
+      "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
+      "source_ids": [
+        "SRC-AHUA-2024-BMRS",
+        "SRC-AHUA-2024-KSNR",
+        "SRC-AHUA-2024-LQ",
+        "SRC-AHUA-2024-ZC",
+        "SRC-AHUA-2024-ZYGG",
+        "SRC-AHUA-2025-KSNR",
+        "SRC-AHUA-2025-LQ",
+        "SRC-AHUA-2025-YG",
+        "SRC-AHUA-2025-ZC",
+        "SRC-AHUA-2026-KSNR",
+        "SRC-AHUA-2026-LQ",
+        "SRC-AHUA-2026-XZ",
+        "SRC-AHUA-2026-YG",
+        "SRC-AHUA-2026-ZC"
+      ],
+      "source_urls": [
+        "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
+      ]
+    }
+  ],
+  "generated_at": "2026-08-14T17:00:27+00:00",
   "pilot_b_selection": {
     "official_site": "https://www.ahua.edu.cn/zsw/",
     "school_id": "AHUA",
@@ -28,6 +114,7 @@
       "2024—2026 年招生章程、考试内容、录取分数和调剂结论均有官方公开页面。"
     ]
   },
+  "required_document_failure_source_ids": [],
   "schema_version": "1.0",
   "scope": {
     "notes": [
@@ -82,7 +169,7 @@
         "调剂规则"
       ],
       "document_type": "admission_policy",
-      "duration_seconds": 8.577,
+      "duration_seconds": 3.832,
       "errors": [],
       "expected_assets": {
         "document_count": 2,
@@ -133,7 +220,7 @@
         "调剂结论"
       ],
       "document_type": "admission_scores",
-      "duration_seconds": 1.364,
+      "duration_seconds": 1.135,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -184,7 +271,7 @@
         "调剂结论"
       ],
       "document_type": "admission_scores",
-      "duration_seconds": 1.639,
+      "duration_seconds": 1.373,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -227,7 +314,19 @@
       "year": 2025
     },
     {
-      "assets": [],
+      "assets": [
+        {
+          "content_type": "application/pdf",
+          "final_url": "https://zsb.hfnu.edu.cn/__local/9/8B/26/859B739DDE01D7ED903FAFE0645_CA51B13A_18200.pdf",
+          "kind": "document",
+          "label": "关于公布我校2026年专升本招生考试录取分数线及录取结果查询的通知（页面内嵌 PDF）",
+          "local_path": "raw/2026/HFNU/DOC-HFNU-2026-LQ-ATT-01.pdf",
+          "sha256": "8cad381fc97ae7da6c6c77fdb014158333d04a4f32f027f5ba8d0991e7ff0cc5",
+          "size_bytes": 98816,
+          "source_id": "SRC-HFNU-2026-LQ",
+          "source_url": "https://zsb.hfnu.edu.cn/__local/9/8B/26/859B739DDE01D7ED903FAFE0645_CA51B13A_18200.pdf"
+        }
+      ],
       "blocked_assets": [],
       "covers": [
         "2026录取分数",
@@ -235,13 +334,15 @@
         "调剂结论"
       ],
       "document_type": "admission_scores",
-      "duration_seconds": 20.73,
+      "duration_seconds": 0.903,
       "errors": [],
       "expected_assets": {
-        "document_count": 0,
+        "document_count": 1,
         "met": true,
-        "min_documents": 0,
-        "preferred_extensions": []
+        "min_documents": 1,
+        "preferred_extensions": [
+          ".pdf"
+        ]
       },
       "page": {
         "content_type": "text/html",
@@ -301,7 +402,7 @@
         "报考范围"
       ],
       "document_type": "exam_syllabus_and_reference_books",
-      "duration_seconds": 4.092,
+      "duration_seconds": 3.363,
       "errors": [],
       "expected_assets": {
         "document_count": 1,
@@ -368,7 +469,7 @@
         "报考范围"
       ],
       "document_type": "exam_syllabus_and_reference_books",
-      "duration_seconds": 3.812,
+      "duration_seconds": 14.618,
       "errors": [],
       "expected_assets": {
         "document_count": 1,
@@ -424,6 +525,17 @@
           "size_bytes": 615279,
           "source_id": "SRC-HFNU-2026-DG",
           "source_url": "https://zsb.hfnu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1090424591&wbfileid=7298453E08C33B075C74A9629F539E8D"
+        },
+        {
+          "content_type": "application/pdf",
+          "final_url": "https://zsb.hfnu.edu.cn/__local/7/D9/69/9D7365B29678864C75F6353DB89_9B196186_22CB2.pdf",
+          "kind": "document",
+          "label": "关于公布我校2026年普通高校专升本拟招生专业范围、考试科目等相关事宜的通知（页面内嵌 PDF）",
+          "local_path": "raw/2026/HFNU/DOC-HFNU-2026-DG-ATT-02.pdf",
+          "sha256": "c2c07f514d5b3326603dfe294290ed504a2218a4888f6d7a207c1741ad70c7fb",
+          "size_bytes": 142514,
+          "source_id": "SRC-HFNU-2026-DG",
+          "source_url": "https://zsb.hfnu.edu.cn/__local/7/D9/69/9D7365B29678864C75F6353DB89_9B196186_22CB2.pdf"
         }
       ],
       "blocked_assets": [],
@@ -433,10 +545,10 @@
         "参考书目"
       ],
       "document_type": "exam_syllabus",
-      "duration_seconds": 14.811,
+      "duration_seconds": 3.166,
       "errors": [],
       "expected_assets": {
-        "document_count": 1,
+        "document_count": 2,
         "met": true,
         "min_documents": 1,
         "preferred_extensions": [
@@ -485,7 +597,7 @@
         "报录数据"
       ],
       "document_type": "application_statistics",
-      "duration_seconds": 1.098,
+      "duration_seconds": 0.917,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -528,30 +640,7 @@
       "year": 2024
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-ZYGG-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2024-ZYGG",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-ZYGG-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2024-ZYGG",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "专业",
@@ -559,7 +648,7 @@
         "培养地点"
       ],
       "document_type": "major_and_training_location",
-      "duration_seconds": 4.088,
+      "duration_seconds": 3.653,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -594,7 +683,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2024-ZYGG",
       "status": "complete",
       "title": "安徽艺术学院关于2024年专升本招生专业的公告",
@@ -624,28 +713,6 @@
           "size_bytes": 479873,
           "source_id": "SRC-AHUA-2024-ZC",
           "source_url": "https://www.ahua.edu.cn/_upload/article/files/d5/18/11a99103438bb4ad29f9c0589dc6/2d5db95c-f36d-430e-b070-d712494ea77c.pdf"
-        },
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-ZC-ATT-03.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2024-ZC",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-ZC-ATT-04.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2024-ZC",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
         }
       ],
       "blocked_assets": [],
@@ -659,7 +726,7 @@
         "调剂规则"
       ],
       "document_type": "admission_policy",
-      "duration_seconds": 9.492,
+      "duration_seconds": 7.727,
       "errors": [],
       "expected_assets": {
         "document_count": 2,
@@ -694,7 +761,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 21,
+      "skipped_asset_count": 23,
       "source_id": "SRC-AHUA-2024-ZC",
       "status": "complete",
       "title": "安徽艺术学院2024年普通高校专升本招生章程",
@@ -702,30 +769,7 @@
       "year": 2024
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-KSNR-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2024-KSNR",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-KSNR-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2024-KSNR",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "考试科目",
@@ -734,7 +778,7 @@
         "参考材料适用性"
       ],
       "document_type": "exam_syllabus",
-      "duration_seconds": 3.681,
+      "duration_seconds": 2.991,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -769,7 +813,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2024-KSNR",
       "status": "complete",
       "title": "安徽艺术学院2024年普通高校专升本招生各专业考试内容",
@@ -777,30 +821,7 @@
       "year": 2024
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-LQ-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2024-LQ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-LQ-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2024-LQ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "录取分数",
@@ -808,7 +829,7 @@
         "不接收校外调剂"
       ],
       "document_type": "admission_scores_and_adjustment",
-      "duration_seconds": 3.748,
+      "duration_seconds": 3.008,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -843,7 +864,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 20,
+      "skipped_asset_count": 22,
       "source_id": "SRC-AHUA-2024-LQ",
       "status": "complete",
       "title": "关于公布2024年专升本招生考试拟录取名单查询的通知",
@@ -851,30 +872,7 @@
       "year": 2024
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-BMRS-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2024-BMRS",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2024/AHUA/DOC-AHUA-2024-BMRS-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2024-BMRS",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "招生计划",
@@ -882,7 +880,7 @@
         "报录数据"
       ],
       "document_type": "application_statistics",
-      "duration_seconds": 3.656,
+      "duration_seconds": 3.037,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -917,7 +915,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2024-BMRS",
       "status": "complete",
       "title": "2024年专升本招生考试各专业报考人数一览表",
@@ -925,30 +923,7 @@
       "year": 2024
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-YG-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2025-YG",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-YG-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2025-YG",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "专业",
@@ -956,7 +931,7 @@
         "考试科目"
       ],
       "document_type": "pre_admission_plan",
-      "duration_seconds": 3.663,
+      "duration_seconds": 3.257,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -991,7 +966,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2025-YG",
       "status": "complete",
       "title": "关于公布我校2025年普通高校专升本拟招生专业及考试方案的通知",
@@ -1021,28 +996,6 @@
           "size_bytes": 18944,
           "source_id": "SRC-AHUA-2025-ZC",
           "source_url": "https://www.ahua.edu.cn/_upload/article/files/01/50/60283a6a448c91947a0841de2c67/4be3abc4-ec80-4c73-84b9-bc26a56e4e0f.doc"
-        },
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-ZC-ATT-03.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2025-ZC",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-ZC-ATT-04.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2025-ZC",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
         }
       ],
       "blocked_assets": [],
@@ -1056,7 +1009,7 @@
         "调剂规则"
       ],
       "document_type": "admission_policy",
-      "duration_seconds": 7.143,
+      "duration_seconds": 5.735,
       "errors": [],
       "expected_assets": {
         "document_count": 2,
@@ -1091,7 +1044,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 23,
+      "skipped_asset_count": 25,
       "source_id": "SRC-AHUA-2025-ZC",
       "status": "complete",
       "title": "安徽艺术学院2025年普通高校专升本招生章程",
@@ -1099,30 +1052,7 @@
       "year": 2025
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-KSNR-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2025-KSNR",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-KSNR-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2025-KSNR",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "考试科目",
@@ -1131,7 +1061,7 @@
         "参考材料适用性"
       ],
       "document_type": "exam_syllabus",
-      "duration_seconds": 3.678,
+      "duration_seconds": 3.286,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -1166,7 +1096,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2025-KSNR",
       "status": "complete",
       "title": "安徽艺术学院2025年普通高校专升本招生各专业考试内容",
@@ -1174,30 +1104,7 @@
       "year": 2025
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-LQ-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2025-LQ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2025/AHUA/DOC-AHUA-2025-LQ-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2025-LQ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "录取分数",
@@ -1205,7 +1112,7 @@
         "不接收校外调剂"
       ],
       "document_type": "admission_scores_and_adjustment",
-      "duration_seconds": 3.746,
+      "duration_seconds": 3.025,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -1240,7 +1147,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 20,
+      "skipped_asset_count": 22,
       "source_id": "SRC-AHUA-2025-LQ",
       "status": "complete",
       "title": "关于发布2025年专升本招生考试拟录取名单查询的通知",
@@ -1248,30 +1155,7 @@
       "year": 2025
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-YG-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2026-YG",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-YG-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2026-YG",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "专业",
@@ -1279,7 +1163,7 @@
         "考试科目"
       ],
       "document_type": "pre_admission_plan",
-      "duration_seconds": 3.95,
+      "duration_seconds": 3.213,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -1314,7 +1198,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2026-YG",
       "status": "complete",
       "title": "关于公布我校2026年普通高校专升本拟招生专业及考试方案的通知",
@@ -1322,30 +1206,7 @@
       "year": 2026
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-XZ-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2026-XZ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-XZ-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2026-XZ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "招生计划",
@@ -1356,7 +1217,7 @@
         "报考范围"
       ],
       "document_type": "new_major_syllabus_and_reference_books",
-      "duration_seconds": 3.673,
+      "duration_seconds": 3.231,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -1391,7 +1252,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2026-XZ",
       "status": "complete",
       "title": "关于发布我校2026年普通高校专升本新增招生专业的通知",
@@ -1421,28 +1282,6 @@
           "size_bytes": 19456,
           "source_id": "SRC-AHUA-2026-ZC",
           "source_url": "https://www.ahua.edu.cn/_upload/article/files/12/31/90378bbd432d9196f2676865c873/eaed413b-4ebe-40d3-9dd3-f9c2d814497e.doc"
-        },
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-ZC-ATT-03.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2026-ZC",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-ZC-ATT-04.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2026-ZC",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
         }
       ],
       "blocked_assets": [],
@@ -1456,7 +1295,7 @@
         "调剂规则"
       ],
       "document_type": "admission_policy",
-      "duration_seconds": 7.107,
+      "duration_seconds": 7.028,
       "errors": [],
       "expected_assets": {
         "document_count": 2,
@@ -1491,7 +1330,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 21,
+      "skipped_asset_count": 23,
       "source_id": "SRC-AHUA-2026-ZC",
       "status": "complete",
       "title": "安徽艺术学院2026年普通高校专升本招生章程",
@@ -1499,30 +1338,7 @@
       "year": 2026
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-KSNR-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2026-KSNR",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-KSNR-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2026-KSNR",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "考试科目",
@@ -1531,7 +1347,7 @@
         "参考材料适用性"
       ],
       "document_type": "exam_syllabus",
-      "duration_seconds": 3.66,
+      "duration_seconds": 2.995,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -1566,7 +1382,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 19,
+      "skipped_asset_count": 21,
       "source_id": "SRC-AHUA-2026-KSNR",
       "status": "complete",
       "title": "安徽艺术学院2026年普通高校专升本招生各专业考试内容",
@@ -1574,30 +1390,7 @@
       "year": 2026
     },
     {
-      "assets": [
-        {
-          "content_type": "image/png",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "kind": "image",
-          "label": "645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-LQ-ATT-01.png",
-          "sha256": "269a812c4520e556b64e5696340556234a57b61bc5022d6efd4f12b389f75406",
-          "size_bytes": 29460,
-          "source_id": "SRC-AHUA-2026-LQ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/70/82/251002284a64a5f1a5e7deb822d8/645c76d2-1b74-4e8d-9e91-0dd5f0820e93_s.png"
-        },
-        {
-          "content_type": "image/jpeg",
-          "final_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "kind": "image",
-          "label": "0e84734a-6349-41c6-865d-3fa2958db280_s.jpg",
-          "local_path": "raw/2026/AHUA/DOC-AHUA-2026-LQ-ATT-02.jpg",
-          "sha256": "368b9d72f073234c79da26918369dcd2a1fe046877f6bb6f2ca6df26ddc23099",
-          "size_bytes": 36849,
-          "source_id": "SRC-AHUA-2026-LQ",
-          "source_url": "https://www.ahua.edu.cn/_upload/article/images/d9/91/0ec8c52443c1ab52eaa53f0e9560/0e84734a-6349-41c6-865d-3fa2958db280_s.jpg"
-        }
-      ],
+      "assets": [],
       "blocked_assets": [],
       "covers": [
         "录取分数",
@@ -1605,7 +1398,7 @@
         "不接收校外调剂"
       ],
       "document_type": "admission_scores_and_adjustment",
-      "duration_seconds": 3.721,
+      "duration_seconds": 3.058,
       "errors": [],
       "expected_assets": {
         "document_count": 0,
@@ -1640,7 +1433,7 @@
       "required_page": true,
       "school_id": "AHUA",
       "school_name": "安徽艺术学院",
-      "skipped_asset_count": 20,
+      "skipped_asset_count": 22,
       "source_id": "SRC-AHUA-2026-LQ",
       "status": "complete",
       "title": "关于发布2026年专升本招生考试拟录取名单查询的通知",
@@ -1649,14 +1442,18 @@
     }
   ],
   "summary": {
-    "asset_count": 39,
+    "asset_count": 13,
     "blocked_asset_count": 0,
     "complete_count": 22,
+    "embedded_pdf_count": 2,
     "failed_count": 0,
     "fatal_required_page_failures": 0,
+    "filtered_shared_image_count": 28,
+    "filtered_shared_image_group_count": 2,
     "html_snapshot_count": 22,
     "parsed_text_count": 22,
     "partial_count": 0,
+    "required_document_failures": 0,
     "source_count": 22
   }
 }
