@@ -57,7 +57,7 @@ jobs:
           done
           printf '%s' "${BATCH01_SCOPE_GZ_B64}" | base64 --decode | gzip -dc \
             > anhui_zsb_data/config/batch_01_school_scope.json
-          echo "362c2ab82b99dd57fb2215322b3b300da927e75550e78eeac3fb9bddfc20f547  anhui_zsb_data/config/batch_01_school_scope.json" | sha256sum --check
+          echo "b3bc4300ea873518ccbc54c45d24d20b0a4100360f67a001567b3ceaa6059631  anhui_zsb_data/config/batch_01_school_scope.json" | sha256sum --check
           python3 -m py_compile anhui_zsb_data/scripts/*.py
 
       - name: Ensure deterministic PDF parser is available
