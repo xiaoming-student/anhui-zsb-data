@@ -1,11 +1,12 @@
 name: Full 30 Official Roster Probe
 
 on:
-  push:
+  pull_request:
     branches:
-      - data/full-30-raw-evidence-acquisition
+      - main
     paths:
       - .github/workflows/full-30-roster-probe.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -27,7 +28,7 @@ jobs:
           from html.parser import HTMLParser
           from urllib.parse import urljoin, urlparse
           from urllib.request import Request, build_opener
-          from urllib.error import HTTPError, URLError
+          from urllib.error import HTTPError
 
           OUT = 'roster_probe'
           os.makedirs(OUT, exist_ok=True)
@@ -44,62 +45,52 @@ jobs:
 
           class Links(HTMLParser):
               def __init__(self):
-                  super().__init__(); self.links=[]; self.title=''; self._in_title=False
+                  super().__init__(); self.links=[]; self.title=''; self._in_title=False; self._anchor=None; self._anchor_text=[]
               def handle_starttag(self, tag, attrs):
                   d=dict(attrs)
                   if tag=='a' and d.get('href'):
-                      self.links.append((d.get('href'), ''))
+                      self._anchor=d.get('href'); self._anchor_text=[]
                   if tag=='title': self._in_title=True
               def handle_endtag(self, tag):
                   if tag=='title': self._in_title=False
+                  if tag=='a' and self._anchor:
+                      self.links.append((self._anchor, ''.join(self._anchor_text).strip()))
+                      self._anchor=None; self._anchor_text=[]
               def handle_data(self, data):
                   if self._in_title: self.title += data
-                  if self.links and self.links[-1][1]=='':
-                      href,_=self.links[-1]; self.links[-1]=(href,data.strip())
+                  if self._anchor: self._anchor_text.append(data)
 
           rows=[]; discovered=[]
           for i, url in enumerate(seeds, 1):
-              req=Request(url, headers=headers)
               rec={'url':url,'retrieved_at':datetime.now(timezone.utc).isoformat()}
               try:
-                  with opener.open(req, timeout=30) as r:
+                  with opener.open(Request(url, headers=headers), timeout=30) as r:
                       body=r.read(); final=r.geturl(); status=r.getcode(); ctype=r.headers.get('Content-Type','')
                   rec.update({'status':status,'final_url':final,'content_type':ctype,'size':len(body),'sha256':hashlib.sha256(body).hexdigest()})
                   ext='.html' if 'html' in ctype.lower() else '.bin'
                   path=f'{OUT}/authority_seed_{i}{ext}'
-                  open(path,'wb').write(body)
-                  rec['local_path']=path
+                  open(path,'wb').write(body); rec['local_path']=path
                   if 'html' in ctype.lower():
-                      text=body.decode('utf-8','replace')
-                      p=Links(); p.feed(text)
-                      rec['title']=p.title.strip()
+                      text=body.decode('utf-8','replace'); p=Links(); p.feed(text); rec['title']=p.title.strip()
                       for href, anchor in p.links:
                           absu=urljoin(final,href)
-                          if urlparse(absu).netloc.endswith('ahzsks.cn'):
-                              if re.search(r'202[456]|专升本|招生章程|招生院校', anchor + ' ' + absu, re.I):
-                                  discovered.append({'parent':final,'url':absu,'anchor':anchor})
-              except HTTPError as e:
-                  rec.update({'status':e.code,'error':str(e)})
-              except Exception as e:
-                  rec.update({'status':'error','error':repr(e)})
+                          if urlparse(absu).netloc.endswith('ahzsks.cn') and re.search(r'202[456]|专升本|招生章程|招生院校', anchor+' '+absu, re.I):
+                              discovered.append({'parent':final,'url':absu,'anchor':anchor})
+              except HTTPError as e: rec.update({'status':e.code,'error':str(e)})
+              except Exception as e: rec.update({'status':'error','error':repr(e)})
               rows.append(rec); time.sleep(1)
 
-          # Fetch one level of official discovered links, bounded for safety.
           seen=set(); fetched=[]
           for item in discovered[:150]:
               url=item['url']
               if url in seen: continue
-              seen.add(url)
-              rec=dict(item); rec['retrieved_at']=datetime.now(timezone.utc).isoformat()
+              seen.add(url); rec=dict(item); rec['retrieved_at']=datetime.now(timezone.utc).isoformat()
               try:
                   with opener.open(Request(url,headers=headers),timeout=30) as r:
                       body=r.read(); final=r.geturl(); status=r.getcode(); ctype=r.headers.get('Content-Type','')
                   rec.update({'status':status,'final_url':final,'content_type':ctype,'size':len(body),'sha256':hashlib.sha256(body).hexdigest()})
                   if 'html' in ctype.lower():
-                      text=body.decode('utf-8','replace')
-                      plain=re.sub(r'<[^>]+>',' ',text)
-                      plain=re.sub(r'\s+',' ',plain)
-                      rec['snippet']=plain[:1200]
+                      text=body.decode('utf-8','replace'); plain=re.sub(r'<[^>]+>',' ',text); plain=re.sub(r'\s+',' ',plain); rec['snippet']=plain[:1200]
               except HTTPError as e: rec.update({'status':e.code,'error':str(e)})
               except Exception as e: rec.update({'status':'error','error':repr(e)})
               fetched.append(rec); time.sleep(.5)
