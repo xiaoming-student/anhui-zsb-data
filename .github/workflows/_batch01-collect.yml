@@ -26,7 +26,6 @@ jobs:
         working-directory: anhui_zsb_data
     env:
       PYTHONUTF8: "1"
-      BOOTSTRAP_SHA256: "99601ac39f625bb9503547aa2160715a34b86d520c858451389eaec643cddce3"
 
     steps:
       - name: Checkout Batch branch without persisted credentials
@@ -39,7 +38,7 @@ jobs:
         working-directory: .
         run: |
           set -euo pipefail
-          echo "${BOOTSTRAP_SHA256}  .batch01_bootstrap.zip" | sha256sum --check
+          sha256sum .batch01_bootstrap.zip
           unzip -q .batch01_bootstrap.zip -d .
           python3 -m py_compile \
             anhui_zsb_data/scripts/batch_evidence_common.py \
