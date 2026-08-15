@@ -1,0 +1,120 @@
+name: Full 30 Official Roster Probe
+
+on:
+  push:
+    branches:
+      - data/full-30-raw-evidence-acquisition
+    paths:
+      - .github/workflows/full-30-roster-probe.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Probe official Anhui admission sources
+        shell: python
+        run: |
+          import csv, hashlib, json, os, re, time
+          from datetime import datetime, timezone
+          from html.parser import HTMLParser
+          from urllib.parse import urljoin, urlparse
+          from urllib.request import Request, build_opener
+          from urllib.error import HTTPError, URLError
+
+          OUT = 'roster_probe'
+          os.makedirs(OUT, exist_ok=True)
+          seeds = [
+              'https://www.ahzsks.cn/zyyx/search2.jsp?c=232',
+              'https://www.ahzsks.cn/zyyx/',
+              'https://www.ahzsks.cn/',
+          ]
+          headers = {
+              'User-Agent': 'Mozilla/5.0 (compatible; AnhuiZSBDataResearch/1.0; +https://github.com/xiaoming-student/anhui-zsb-data)',
+              'Accept': 'text/html,application/xhtml+xml,application/pdf,*/*;q=0.8',
+          }
+          opener = build_opener()
+
+          class Links(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.links=[]; self.title=''; self._in_title=False
+              def handle_starttag(self, tag, attrs):
+                  d=dict(attrs)
+                  if tag=='a' and d.get('href'):
+                      self.links.append((d.get('href'), ''))
+                  if tag=='title': self._in_title=True
+              def handle_endtag(self, tag):
+                  if tag=='title': self._in_title=False
+              def handle_data(self, data):
+                  if self._in_title: self.title += data
+                  if self.links and self.links[-1][1]=='':
+                      href,_=self.links[-1]; self.links[-1]=(href,data.strip())
+
+          rows=[]; discovered=[]
+          for i, url in enumerate(seeds, 1):
+              req=Request(url, headers=headers)
+              rec={'url':url,'retrieved_at':datetime.now(timezone.utc).isoformat()}
+              try:
+                  with opener.open(req, timeout=30) as r:
+                      body=r.read(); final=r.geturl(); status=r.getcode(); ctype=r.headers.get('Content-Type','')
+                  rec.update({'status':status,'final_url':final,'content_type':ctype,'size':len(body),'sha256':hashlib.sha256(body).hexdigest()})
+                  ext='.html' if 'html' in ctype.lower() else '.bin'
+                  path=f'{OUT}/authority_seed_{i}{ext}'
+                  open(path,'wb').write(body)
+                  rec['local_path']=path
+                  if 'html' in ctype.lower():
+                      text=body.decode('utf-8','replace')
+                      p=Links(); p.feed(text)
+                      rec['title']=p.title.strip()
+                      for href, anchor in p.links:
+                          absu=urljoin(final,href)
+                          if urlparse(absu).netloc.endswith('ahzsks.cn'):
+                              if re.search(r'202[456]|专升本|招生章程|招生院校', anchor + ' ' + absu, re.I):
+                                  discovered.append({'parent':final,'url':absu,'anchor':anchor})
+              except HTTPError as e:
+                  rec.update({'status':e.code,'error':str(e)})
+              except Exception as e:
+                  rec.update({'status':'error','error':repr(e)})
+              rows.append(rec); time.sleep(1)
+
+          # Fetch one level of official discovered links, bounded for safety.
+          seen=set(); fetched=[]
+          for item in discovered[:150]:
+              url=item['url']
+              if url in seen: continue
+              seen.add(url)
+              rec=dict(item); rec['retrieved_at']=datetime.now(timezone.utc).isoformat()
+              try:
+                  with opener.open(Request(url,headers=headers),timeout=30) as r:
+                      body=r.read(); final=r.geturl(); status=r.getcode(); ctype=r.headers.get('Content-Type','')
+                  rec.update({'status':status,'final_url':final,'content_type':ctype,'size':len(body),'sha256':hashlib.sha256(body).hexdigest()})
+                  if 'html' in ctype.lower():
+                      text=body.decode('utf-8','replace')
+                      plain=re.sub(r'<[^>]+>',' ',text)
+                      plain=re.sub(r'\s+',' ',plain)
+                      rec['snippet']=plain[:1200]
+              except HTTPError as e: rec.update({'status':e.code,'error':str(e)})
+              except Exception as e: rec.update({'status':'error','error':repr(e)})
+              fetched.append(rec); time.sleep(.5)
+
+          with open(f'{OUT}/authority_probe.json','w',encoding='utf-8') as f:
+              json.dump({'seeds':rows,'discovered':discovered,'fetched':fetched},f,ensure_ascii=False,indent=2)
+          fields=['url','final_url','status','content_type','size','sha256','local_path','title','retrieved_at','error']
+          with open(f'{OUT}/authority_seeds.csv','w',encoding='utf-8-sig',newline='') as f:
+              w=csv.DictWriter(f,fieldnames=fields); w.writeheader()
+              for r in rows: w.writerow({k:r.get(k,'') for k in fields})
+          print(json.dumps({'seed_results':rows,'discovered_count':len(discovered),'fetched_count':len(fetched)},ensure_ascii=False,indent=2))
+      - name: Upload probe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-roster-probe
+          path: roster_probe/
+          if-no-files-found: error
+          retention-days: 7
