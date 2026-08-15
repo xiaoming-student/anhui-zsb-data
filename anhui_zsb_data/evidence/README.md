@@ -35,12 +35,29 @@ python3 scripts/collect_stage1_evidence.py --dry-run
 python3 scripts/collect_stage1_evidence.py
 ```
 
+需要重新获取全部已登记资产时，可以执行：
+
+```bash
+python3 scripts/collect_stage1_evidence.py --clean
+```
+
+`--clean` 只删除 inventory 明确登记的文件，不会整体删除 `pilot_a/` 或 `pilot_b/`，也不会删除未登记文件。未登记文件会被闭集审计判定为错误，必须由人工决定登记或显式删除。
+
 采集器只能写入 `evidence/`，不会写入或清理 canonical `raw/`。官方字节、大小或最终 URL 与审计清单不一致时会立即失败。
 
 离线验证：
 
 ```bash
+python3 scripts/stage1_evidence_guard.py
 python3 scripts/verify_stage1_evidence.py
 ```
+
+其中 `stage1_evidence_guard.py` 强制执行闭集规则：
+
+- `pilot_a/` 与 `pilot_b/` 下的每一个文件都必须出现在 inventory；
+- inventory 中的每一个文件都必须真实存在且不能是符号链接；
+- 每个 source document 必须且只能有一个 HTML snapshot；
+- parsed text 必须指向同 source 的 HTML 或 PDF 父资产；
+- `blank_official_form` 必须是可选 DOC/DOCX，并挂接到同 source 的 HTML 页面。
 
 Stage 1 不修改 Schema、staging、normalized、SQLite 或现有 canonical 业务数据。

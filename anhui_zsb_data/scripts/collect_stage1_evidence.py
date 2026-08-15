@@ -12,16 +12,16 @@ import hashlib
 import http.cookiejar
 import json
 import re
-import shutil
 import ssl
 import subprocess
 import tempfile
 import time
-import zipfile
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import HTTPCookieProcessor, HTTPSHandler, Request, build_opener
+
+from stage1_evidence_guard import EvidenceGuardError, clean_managed_evidence
 
 ROOT = Path(__file__).resolve().parent.parent
 INVENTORY_PATH = ROOT / "config" / "phase1_evidence_inventory.json"
@@ -232,13 +232,36 @@ def derive_text(asset: dict, by_id: dict[str, dict], target: Path) -> None:
                 del attrs
                 if tag.lower() in {"script", "style", "noscript", "svg"}:
                     self.skip += 1
-                elif tag.lower() in {"br", "p", "div", "li", "tr", "h1", "h2", "h3", "h4", "h5", "h6"}:
+                elif tag.lower() in {
+                    "br",
+                    "p",
+                    "div",
+                    "li",
+                    "tr",
+                    "h1",
+                    "h2",
+                    "h3",
+                    "h4",
+                    "h5",
+                    "h6",
+                }:
                     self.text.append("\n")
 
             def handle_endtag(self, tag: str) -> None:
                 if tag.lower() in {"script", "style", "noscript", "svg"} and self.skip:
                     self.skip -= 1
-                elif tag.lower() in {"p", "div", "li", "tr", "h1", "h2", "h3", "h4", "h5", "h6"}:
+                elif tag.lower() in {
+                    "p",
+                    "div",
+                    "li",
+                    "tr",
+                    "h1",
+                    "h2",
+                    "h3",
+                    "h4",
+                    "h5",
+                    "h6",
+                }:
                     self.text.append("\n")
 
             def handle_data(self, value: str) -> None:
@@ -273,13 +296,6 @@ def derive_text(asset: dict, by_id: dict[str, dict], target: Path) -> None:
     target.write_bytes(data)
 
 
-def clean_evidence_namespaces() -> None:
-    for relative in ("evidence/pilot_a", "evidence/pilot_b"):
-        target = safe_evidence_path(relative)
-        if target.exists():
-            shutil.rmtree(target)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check-config", action="store_true")
@@ -287,7 +303,10 @@ def main() -> int:
     parser.add_argument(
         "--clean",
         action="store_true",
-        help="remove only evidence/pilot_a and evidence/pilot_b before refresh",
+        help=(
+            "remove only files explicitly declared by the Stage 1 inventory "
+            "before refresh; untracked files are preserved for audit"
+        ),
     )
     args = parser.parse_args()
 
@@ -302,7 +321,11 @@ def main() -> int:
         return 0
 
     if args.clean and not args.dry_run:
-        clean_evidence_namespaces()
+        try:
+            removed = clean_managed_evidence(assets, root=ROOT)
+        except EvidenceGuardError as exc:
+            raise CollectionError(str(exc)) from exc
+        print(f"[PASS] removed {removed} inventory-managed evidence files")
 
     opener = make_opener()
     by_id = {item["asset_id"]: item for item in assets}
