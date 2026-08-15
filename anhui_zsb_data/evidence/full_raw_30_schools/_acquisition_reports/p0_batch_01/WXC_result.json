@@ -1,0 +1,54 @@
+{
+  "school": {
+    "school_id": "WXC",
+    "school_name": "皖西学院",
+    "source_documents": 0,
+    "raw_files": 0,
+    "raw_bytes": 0,
+    "collected": 0,
+    "not_found": 84,
+    "access_restricted": 2,
+    "manual_download_required": 0,
+    "privacy_excluded": 0,
+    "year_topics": {
+      "2024": [],
+      "2025": [],
+      "2026": []
+    }
+  },
+  "manifest": {
+    "school_id": "WXC",
+    "school_name": "皖西学院",
+    "official_domains": [
+      "wxc.edu.cn"
+    ],
+    "sources": [],
+    "assets": [],
+    "failures": [
+      {
+        "school_id": "WXC",
+        "school_name": "皖西学院",
+        "year": 2025,
+        "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='zsb.wxc.edu.cn', port=443): Max retries exceeded with url: /_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf (Caused by ConnectTimeoutError(<HTTPSConnection(host='zsb.wxc.edu.cn', port=443) at 0x7f0d4e460fb0>, 'Connection to zsb.wxc.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "WXC",
+        "school_name": "皖西学院",
+        "year": 2025,
+        "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='zsb.wxc.edu.cn', port=443): Max retries exceeded with url: /_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf (Caused by ConnectTimeoutError(<HTTPSConnection(host='zsb.wxc.edu.cn', port=443) at 0x7f0d4e1261b0>, 'Connection to zsb.wxc.edu.cn timed out. (connect timeout=5)'))\"))"
+      }
+    ],
+    "privacy_exclusions": [],
+    "generated_at": "2026-08-15T17:34:09.756747+00:00",
+    "sanitized": true,
+    "acquisition_batch": "p0_batch_01_targeted_fast"
+  }
+}

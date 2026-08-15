@@ -1,0 +1,204 @@
+{
+  "school": {
+    "school_id": "AHSZU",
+    "school_name": "宿州学院",
+    "source_documents": 0,
+    "raw_files": 0,
+    "raw_bytes": 0,
+    "collected": 0,
+    "not_found": 84,
+    "access_restricted": 17,
+    "manual_download_required": 0,
+    "privacy_excluded": 0,
+    "year_topics": {
+      "2024": [],
+      "2025": [],
+      "2026": []
+    }
+  },
+  "manifest": {
+    "school_id": "AHSZU",
+    "school_name": "宿州学院",
+    "official_domains": [
+      "ahszu.edu.cn"
+    ],
+    "sources": [],
+    "assets": [],
+    "failures": [
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2024,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/5639.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/5639.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e1268a0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2024,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/5667.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/5667.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e125b80>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2024,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/5739.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/5739.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e127c20>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2024,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/5762.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/5762.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e1547a0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2024,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/5786.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/5786.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e1552e0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2024,
+        "url": "https://www.ahszu.edu.cn/zs/info/1062/5673.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1062/5673.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e127410>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2025,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/6239.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/6239.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e156a20>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2025,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/6309.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/6309.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e1578f0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2025,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/7209.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/7209.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e157650>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2025,
+        "url": "https://www.ahszu.edu.cn/zs/info/1062/6003.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1062/6003.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e155e80>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2025,
+        "url": "https://www.ahszu.edu.cn/zs/info/1062/8129.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1062/8129.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e127860>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2026,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/8559.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/8559.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e17c5c0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2026,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/8789.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/8789.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e17c980>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2026,
+        "url": "https://www.ahszu.edu.cn/zs/info/1039/8869.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1039/8869.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e17cd40>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2026,
+        "url": "https://www.ahszu.edu.cn/zs/info/1062/8249.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1062/8249.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e157c50>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2026,
+        "url": "https://www.ahszu.edu.cn/zs/info/1062/8549.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1062/8549.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e17c0b0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      },
+      {
+        "school_id": "AHSZU",
+        "school_name": "宿州学院",
+        "year": 2026,
+        "url": "https://www.ahszu.edu.cn/zs/info/1062/8889.htm",
+        "parent_url": "",
+        "status": "access_restricted",
+        "http_status": "error",
+        "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='www.ahszu.edu.cn', port=443): Max retries exceeded with url: /zs/info/1062/8889.htm (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.ahszu.edu.cn', port=443) at 0x7f0d4e17d1c0>, 'Connection to www.ahszu.edu.cn timed out. (connect timeout=5)'))\"))"
+      }
+    ],
+    "privacy_exclusions": [],
+    "generated_at": "2026-08-15T17:34:09.770512+00:00",
+    "sanitized": true,
+    "acquisition_batch": "p0_batch_01_targeted_fast"
+  }
+}

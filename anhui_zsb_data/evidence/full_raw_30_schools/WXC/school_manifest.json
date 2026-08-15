@@ -10,63 +10,26 @@
     {
       "school_id": "WXC",
       "school_name": "皖西学院",
-      "year": 2024,
-      "url": "https://zsb.wxc.edu.cn/",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
-    },
-    {
-      "school_id": "WXC",
-      "school_name": "皖西学院",
-      "year": 2024,
-      "url": "https://www.wxc.edu.cn/",
-      "parent_url": "",
-      "status": "access_restricted",
-      "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='zsb.wxc.edu.cn', port=443): Max retries exceeded with url: /_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf (Caused by ConnectTimeoutError(<HTTPSConnection(host='zsb.wxc.edu.cn', port=443) at 0x7f0d4e460fb0>, 'Connection to zsb.wxc.edu.cn timed out. (connect timeout=5)'))\"))"
     },
     {
       "school_id": "WXC",
       "school_name": "皖西学院",
       "year": 2025,
-      "url": "https://zsb.wxc.edu.cn/",
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
-    },
-    {
-      "school_id": "WXC",
-      "school_name": "皖西学院",
-      "year": 2025,
-      "url": "https://www.wxc.edu.cn/",
-      "parent_url": "",
-      "status": "access_restricted",
-      "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
-    },
-    {
-      "school_id": "WXC",
-      "school_name": "皖西学院",
-      "year": 2026,
-      "url": "https://zsb.wxc.edu.cn/",
-      "parent_url": "",
-      "status": "access_restricted",
-      "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
-    },
-    {
-      "school_id": "WXC",
-      "school_name": "皖西学院",
-      "year": 2026,
-      "url": "https://www.wxc.edu.cn/",
-      "parent_url": "",
-      "status": "access_restricted",
-      "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='zsb.wxc.edu.cn', port=443): Max retries exceeded with url: /_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf (Caused by ConnectTimeoutError(<HTTPSConnection(host='zsb.wxc.edu.cn', port=443) at 0x7f0d4e1261b0>, 'Connection to zsb.wxc.edu.cn timed out. (connect timeout=5)'))\"))"
     }
   ],
-  "sanitized": true
+  "privacy_exclusions": [],
+  "generated_at": "2026-08-15T17:34:09.756747+00:00",
+  "sanitized": true,
+  "acquisition_batch": "p0_batch_01_targeted_fast"
 }
