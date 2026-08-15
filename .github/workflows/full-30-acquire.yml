@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - scripts/acquire_full_30_raw_evidence.py
+      - scripts/sanitize_full_30_evidence.py
       - .github/workflows/full-30-acquire.yml
   workflow_dispatch:
 
@@ -36,7 +37,7 @@ jobs:
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
 
       - name: Syntax check
-        run: python -m py_compile scripts/acquire_full_30_raw_evidence.py
+        run: python -m py_compile scripts/acquire_full_30_raw_evidence.py scripts/sanitize_full_30_evidence.py
 
       - name: Acquire official raw evidence
         env:
@@ -44,6 +45,11 @@ jobs:
           MAX_PAGES_PER_SCHOOL_YEAR: '40'
           ACQ_DELAY: '0.30'
         run: python scripts/acquire_full_30_raw_evidence.py
+
+      - name: Enforce year binding and privacy/image policy
+        env:
+          ACQ_GROUP: ${{ matrix.group }}
+        run: python scripts/sanitize_full_30_evidence.py
 
       - name: Upload checkpoint artifact
         uses: actions/upload-artifact@v4
