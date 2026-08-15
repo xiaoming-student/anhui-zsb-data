@@ -71,6 +71,9 @@ class CanonicalBuilder:
         self.eligibility_rule_items: list[dict[str, Any]] = []
         self.admission_scores: list[dict[str, Any]] = []
         self.admission_rules: list[dict[str, Any]] = []
+        self.syllabus: list[dict[str, Any]] = []
+        self.reference_books: list[dict[str, Any]] = []
+        self.application_statistics: list[dict[str, Any]] = []
 
         self.program_year_by_key: dict[tuple[int, str], dict[str, Any]] = {}
         self.offering_by_key: dict[tuple[int, str, str], dict[str, Any]] = {}
@@ -829,7 +832,16 @@ class CanonicalBuilder:
     def _resolve_score_offering(self, year: int, score: dict[str, Any]) -> dict[str, Any]:
         major_std = normalize_major_name(score["major_name_raw"])
         notes = normalize_text(score.get("notes_raw"))
-        institution_name = notes if notes in self.institution_by_name else "合肥师范学院"
+        institution_matches = [
+            name for name in self.institution_by_name if name and name in notes
+        ]
+        if len(institution_matches) > 1:
+            raise BuildError(
+                f"Score note resolves to multiple institutions: {year} {major_std} {notes!r}"
+            )
+        institution_name = (
+            institution_matches[0] if institution_matches else "合肥师范学院"
+        )
         institution_id = self.institution_by_name[institution_name]["institution_id"]
         key = (year, major_std, institution_id)
         try:
@@ -839,7 +851,7 @@ class CanonicalBuilder:
 
     def build_admission_scores(self) -> None:
         rows: list[dict[str, Any]] = []
-        for year in (2024, 2025):
+        for year in YEARS:
             payload = self._staging_payload(year, "admission_scores.json")
             source = source_id(year, "admission_scores")
             seen_offering_rows: set[str] = set()
@@ -968,6 +980,276 @@ class CanonicalBuilder:
             self.admission_rules,
         )
 
+    def _professional_subject_for(
+        self,
+        year: int,
+        major_name: str,
+        subject_name: str,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        program = self._program_for_major(year, major_name)
+        expected = normalize_text(subject_name)
+        matches = [
+            row
+            for row in self.exam_subjects
+            if row["program_year_id"] == program["program_year_id"]
+            and row["subject_slot"] in {"professional_1", "professional_2"}
+            and row["subject_name_std"] == expected
+        ]
+        if len(matches) != 1:
+            raise BuildError(
+                "Cannot uniquely resolve professional subject: "
+                f"{year} {normalize_major_name(major_name)} {expected!r} "
+                f"(matches={len(matches)})"
+            )
+        return program, matches[0]
+
+    def build_syllabus(self) -> None:
+        rows: list[dict[str, Any]] = []
+        seen_keys: set[tuple[str, str]] = set()
+        for year in YEARS:
+            payload = self._staging_payload(year, "syllabus.json")
+            source = normalize_text(payload.get("source_document_id"))
+            expected_source = f"SRC-HFNU-{year}-DG"
+            if source != expected_source:
+                raise BuildError(
+                    f"Unexpected syllabus source for {year}: {source!r}, expected {expected_source}"
+                )
+            for item in payload["data"]:
+                program, subject = self._professional_subject_for(
+                    year,
+                    item["major_name_raw"],
+                    item["subject_name_raw"],
+                )
+                natural_key = (program["program_year_id"], subject["subject_id"])
+                if natural_key in seen_keys:
+                    raise BuildError(
+                        "Duplicate syllabus row: "
+                        f"{year} {program['major_name_std']} {subject['subject_name_std']}"
+                    )
+                seen_keys.add(natural_key)
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="exam_syllabus",
+                    row_key=f"{program['major_name_std']}|{subject['subject_name_std']}",
+                    section=subject["subject_name_std"],
+                )
+                rows.append(
+                    {
+                        "syllabus_id": stable_id(
+                            "SYLL",
+                            program["program_year_id"],
+                            subject["subject_id"],
+                        ),
+                        "program_year_id": program["program_year_id"],
+                        "subject_id": subject["subject_id"],
+                        "title": normalize_text(item.get("title_raw")),
+                        "raw_text": normalize_text(item.get("raw_text")),
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
+        self.syllabus = sorted(
+            rows,
+            key=lambda row: (
+                self._major_for_program(row["program_year_id"]),
+                row["subject_id"],
+            ),
+        )
+        write_csv(
+            NORMALIZED_DIR / "syllabus.csv",
+            [
+                "syllabus_id",
+                "program_year_id",
+                "subject_id",
+                "title",
+                "raw_text",
+                "source_id",
+                "source_locator",
+            ],
+            self.syllabus,
+        )
+
+    def build_reference_books(self) -> None:
+        rows: list[dict[str, Any]] = []
+        seen_ids: set[str] = set()
+        for year in YEARS:
+            payload = self._staging_payload(year, "reference_books.json")
+            source = normalize_text(payload.get("source_document_id"))
+            expected_source = f"SRC-HFNU-{year}-DG"
+            if source != expected_source:
+                raise BuildError(
+                    f"Unexpected reference-book source for {year}: {source!r}, expected {expected_source}"
+                )
+            for item in payload["data"]:
+                program, subject = self._professional_subject_for(
+                    year,
+                    item["major_name_raw"],
+                    item["subject_name_raw"],
+                )
+                book_name = normalize_text(item.get("book_name_raw"))
+                reference_key = normalize_text(item.get("reference_key_raw"))
+                if not book_name or not reference_key:
+                    raise BuildError(
+                        f"Reference book lacks official title/key: {year} {program['major_name_std']}"
+                    )
+                reference_book_id = stable_id(
+                    "BOOK",
+                    program["program_year_id"],
+                    subject["subject_id"],
+                    book_name,
+                    reference_key,
+                )
+                if reference_book_id in seen_ids:
+                    raise BuildError(f"Duplicate reference book natural key: {reference_book_id}")
+                seen_ids.add(reference_book_id)
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="exam_syllabus",
+                    row_key=(
+                        f"{program['major_name_std']}|{subject['subject_name_std']}|{book_name}"
+                    ),
+                    section="参考书目",
+                )
+                rows.append(
+                    {
+                        "reference_book_id": reference_book_id,
+                        "program_year_id": program["program_year_id"],
+                        "subject_id": subject["subject_id"],
+                        "book_name": book_name,
+                        "author": normalize_text(item.get("author_raw")),
+                        "publisher": normalize_text(item.get("publisher_raw")),
+                        "edition": normalize_text(item.get("edition_raw")),
+                        "isbn": normalize_text(item.get("isbn_raw")),
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
+        self.reference_books = sorted(
+            rows,
+            key=lambda row: (
+                self._major_for_program(row["program_year_id"]),
+                row["subject_id"],
+                row["book_name"],
+                row["reference_book_id"],
+            ),
+        )
+        write_csv(
+            NORMALIZED_DIR / "reference_books.csv",
+            [
+                "reference_book_id",
+                "program_year_id",
+                "subject_id",
+                "book_name",
+                "author",
+                "publisher",
+                "edition",
+                "isbn",
+                "source_id",
+                "source_locator",
+            ],
+            self.reference_books,
+        )
+
+    def _resolve_application_offering(
+        self,
+        year: int,
+        item: dict[str, Any],
+    ) -> dict[str, Any]:
+        major_std = normalize_major_name(item["major_name_raw"])
+        institution_name = normalize_text(item.get("training_institution_name_raw"))
+        if not institution_name:
+            institution_name = "合肥师范学院"
+        institution = self.institution_by_name.get(institution_name)
+        if institution is None:
+            raise BuildError(
+                f"Unknown application-statistics institution: {year} {institution_name}"
+            )
+        key = (year, major_std, institution["institution_id"])
+        try:
+            return self.offering_by_key[key]
+        except KeyError:
+            raise BuildError(
+                f"Cannot resolve application-statistics offering: "
+                f"{year} {major_std} {institution_name}"
+            ) from None
+
+    def build_application_statistics(self) -> None:
+        payload = self._staging_payload(2024, "application_statistics.json")
+        source = normalize_text(payload.get("source_document_id"))
+        if source != "SRC-HFNU-2024-BMRS":
+            raise BuildError(f"Unexpected application-statistics source: {source!r}")
+        total_plan_by_offering = {
+            row["offering_id"]: row
+            for row in self.enrollment_plans
+            if row["plan_type"] == "total"
+        }
+        rows: list[dict[str, Any]] = []
+        seen_offerings: set[str] = set()
+        for item in payload["data"]:
+            offering = self._resolve_application_offering(2024, item)
+            offering_id = offering["offering_id"]
+            if offering_id in seen_offerings:
+                raise BuildError(f"Duplicate application-statistics offering: {offering_id}")
+            seen_offerings.add(offering_id)
+            official_plan = int(item["plan_count_raw"])
+            canonical_plan = total_plan_by_offering.get(offering_id)
+            if canonical_plan is None or canonical_plan["value_status"] not in {
+                "explicit_value",
+                "explicit_zero",
+            }:
+                raise BuildError(f"No explicit canonical total plan for {offering_id}")
+            if int(float(canonical_plan["plan_value"])) != official_plan:
+                raise BuildError(
+                    "Application-statistics plan conflict: "
+                    f"{offering_id} official={official_plan} "
+                    f"canonical={canonical_plan['plan_value']}"
+                )
+            applicant_count = item.get("applicant_count_raw")
+            if isinstance(applicant_count, bool) or not isinstance(applicant_count, int):
+                raise BuildError(f"Applicant count is not an official integer: {item!r}")
+            locator = normalized_locator(
+                item.get("source_locator"),
+                year=2024,
+                document_type="application_statistics",
+                row_key=(
+                    f"{self._major_for_program(offering['program_year_id'])}|"
+                    f"{offering['training_institution_name']}"
+                ),
+                section="分专业报考人数",
+            )
+            rows.append(
+                {
+                    "application_statistic_id": stable_id(
+                        "APPSTAT", offering_id, source
+                    ),
+                    "offering_id": offering_id,
+                    "applicant_count": applicant_count,
+                    "qualified_count": item.get("qualified_count_raw"),
+                    "admitted_count": item.get("admitted_count_raw"),
+                    "source_id": source,
+                    "source_locator": locator,
+                }
+            )
+        self.application_statistics = sorted(
+            rows,
+            key=lambda row: self._offering_sort_key(row["offering_id"]),
+        )
+        write_csv(
+            NORMALIZED_DIR / "application_statistics.csv",
+            [
+                "application_statistic_id",
+                "offering_id",
+                "applicant_count",
+                "qualified_count",
+                "admitted_count",
+                "source_id",
+                "source_locator",
+            ],
+            self.application_statistics,
+        )
+
     def build_supporting_tables(self) -> None:
         hfnu = self.institution_by_name["合肥师范学院"]
         write_csv(
@@ -1050,17 +1332,8 @@ class CanonicalBuilder:
         )
         # Empty future tables use explicit schemas instead of ambiguous blank files.
         empty_schemas = {
-            "syllabus.csv": [
-                "syllabus_id", "program_year_id", "subject_id", "title", "raw_text", "source_id", "source_locator"
-            ],
-            "reference_books.csv": [
-                "reference_book_id", "program_year_id", "subject_id", "book_name", "author", "publisher", "edition", "isbn", "source_id", "source_locator"
-            ],
             "adjustments.csv": [
                 "adjustment_id", "offering_id", "adjustment_type", "plan_value", "requirements_raw", "source_id", "source_locator"
-            ],
-            "application_statistics.csv": [
-                "application_statistic_id", "offering_id", "applicant_count", "qualified_count", "admitted_count", "source_id", "source_locator"
             ],
         }
         for filename, headers in empty_schemas.items():
@@ -1077,6 +1350,12 @@ class CanonicalBuilder:
             "eligibility_rule_sets": (self.eligibility_rule_sets, "eligibility_rule_set_id"),
             "admission_scores": (self.admission_scores, "admission_score_id"),
             "admission_rules": (self.admission_rules, "rule_id"),
+            "syllabus": (self.syllabus, "syllabus_id"),
+            "reference_books": (self.reference_books, "reference_book_id"),
+            "application_statistics": (
+                self.application_statistics,
+                "application_statistic_id",
+            ),
         }
         rows: list[dict[str, Any]] = []
         for table_name, (records, id_field) in table_specs.items():
@@ -1105,6 +1384,9 @@ class CanonicalBuilder:
         self.build_eligibility()
         self.build_admission_scores()
         self.build_admission_rules()
+        self.build_syllabus()
+        self.build_reference_books()
+        self.build_application_statistics()
         self.build_supporting_tables()
         self.build_fact_sources()
         return {
@@ -1118,6 +1400,9 @@ class CanonicalBuilder:
             "eligibility_rule_items": len(self.eligibility_rule_items),
             "admission_scores": len(self.admission_scores),
             "admission_rules": len(self.admission_rules),
+            "syllabus": len(self.syllabus),
+            "reference_books": len(self.reference_books),
+            "application_statistics": len(self.application_statistics),
         }
 
 

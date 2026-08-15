@@ -259,6 +259,42 @@ def build_database(path: Path = DB_PATH) -> Path:
             UNIQUE(year, school_id, rule_type, rule_scope)
         );
 
+        CREATE TABLE syllabus (
+            syllabus_id TEXT PRIMARY KEY,
+            program_year_id TEXT NOT NULL REFERENCES program_years(program_year_id),
+            subject_id TEXT NOT NULL,
+            title TEXT NOT NULL,
+            raw_text TEXT NOT NULL,
+            source_id TEXT NOT NULL REFERENCES source_documents(source_document_id),
+            source_locator TEXT NOT NULL,
+            UNIQUE(program_year_id, subject_id)
+        );
+
+        CREATE TABLE reference_books (
+            reference_book_id TEXT PRIMARY KEY,
+            program_year_id TEXT NOT NULL REFERENCES program_years(program_year_id),
+            subject_id TEXT NOT NULL,
+            book_name TEXT NOT NULL,
+            author TEXT,
+            publisher TEXT,
+            edition TEXT,
+            isbn TEXT,
+            source_id TEXT NOT NULL REFERENCES source_documents(source_document_id),
+            source_locator TEXT NOT NULL,
+            UNIQUE(program_year_id, subject_id, book_name, author, publisher, edition, isbn)
+        );
+
+        CREATE TABLE application_statistics (
+            application_statistic_id TEXT PRIMARY KEY,
+            offering_id TEXT NOT NULL REFERENCES program_offerings(offering_id),
+            applicant_count INTEGER NOT NULL,
+            qualified_count INTEGER,
+            admitted_count INTEGER,
+            source_id TEXT NOT NULL REFERENCES source_documents(source_document_id),
+            source_locator TEXT NOT NULL,
+            UNIQUE(offering_id, source_id)
+        );
+
 
         CREATE TABLE fact_sources (
             fact_source_id TEXT PRIMARY KEY,
@@ -334,6 +370,18 @@ def build_database(path: Path = DB_PATH) -> Path:
     columns = ["rule_id","year","school_id","rule_type","rule_scope","rule_raw_text","rule_structured_json","source_id","source_locator"]
     execute_many(connection, "INSERT INTO admission_rules VALUES (?,?,?,?,?,?,?,?,?)", [tuple(number(row[key]) if key == "year" else null(row[key]) for key in columns) for row in rows])
 
+    rows = read_csv(NORMALIZED_DIR / "syllabus.csv")
+    columns = ["syllabus_id","program_year_id","subject_id","title","raw_text","source_id","source_locator"]
+    execute_many(connection, "INSERT INTO syllabus VALUES (?,?,?,?,?,?,?)", [tuple(null(row[key]) for key in columns) for row in rows])
+
+    rows = read_csv(NORMALIZED_DIR / "reference_books.csv")
+    columns = ["reference_book_id","program_year_id","subject_id","book_name","author","publisher","edition","isbn","source_id","source_locator"]
+    execute_many(connection, "INSERT INTO reference_books VALUES (?,?,?,?,?,?,?,?,?,?)", [tuple(null(row[key]) for key in columns) for row in rows])
+
+    rows = read_csv(NORMALIZED_DIR / "application_statistics.csv")
+    columns = ["application_statistic_id","offering_id","applicant_count","qualified_count","admitted_count","source_id","source_locator"]
+    execute_many(connection, "INSERT INTO application_statistics VALUES (?,?,?,?,?,?,?)", [tuple(number(row[key]) if key in {"applicant_count","qualified_count","admitted_count"} else null(row[key]) for key in columns) for row in rows])
+
     rows = read_csv(NORMALIZED_DIR / "fact_sources.csv")
     columns = ["fact_source_id","table_name","record_id","source_id","relation_type","source_locator"]
     execute_many(connection, "INSERT INTO fact_sources VALUES (?,?,?,?,?,?)", [tuple(null(row[key]) for key in columns) for row in rows])
@@ -344,6 +392,9 @@ def build_database(path: Path = DB_PATH) -> Path:
         CREATE INDEX idx_offering_program ON program_offerings(program_year_id);
         CREATE INDEX idx_plan_offering ON enrollment_plans(offering_id);
         CREATE INDEX idx_score_offering ON admission_scores(offering_id);
+        CREATE INDEX idx_syllabus_program ON syllabus(program_year_id);
+        CREATE INDEX idx_reference_book_program ON reference_books(program_year_id);
+        CREATE INDEX idx_application_stat_offering ON application_statistics(offering_id);
         CREATE INDEX idx_fact_source_record ON fact_sources(table_name, record_id);
 
         CREATE VIEW v_program_offerings AS
