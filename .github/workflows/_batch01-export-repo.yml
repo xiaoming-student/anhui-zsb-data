@@ -1,0 +1,53 @@
+name: Batch 01 Temporary Read-Only Repository Export
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-export-repo.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout branch without persisted credentials
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Build repository snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+
+          root = Path('.')
+          paths = sorted(
+              path for path in root.rglob('*')
+              if path.is_file() and '.git' not in path.parts
+          )
+          with zipfile.ZipFile('/tmp/batch01-repository-snapshot.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+              for path in paths:
+                  archive.write(path, path.as_posix())
+          print(f'files={len(paths)}')
+          PY
+          sha256sum /tmp/batch01-repository-snapshot.zip > /tmp/batch01-repository-snapshot.zip.sha256
+
+      - name: Upload repository snapshot
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch01-repository-snapshot
+          path: |
+            /tmp/batch01-repository-snapshot.zip
+            /tmp/batch01-repository-snapshot.zip.sha256
+          if-no-files-found: error
+          retention-days: 2
