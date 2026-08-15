@@ -1,0 +1,70 @@
+name: Stage 2A Bundle Assembly
+
+on:
+  push:
+    branches:
+      - data/stage2a-hfnu-evidence-integration
+    paths:
+      - .github/workflows/_stage2a-assemble.yml
+      - .stage2a_parts/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage2a-bundle-assembly-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  assemble:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Stage 2A branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Assemble and verify audited source bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .stage2a_bundle /tmp/stage2a_source_bundle.zip
+          mkdir -p .stage2a_bundle
+
+          cat .stage2a_parts/chunk00_*.b64 > .stage2a_bundle/chunk00.b64
+          cp .stage2a_parts/chunk01.b64 .stage2a_bundle/chunk01.b64
+          cat .stage2a_parts/chunk02_*.b64 > .stage2a_bundle/chunk02.b64
+          for index in 03 04 05 06 07 08; do
+            cp ".stage2a_parts/chunk${index}.b64" ".stage2a_bundle/chunk${index}.b64"
+          done
+
+          cat > /tmp/stage2a-chunks.sha256 <<'EOF'
+          b3397ba7a667750bf2e519271bee4bea22abedb5547cace401a084f2c90d2838  .stage2a_bundle/chunk00.b64
+          70248982487931bbacb83b5049d2d132cc788180e6eb98f1e17092036ae4f1b3  .stage2a_bundle/chunk01.b64
+          6c43ef54b2f2ea65341bd222ceb7ab7441b12f28d38b7a1f016ff78a57a7707d  .stage2a_bundle/chunk02.b64
+          c6ba85869b1a12410d63fe2655b48b458bd310409d113307fd133ec9909fbe11  .stage2a_bundle/chunk03.b64
+          0fbc7bfd04b6c46c8ebddbcd32055d7433c6abb2e9b31f7fe659f6a5256b3f38  .stage2a_bundle/chunk04.b64
+          1027667eacfdf55249a3cbd2b2a44430543f13532e710b7b1f534842b84bdf20  .stage2a_bundle/chunk05.b64
+          a69adac68dfe53b4284003147bb0c92940080c362d6fd8c0c19f2627fdf410d3  .stage2a_bundle/chunk06.b64
+          87f5e6f30f8149032f84928c316aa89926ccd4a73a46ebed00ff558734bce633  .stage2a_bundle/chunk07.b64
+          c5b1134b1a1076b67f12fafdd6e154eb4175f681b80abf9032d9ddc3b4f799ef  .stage2a_bundle/chunk08.b64
+          EOF
+          sed -i 's/^          //' /tmp/stage2a-chunks.sha256
+          sha256sum --check /tmp/stage2a-chunks.sha256
+
+          cat .stage2a_bundle/chunk*.b64 | base64 --decode > /tmp/stage2a_source_bundle.zip
+          echo "dd761ecf9939125ca42ac0de1819e1dd6ab761c081d61ef6e620b9ed0d4a6cc1  /tmp/stage2a_source_bundle.zip" | sha256sum --check
+          unzip -t /tmp/stage2a_source_bundle.zip
+
+      - name: Commit verified logical chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .stage2a_bundle
+          git commit -m "chore(stage2a): assemble verified integration bundle"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
