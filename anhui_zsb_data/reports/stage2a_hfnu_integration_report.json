@@ -1,0 +1,268 @@
+{
+  "application_plan_reconciliation": {
+    "canonical_missing": 0,
+    "conflict": 0,
+    "consistent": 30,
+    "official_missing": 0,
+    "unmapped": 0
+  },
+  "canonical_changes": {
+    "adjustments": {
+      "added": 0,
+      "after": 0,
+      "before": 0,
+      "deleted": 0,
+      "updated": 0
+    },
+    "admission_rules": {
+      "added": 0,
+      "after": 15,
+      "before": 15,
+      "deleted": 0,
+      "updated": 0
+    },
+    "admission_scores": {
+      "added": 140,
+      "after": 445,
+      "before": 305,
+      "deleted": 0,
+      "updated": 0
+    },
+    "application_statistics": {
+      "added": 30,
+      "after": 30,
+      "before": 0,
+      "deleted": 0,
+      "updated": 0
+    },
+    "dim_major_alias": {
+      "added": 0,
+      "after": 0,
+      "before": 0,
+      "deleted": 0,
+      "updated": 0
+    },
+    "dim_school_alias": {
+      "added": 0,
+      "after": 4,
+      "before": 4,
+      "deleted": 0,
+      "updated": 0
+    },
+    "dim_subject_alias": {
+      "added": 0,
+      "after": 38,
+      "before": 38,
+      "deleted": 0,
+      "updated": 0
+    },
+    "documents": {
+      "added": 5,
+      "after": 10,
+      "before": 5,
+      "deleted": 0,
+      "updated": 3
+    },
+    "eligibility_rule_items": {
+      "added": 0,
+      "after": 295,
+      "before": 295,
+      "deleted": 0,
+      "updated": 0
+    },
+    "eligibility_rule_sets": {
+      "added": 0,
+      "after": 82,
+      "before": 82,
+      "deleted": 0,
+      "updated": 0
+    },
+    "enrollment_plans": {
+      "added": 0,
+      "after": 356,
+      "before": 356,
+      "deleted": 0,
+      "updated": 0
+    },
+    "exam_sessions": {
+      "added": 0,
+      "after": 246,
+      "before": 246,
+      "deleted": 0,
+      "updated": 0
+    },
+    "exam_subjects": {
+      "added": 0,
+      "after": 328,
+      "before": 328,
+      "deleted": 0,
+      "updated": 0
+    },
+    "fact_sources": {
+      "added": 533,
+      "after": 2118,
+      "before": 1585,
+      "deleted": 0,
+      "updated": 0
+    },
+    "institutions": {
+      "added": 0,
+      "after": 5,
+      "before": 5,
+      "deleted": 0,
+      "updated": 0
+    },
+    "major_eligibility": {
+      "added": 0,
+      "after": 82,
+      "before": 82,
+      "deleted": 0,
+      "updated": 0
+    },
+    "program_offerings": {
+      "added": 0,
+      "after": 89,
+      "before": 89,
+      "deleted": 0,
+      "updated": 0
+    },
+    "program_years": {
+      "added": 0,
+      "after": 82,
+      "before": 82,
+      "deleted": 0,
+      "updated": 0
+    },
+    "reference_books": {
+      "added": 199,
+      "after": 199,
+      "before": 0,
+      "deleted": 0,
+      "updated": 0
+    },
+    "school_years": {
+      "added": 0,
+      "after": 3,
+      "before": 3,
+      "deleted": 0,
+      "updated": 0
+    },
+    "schools": {
+      "added": 0,
+      "after": 1,
+      "before": 1,
+      "deleted": 0,
+      "updated": 0
+    },
+    "source_assets": {
+      "added": 26,
+      "after": 29,
+      "before": 3,
+      "deleted": 0,
+      "updated": 0
+    },
+    "source_documents": {
+      "added": 5,
+      "after": 10,
+      "before": 5,
+      "deleted": 0,
+      "updated": 3
+    },
+    "source_sites": {
+      "added": 0,
+      "after": 1,
+      "before": 1,
+      "deleted": 0,
+      "updated": 0
+    },
+    "sources": {
+      "added": 5,
+      "after": 10,
+      "before": 5,
+      "deleted": 0,
+      "updated": 3
+    },
+    "syllabus": {
+      "added": 164,
+      "after": 164,
+      "before": 0,
+      "deleted": 0,
+      "updated": 0
+    }
+  },
+  "evidence_and_sources": {
+    "hfnu_evidence_assets": 26,
+    "new_source_assets": 26,
+    "new_source_documents": 5,
+    "new_staging_files": 8,
+    "promoted_raw_assets": 26,
+    "sha_mismatches": 0,
+    "source_assets_after": 29,
+    "source_assets_before": 3,
+    "source_documents_after": 10,
+    "source_documents_before": 5,
+    "unmanaged_raw_files": 0,
+    "unpromoted_assets": 0,
+    "updated_source_documents": 3
+  },
+  "generated_at": "2026-08-15T05:47:05+00:00",
+  "git": {
+    "base_sha": "5d16b24801979c070699514698d4ff9877575593",
+    "branch": "data/stage2a-hfnu-evidence-integration",
+    "implementation_head_sha": "pending_draft_pr"
+  },
+  "key_facts": {
+    "admission_scores_2026": 140,
+    "admission_scores_2026_published": 81,
+    "application_statistics": 30,
+    "reference_books": 199,
+    "syllabus": 164
+  },
+  "next_stage": "After human review and merge, start Stage 2B AHUA Pilot B from latest main.",
+  "qa": {
+    "baseline_open_missing": 47,
+    "closed_missing": 38,
+    "conflicts": 0,
+    "p0": 0,
+    "p1": 0,
+    "remaining_missing": 9
+  },
+  "schema": {
+    "modified": false,
+    "version": "0.3.0"
+  },
+  "schema_version": "stage2a-hfnu-integration-report-v1",
+  "scope": {
+    "ahua_canonical_written": false,
+    "batch_ready": false,
+    "school_id": "HFNU"
+  },
+  "stable_id": {
+    "baseline_path": "config/stage2a_stable_ids_baseline.json",
+    "drift": [],
+    "existing_id_drift_count": 0,
+    "new_id_count": 533,
+    "new_id_counts": {
+      "admission_scores": 140,
+      "application_statistics": 30,
+      "reference_books": 199,
+      "syllabus": 164
+    }
+  },
+  "tests": {
+    "clean_rebuild": "PASS",
+    "github_actions": "PENDING_DRAFT_PR",
+    "idempotence": "PASS",
+    "local_quality_gate": "PASS",
+    "unit_tests": {
+      "count": 29,
+      "status": "PASS"
+    }
+  },
+  "unresolved": [
+    "2024-2026 historical adjustments remain not_found",
+    "2025 and 2026 official application statistics remain unpublished",
+    "four 2025 offerings remain blank in the official score source",
+    "AHUA Pilot B has not entered canonical data"
+  ]
+}
