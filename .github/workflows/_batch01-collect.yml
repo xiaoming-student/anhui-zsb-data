@@ -40,6 +40,19 @@ jobs:
         run: |
           set -euo pipefail
           test "$(find .batch01_bootstrap -maxdepth 1 -type f -name 'chunk*.b64' | wc -l)" = "8"
+          cat > /tmp/batch01-chunks.sha256 <<'EOF'
+          836141643178d4e46831db5c80c103c4d09c4987463f5bec384bccbbdef139bc  .batch01_bootstrap/chunk00.b64
+          43f41737048ee5ba7dc98bd0c1110d0b4ff6d2d35e3643437d30b05ca2d6bede  .batch01_bootstrap/chunk01.b64
+          81610999125cbabca521979c33586979c9254934afaf8d6204e9288e6a89aaaf  .batch01_bootstrap/chunk02.b64
+          f80efd378d92f9a8e29f37950d6f4664cd4a28c446d2102808c4207fd5298261  .batch01_bootstrap/chunk03.b64
+          16f31136a14359193bb13b957fccf7a09cb0c8e72fb11905e9a8c7dba7e0b396  .batch01_bootstrap/chunk04.b64
+          07325f2465ac11cc30b1ab40b98c81e40f39d73c0cc4dda51cdfb5bd60b2e53f  .batch01_bootstrap/chunk05.b64
+          45dad4e19921ff35c11a1f3fd10fdccb64eb03adcd90c469aca1c66af51e6b89  .batch01_bootstrap/chunk06.b64
+          2a3a6138622e1b71202f30022b8264b067a711625b78a219c3d72fe176a77b90  .batch01_bootstrap/chunk07.b64
+          EOF
+          sed -i 's/^          //' /tmp/batch01-chunks.sha256
+          sha256sum .batch01_bootstrap/chunk*.b64
+          sha256sum --check /tmp/batch01-chunks.sha256
           cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01_bootstrap.zip
           echo "${BOOTSTRAP_SHA256}  /tmp/batch01_bootstrap.zip" | sha256sum --check
           unzip -t /tmp/batch01_bootstrap.zip
