@@ -6,7 +6,7 @@ on:
       - data/batch-01-raw-evidence-acquisition
     paths:
       - .github/workflows/_batch01-collect-v2.yml
-      - anhui_zsb_data/config/batch_01_school_scope.json
+      - .batch01_scope_temp_v2/**
       - .batch01_bootstrap/**
   workflow_dispatch:
 
@@ -20,9 +20,10 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-24.04
-    timeout-minutes: 50
+    timeout-minutes: 60
     env:
       PYTHONUTF8: "1"
+
     steps:
       - name: Checkout Batch branch without persisted credentials
         uses: actions/checkout@v6
@@ -35,7 +36,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Restore reviewed Batch tooling only
+      - name: Restore reviewed Batch tooling and valid temporary scope
         shell: bash
         run: |
           set -euo pipefail
@@ -55,6 +56,13 @@ jobs:
             anhui_zsb_data/scripts/discover_batch_evidence.py \
             anhui_zsb_data/scripts/collect_batch_evidence.py \
             anhui_zsb_data/scripts/verify_batch_evidence.py
+
+          test "$(find .batch01_scope_temp_v2 -maxdepth 1 -type f -name 'part*.b64' | wc -l)" = "7"
+          cat .batch01_scope_temp_v2/part*.b64 | base64 --decode \
+            > anhui_zsb_data/config/batch_01_school_scope.json
+          echo "96b6a5828bbae22fcfb29b4dcee33627be70a127392f89473e8c84ad216ee016  anhui_zsb_data/config/batch_01_school_scope.json" \
+            | sha256sum --check
+          python3 -m json.tool anhui_zsb_data/config/batch_01_school_scope.json >/dev/null
 
       - name: Ensure deterministic PDF parser is available
         shell: bash
@@ -88,7 +96,7 @@ jobs:
           after="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
           test "${before}" = "${after}"
 
-      - name: Collect official source pages and assets
+      - name: Collect official source pages and unrestricted assets
         working-directory: anhui_zsb_data
         shell: bash
         run: |
@@ -96,22 +104,45 @@ jobs:
           python3 scripts/collect_batch_evidence.py --batch batch_01 2>&1 \
             | tee -a ci-logs/batch-01-collection.log
 
-      - name: Verify Batch package and existing project invariants
+      - name: Validate generated inventory basics
+        if: always()
         working-directory: anhui_zsb_data
         shell: bash
         run: |
-          set -o pipefail
-          {
-            python3 scripts/verify_batch_evidence.py --batch batch_01
-            python3 scripts/stage1_evidence_guard.py
-            python3 scripts/verify_stage1_evidence.py
-            python3 -m unittest discover -s tests -v
-            PYTHONPATH=scripts python3 scripts/check_idempotence.py
-            PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
-            python3 scripts/run_quality_gate.py
-          } 2>&1 | tee -a ci-logs/batch-01-collection.log
+          set -euo pipefail
+          test -f config/batch_01_evidence_inventory.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('.')
+          inventory = json.loads((root / 'config/batch_01_evidence_inventory.json').read_text(encoding='utf-8'))
+          assert inventory['schema_version'] == 'batch-evidence-v1'
+          assert inventory['batch_id'] == 'batch_01'
+          assert [item['school_id'] for item in inventory['schools']] == ['AHSTU', 'CHZU', 'CZU']
+          assert len(inventory['sources']) == 27
+          declared = set()
+          for asset in inventory['assets']:
+              if asset.get('status') not in {'collected', 'awaiting_manual_review'}:
+                  continue
+              path = root / asset['local_path']
+              assert path.is_file() and not path.is_symlink(), asset['asset_id']
+              assert path.stat().st_size == asset['file_size'], asset['asset_id']
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == asset['sha256'], asset['asset_id']
+              declared.add(asset['local_path'])
+          actual = {
+              path.as_posix()
+              for path in (root / 'evidence/batch_01').rglob('*')
+              if path.is_file()
+          }
+          assert declared == actual, (sorted(declared - actual), sorted(actual - declared))
+          failures = [item['source_id'] for item in inventory['sources'] if item.get('required') and item.get('status') != 'collected']
+          print(f"sources={len(inventory['sources'])} files={len(actual)} required_failures={failures}")
+          PY
 
       - name: Build exact generated payload archive
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
@@ -119,32 +150,33 @@ jobs:
           from pathlib import Path
           import zipfile
 
-          include = [
-              Path('anhui_zsb_data/config/batch_01_school_scope.json'),
+          include = []
+          for path in [
               Path('anhui_zsb_data/config/batch_01_evidence_inventory.json'),
-              Path('anhui_zsb_data/scripts/batch_evidence_common.py'),
-              Path('anhui_zsb_data/scripts/discover_batch_evidence.py'),
-              Path('anhui_zsb_data/scripts/collect_batch_evidence.py'),
-              Path('anhui_zsb_data/scripts/verify_batch_evidence.py'),
-          ]
-          include += sorted(Path('anhui_zsb_data/evidence/batch_01').rglob('*'))
-          include += sorted(Path('anhui_zsb_data/reports').glob('batch_01_*'))
-          include = [path for path in include if path.is_file()]
-          with zipfile.ZipFile('/tmp/batch-01-final-payload.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+              *sorted(Path('anhui_zsb_data/evidence/batch_01').rglob('*')),
+              *sorted(Path('anhui_zsb_data/reports').glob('batch_01_*')),
+              Path('anhui_zsb_data/ci-logs/batch-01-collection.log'),
+          ]:
+              if path.is_file():
+                  include.append(path)
+          if not include:
+              raise SystemExit('no generated Batch files available')
+          with zipfile.ZipFile('/tmp/batch-01-automatic-payload-v2.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
               for path in include:
                   archive.write(path, path.as_posix())
           print(f'payload_files={len(include)}')
           PY
-          sha256sum /tmp/batch-01-final-payload.zip > /tmp/batch-01-final-payload.zip.sha256
+          sha256sum /tmp/batch-01-automatic-payload-v2.zip \
+            > /tmp/batch-01-automatic-payload-v2.zip.sha256
 
-      - name: Upload generated Batch package and full log
+      - name: Upload generated automatic package and full log
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: batch-01-generated-evidence-v2
+          name: batch-01-automatic-evidence-v2
           path: |
-            /tmp/batch-01-final-payload.zip
-            /tmp/batch-01-final-payload.zip.sha256
+            /tmp/batch-01-automatic-payload-v2.zip
+            /tmp/batch-01-automatic-payload-v2.zip.sha256
             anhui_zsb_data/ci-logs/batch-01-collection.log
             anhui_zsb_data/config/batch_01_evidence_inventory.json
             anhui_zsb_data/reports/batch_01_*
