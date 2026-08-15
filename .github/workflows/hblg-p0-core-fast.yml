@@ -1,0 +1,225 @@
+name: HBLG P0 Core Raw Evidence Fast Batch
+
+on:
+  push:
+    branches:
+      - agent/hblg-p0-core-fast
+    paths:
+      - scripts/acquire_hblg_core_raw_fast.py
+      - .github/workflows/hblg-p0-core-fast.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: hblg-p0-core-fast-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acquire-validate-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout acquisition branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Compile collector
+        run: python -m py_compile scripts/acquire_hblg_core_raw_fast.py
+
+      - name: Resolve and pin official host
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/hblg-core-hosts
+          import ipaddress
+          import requests
+          import subprocess
+          import urllib3
+
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          host = 'zsb.hblgxy.edu.cn'
+          url = 'https://zsb.hblgxy.edu.cn/info/1020/2103.htm'
+          candidates=[]
+          for endpoint,headers in (
+              ('https://1.1.1.1/dns-query', {'accept':'application/dns-json','Host':'cloudflare-dns.com'}),
+              ('https://8.8.8.8/resolve', {'accept':'application/dns-json','Host':'dns.google'}),
+          ):
+              try:
+                  response=requests.get(endpoint,params={'name':host,'type':'A'},headers=headers,timeout=15,verify=False)
+                  response.raise_for_status()
+                  for answer in response.json().get('Answer',[]):
+                      value=str(answer.get('data','')).strip()
+                      try: address=ipaddress.ip_address(value)
+                      except ValueError: continue
+                      if address.version==4 and address.is_global and value not in candidates:
+                          candidates.append(value)
+              except Exception as exc:
+                  print(f'# DoH error {endpoint}: {exc}')
+          chosen=None
+          for ip in candidates:
+              process=subprocess.run([
+                  'curl','--silent','--show-error','--location','--insecure','--noproxy','*',
+                  '--connect-timeout','7','--max-time','20','--resolve',f'{host}:443:{ip}',
+                  '--range','0-1023','--output','/tmp/hblg-probe-body',
+                  '--write-out','%{http_code}',url,
+              ],text=True,capture_output=True,check=False)
+              code=process.stdout.strip()[-3:] if process.stdout.strip() else '000'
+              print(f'# probe ip={ip} rc={process.returncode} http={code} stderr={process.stderr[:300]}')
+              if process.returncode==0 and code in {'200','206'}:
+                  chosen=ip
+                  break
+          if not chosen:
+              raise SystemExit(f'No reachable official IPv4 address among {candidates}')
+          print(chosen, host)
+          PY
+          grep -E '^[0-9]+(\.[0-9]+){3}[[:space:]]+zsb\.hblgxy\.edu\.cn$' /tmp/hblg-core-hosts | sudo tee -a /etc/hosts >/dev/null
+          getent ahostsv4 zsb.hblgxy.edu.cn
+
+      - name: Acquire three charter pages and every linked attachment in parallel
+        shell: bash
+        env:
+          HBLG_FAST_WORKERS: '6'
+          HBLG_FAST_MAX_BYTES: '99614720'
+        run: |
+          set -o pipefail
+          python scripts/acquire_hblg_core_raw_fast.py | tee "$RUNNER_TEMP/hblg-core-fast.log"
+
+      - name: Validate raw bytes, metadata relations, and 3 x 28 coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='anhui_zsb_data/evidence/full_raw_30_schools/HBLG'
+          REPORT='anhui_zsb_data/reports/hblg_p0_core_raw_batch_01.md'
+          test -s "$ROOT/school_manifest.json"
+          test -s "$ROOT/school_coverage.csv"
+          test -s "$ROOT/school_notes.md"
+          test -s "$REPORT"
+          python - <<'PY'
+          from __future__ import annotations
+          import csv
+          import hashlib
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          root=Path('anhui_zsb_data/evidence/full_raw_30_schools/HBLG')
+          manifest=json.loads((root/'school_manifest.json').read_text('utf-8-sig'))
+          sources=manifest.get('sources',[])
+          assets=manifest.get('assets',[])
+          documents=sources+assets
+          if len(sources)!=3:
+              raise SystemExit(f'expected 3 sources, got {len(sources)}')
+          if len(assets)<55:
+              raise SystemExit(f'expected >=55 attachment relations, got {len(assets)}')
+          if manifest.get('failures'):
+              raise SystemExit(f"core batch contains failures: {len(manifest['failures'])}")
+          if manifest.get('years_audited') != [2024,2025,2026]:
+              raise SystemExit('year audit mismatch')
+          if manifest.get('original_information_preserved') is not True or manifest.get('sanitized') is not False:
+              raise SystemExit('raw-information policy flags mismatch')
+
+          unique_paths={}
+          relations_by_year=Counter()
+          attachments_by_year=Counter()
+          for item in documents:
+              year=int(item.get('year',0))
+              if year not in {2024,2025,2026}:
+                  raise SystemExit(f'invalid year: {item}')
+              relations_by_year[year]+=1
+              if item.get('document_type')=='attachment':
+                  attachments_by_year[year]+=1
+              url=item.get('official_url') or item.get('attachment_url') or ''
+              host=(urlparse(url).hostname or '').lower()
+              if host!='hblgxy.edu.cn' and not host.endswith('.hblgxy.edu.cn'):
+                  raise SystemExit(f'non-official URL: {url}')
+              path=Path(item['local_path'])
+              if not path.is_file():
+                  raise SystemExit(f'missing raw file: {path}')
+              data=path.read_bytes()
+              actual=hashlib.sha256(data).hexdigest()
+              if actual!=item.get('sha256'):
+                  raise SystemExit(f'SHA mismatch: {path}')
+              if len(data)!=int(item.get('file_size',-1)):
+                  raise SystemExit(f'byte-size mismatch: {path}')
+              if len(data)>=100*1024*1024:
+                  raise SystemExit(f'file exceeds GitHub safe limit: {path}')
+              suffix=path.suffix.lower()
+              if suffix=='.pdf' and not data.startswith(b'%PDF-'):
+                  raise SystemExit(f'bad PDF magic: {path}')
+              if suffix in {'.docx','.xlsx','.zip'} and not data.startswith(b'PK\x03\x04'):
+                  raise SystemExit(f'bad OOXML/ZIP magic: {path}')
+              if suffix in {'.doc','.xls'} and not data.startswith(b'\xd0\xcf\x11\xe0'):
+                  raise SystemExit(f'bad OLE magic: {path}')
+              if suffix=='.html':
+                  prefix=data[:2048].lstrip().lower()
+                  if not prefix.startswith((b'<!doctype html',b'<html',b'<?xml')) and b'<html' not in prefix:
+                      raise SystemExit(f'bad HTML magic: {path}')
+              previous=unique_paths.get(path.as_posix())
+              if previous and previous!=(len(data),actual):
+                  raise SystemExit(f'inconsistent deduplicated relation: {path}')
+              unique_paths[path.as_posix()]=(len(data),actual)
+
+          if set(relations_by_year)!={2024,2025,2026}:
+              raise SystemExit(f'missing year relations: {dict(relations_by_year)}')
+          if min(attachments_by_year.values())<17:
+              raise SystemExit(f'unexpectedly low annual attachment count: {dict(attachments_by_year)}')
+
+          topics=manifest.get('topics_audited',[])
+          if len(topics)!=28:
+              raise SystemExit(f'expected 28 topics, got {len(topics)}')
+          rows=list(csv.DictReader((root/'school_coverage.csv').open(encoding='utf-8-sig')))
+          if len(rows)!=84:
+              raise SystemExit(f'expected 84 coverage rows, got {len(rows)}')
+          expected={(year,topic) for year in (2024,2025,2026) for topic in topics}
+          actual={(int(row['year']),row['topic']) for row in rows}
+          if actual!=expected:
+              raise SystemExit('coverage matrix is not a complete 3 x 28 grid')
+          valid={
+              'collected','official_not_published','not_found','not_applicable',
+              'removed_or_unavailable','access_restricted','manual_download_required',
+              'public_official_record','awaiting_manual_review',
+          }
+          if any(row['status'] not in valid for row in rows):
+              raise SystemExit('invalid coverage status')
+          collected=sum(row['status']=='collected' for row in rows)
+          if collected<20:
+              raise SystemExit(f'implausibly low collected coverage: {collected}')
+
+          print(json.dumps({
+              'sources':len(sources),
+              'attachment_relations':len(assets),
+              'attachments_by_year':dict(attachments_by_year),
+              'unique_raw_files':len(unique_paths),
+              'unique_raw_bytes':sum(size for size,_ in unique_paths.values()),
+              'collected_cells':collected,
+          },ensure_ascii=False,indent=2))
+          PY
+
+      - name: Commit core raw evidence to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anhui_zsb_data/evidence/full_raw_30_schools/HBLG
+          git add anhui_zsb_data/reports/hblg_p0_core_raw_batch_01.md
+          if git diff --cached --quiet; then
+            echo 'No evidence changes to commit.'
+            exit 0
+          fi
+          git commit -m 'data: add HBLG core raw evidence for 2024-2026'
+          git push origin HEAD:${GITHUB_REF_NAME}
