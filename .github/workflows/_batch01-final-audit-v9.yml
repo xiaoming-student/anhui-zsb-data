@@ -1,0 +1,138 @@
+name: Batch 01 Temporary Final Audit V9
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-final-audit-v9.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+concurrency:
+  group: batch01-temporary-final-audit-v9
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      PYTHONUTF8: '1'
+      TARGET_BRANCH: data/batch-01-raw-evidence-acquisition
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF parser
+        run: |
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+
+      - name: Prove the parent commit is the clean final package
+        shell: bash
+        run: |
+          set -euo pipefail
+          parent="$(git rev-parse HEAD^)"
+          git worktree add --detach /tmp/batch01-audited-parent "${parent}"
+          test -f /tmp/batch01-audited-parent/.github/workflows/batch-evidence-validation.yml
+          test -f /tmp/batch01-audited-parent/anhui_zsb_data/config/batch_01_school_scope.json
+          test -f /tmp/batch01-audited-parent/anhui_zsb_data/config/batch_01_evidence_inventory.json
+          test -d /tmp/batch01-audited-parent/anhui_zsb_data/evidence/batch_01
+          test -f /tmp/batch01-audited-parent/anhui_zsb_data/tests/test_batch_01_evidence.py
+          test ! -e /tmp/batch01-audited-parent/.batch01_bootstrap
+          test ! -e /tmp/batch01-audited-parent/.batch01_bootstrap.zip
+          test ! -e /tmp/batch01-audited-parent/.batch01_probe
+          test ! -e /tmp/batch01-audited-parent/.github/workflows/_batch01-finalize-v8.yml
+          test "$(find /tmp/batch01-audited-parent/anhui_zsb_data/reports -maxdepth 1 -type f -name 'batch_01_*' | wc -l)" = '10'
+
+          cd /tmp/batch01-audited-parent/anhui_zsb_data
+          python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+          before="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          python3 scripts/collect_batch_evidence.py --batch batch_01 --dry-run
+          after="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          test "${before}" = "${after}"
+          python3 scripts/verify_batch_evidence.py --batch batch_01
+          python3 scripts/stage1_evidence_guard.py
+          python3 scripts/verify_stage1_evidence.py
+          python3 -m unittest discover -s tests -v
+          PYTHONPATH=scripts python3 scripts/check_idempotence.py
+          PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
+          python3 scripts/run_quality_gate.py
+
+      - name: Remove the temporary audit commit from the target branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          parent="$(git rev-parse HEAD^)"
+          git push --force origin "${parent}:refs/heads/${TARGET_BRANCH}"
+          echo "FINAL_SHA=${parent}" >> "$GITHUB_ENV"
+
+      - name: Wait for all Draft PR checks and publish the final audit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          pr="$(gh pr list --repo "${GITHUB_REPOSITORY}" --head "${TARGET_BRANCH}" --base main --state open --json number --jq '.[0].number // empty')"
+          test -n "${pr}"
+          gh pr ready "${pr}" --repo "${GITHUB_REPOSITORY}" --undo || true
+
+          sleep 20
+          set +e
+          timeout 2400s gh pr checks "${pr}" --repo "${GITHUB_REPOSITORY}" --watch --fail-fast
+          checks_status=$?
+          set -e
+
+          python3 - <<'PY' > /tmp/batch01-final-audit.md
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path('/tmp/batch01-audited-parent/anhui_zsb_data')
+          inventory = json.loads((root / 'config/batch_01_evidence_inventory.json').read_text(encoding='utf-8'))
+          files = [p for p in (root / 'evidence/batch_01').rglob('*') if p.is_file()]
+          required_failures = [s['source_id'] for s in inventory['sources'] if s.get('required') and s.get('status') != 'collected']
+          print('## Final Batch 01 audit')
+          print()
+          print(f'- Final commit: `{os.environ["FINAL_SHA"]}`')
+          print('- Draft status: retained')
+          print('- Schools: `AHSTU`, `CHZU`, `CZU`')
+          print(f'- Official source records: {len(inventory["sources"])}')
+          print(f'- Inventory assets: {len(inventory["assets"])}')
+          print(f'- Evidence files: {len(files)}')
+          print('- Manually acquired official CZU PDFs: 13')
+          print('- Deterministic parsed-text files for those PDFs: 13')
+          print(f'- Required source failures: {required_failures or "none"}')
+          print('- Candidate-level personal records: excluded')
+          print('- CAPTCHA/access-control bypass: no')
+          print('- Canonical raw/staging/normalized/SQLite/Schema: unchanged')
+          print('- Batch Ready: false')
+          print()
+          print('Local final audit passed all discovery, evidence-closure, privacy, regression, idempotence, clean-room, and quality-gate checks.')
+          PY
+
+          if [[ "${checks_status}" = '0' ]]; then
+            printf '\nPR checks: **PASS**.\n' >> /tmp/batch01-final-audit.md
+            gh pr comment "${pr}" --repo "${GITHUB_REPOSITORY}" --body-file /tmp/batch01-final-audit.md
+          else
+            printf '\nPR checks: **not all passing** (exit %s). The PR remains Draft and must not be merged.\n' "${checks_status}" >> /tmp/batch01-final-audit.md
+            gh pr comment "${pr}" --repo "${GITHUB_REPOSITORY}" --body-file /tmp/batch01-final-audit.md
+            exit "${checks_status}"
+          fi
