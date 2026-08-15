@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-08-15T02:49:24+00:00",
+  "ok": true,
+  "results": [
+    {
+      "error": "",
+      "ok": true,
+      "parsed_text_asset_id": "ASSET-HFNU-2024-DG-PDF-TXT",
+      "parsed_text_path": "evidence/pilot_a/HFNU/2024/DOC-HFNU-2024-DG.txt",
+      "pdf_asset_id": "ASSET-HFNU-2024-DG-PDF",
+      "pdf_path": "evidence/pilot_a/HFNU/2024/DOC-HFNU-2024-DG.pdf",
+      "reference_markers": [
+        "参考书目",
+        "参考书"
+      ],
+      "year": 2024
+    },
+    {
+      "error": "",
+      "ok": true,
+      "parsed_text_asset_id": "ASSET-HFNU-2025-DG-PDF-TXT",
+      "parsed_text_path": "evidence/pilot_a/HFNU/2025/DOC-HFNU-2025-DG.txt",
+      "pdf_asset_id": "ASSET-HFNU-2025-DG-PDF",
+      "pdf_path": "evidence/pilot_a/HFNU/2025/DOC-HFNU-2025-DG.pdf",
+      "reference_markers": [
+        "参考书目",
+        "参考书"
+      ],
+      "year": 2025
+    },
+    {
+      "error": "",
+      "ok": true,
+      "parsed_text_asset_id": "ASSET-HFNU-2026-DG-PDF-TXT",
+      "parsed_text_path": "evidence/pilot_a/HFNU/2026/DOC-HFNU-2026-DG.txt",
+      "pdf_asset_id": "ASSET-HFNU-2026-DG-PDF",
+      "pdf_path": "evidence/pilot_a/HFNU/2026/DOC-HFNU-2026-DG.pdf",
+      "reference_markers": [
+        "参考书目",
+        "参考书"
+      ],
+      "year": 2026
+    }
+  ]
+}

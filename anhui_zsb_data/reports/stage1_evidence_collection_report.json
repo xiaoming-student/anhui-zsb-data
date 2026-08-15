@@ -1,0 +1,261 @@
+{
+  "asset_count": 60,
+  "asset_type_counts": {
+    "doc": 2,
+    "docx": 4,
+    "html_snapshot": 22,
+    "parsed_text": 25,
+    "pdf": 7
+  },
+  "canonical_layers_modified": {
+    "canonical_raw": false,
+    "normalized": false,
+    "schema": false,
+    "sqlite": false,
+    "staging": false
+  },
+  "collected_count": 60,
+  "gate": "Gate 0 - Stage 1 PR reconciliation",
+  "generated_at": "2026-08-15T02:49:24+00:00",
+  "ok": true,
+  "pilot_b_category_coverage": {
+    "专业及培养地点": [
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2024-ZYGG-HTML",
+      "ASSET-AHUA-2024-ZYGG-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-XZYX-HTML",
+      "ASSET-AHUA-2026-XZYX-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ],
+    "参考教材": [
+      "ASSET-AHUA-2024-KSNR-HTML",
+      "ASSET-AHUA-2024-KSNR-HTML-TXT",
+      "ASSET-AHUA-2025-KSNR-HTML",
+      "ASSET-AHUA-2025-KSNR-HTML-TXT",
+      "ASSET-AHUA-2026-KSNR-HTML",
+      "ASSET-AHUA-2026-KSNR-HTML-TXT",
+      "ASSET-AHUA-2026-XZYX-HTML",
+      "ASSET-AHUA-2026-XZYX-HTML-TXT"
+    ],
+    "实操考试": [
+      "ASSET-AHUA-2024-KSNR-HTML",
+      "ASSET-AHUA-2024-KSNR-HTML-TXT",
+      "ASSET-AHUA-2025-KSNR-HTML",
+      "ASSET-AHUA-2025-KSNR-HTML-TXT",
+      "ASSET-AHUA-2026-KSNR-HTML",
+      "ASSET-AHUA-2026-KSNR-HTML-TXT"
+    ],
+    "录取分数": [
+      "ASSET-AHUA-2024-LQ-HTML",
+      "ASSET-AHUA-2024-LQ-HTML-TXT",
+      "ASSET-AHUA-2025-LQ-HTML",
+      "ASSET-AHUA-2025-LQ-HTML-TXT",
+      "ASSET-AHUA-2026-LQ-HTML",
+      "ASSET-AHUA-2026-LQ-HTML-TXT"
+    ],
+    "录取规则": [
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ],
+    "报名人数或报录数据": [
+      "ASSET-AHUA-2024-BKRS-HTML",
+      "ASSET-AHUA-2024-BKRS-HTML-TXT"
+    ],
+    "报考范围": [
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2025-FA-HTML",
+      "ASSET-AHUA-2025-FA-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-FA-HTML",
+      "ASSET-AHUA-2026-FA-HTML-TXT",
+      "ASSET-AHUA-2026-XZYX-HTML",
+      "ASSET-AHUA-2026-XZYX-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ],
+    "招生专业": [
+      "ASSET-AHUA-2024-ZYGG-HTML",
+      "ASSET-AHUA-2024-ZYGG-HTML-TXT",
+      "ASSET-AHUA-2025-FA-HTML",
+      "ASSET-AHUA-2025-FA-HTML-TXT",
+      "ASSET-AHUA-2026-FA-HTML",
+      "ASSET-AHUA-2026-FA-HTML-TXT"
+    ],
+    "招生章程": [
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ],
+    "招生计划": [
+      "ASSET-AHUA-2024-BKRS-HTML",
+      "ASSET-AHUA-2024-BKRS-HTML-TXT",
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-XZYX-HTML",
+      "ASSET-AHUA-2026-XZYX-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ],
+    "考试大纲": [
+      "ASSET-AHUA-2024-KSNR-HTML",
+      "ASSET-AHUA-2024-KSNR-HTML-TXT",
+      "ASSET-AHUA-2025-KSNR-HTML",
+      "ASSET-AHUA-2025-KSNR-HTML-TXT",
+      "ASSET-AHUA-2026-KSNR-HTML",
+      "ASSET-AHUA-2026-KSNR-HTML-TXT",
+      "ASSET-AHUA-2026-XZYX-HTML",
+      "ASSET-AHUA-2026-XZYX-HTML-TXT"
+    ],
+    "考试科目": [
+      "ASSET-AHUA-2024-KSNR-HTML",
+      "ASSET-AHUA-2024-KSNR-HTML-TXT",
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2025-FA-HTML",
+      "ASSET-AHUA-2025-FA-HTML-TXT",
+      "ASSET-AHUA-2025-KSNR-HTML",
+      "ASSET-AHUA-2025-KSNR-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-FA-HTML",
+      "ASSET-AHUA-2026-FA-HTML-TXT",
+      "ASSET-AHUA-2026-KSNR-HTML",
+      "ASSET-AHUA-2026-KSNR-HTML-TXT",
+      "ASSET-AHUA-2026-XZYX-HTML",
+      "ASSET-AHUA-2026-XZYX-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ],
+    "调剂信息": [
+      "ASSET-AHUA-2024-LQ-HTML",
+      "ASSET-AHUA-2024-LQ-HTML-TXT",
+      "ASSET-AHUA-2024-ZC-ATT-01",
+      "ASSET-AHUA-2024-ZC-ATT-02",
+      "ASSET-AHUA-2024-ZC-HTML",
+      "ASSET-AHUA-2024-ZC-HTML-TXT",
+      "ASSET-AHUA-2025-LQ-HTML",
+      "ASSET-AHUA-2025-LQ-HTML-TXT",
+      "ASSET-AHUA-2025-ZC-ATT-01",
+      "ASSET-AHUA-2025-ZC-ATT-02",
+      "ASSET-AHUA-2025-ZC-HTML",
+      "ASSET-AHUA-2025-ZC-HTML-TXT",
+      "ASSET-AHUA-2026-LQ-HTML",
+      "ASSET-AHUA-2026-LQ-HTML-TXT",
+      "ASSET-AHUA-2026-ZC-ATT-01",
+      "ASSET-AHUA-2026-ZC-ATT-02",
+      "ASSET-AHUA-2026-ZC-HTML",
+      "ASSET-AHUA-2026-ZC-HTML-TXT"
+    ]
+  },
+  "pilot_b_missing_categories": [],
+  "privacy": {
+    "blank_official_forms_archived": 2,
+    "blank_official_forms_excluded_during_reconciliation": 0,
+    "personal_candidate_records_archived": 0
+  },
+  "reference_books_check": {
+    "generated_at": "2026-08-15T02:49:24+00:00",
+    "ok": true,
+    "results": [
+      {
+        "error": "",
+        "ok": true,
+        "parsed_text_asset_id": "ASSET-HFNU-2024-DG-PDF-TXT",
+        "parsed_text_path": "evidence/pilot_a/HFNU/2024/DOC-HFNU-2024-DG.txt",
+        "pdf_asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "pdf_path": "evidence/pilot_a/HFNU/2024/DOC-HFNU-2024-DG.pdf",
+        "reference_markers": [
+          "参考书目",
+          "参考书"
+        ],
+        "year": 2024
+      },
+      {
+        "error": "",
+        "ok": true,
+        "parsed_text_asset_id": "ASSET-HFNU-2025-DG-PDF-TXT",
+        "parsed_text_path": "evidence/pilot_a/HFNU/2025/DOC-HFNU-2025-DG.txt",
+        "pdf_asset_id": "ASSET-HFNU-2025-DG-PDF",
+        "pdf_path": "evidence/pilot_a/HFNU/2025/DOC-HFNU-2025-DG.pdf",
+        "reference_markers": [
+          "参考书目",
+          "参考书"
+        ],
+        "year": 2025
+      },
+      {
+        "error": "",
+        "ok": true,
+        "parsed_text_asset_id": "ASSET-HFNU-2026-DG-PDF-TXT",
+        "parsed_text_path": "evidence/pilot_a/HFNU/2026/DOC-HFNU-2026-DG.txt",
+        "pdf_asset_id": "ASSET-HFNU-2026-DG-PDF",
+        "pdf_path": "evidence/pilot_a/HFNU/2026/DOC-HFNU-2026-DG.pdf",
+        "reference_markers": [
+          "参考书目",
+          "参考书"
+        ],
+        "year": 2026
+      }
+    ]
+  },
+  "required_failure_count": 0,
+  "schema_version": "stage1-evidence-report-v2",
+  "school_asset_counts": {
+    "AHUA": 34,
+    "HFNU": 26
+  },
+  "source_count": 22,
+  "unique_local_path_count": 60,
+  "unique_sha256_count": 60
+}
