@@ -56,18 +56,6 @@ jobs:
               '"--retry", "3", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "20", "--max-time", "150",',
               '"--retry", "2", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "12", "--max-time", "75",',
           )
-          needle = '    try:\n        entry, soup = save_official_document(\n'
-          replacement = '''    try:
-              expected_ext = Path(unquote(urlparse(url).path)).suffix.lower()
-              if expected_ext == ".pdf" and not data.startswith(b"%PDF-"):
-                  raise ValueError("official .pdf URL did not return PDF magic bytes")
-              if expected_ext in {".docx", ".xlsx", ".zip"} and not data.startswith(b"PK\\x03\\x04"):
-                  raise ValueError(f"official {expected_ext} URL did not return ZIP/OOXML magic bytes")
-              entry, soup = save_official_document(
-          '''
-          if needle not in text:
-              raise SystemExit('preflight guard insertion point not found')
-          text = text.replace(needle, replacement, 1)
           text = text.replace(
               'failures = [f for f in failures if f.get("url") not in success_urls]',
               'reachable_urls = {url for url, (body, _meta) in fetch_cache.items() if body is not None}\nfailures = [f for f in failures if f.get("url") not in success_urls and f.get("url") not in reachable_urls]',
@@ -82,7 +70,7 @@ jobs:
           WXC_MAX_CRAWL_DEPTH: '3'
         run: python scripts/acquire_wxc_p0_raw_evidence.py | tee "$RUNNER_TEMP/wxc-acquisition.log"
 
-      - name: Validate generated evidence metadata
+      - name: Validate generated evidence metadata and raw bytes
         shell: bash
         run: |
           set -euo pipefail
@@ -96,22 +84,46 @@ jobs:
           import hashlib
           import json
           from pathlib import Path
+          from urllib.parse import urlparse
 
           root = Path('anhui_zsb_data/evidence/full_raw_30_schools/WXC')
           manifest = json.loads((root / 'school_manifest.json').read_text('utf-8-sig'))
           documents = manifest.get('sources', []) + manifest.get('assets', [])
           if not documents:
               raise SystemExit('manifest contains no official documents')
+
+          allowed_domains = ('wxc.edu.cn', 'ahzsks.cn')
           for item in documents:
               path = Path(item['local_path'])
               if not path.is_file():
                   raise SystemExit(f'missing raw file: {path}')
-              actual = hashlib.sha256(path.read_bytes()).hexdigest()
+              data = path.read_bytes()
+              actual = hashlib.sha256(data).hexdigest()
               if actual != item['sha256']:
                   raise SystemExit(f'SHA-256 mismatch: {path}')
+              if len(data) != int(item['file_size']):
+                  raise SystemExit(f'file-size mismatch: {path}')
+              if path.suffix.lower() == '.pdf' and not data.startswith(b'%PDF-'):
+                  raise SystemExit(f'non-PDF response saved as PDF: {path}')
+              if path.suffix.lower() in {'.docx', '.xlsx', '.zip'} and not data.startswith(b'PK\x03\x04'):
+                  raise SystemExit(f'non-OOXML/ZIP response saved as {path.suffix}: {path}')
+              url = item.get('official_url') or item.get('attachment_url') or ''
+              host = (urlparse(url).hostname or '').lower()
+              if not any(host == d or host.endswith('.' + d) for d in allowed_domains):
+                  raise SystemExit(f'non-official URL in manifest: {url}')
+              if int(item.get('year', 0)) not in {2024, 2025, 2026}:
+                  raise SystemExit(f'invalid year binding: {item}')
+
           rows = list(csv.DictReader((root / 'school_coverage.csv').open(encoding='utf-8-sig')))
           if len(rows) != 84:
               raise SystemExit(f'expected 84 coverage rows, got {len(rows)}')
+          if {(int(r['year']), r['topic']) for r in rows} != {
+              (year, topic)
+              for year in (2024, 2025, 2026)
+              for topic in manifest['topics_audited']
+          }:
+              raise SystemExit('coverage matrix is not a complete 3 x 28 grid')
+
           print(json.dumps({
               'sources': len(manifest.get('sources', [])),
               'assets': len(manifest.get('assets', [])),
