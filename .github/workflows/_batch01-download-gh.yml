@@ -1,0 +1,35 @@
+name: Batch 01 Temporary Read-Only GitHub CLI Download
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-download-gh.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  download:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Download and verify official GitHub CLI binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 --retry-delay 2 \
+            -o /tmp/gh_2.97.0_linux_amd64.tar.gz \
+            https://github.com/cli/cli/releases/download/v2.97.0/gh_2.97.0_linux_amd64.tar.gz
+          echo "a2c9b8497e1f85b1ad0dfcb78b5a622e098801b8e461e459e88e1ee12f018112  /tmp/gh_2.97.0_linux_amd64.tar.gz" \
+            | sha256sum --check
+
+      - name: Upload verified GitHub CLI binary
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch01-gh-cli-2.97.0-linux-amd64
+          path: /tmp/gh_2.97.0_linux_amd64.tar.gz
+          if-no-files-found: error
+          retention-days: 1
