@@ -1,14 +1,14 @@
 {
   "completed_schools": [],
-  "last_checkpoint": "2026-08-14T13:35:50+00:00",
-  "next_action": "人工复核后，选择1所结构明显不同的院校执行 Pilot B；不要直接进入39所Batch。",
+  "last_checkpoint": "2026-08-15T05:47:05+00:00",
+  "next_action": "人工Review并合并Stage 2A后，从最新main创建data/stage2b-ahua-pilot-b-canonical执行AHUA Pilot B；不得进入Batch。",
   "partial_schools": [
     "HFNU"
   ],
   "run_mode": "pilot",
   "schema_version": "0.3.0",
   "school_id": "HFNU",
-  "stage": "pilot_2_3_complete",
+  "stage": "stage2a_hfnu_evidence_integration_complete",
   "stages": {
     "batch_ready": false,
     "normalization_complete": true,
