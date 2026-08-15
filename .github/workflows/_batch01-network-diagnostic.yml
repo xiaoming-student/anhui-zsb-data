@@ -20,7 +20,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Discover CHZU official 2024-2026 special-upgrade notices
+      - name: Discover older CHZU official special-upgrade notices
         shell: bash
         run: |
           set -euo pipefail
@@ -39,9 +39,8 @@ jobs:
           tag_re = re.compile(r'<[^>]+>')
 
           seen = set()
-          for page in range(1, 9):
-              suffix = 'listm.htm' if page == 1 else f'listm{page}.htm'
-              url = f'https://zsw.chzu.edu.cn/5395/{suffix}'
+          for page in range(8, 16):
+              url = f'https://zsw.chzu.edu.cn/5395/listm{page}.htm'
               req = urllib.request.Request(url, headers=headers)
               try:
                   with urllib.request.urlopen(req, timeout=25) as response:
@@ -68,7 +67,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: batch01-chzu-discovery
+          name: batch01-chzu-discovery-older
           path: /tmp/batch01-network-diagnostic.log
           if-no-files-found: error
           retention-days: 7
