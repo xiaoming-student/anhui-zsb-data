@@ -1,6 +1,7 @@
 {
-  "canonical_data_as_of": "2026-08-14",
-  "pipeline_finished_at": "2026-08-14T13:35:50+00:00",
+  "canonical_data_as_of": "2026-08-15",
+  "pipeline_finished_at": "2026-08-15T05:47:05+00:00",
   "schema_version": "0.3.0",
-  "school_id": "HFNU"
+  "school_id": "HFNU",
+  "stage": "stage2a_hfnu_evidence_integration_complete"
 }

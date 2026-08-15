@@ -1,0 +1,1200 @@
+{
+  "data": [
+    {
+      "author_raw": "张凤明、唐淑文编著",
+      "book_name_raw": "基础会计",
+      "edition_raw": "第1版",
+      "entry_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017 年 第 1 版。",
+      "isbn_raw": "",
+      "major_name_raw": "互联网金融",
+      "publisher_raw": "立信会计出版社",
+      "reference_key_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017年第1版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 13,
+        "row_key": "互联网金融|会计学原理|基础会计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "会计学原理"
+    },
+    {
+      "author_raw": "",
+      "book_name_raw": "西方经济学",
+      "edition_raw": "",
+      "entry_raw": "《西方经济学》（马工程），上册，高等教育出版社，2019 年版。",
+      "isbn_raw": "",
+      "major_name_raw": "互联网金融",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《西方经济学》(马工程)，上册，高等教育出版社，2019年版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 13,
+        "row_key": "互联网金融|微观经济学|西方经济学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "微观经济学"
+    },
+    {
+      "author_raw": "张凤明、唐淑文编著",
+      "book_name_raw": "基础会计",
+      "edition_raw": "第1版",
+      "entry_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017 年 第 1 版。",
+      "isbn_raw": "",
+      "major_name_raw": "人力资源管理",
+      "publisher_raw": "立信会计出版社",
+      "reference_key_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017年第1版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 9,
+        "row_key": "人力资源管理|会计学原理|基础会计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "会计学原理"
+    },
+    {
+      "author_raw": "王光健，胡友宇，石媚山",
+      "book_name_raw": "管理学原理",
+      "edition_raw": "第二版",
+      "entry_raw": "王光健，胡友宇，石媚山.管理学原理，中国人民大学出版社，2018 年，第二版。",
+      "isbn_raw": "",
+      "major_name_raw": "人力资源管理",
+      "publisher_raw": "中国人民大学出版社",
+      "reference_key_raw": "王光健，胡友宇，石媚山.管理学原理，中国人民大学出版社，2018年，第二版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 9,
+        "row_key": "人力资源管理|管理学原理|管理学原理",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "管理学原理"
+    },
+    {
+      "author_raw": "南京大学编",
+      "book_name_raw": "无机及分析化学（第五版）",
+      "edition_raw": "第五版",
+      "entry_raw": "南京大学编，《无机及分析化学（第五版）》，高等教育出版社，2015 年 8 月。",
+      "isbn_raw": "",
+      "major_name_raw": "制药工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "南京大学编，《无机及分析化学(第五版)》，高等教育出版社，2015年8月。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 29,
+        "row_key": "制药工程|基础分析化学|无机及分析化学（第五版）",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "基础分析化学"
+    },
+    {
+      "author_raw": "南京大学编",
+      "book_name_raw": "无机及分析化学（第五版）",
+      "edition_raw": "第五版",
+      "entry_raw": "南京大学编，《无机及分析化学（第五版）》，高等教育出版社，2015 年 8 月。",
+      "isbn_raw": "",
+      "major_name_raw": "制药工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "南京大学编，《无机及分析化学(第五版)》，高等教育出版社，2015年8月。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 29,
+        "row_key": "制药工程|基础无机化学|无机及分析化学（第五版）",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "基础无机化学"
+    },
+    {
+      "author_raw": "王雷,宫丽慧,刘海静等编著",
+      "book_name_raw": "速写",
+      "edition_raw": "第一版",
+      "entry_raw": "《速写》（第一版），王雷,宫丽慧,刘海静等编著，辽宁美术出版 社，2016 年。",
+      "isbn_raw": "",
+      "major_name_raw": "动画",
+      "publisher_raw": "辽宁美术出版社",
+      "reference_key_raw": "《速写》(第一版)，王雷,宫丽慧,刘海静等编著，辽宁美术出版社，2016年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "动画|人物速写|速写",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "人物速写"
+    },
+    {
+      "author_raw": "刘萍编著",
+      "book_name_raw": "插画设计",
+      "edition_raw": "",
+      "entry_raw": "《插画设计》，刘萍编著，西南大学出版社，2023 年。",
+      "isbn_raw": "",
+      "major_name_raw": "动画",
+      "publisher_raw": "西南大学出版社",
+      "reference_key_raw": "《插画设计》，刘萍编著，西南大学出版社，2023年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "动画|插画设计|插画设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "插画设计"
+    },
+    {
+      "author_raw": "刘雪花，蒋粤闽编著",
+      "book_name_raw": "色彩表现",
+      "edition_raw": "",
+      "entry_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018 年。",
+      "isbn_raw": "",
+      "major_name_raw": "动画",
+      "publisher_raw": "华中科技大学出版社",
+      "reference_key_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "动画|插画设计|色彩表现",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "插画设计"
+    },
+    {
+      "author_raw": "南京大学编",
+      "book_name_raw": "无机及分析化学（第五版）",
+      "edition_raw": "第五版",
+      "entry_raw": "南京大学编，《无机及分析化学（第五版）》，高等教育出版社，2015 年 8 月。",
+      "isbn_raw": "",
+      "major_name_raw": "化学工程与工艺",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "南京大学编，《无机及分析化学(第五版)》，高等教育出版社，2015年8月。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 29,
+        "row_key": "化学工程与工艺|基础分析化学|无机及分析化学（第五版）",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "基础分析化学"
+    },
+    {
+      "author_raw": "南京大学编",
+      "book_name_raw": "无机及分析化学（第五版）",
+      "edition_raw": "第五版",
+      "entry_raw": "南京大学编，《无机及分析化学（第五版）》，高等教育出版社，2015 年 8 月。",
+      "isbn_raw": "",
+      "major_name_raw": "化学工程与工艺",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "南京大学编，《无机及分析化学(第五版)》，高等教育出版社，2015年8月。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 29,
+        "row_key": "化学工程与工艺|基础无机化学|无机及分析化学（第五版）",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "基础无机化学"
+    },
+    {
+      "author_raw": "全国导游人员资格考试教材编写组",
+      "book_name_raw": "导游业务",
+      "edition_raw": "第7版",
+      "entry_raw": "全国导游人员资格考试教材编写组.《导游业务》(第 7 版)，旅游 教育出版社，2022.",
+      "isbn_raw": "",
+      "major_name_raw": "商务英语",
+      "publisher_raw": "旅游教育出版社",
+      "reference_key_raw": "全国导游人员资格考试教材编写组.《导游业务》(第7版)，旅游教育出版社，2022.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 21,
+        "row_key": "商务英语|旅游与酒店管理|导游业务",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "旅游与酒店管理"
+    },
+    {
+      "author_raw": "魏卫",
+      "book_name_raw": "酒店管理概论",
+      "edition_raw": "第1版",
+      "entry_raw": "魏卫. 《酒店管理概论》(第 1 版), 华中科技大学出版社，2019.",
+      "isbn_raw": "",
+      "major_name_raw": "商务英语",
+      "publisher_raw": "华中科技大学出版社",
+      "reference_key_raw": "魏卫.《酒店管理概论》(第1版),华中科技大学出版社，2019.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 21,
+        "row_key": "商务英语|旅游与酒店管理|酒店管理概论",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "旅游与酒店管理"
+    },
+    {
+      "author_raw": "孙志农",
+      "book_name_raw": "商务英语综合教程 1",
+      "edition_raw": "第1版",
+      "entry_raw": "孙志农.《商务英语综合教程 1》(第 1 版)，安徽大学出版社，2022.",
+      "isbn_raw": "",
+      "major_name_raw": "商务英语",
+      "publisher_raw": "安徽大学出版社",
+      "reference_key_raw": "孙志农.《商务英语综合教程1》(第1版)，安徽大学出版社，2022.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 21,
+        "row_key": "商务英语|综合商务英语|商务英语综合教程 1",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "综合商务英语"
+    },
+    {
+      "author_raw": "姚本先主编",
+      "book_name_raw": "心理学",
+      "edition_raw": "第三版",
+      "entry_raw": "《心理学》 （第三版），姚本先主编，北京：高等教育出版社，2018.1。",
+      "isbn_raw": "",
+      "major_name_raw": "学前教育",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《心理学》(第三版)，姚本先主编，北京：高等教育出版社，2018.1。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 6,
+        "row_key": "学前教育|心理学|心理学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "心理学"
+    },
+    {
+      "author_raw": "《教育学原理》编写组",
+      "book_name_raw": "教育学原理",
+      "edition_raw": "",
+      "entry_raw": "马克思主义理论研究和建设工程重点教材：《教育学原理》,《教 育学原理》编写组，北京：高等教育出版社，2019.1。",
+      "isbn_raw": "",
+      "major_name_raw": "学前教育",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "马克思主义理论研究和建设工程重点教材：《教育学原理》,《教育学原理》编写组，北京：高等教育出版社，2019.1。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 6,
+        "row_key": "学前教育|教育学|教育学原理",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "教育学"
+    },
+    {
+      "author_raw": "姚本先主编",
+      "book_name_raw": "心理学",
+      "edition_raw": "第三版",
+      "entry_raw": "《心理学》 （第三版），姚本先主编，北京：高等教育出版社，2018.1。",
+      "isbn_raw": "",
+      "major_name_raw": "小学教育",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《心理学》(第三版)，姚本先主编，北京：高等教育出版社，2018.1。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 6,
+        "row_key": "小学教育|心理学|心理学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "心理学"
+    },
+    {
+      "author_raw": "《教育学原理》编写组",
+      "book_name_raw": "教育学原理",
+      "edition_raw": "",
+      "entry_raw": "马克思主义理论研究和建设工程重点教材：《教育学原理》,《教 育学原理》编写组，北京：高等教育出版社，2019.1。",
+      "isbn_raw": "",
+      "major_name_raw": "小学教育",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "马克思主义理论研究和建设工程重点教材：《教育学原理》,《教育学原理》编写组，北京：高等教育出版社，2019.1。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 6,
+        "row_key": "小学教育|教育学|教育学原理",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "教育学"
+    },
+    {
+      "author_raw": "张凤明、唐淑文编著",
+      "book_name_raw": "基础会计",
+      "edition_raw": "第1版",
+      "entry_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017 年 第 1 版。",
+      "isbn_raw": "",
+      "major_name_raw": "市场营销",
+      "publisher_raw": "立信会计出版社",
+      "reference_key_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017年第1版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 9,
+        "row_key": "市场营销|会计学原理|基础会计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "会计学原理"
+    },
+    {
+      "author_raw": "王光健，胡友宇，石媚山",
+      "book_name_raw": "管理学原理",
+      "edition_raw": "第二版",
+      "entry_raw": "王光健，胡友宇，石媚山.管理学原理，中国人民大学出版社，2018 年，第二版。",
+      "isbn_raw": "",
+      "major_name_raw": "市场营销",
+      "publisher_raw": "中国人民大学出版社",
+      "reference_key_raw": "王光健，胡友宇，石媚山.管理学原理，中国人民大学出版社，2018年，第二版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 9,
+        "row_key": "市场营销|管理学原理|管理学原理",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "管理学原理"
+    },
+    {
+      "author_raw": "苏小红等编著",
+      "book_name_raw": "C 语言程序设计",
+      "edition_raw": "第4版",
+      "entry_raw": "《C 语言程序设计》(第 4 版），苏小红等编著，高等教育出版社，",
+      "isbn_raw": "",
+      "major_name_raw": "数据科学与大数据技术",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《C语言程序设计》(第4版)，苏小红等编著，高等教育出版社，",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 56,
+        "row_key": "数据科学与大数据技术|C语言程序设计|C 语言程序设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "C语言程序设计"
+    },
+    {
+      "author_raw": "严蔚敏、李冬梅、吴伟民编著",
+      "book_name_raw": "数据结构",
+      "edition_raw": "第2版",
+      "entry_raw": "《数据结构》(C 语言版）(第 2 版），严蔚敏、李冬梅、吴伟民 编著，人民邮电出版社，2015.2.",
+      "isbn_raw": "",
+      "major_name_raw": "数据科学与大数据技术",
+      "publisher_raw": "人民邮电出版社",
+      "reference_key_raw": "《数据结构》(C语言版)(第2版)，严蔚敏、李冬梅、吴伟民编著，人民邮电出版社，2015.2.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "数据科学与大数据技术|数据结构|数据结构",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "李春葆、喻丹丹、曾平、曾慧编著",
+      "book_name_raw": "新编数据结构习题与解析",
+      "edition_raw": "",
+      "entry_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著， 清华大学出版社，2013.5",
+      "isbn_raw": "",
+      "major_name_raw": "数据科学与大数据技术",
+      "publisher_raw": "清华大学出版社",
+      "reference_key_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著，清华大学出版社，2013.5",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "数据科学与大数据技术|数据结构|新编数据结构习题与解析",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "程守洙 江之永主编",
+      "book_name_raw": "普通物理学",
+      "edition_raw": "第七版",
+      "entry_raw": "《普通物理学》上册，程守洙 江之永 主编，第七版，北京：高等教 育出版社，2016.5",
+      "isbn_raw": "",
+      "major_name_raw": "新能源材料与器件",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《普通物理学》上册，程守洙江之永主编，第七版，北京：高等教育出版社，2016.5",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 35,
+        "row_key": "新能源材料与器件|大学物理|普通物理学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "大学物理"
+    },
+    {
+      "author_raw": "天津大学",
+      "book_name_raw": "无机化学简明教程",
+      "edition_raw": "第一版",
+      "entry_raw": "《无机化学简明教程》天津大学，2010 年 12 月第一版，高等教育出 版社。",
+      "isbn_raw": "",
+      "major_name_raw": "新能源材料与器件",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《无机化学简明教程》天津大学，2010年12月第一版，高等教育出版社。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 32,
+        "row_key": "新能源材料与器件|无机化学|无机化学简明教程",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "无机化学"
+    },
+    {
+      "author_raw": "王雷,宫丽慧,刘海静等编著",
+      "book_name_raw": "速写",
+      "edition_raw": "第一版",
+      "entry_raw": "《速写》（第一版），王雷,宫丽慧,刘海静等编著，辽宁美术出版 社，2016 年。",
+      "isbn_raw": "",
+      "major_name_raw": "服装与服饰设计",
+      "publisher_raw": "辽宁美术出版社",
+      "reference_key_raw": "《速写》(第一版)，王雷,宫丽慧,刘海静等编著，辽宁美术出版社，2016年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "服装与服饰设计|人物速写|速写",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "人物速写"
+    },
+    {
+      "author_raw": "刘萍编著",
+      "book_name_raw": "插画设计",
+      "edition_raw": "",
+      "entry_raw": "《插画设计》，刘萍编著，西南大学出版社，2023 年。",
+      "isbn_raw": "",
+      "major_name_raw": "服装与服饰设计",
+      "publisher_raw": "西南大学出版社",
+      "reference_key_raw": "《插画设计》，刘萍编著，西南大学出版社，2023年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "服装与服饰设计|插画设计|插画设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "插画设计"
+    },
+    {
+      "author_raw": "刘雪花，蒋粤闽编著",
+      "book_name_raw": "色彩表现",
+      "edition_raw": "",
+      "entry_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018 年。",
+      "isbn_raw": "",
+      "major_name_raw": "服装与服饰设计",
+      "publisher_raw": "华中科技大学出版社",
+      "reference_key_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "服装与服饰设计|插画设计|色彩表现",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "插画设计"
+    },
+    {
+      "author_raw": "程守洙 江之永主编",
+      "book_name_raw": "普通物理学",
+      "edition_raw": "第七版",
+      "entry_raw": "《普通物理学》上册，程守洙 江之永 主编，第七版，北京：高等教 育出版社，2016.5",
+      "isbn_raw": "",
+      "major_name_raw": "材料科学与工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《普通物理学》上册，程守洙江之永主编，第七版，北京：高等教育出版社，2016.5",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 35,
+        "row_key": "材料科学与工程|大学物理|普通物理学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "大学物理"
+    },
+    {
+      "author_raw": "天津大学",
+      "book_name_raw": "无机化学简明教程",
+      "edition_raw": "第一版",
+      "entry_raw": "《无机化学简明教程》天津大学，2010 年 12 月第一版，高等教育出 版社。",
+      "isbn_raw": "",
+      "major_name_raw": "材料科学与工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《无机化学简明教程》天津大学，2010年12月第一版，高等教育出版社。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 32,
+        "row_key": "材料科学与工程|无机化学|无机化学简明教程",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "无机化学"
+    },
+    {
+      "author_raw": "曾添编著",
+      "book_name_raw": "室内设计手绘技法与快题表现",
+      "edition_raw": "第2版",
+      "entry_raw": "《室内设计手绘技法与快题表现》第 2 版，曾添编著，人民邮电出版社， 2022 年",
+      "isbn_raw": "",
+      "major_name_raw": "环境设计",
+      "publisher_raw": "人民邮电出版社",
+      "reference_key_raw": "《室内设计手绘技法与快题表现》第2版，曾添编著，人民邮电出版社，2022年",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 23,
+        "row_key": "环境设计|室内设计表现|室内设计手绘技法与快题表现",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "室内设计表现"
+    },
+    {
+      "author_raw": "刘雪花，蒋粤闽编著",
+      "book_name_raw": "色彩表现",
+      "edition_raw": "",
+      "entry_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018 年",
+      "isbn_raw": "",
+      "major_name_raw": "环境设计",
+      "publisher_raw": "华中科技大学出版社",
+      "reference_key_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018年",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 23,
+        "row_key": "环境设计|室内设计表现|色彩表现",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "室内设计表现"
+    },
+    {
+      "author_raw": "杜鹏、刘庆慧、王炼等编著",
+      "book_name_raw": "建筑速写",
+      "edition_raw": "",
+      "entry_raw": "《建筑速写》，杜鹏、刘庆慧、王炼等编著，清华大学出版社，2023 年",
+      "isbn_raw": "",
+      "major_name_raw": "环境设计",
+      "publisher_raw": "清华大学出版社",
+      "reference_key_raw": "《建筑速写》，杜鹏、刘庆慧、王炼等编著，清华大学出版社，2023年",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 23,
+        "row_key": "环境设计|建筑速写|建筑速写",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "建筑速写"
+    },
+    {
+      "author_raw": "周德庆编",
+      "book_name_raw": "微生物学教程",
+      "edition_raw": "第四版",
+      "entry_raw": "微生物学教程（第四版），周德庆编，高等教育出版社，2020。",
+      "isbn_raw": "",
+      "major_name_raw": "生物制药",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "微生物学教程(第四版)，周德庆编，高等教育出版社，2020。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 62,
+        "row_key": "生物制药|微生物学|微生物学教程",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "微生物学"
+    },
+    {
+      "author_raw": "魏民主编",
+      "book_name_raw": "生物化学简明教程",
+      "edition_raw": "第六版",
+      "entry_raw": "生物化学简明教程(第六版)，魏民主编，高等教育出版社，2021。",
+      "isbn_raw": "",
+      "major_name_raw": "生物制药",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "生物化学简明教程(第六版)，魏民主编，高等教育出版社，2021。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 62,
+        "row_key": "生物制药|生物化学|生物化学简明教程",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "生物化学"
+    },
+    {
+      "author_raw": "阎石 王红编著",
+      "book_name_raw": "数字电子技术基础",
+      "edition_raw": "第六版",
+      "entry_raw": "《数字电子技术基础》（第六版），阎石 王红编著，高等教育出 版社，2016.4.",
+      "isbn_raw": "",
+      "major_name_raw": "电子信息工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《数字电子技术基础》(第六版)，阎石王红编著，高等教育出版社，2016.4.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 43,
+        "row_key": "电子信息工程|数字电子技术基础|数字电子技术基础",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数字电子技术基础"
+    },
+    {
+      "author_raw": "邱关源",
+      "book_name_raw": "电路",
+      "edition_raw": "第五版",
+      "entry_raw": "《电路》（第五版）.邱关源.北京：高等教育出版社，2018。",
+      "isbn_raw": "",
+      "major_name_raw": "电子信息工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《电路》(第五版).邱关源.北京：高等教育出版社，2018。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 43,
+        "row_key": "电子信息工程|电路分析基础|电路",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "电路分析基础"
+    },
+    {
+      "author_raw": "",
+      "book_name_raw": "电路分析基础",
+      "edition_raw": "",
+      "entry_raw": "《电路分析基础》网络课程版： https://www.ehuixue.cn/index/detail/index?cid=38799",
+      "isbn_raw": "",
+      "major_name_raw": "电子信息工程",
+      "publisher_raw": "",
+      "reference_key_raw": "《电路分析基础》网络课程版：https://www.ehuixue.cn/index/detail/index?cid=38799",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 43,
+        "row_key": "电子信息工程|电路分析基础|电路分析基础",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "电路分析基础"
+    },
+    {
+      "author_raw": "邱关源",
+      "book_name_raw": "电路",
+      "edition_raw": "第五版",
+      "entry_raw": "《电路》（第五版），邱关源，北京：高等教育出版社，2018",
+      "isbn_raw": "",
+      "major_name_raw": "电气工程及其自动化",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《电路》(第五版)，邱关源，北京：高等教育出版社，2018",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 53,
+        "row_key": "电气工程及其自动化|电路分析基础|电路",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "电路分析基础"
+    },
+    {
+      "author_raw": "",
+      "book_name_raw": "电路分析基础",
+      "edition_raw": "",
+      "entry_raw": "《电路分析基础》网络课程版： https://www.ehuixue.cn/index/detail/index?cid=38799",
+      "isbn_raw": "",
+      "major_name_raw": "电气工程及其自动化",
+      "publisher_raw": "",
+      "reference_key_raw": "《电路分析基础》网络课程版：https://www.ehuixue.cn/index/detail/index?cid=38799",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 53,
+        "row_key": "电气工程及其自动化|电路分析基础|电路分析基础",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "电路分析基础"
+    },
+    {
+      "author_raw": "胡寿松主编",
+      "book_name_raw": "自动控制原理",
+      "edition_raw": "第六版",
+      "entry_raw": "《自动控制原理》第六版，胡寿松主编，科学出版社。",
+      "isbn_raw": "",
+      "major_name_raw": "电气工程及其自动化",
+      "publisher_raw": "科学出版社",
+      "reference_key_raw": "《自动控制原理》第六版，胡寿松主编，科学出版社。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 53,
+        "row_key": "电气工程及其自动化|自动控制原理|自动控制原理",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "自动控制原理"
+    },
+    {
+      "author_raw": "孔凡才、陈渝光主编",
+      "book_name_raw": "自动控制原理与系统",
+      "edition_raw": "",
+      "entry_raw": "《自动控制原理与系统》，孔凡才、陈渝光主编，机械工业出版社。",
+      "isbn_raw": "",
+      "major_name_raw": "电气工程及其自动化",
+      "publisher_raw": "机械工业出版社",
+      "reference_key_raw": "《自动控制原理与系统》，孔凡才、陈渝光主编，机械工业出版社。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 53,
+        "row_key": "电气工程及其自动化|自动控制原理|自动控制原理与系统",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "自动控制原理"
+    },
+    {
+      "author_raw": "马工程西方经济学编写组",
+      "book_name_raw": "西方经济学",
+      "edition_raw": "第二版",
+      "entry_raw": "马工程西方经济学编写组.《西方经济学》第二版上册，高等教育 出版社，2019.",
+      "isbn_raw": "",
+      "major_name_raw": "经济统计学",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "马工程西方经济学编写组.《西方经济学》第二版上册，高等教育出版社，2019.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 38,
+        "row_key": "经济统计学|微观经济学|西方经济学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "微观经济学"
+    },
+    {
+      "author_raw": "王莹,徐颖,王军",
+      "book_name_raw": "经济统计学",
+      "edition_raw": "第2版",
+      "entry_raw": "王莹,徐颖,王军.《经济统计学》（第 2 版），机械工业出版社，",
+      "isbn_raw": "",
+      "major_name_raw": "经济统计学",
+      "publisher_raw": "机械工业出版社",
+      "reference_key_raw": "王莹,徐颖,王军.《经济统计学》(第2版)，机械工业出版社，",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 38,
+        "row_key": "经济统计学|统计学|经济统计学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "统计学"
+    },
+    {
+      "author_raw": "郭庆光著",
+      "book_name_raw": "传播学概论 (第二版)",
+      "edition_raw": "第二版",
+      "entry_raw": "郭庆光 著.《传播学概论 (第二版)》.中国人民大学出版社，2011.",
+      "isbn_raw": "",
+      "major_name_raw": "网络与新媒体",
+      "publisher_raw": "中国人民大学出版社",
+      "reference_key_raw": "郭庆光著.《传播学概论(第二版)》.中国人民大学出版社，2011.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 17,
+        "row_key": "网络与新媒体|传播学概论|传播学概论 (第二版)",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "传播学概论"
+    },
+    {
+      "author_raw": "李良荣著",
+      "book_name_raw": "新闻学概论",
+      "edition_raw": "第六版",
+      "entry_raw": "李良荣 著.《新闻学概论》（第六版）》.复旦大学出版社，2018.",
+      "isbn_raw": "",
+      "major_name_raw": "网络与新媒体",
+      "publisher_raw": "复旦大学出版社",
+      "reference_key_raw": "李良荣著.《新闻学概论》(第六版)》.复旦大学出版社，2018.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 17,
+        "row_key": "网络与新媒体|新闻学概论|新闻学概论",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "新闻学概论"
+    },
+    {
+      "author_raw": "苏小红等编著",
+      "book_name_raw": "C 语言程序设计",
+      "edition_raw": "第4版",
+      "entry_raw": "《C 语言程序设计》(第 4 版），苏小红等编著，高等教育出版社，",
+      "isbn_raw": "",
+      "major_name_raw": "网络工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《C语言程序设计》(第4版)，苏小红等编著，高等教育出版社，",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 56,
+        "row_key": "网络工程|C语言程序设计|C 语言程序设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "C语言程序设计"
+    },
+    {
+      "author_raw": "严蔚敏、李冬梅、吴伟民编著",
+      "book_name_raw": "数据结构",
+      "edition_raw": "第2版",
+      "entry_raw": "《数据结构》(C 语言版）(第 2 版），严蔚敏、李冬梅、吴伟民 编著，人民邮电出版社，2015.2.",
+      "isbn_raw": "",
+      "major_name_raw": "网络工程",
+      "publisher_raw": "人民邮电出版社",
+      "reference_key_raw": "《数据结构》(C语言版)(第2版)，严蔚敏、李冬梅、吴伟民编著，人民邮电出版社，2015.2.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "网络工程|数据结构|数据结构",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "李春葆、喻丹丹、曾平、曾慧编著",
+      "book_name_raw": "新编数据结构习题与解析",
+      "edition_raw": "",
+      "entry_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著， 清华大学出版社，2013.5",
+      "isbn_raw": "",
+      "major_name_raw": "网络工程",
+      "publisher_raw": "清华大学出版社",
+      "reference_key_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著，清华大学出版社，2013.5",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "网络工程|数据结构|新编数据结构习题与解析",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "南京大学编",
+      "book_name_raw": "无机及分析化学（第五版）",
+      "edition_raw": "第五版",
+      "entry_raw": "南京大学编，《无机及分析化学（第五版）》，高等教育出版社，2015 年 8 月。",
+      "isbn_raw": "",
+      "major_name_raw": "药物制剂",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "南京大学编，《无机及分析化学(第五版)》，高等教育出版社，2015年8月。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 29,
+        "row_key": "药物制剂|基础分析化学|无机及分析化学（第五版）",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "基础分析化学"
+    },
+    {
+      "author_raw": "南京大学编",
+      "book_name_raw": "无机及分析化学（第五版）",
+      "edition_raw": "第五版",
+      "entry_raw": "南京大学编，《无机及分析化学（第五版）》，高等教育出版社，2015 年 8 月。",
+      "isbn_raw": "",
+      "major_name_raw": "药物制剂",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "南京大学编，《无机及分析化学(第五版)》，高等教育出版社，2015年8月。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 29,
+        "row_key": "药物制剂|基础无机化学|无机及分析化学（第五版）",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "基础无机化学"
+    },
+    {
+      "author_raw": "王雷,宫丽慧,刘海静等编著",
+      "book_name_raw": "速写",
+      "edition_raw": "第一版",
+      "entry_raw": "《速写》（第一版），王雷,宫丽慧,刘海静等编著，辽宁美术出版 社，2016 年。",
+      "isbn_raw": "",
+      "major_name_raw": "视觉传达设计",
+      "publisher_raw": "辽宁美术出版社",
+      "reference_key_raw": "《速写》(第一版)，王雷,宫丽慧,刘海静等编著，辽宁美术出版社，2016年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "视觉传达设计|人物速写|速写",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "人物速写"
+    },
+    {
+      "author_raw": "刘萍编著",
+      "book_name_raw": "插画设计",
+      "edition_raw": "",
+      "entry_raw": "《插画设计》，刘萍编著，西南大学出版社，2023 年。",
+      "isbn_raw": "",
+      "major_name_raw": "视觉传达设计",
+      "publisher_raw": "西南大学出版社",
+      "reference_key_raw": "《插画设计》，刘萍编著，西南大学出版社，2023年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "视觉传达设计|插画设计|插画设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "插画设计"
+    },
+    {
+      "author_raw": "刘雪花，蒋粤闽编著",
+      "book_name_raw": "色彩表现",
+      "edition_raw": "",
+      "entry_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018 年。",
+      "isbn_raw": "",
+      "major_name_raw": "视觉传达设计",
+      "publisher_raw": "华中科技大学出版社",
+      "reference_key_raw": "《色彩表现》，刘雪花，蒋粤闽编著，华中科技大学出版社，2018年。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 22,
+        "row_key": "视觉传达设计|插画设计|色彩表现",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "插画设计"
+    },
+    {
+      "author_raw": "苏小红等编著",
+      "book_name_raw": "C 语言程序设计",
+      "edition_raw": "第4版",
+      "entry_raw": "《C 语言程序设计》(第 4 版），苏小红等编著，高等教育出版社，",
+      "isbn_raw": "",
+      "major_name_raw": "计算机科学与技术",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《C语言程序设计》(第4版)，苏小红等编著，高等教育出版社，",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 56,
+        "row_key": "计算机科学与技术|C语言程序设计|C 语言程序设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "C语言程序设计"
+    },
+    {
+      "author_raw": "严蔚敏、李冬梅、吴伟民编著",
+      "book_name_raw": "数据结构",
+      "edition_raw": "第2版",
+      "entry_raw": "《数据结构》(C 语言版）(第 2 版），严蔚敏、李冬梅、吴伟民 编著，人民邮电出版社，2015.2.",
+      "isbn_raw": "",
+      "major_name_raw": "计算机科学与技术",
+      "publisher_raw": "人民邮电出版社",
+      "reference_key_raw": "《数据结构》(C语言版)(第2版)，严蔚敏、李冬梅、吴伟民编著，人民邮电出版社，2015.2.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "计算机科学与技术|数据结构|数据结构",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "李春葆、喻丹丹、曾平、曾慧编著",
+      "book_name_raw": "新编数据结构习题与解析",
+      "edition_raw": "",
+      "entry_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著， 清华大学出版社，2013.5",
+      "isbn_raw": "",
+      "major_name_raw": "计算机科学与技术",
+      "publisher_raw": "清华大学出版社",
+      "reference_key_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著，清华大学出版社，2013.5",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "计算机科学与技术|数据结构|新编数据结构习题与解析",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "张凤明、唐淑文编著",
+      "book_name_raw": "基础会计",
+      "edition_raw": "第1版",
+      "entry_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017 年 第 1 版。",
+      "isbn_raw": "",
+      "major_name_raw": "财务管理",
+      "publisher_raw": "立信会计出版社",
+      "reference_key_raw": "《基础会计》，张凤明、唐淑文编著，立信会计出版社，2017年第1版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 9,
+        "row_key": "财务管理|会计学原理|基础会计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "会计学原理"
+    },
+    {
+      "author_raw": "王光健，胡友宇，石媚山",
+      "book_name_raw": "管理学原理",
+      "edition_raw": "第二版",
+      "entry_raw": "王光健，胡友宇，石媚山.管理学原理，中国人民大学出版社，2018 年，第二版。",
+      "isbn_raw": "",
+      "major_name_raw": "财务管理",
+      "publisher_raw": "中国人民大学出版社",
+      "reference_key_raw": "王光健，胡友宇，石媚山.管理学原理，中国人民大学出版社，2018年，第二版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 9,
+        "row_key": "财务管理|管理学原理|管理学原理",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "管理学原理"
+    },
+    {
+      "author_raw": "苏小红等编著",
+      "book_name_raw": "C 语言程序设计",
+      "edition_raw": "第4版",
+      "entry_raw": "《C 语言程序设计》(第 4 版），苏小红等编著，高等教育出版社，",
+      "isbn_raw": "",
+      "major_name_raw": "软件工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《C语言程序设计》(第4版)，苏小红等编著，高等教育出版社，",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 56,
+        "row_key": "软件工程|C语言程序设计|C 语言程序设计",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "C语言程序设计"
+    },
+    {
+      "author_raw": "严蔚敏、李冬梅、吴伟民编著",
+      "book_name_raw": "数据结构",
+      "edition_raw": "第2版",
+      "entry_raw": "《数据结构》(C 语言版）(第 2 版），严蔚敏、李冬梅、吴伟民 编著，人民邮电出版社，2015.2.",
+      "isbn_raw": "",
+      "major_name_raw": "软件工程",
+      "publisher_raw": "人民邮电出版社",
+      "reference_key_raw": "《数据结构》(C语言版)(第2版)，严蔚敏、李冬梅、吴伟民编著，人民邮电出版社，2015.2.",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "软件工程|数据结构|数据结构",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "李春葆、喻丹丹、曾平、曾慧编著",
+      "book_name_raw": "新编数据结构习题与解析",
+      "edition_raw": "",
+      "entry_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著， 清华大学出版社，2013.5",
+      "isbn_raw": "",
+      "major_name_raw": "软件工程",
+      "publisher_raw": "清华大学出版社",
+      "reference_key_raw": "《新编数据结构习题与解析》,李春葆、喻丹丹、曾平、曾慧编著，清华大学出版社，2013.5",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 57,
+        "row_key": "软件工程|数据结构|新编数据结构习题与解析",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数据结构"
+    },
+    {
+      "author_raw": "王玉龙",
+      "book_name_raw": "康复功能评定学",
+      "edition_raw": "第二版",
+      "entry_raw": "《康复功能评定学》王玉龙，人民卫生出版社第二版。",
+      "isbn_raw": "",
+      "major_name_raw": "运动康复",
+      "publisher_raw": "人民卫生出版社",
+      "reference_key_raw": "《康复功能评定学》王玉龙，人民卫生出版社第二版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 27,
+        "row_key": "运动康复|康复功能评定学|康复功能评定学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "康复功能评定学"
+    },
+    {
+      "author_raw": "邓树勋主编",
+      "book_name_raw": "运动生理学",
+      "edition_raw": "第三版",
+      "entry_raw": "邓树勋主编，《运动生理学》第三版，(“十二五”普通高等教育 本科国家级规划教材)，北京：高等教育出版社，2015.4",
+      "isbn_raw": "",
+      "major_name_raw": "运动康复",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "邓树勋主编，《运动生理学》第三版，(“十二五”普通高等教育本科国家级规划教材)，北京：高等教育出版社，2015.4",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 27,
+        "row_key": "运动康复|运动解剖生理学|运动生理学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "运动解剖生理学"
+    },
+    {
+      "author_raw": "李世昌",
+      "book_name_raw": "运动解剖学",
+      "edition_raw": "第三版",
+      "entry_raw": "《运动解剖学》李世昌，高等教育出版社第三版。",
+      "isbn_raw": "",
+      "major_name_raw": "运动康复",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《运动解剖学》李世昌，高等教育出版社第三版。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 27,
+        "row_key": "运动康复|运动解剖生理学|运动解剖学",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "运动解剖生理学"
+    },
+    {
+      "author_raw": "阎石 王红编著",
+      "book_name_raw": "数字电子技术基础",
+      "edition_raw": "第六版",
+      "entry_raw": "《数字电子技术基础》（第六版），阎石 王红编著，高等教育出 版社，2016.4。",
+      "isbn_raw": "",
+      "major_name_raw": "通信工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《数字电子技术基础》(第六版)，阎石王红编著，高等教育出版社，2016.4。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 48,
+        "row_key": "通信工程|数字电子技术基础|数字电子技术基础",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "数字电子技术基础"
+    },
+    {
+      "author_raw": "邱关源",
+      "book_name_raw": "电路",
+      "edition_raw": "第五版",
+      "entry_raw": "《电路》（第五版）.邱关源.北京：高等教育出版社，2018。",
+      "isbn_raw": "",
+      "major_name_raw": "通信工程",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "《电路》(第五版).邱关源.北京：高等教育出版社，2018。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 48,
+        "row_key": "通信工程|电路分析基础|电路",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "电路分析基础"
+    },
+    {
+      "author_raw": "",
+      "book_name_raw": "电路分析基础",
+      "edition_raw": "",
+      "entry_raw": "《电路分析基础》网络课程版： https://www.ehuixue.cn/index/detail/index?cid=38799",
+      "isbn_raw": "",
+      "major_name_raw": "通信工程",
+      "publisher_raw": "",
+      "reference_key_raw": "《电路分析基础》网络课程版：https://www.ehuixue.cn/index/detail/index?cid=38799",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 48,
+        "row_key": "通信工程|电路分析基础|电路分析基础",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "电路分析基础"
+    },
+    {
+      "author_raw": "周德庆编",
+      "book_name_raw": "微生物学教程",
+      "edition_raw": "第四版",
+      "entry_raw": "微生物学教程（第四版），周德庆编，高等教育出版社，2020。",
+      "isbn_raw": "",
+      "major_name_raw": "食品质量与安全",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "微生物学教程(第四版)，周德庆编，高等教育出版社，2020。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 62,
+        "row_key": "食品质量与安全|微生物学|微生物学教程",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "微生物学"
+    },
+    {
+      "author_raw": "魏民主编",
+      "book_name_raw": "生物化学简明教程",
+      "edition_raw": "第六版",
+      "entry_raw": "生物化学简明教程(第六版)，魏民主编，高等教育出版社，2021。",
+      "isbn_raw": "",
+      "major_name_raw": "食品质量与安全",
+      "publisher_raw": "高等教育出版社",
+      "reference_key_raw": "生物化学简明教程(第六版)，魏民主编，高等教育出版社，2021。",
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-DG-PDF",
+        "page": 62,
+        "row_key": "食品质量与安全|生物化学|生物化学简明教程",
+        "section": "参考书目"
+      },
+      "subject_name_raw": "生物化学"
+    }
+  ],
+  "extracted_at": "2026-08-15T04:00:00+00:00",
+  "extraction_method": "deterministic_parse_of_reviewed_official_pdf_text",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2024-DG",
+  "source_school_id": "HFNU",
+  "source_year": "2024"
+}

@@ -21,7 +21,12 @@ REQUIRED_CORE = (
     "exam_subjects.json",
     "admission_rules.json",
 )
-OPTIONAL = ("admission_scores.json",)
+OPTIONAL = (
+    "admission_scores.json",
+    "syllabus.json",
+    "reference_books.json",
+    "application_statistics.json",
+)
 
 
 def load_json(path: Path) -> Any:
@@ -55,6 +60,22 @@ def row_key(filename: str, row: dict[str, Any]) -> tuple[str, ...]:
         return (
             str(row.get("major_name_raw", "")).strip(),
             str(row.get("notes_raw", "")).strip(),
+        )
+    if filename == "syllabus.json":
+        return (
+            str(row.get("major_name_raw", "")).strip(),
+            str(row.get("subject_name_raw", "")).strip(),
+        )
+    if filename == "reference_books.json":
+        return (
+            str(row.get("major_name_raw", "")).strip(),
+            str(row.get("subject_name_raw", "")).strip(),
+            str(row.get("reference_key_raw", "")).strip(),
+        )
+    if filename == "application_statistics.json":
+        return (
+            str(row.get("major_name_raw", "")).strip(),
+            str(row.get("training_institution_name_raw", "")).strip() or "main_school",
         )
     return (json.dumps(row, ensure_ascii=False, sort_keys=True),)
 

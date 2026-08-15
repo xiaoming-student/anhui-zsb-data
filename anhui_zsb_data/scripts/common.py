@@ -200,7 +200,10 @@ def as_decimal_string(value: Any) -> str:
 _SCORE_RE = re.compile(
     r"^\s*(?P<score>\d+(?:\.\d+)?)"
     r"(?:\s*/\s*(?P<max>\d+(?:\.\d+)?))?"
-    r"(?:\s*[（(]\s*(?P<label>[^:：()（）]+)\s*[:：]\s*(?P<detail>\d+(?:\.\d+)?)\s*[）)])?\s*$"
+    r"(?:\s*[（(]\s*(?:"
+    r"(?P<label_colon>[^:：()（）]+)\s*[:：]\s*(?P<detail_colon>\d+(?:\.\d+)?)"
+    r"|(?P<label_plain>[^0-9:：()（）]+?)\s*(?P<detail_plain>\d+(?:\.\d+)?)"
+    r")\s*[）)])?\s*$"
 )
 
 
@@ -217,13 +220,14 @@ def parse_score(raw_value: Any) -> dict[str, str]:
         raise ValueError(f"Unsupported score format: {raw!r}")
 
     detail: dict[str, Any] = {}
-    label = normalize_text(match.group("label"))
-    detail_score = match.group("detail")
+    label = normalize_text(match.group("label_colon") or match.group("label_plain"))
+    detail_score = match.group("detail_colon") or match.group("detail_plain")
     if label and detail_score:
         label_map = {
             "专业课1": "professional_1",
             "专业课一": "professional_1",
             "职测": "vocational_assessment",
+            "素质": "quality_assessment",
         }
         detail = {
             "tie_break_label_raw": label,

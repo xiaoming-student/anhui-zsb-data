@@ -1,25 +1,20 @@
 # Batch Readiness Checklist
 
-## 已通过
+## Stage 2A 已通过
 
-- [x] Program Year / Offering 两级模型
-- [x] 稳定、跨院校安全的 deterministic ID
-- [x] 招生计划空白语义
-- [x] Eligibility 年度覆盖与 FK
-- [x] 录取分数数值拆分、ID 与 observation matrix
-- [x] 原始文件 ASCII 路径、SHA-256 与 manifest
-- [x] 核心事实 source locator
-- [x] 自动 PK/FK/业务规则验证
-- [x] Active conflicts 清零
+- [x] HFNU Stage 1 evidence 正式提升到 canonical raw
+- [x] 正式 source catalog / source assets
+- [x] HFNU 2026 录取分数结构化
+- [x] HFNU 2024—2026 考试大纲与参考教材结构化
+- [x] HFNU 2024 官方报名人数结构化
+- [x] Stable ID 无漂移
+- [x] P0/P1 为 0、幂等与 clean-room 可重建
 
 ## 进入 Batch 前仍需完成
 
-- [ ] 保存 2024 招生章程 HTML 快照
-- [ ] 保存 2024、2025 录取分数 HTML 快照
-- [ ] 采集 2026 录取分数
-- [ ] 完成考试大纲和参考书数据
-- [ ] 执行一所异构院校 Pilot B
-- [ ] Pilot B 不再修改核心 Schema
-- [ ] 冻结 Schema v1.0
+- [ ] 人工 Review 并合并 Stage 2A
+- [ ] 执行 AHUA Stage 2B canonical 建模
+- [ ] 完成 Pilot B Schema 兼容性评估
+- [ ] 人工确认 Schema v1.0 冻结方案
 
-**当前结论：Batch Readiness = FAIL（应先执行 Pilot B）。**
+**当前结论：Batch Readiness = FAIL；`batch_ready=false`。**

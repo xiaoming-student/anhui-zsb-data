@@ -1,0 +1,430 @@
+{
+  "data": [
+    {
+      "major_name_raw": "商务英语",
+      "notes_raw": "",
+      "score_normal_raw": "342.5",
+      "score_registered_poor_family_raw": "236.5",
+      "score_retired_culture_exam_exempt_raw": "61.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "商务英语|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "电子信息工程",
+      "notes_raw": "",
+      "score_normal_raw": "418",
+      "score_registered_poor_family_raw": "213",
+      "score_retired_culture_exam_exempt_raw": "70",
+      "score_retired_non_exempt_raw": "399",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "电子信息工程|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "药物制剂",
+      "notes_raw": "",
+      "score_normal_raw": "301.5",
+      "score_registered_poor_family_raw": "179.5",
+      "score_retired_culture_exam_exempt_raw": "51.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "药物制剂|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "人力资源管理",
+      "notes_raw": "",
+      "score_normal_raw": "453(专业课1:125.5)",
+      "score_registered_poor_family_raw": "378",
+      "score_retired_culture_exam_exempt_raw": "65",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "人力资源管理|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "市场营销",
+      "notes_raw": "",
+      "score_normal_raw": "451.5(专业课1:126)",
+      "score_registered_poor_family_raw": "443",
+      "score_retired_culture_exam_exempt_raw": "64",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "市场营销|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "网络与新媒体",
+      "notes_raw": "",
+      "score_normal_raw": "443",
+      "score_registered_poor_family_raw": "428.5",
+      "score_retired_culture_exam_exempt_raw": "60",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "网络与新媒体|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "通信工程",
+      "notes_raw": "",
+      "score_normal_raw": "341.5",
+      "score_registered_poor_family_raw": "204",
+      "score_retired_culture_exam_exempt_raw": "69.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "通信工程|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "化学工程与工艺",
+      "notes_raw": "",
+      "score_normal_raw": "208.5",
+      "score_registered_poor_family_raw": "222",
+      "score_retired_culture_exam_exempt_raw": "63.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "化学工程与工艺|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "软件工程",
+      "notes_raw": "",
+      "score_normal_raw": "444.5",
+      "score_registered_poor_family_raw": "363.5",
+      "score_retired_culture_exam_exempt_raw": "63",
+      "score_retired_non_exempt_raw": "309",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "软件工程|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "互联网金融",
+      "notes_raw": "",
+      "score_normal_raw": "422.5",
+      "score_registered_poor_family_raw": "400",
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "互联网金融|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "学前教育",
+      "notes_raw": "师范",
+      "score_normal_raw": "395.5",
+      "score_registered_poor_family_raw": "287",
+      "score_retired_culture_exam_exempt_raw": "53.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "学前教育|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "生物制药",
+      "notes_raw": "",
+      "score_normal_raw": "417",
+      "score_registered_poor_family_raw": "266",
+      "score_retired_culture_exam_exempt_raw": "70.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "生物制药|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "经济统计学",
+      "notes_raw": "",
+      "score_normal_raw": "378",
+      "score_registered_poor_family_raw": "362",
+      "score_retired_culture_exam_exempt_raw": "57(素质39)",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 1,
+        "row_key": "经济统计学|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "新能源材料与器件",
+      "notes_raw": "",
+      "score_normal_raw": "367",
+      "score_registered_poor_family_raw": "339.5",
+      "score_retired_culture_exam_exempt_raw": "60.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "新能源材料与器件|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "音乐学",
+      "notes_raw": "师范",
+      "score_normal_raw": "430",
+      "score_registered_poor_family_raw": null,
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "音乐学|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "视觉传达设计",
+      "notes_raw": "",
+      "score_normal_raw": "440",
+      "score_registered_poor_family_raw": "409.66",
+      "score_retired_culture_exam_exempt_raw": "80",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "视觉传达设计|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "服装与服饰设计",
+      "notes_raw": "",
+      "score_normal_raw": "396.33",
+      "score_registered_poor_family_raw": "362",
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "服装与服饰设计|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "动画",
+      "notes_raw": "",
+      "score_normal_raw": "429.66",
+      "score_registered_poor_family_raw": "424.33",
+      "score_retired_culture_exam_exempt_raw": "80.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "动画|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "运动康复",
+      "notes_raw": "",
+      "score_normal_raw": "400.5",
+      "score_registered_poor_family_raw": "391.5",
+      "score_retired_culture_exam_exempt_raw": "72",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "运动康复|合肥师范学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "财务管理",
+      "notes_raw": "与安徽工业经济职业技术学院联合培养",
+      "score_normal_raw": "442(专业课1:133)",
+      "score_registered_poor_family_raw": "252.5",
+      "score_retired_culture_exam_exempt_raw": "74.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "财务管理|安徽工业经济职业技术学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "电气工程及其自动化",
+      "notes_raw": "与安徽工业经济职业技术学院联合培养",
+      "score_normal_raw": "409.5",
+      "score_registered_poor_family_raw": "302.5",
+      "score_retired_culture_exam_exempt_raw": "74.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "电气工程及其自动化|安徽工业经济职业技术学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "网络工程",
+      "notes_raw": "与安徽工业经济职业技术学院联合培养",
+      "score_normal_raw": "467.5",
+      "score_registered_poor_family_raw": "409.5",
+      "score_retired_culture_exam_exempt_raw": "75",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "网络工程|安徽工业经济职业技术学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "计算机科学与技术",
+      "notes_raw": "与安徽工业经济职业技术学院联合培养",
+      "score_normal_raw": "437",
+      "score_registered_poor_family_raw": "407",
+      "score_retired_culture_exam_exempt_raw": "63",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "计算机科学与技术|安徽工业经济职业技术学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "小学教育",
+      "notes_raw": "师范；与淮北职业技术学院联合培养",
+      "score_normal_raw": "448(专业课1:118.5)",
+      "score_registered_poor_family_raw": "446",
+      "score_retired_culture_exam_exempt_raw": "57.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "小学教育|淮北职业技术学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "电气工程及其自动化",
+      "notes_raw": "与淮北职业技术学院联合培养",
+      "score_normal_raw": "455(专业课1:142)",
+      "score_registered_poor_family_raw": "249.5",
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "电气工程及其自动化|淮北职业技术学院",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "环境设计",
+      "notes_raw": "与马鞍山师范高等专科学校联合培养",
+      "score_normal_raw": "407.66",
+      "score_registered_poor_family_raw": "408.66",
+      "score_retired_culture_exam_exempt_raw": "72.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "环境设计|马鞍山师范高等专科学校",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "计算机科学与技术",
+      "notes_raw": "与马鞍山师范高等专科学校联合培养",
+      "score_normal_raw": "405",
+      "score_registered_poor_family_raw": "262",
+      "score_retired_culture_exam_exempt_raw": "61",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "计算机科学与技术|马鞍山师范高等专科学校",
+        "table": 1
+      }
+    },
+    {
+      "major_name_raw": "食品质量与安全",
+      "notes_raw": "与马鞍山师范高等专科学校联合培养",
+      "score_normal_raw": "245.5(专业课1:73)",
+      "score_registered_poor_family_raw": "226.5",
+      "score_retired_culture_exam_exempt_raw": "50.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2026-LQ-EMBEDDED-PDF",
+        "page": 2,
+        "row_key": "食品质量与安全|马鞍山师范高等专科学校",
+        "table": 1
+      }
+    }
+  ],
+  "extracted_at": "2026-08-15T04:00:00+00:00",
+  "extraction_method": "manual_verified_from_official_pdf_table",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2026-LQ",
+  "source_school_id": "HFNU",
+  "source_year": "2026"
+}
