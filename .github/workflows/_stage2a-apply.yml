@@ -1,0 +1,343 @@
+name: Stage 2A HFNU Integration Apply
+
+on:
+  push:
+    branches:
+      - data/stage2a-hfnu-evidence-integration
+    paths:
+      - .github/workflows/_stage2a-apply.yml
+      - .stage2a_source_bundle.zip
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage2a-apply-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PYTHONUTF8: "1"
+      STAGE2A_LOG: /tmp/stage2a-apply.log
+      STAGE2A_SOURCE_BUNDLE_SHA256: dd761ecf9939125ca42ac0de1819e1dd6ab761c081d61ef6e620b9ed0d4a6cc1
+
+    steps:
+      - name: Checkout Stage 2A branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Verify current main and Stage 2A base
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          base="$(git merge-base HEAD origin/main)"
+          current_main="$(git rev-parse origin/main)"
+          echo "Stage 2A merge-base: ${base}"
+          echo "Current main: ${current_main}"
+          test "${base}" = "${current_main}"
+          test "$(grep '^schema_version=' anhui_zsb_data/VERSION | cut -d= -f2)" = "0.3.0"
+
+      - name: Install audited Stage 2A implementation bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          import os
+          import stat
+          import zipfile
+          from pathlib import Path, PurePosixPath
+
+          archive = Path('.stage2a_source_bundle.zip')
+          actual_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
+          expected_sha = os.environ['STAGE2A_SOURCE_BUNDLE_SHA256']
+          if actual_sha != expected_sha:
+              raise SystemExit(f'source bundle SHA mismatch: {actual_sha} != {expected_sha}')
+
+          allowed = {
+              'anhui_zsb_data/extract.py',
+              'anhui_zsb_data/config/stage2a_test_expectations.json',
+              'anhui_zsb_data/scripts/build_database.py',
+              'anhui_zsb_data/scripts/build_normalized.py',
+              'anhui_zsb_data/scripts/build_stage2a_hfnu_staging.py',
+              'anhui_zsb_data/scripts/common.py',
+              'anhui_zsb_data/scripts/generate_report.py',
+              'anhui_zsb_data/scripts/promote_hfnu_evidence.py',
+              'anhui_zsb_data/scripts/validate.py',
+              'anhui_zsb_data/tests/test_pipeline.py',
+              'anhui_zsb_data/tests/test_stage2a_hfnu.py',
+          }
+          with zipfile.ZipFile(archive) as bundle:
+              manifest = json.loads(bundle.read('MANIFEST.json'))
+              if manifest.get('schema_version') != 'stage2a-source-bundle-v1':
+                  raise SystemExit('unexpected source bundle schema')
+              entries = manifest.get('files', [])
+              declared = {str(item['path']) for item in entries}
+              if declared != allowed:
+                  raise SystemExit(f'source bundle path set mismatch: {sorted(declared ^ allowed)}')
+              if set(bundle.namelist()) != allowed | {'MANIFEST.json'}:
+                  raise SystemExit('source bundle ZIP members differ from manifest')
+
+              for info in bundle.infolist():
+                  if info.filename == 'MANIFEST.json':
+                      continue
+                  mode = (info.external_attr >> 16) & 0o170000
+                  if mode == stat.S_IFLNK:
+                      raise SystemExit(f'symbolic link forbidden: {info.filename}')
+
+              for entry in entries:
+                  relative = str(entry['path'])
+                  path = PurePosixPath(relative)
+                  if path.is_absolute() or '..' in path.parts:
+                      raise SystemExit(f'unsafe source bundle path: {relative}')
+                  data = bundle.read(relative)
+                  if len(data) != int(entry['size']):
+                      raise SystemExit(f'source bundle size mismatch: {relative}')
+                  if hashlib.sha256(data).hexdigest() != str(entry['sha256']):
+                      raise SystemExit(f'source bundle SHA mismatch: {relative}')
+                  target = Path(relative)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(data)
+
+          print(f'Stage 2A implementation bundle installed: {len(allowed)} files')
+          PY
+
+      - name: Generate Stage 2A inputs and canonical outputs
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            cp reports/stage2a_baseline.json config/stage2a_baseline.json
+            cp reports/stage2a_stable_ids_baseline.json config/stage2a_stable_ids_baseline.json
+            echo '===== promote_hfnu_evidence.py --apply ====='
+            python3 scripts/promote_hfnu_evidence.py --apply
+            echo '===== build_stage2a_hfnu_staging.py --apply ====='
+            python3 scripts/build_stage2a_hfnu_staging.py --apply
+            echo '===== first canonical build ====='
+            python3 run_pipeline.py
+          } 2>&1 | tee "${STAGE2A_LOG}"
+
+      - name: Enforce Stage 2A scope before testing
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- anhui_zsb_data/evidence anhui_zsb_data/schema anhui_zsb_data/VERSION
+          if find anhui_zsb_data/raw -type f -path '*AHUA*' -print -quit | grep -q .; then
+            echo "AHUA file found in canonical raw during Stage 2A"
+            exit 1
+          fi
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          state = json.loads(Path('anhui_zsb_data/progress/task_state.json').read_text(encoding='utf-8'))
+          batch_ready = state.get('batch_ready', state.get('stages', {}).get('batch_ready'))
+          if batch_ready is not False:
+              raise SystemExit('batch_ready must remain false')
+          if state.get('schema_version') != '0.3.0':
+              raise SystemExit('schema_version must remain 0.3.0')
+          if state.get('completed_schools'):
+              raise SystemExit('Stage 2A must not mark HFNU completed')
+          PY
+
+      - name: Validate promotion and generated staging
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo '===== promote_hfnu_evidence.py --check ====='
+            python3 scripts/promote_hfnu_evidence.py --check
+            echo '===== build_stage2a_hfnu_staging.py --check ====='
+            python3 scripts/build_stage2a_hfnu_staging.py --check
+          } 2>&1 | tee -a "${STAGE2A_LOG}"
+
+      - name: Run mandatory Stage 2A gates
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo '===== stage1_evidence_guard.py ====='
+            python3 scripts/stage1_evidence_guard.py
+            echo '===== verify_stage1_evidence.py ====='
+            python3 scripts/verify_stage1_evidence.py
+            echo '===== unittest ====='
+            python3 -m unittest discover -s tests -v
+            echo '===== idempotence ====='
+            PYTHONPATH=scripts python3 scripts/check_idempotence.py
+            echo '===== clean rebuild ====='
+            PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
+            echo '===== quality gate ====='
+            python3 scripts/run_quality_gate.py
+            echo '===== refresh reports from finalized local gates ====='
+            python3 run_pipeline.py
+          } 2>&1 | tee -a "${STAGE2A_LOG}"
+
+      - name: Enforce final invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- anhui_zsb_data/evidence anhui_zsb_data/schema anhui_zsb_data/VERSION
+          if find anhui_zsb_data/raw -type f -path '*AHUA*' -print -quit | grep -q .; then
+            echo "AHUA file found in canonical raw during Stage 2A"
+            exit 1
+          fi
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('anhui_zsb_data/reports/stage2a_hfnu_integration_report.json').read_text(encoding='utf-8'))
+          if report.get('schema', {}).get('modified') is not False:
+              raise SystemExit('Schema must remain unchanged')
+          if report.get('scope', {}).get('ahua_canonical_written') is not False:
+              raise SystemExit('AHUA must not enter canonical data in Stage 2A')
+          if report.get('scope', {}).get('batch_ready') is not False:
+              raise SystemExit('batch_ready must remain false')
+          if report.get('stable_id', {}).get('existing_id_drift_count') != 0:
+              raise SystemExit('existing stable ID drift detected')
+          if report.get('qa', {}).get('p0') != 0 or report.get('qa', {}).get('p1') != 0:
+              raise SystemExit('P0/P1 must both be zero')
+          if report.get('tests', {}).get('unit_tests') != {'status': 'PASS', 'count': 29}:
+              raise SystemExit('final integration report does not contain the completed 29-test result')
+          PY
+
+      - name: Commit Stage 2A implementation logic
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- \
+            anhui_zsb_data/extract.py \
+            anhui_zsb_data/config/stage2a_test_expectations.json \
+            anhui_zsb_data/scripts/build_database.py \
+            anhui_zsb_data/scripts/build_normalized.py \
+            anhui_zsb_data/scripts/build_stage2a_hfnu_staging.py \
+            anhui_zsb_data/scripts/common.py \
+            anhui_zsb_data/scripts/generate_report.py \
+            anhui_zsb_data/scripts/promote_hfnu_evidence.py \
+            anhui_zsb_data/scripts/validate.py
+          git commit -m "feat(pipeline): implement HFNU Stage 2A evidence integration"
+
+      - name: Commit Stage 2A regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- \
+            anhui_zsb_data/tests/test_pipeline.py \
+            anhui_zsb_data/tests/test_stage2a_hfnu.py
+          git commit -m "test(qa): validate Stage 2A provenance stability and rebuilds"
+
+      - name: Commit source and canonical asset promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- \
+            anhui_zsb_data/config/source_catalog.json \
+            anhui_zsb_data/config/source_assets.json \
+            anhui_zsb_data/config/stage2a_hfnu_asset_mapping.json \
+            anhui_zsb_data/raw \
+            anhui_zsb_data/raw_manifest.csv \
+            anhui_zsb_data/normalized/documents.csv \
+            anhui_zsb_data/normalized/source_documents.csv \
+            anhui_zsb_data/normalized/source_assets.csv \
+            anhui_zsb_data/normalized/sources.csv \
+            anhui_zsb_data/reports/stage2a_hfnu_asset_mapping.json \
+            anhui_zsb_data/reports/stage2a_hfnu_asset_mapping.md
+          git commit -m "data(source): promote audited HFNU evidence into canonical raw"
+
+      - name: Commit generated HFNU staging and canonical data
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- \
+            anhui_zsb_data/staging \
+            anhui_zsb_data/normalized/admission_scores.csv \
+            anhui_zsb_data/normalized/application_statistics.csv \
+            anhui_zsb_data/normalized/fact_sources.csv \
+            anhui_zsb_data/normalized/reference_books.csv \
+            anhui_zsb_data/normalized/syllabus.csv \
+            anhui_zsb_data/db/anhui_zsb.sqlite \
+            anhui_zsb_data/qa/missing_data.csv \
+            anhui_zsb_data/progress
+          git commit -m "data(canonical): rebuild HFNU Stage 2A facts and QA"
+
+      - name: Commit Stage 2A reproducibility fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- \
+            anhui_zsb_data/config/stage2a_baseline.json \
+            anhui_zsb_data/config/stage2a_stable_ids_baseline.json \
+            anhui_zsb_data/reports/clean_rebuild_report.json \
+            anhui_zsb_data/reports/idempotence_report.json \
+            anhui_zsb_data/reports/quality_gate_report.json \
+            anhui_zsb_data/reports/quality_gate_report.md \
+            anhui_zsb_data/reports/validation_report.json
+          git commit -m "test(qa): record Stage 2A rebuild and validation results"
+
+      - name: Commit Stage 2A reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- \
+            anhui_zsb_data/reports/batch_readiness_checklist.md \
+            anhui_zsb_data/reports/pilot_2_3_repair_report.md \
+            anhui_zsb_data/reports/pilot_report.md \
+            anhui_zsb_data/reports/stage2a_hfnu_application_plan_reconciliation.json \
+            anhui_zsb_data/reports/stage2a_hfnu_application_plan_reconciliation.md \
+            anhui_zsb_data/reports/stage2a_hfnu_integration_report.json \
+            anhui_zsb_data/reports/stage2a_hfnu_integration_report.md
+          git commit -m "docs(report): document HFNU Stage 2A integration"
+
+      - name: Confirm generated changes are fully committed and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git status --porcelain)"
+          if [[ -n "${unexpected}" ]]; then
+            echo "Unexpected uncommitted Stage 2A files:"
+            echo "${unexpected}"
+            exit 1
+          fi
+          git log --oneline -8
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload Stage 2A execution evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: stage2a-hfnu-integration
+          path: |
+            /tmp/stage2a-apply.log
+            anhui_zsb_data/config/stage2a_baseline.json
+            anhui_zsb_data/config/stage2a_hfnu_asset_mapping.json
+            anhui_zsb_data/config/stage2a_stable_ids_baseline.json
+            anhui_zsb_data/reports/stage2a_baseline.json
+            anhui_zsb_data/reports/stage2a_baseline.md
+            anhui_zsb_data/reports/stage2a_hfnu_asset_mapping.json
+            anhui_zsb_data/reports/stage2a_hfnu_asset_mapping.md
+            anhui_zsb_data/reports/stage2a_hfnu_application_plan_reconciliation.json
+            anhui_zsb_data/reports/stage2a_hfnu_application_plan_reconciliation.md
+            anhui_zsb_data/reports/stage2a_hfnu_integration_report.json
+            anhui_zsb_data/reports/stage2a_hfnu_integration_report.md
+            anhui_zsb_data/reports/quality_gate_report.json
+            anhui_zsb_data/reports/quality_gate_report.md
+          if-no-files-found: warn
+          retention-days: 30
