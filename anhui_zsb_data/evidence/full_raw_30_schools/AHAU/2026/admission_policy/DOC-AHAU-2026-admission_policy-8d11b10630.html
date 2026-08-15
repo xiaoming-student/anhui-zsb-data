@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>安徽农业大学2026年本科招生章程-安徽农业大学-招生信息网本科</title><meta name="pageType" content="3">
+<meta name="pageTitle" content="安徽农业大学2026年本科招生章程">
+<META Name="keywords" Content="安徽农业大学-招生信息网本科,通知公告,章程,招生,本科,安徽,农业大学" />
+<META Name="description" Content="一、学校全称安徽农业大学（院校标识码：4134010364）。二、办学层次和类型公办普通本科高校，安徽省“地方特色高水平”大学建设高校，安徽省人民政府与农业农村部、国家林业和草原局合作共建高校。三、办学地址和联系方式地址：安徽省合肥市长江西路130号   邮编：230036电话：0551-65786603、65786135邮箱：zsb@ahau.edu.cn网址：https://www.ahau.edu.cn（安徽农业大学官网）https://zsb.ahau.edu.cn（安徽农业大学本科招生信息网）..." />
+
+    <link type="text/css" rel="stylesheet" href="../../assets/css/style.css">
+    <link type="text/css" rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script type="text/javascript" src="../../js/min.js"></script>
+    <script type="text/javascript" src="../../js/slider.js"></script>
+
+<!--Announced by Visual SiteBuilder 9-->
+<link rel="stylesheet" type="text/css" href="../../_sitegray/_sitegray_d.css" />
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:776562626572323076784752525a5742000200004050 -->
+<link rel="stylesheet" type="text/css" href="../../content.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/vsbscreen.min.js" id="_vsbscreen" devices="pc|pad"></script>
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1028,'/content.jsp',12044,1877718840)</script>
+</head>
+<body>
+         <header class="header">
+            <div class="top">
+                <div class="logo">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" title="211教务处-本科招生信息网"><img src="../../images/logo_zsw_new.png" /></a></div>
+                <div class="top_right">
+                    <div class="rig_nav">
+                        <script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script>
+                    </div>
+                    <div class="search">
+                        
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><div id="divu2"></div>
+<script type="text/html" id="htmlu2">
+    <div id="appu2">
+        <div v-if="!isError" class="input">
+        <span class="sear_ico"></span>
+            <input type="text"  v-model=query.keyWord @keyup.enter="onSubmit">
+        </div>
+        <button v-on:click="onSubmit()">搜索</button>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu2").html($("#htmlu2").text());
+</script>
+<script>
+    var appOwner = "1877718840";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu2",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "https://bdcmsdynamic.ahau.edu.cn/" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="nav">
+            <UL class="nav_con">
+        <LI><A href="../../index.htm">招生首页</A>
+    </LI>
+    <LI><A href="https://www.ahau.edu.cn/xxgk/xxjj.htm">学校概况</A>
+    <UL>
+      <LI><A href="https://www.ahau.edu.cn/xxgk/xxjj.htm">学校简介</A></LI>
+      <LI><A href="https://www.ahau.edu.cn/xxgk/lsyg.htm">历史沿革</A></LI>
+      <LI><A href="../../xxgk/zsld.htm">招生亮点</A></LI>
+      <LI><A href="../../xxgk/jyqk.htm">就业情况</A></LI>
+      <LI><A href="../../xxgk/ssbsd.htm">硕士博士点</A></LI>
+      <LI><A href="../../xxgk/yzsyjd.htm">优质生源基地</A></LI>
+    </UL>
+    </LI>
+    <LI><A href="../../xwzx/zsdt.htm">新闻资讯</A>
+    <UL>
+      <LI><A href="../../xwzx/zsdt.htm">招生动态</A></LI>
+      <LI><A href="../../xwzx/xyxw.htm">校园新闻</A></LI>
+    </UL>
+    </LI>
+    <LI><A id="current" href="../../tzgg.htm">通知公告</A>
+    </LI>
+    <LI><A href="../../xxcx.htm">信息查询</A>
+    <UL>
+      <LI><A href="../../xxcx/zszc.htm">招生章程</A></LI>
+      <LI><A href="../../xxcx/zsjh.htm">招生计划</A></LI>
+      <LI><A href="http://app.ahau.edu.cn/recruit/public/zscx.jsp">录取信息</A></LI>
+      <LI><A href="http://app.ahau.edu.cn/recruit/public/zsxsxxCountSearchMobile.jsp">历年分数</A></LI>
+    </UL>
+    </LI>
+    <LI><A href="../../zszx.htm">招生咨询</A>
+    <UL>
+      <LI><A href="https://answer.eol.cn/fillmess/index?id=649&source=gw_pc">智能问答</A></LI>
+      <LI><A href="../../zszx/zxdh.htm">咨询电话</A></LI>
+      <LI><A href="https://app.ahau.edu.cn/zsbbm/public/zsbxscjView.jsp?bh=20260412020524103884198">报名系统</A></LI>
+      <LI><A href="https://zsb.ahau.edu.cn/info/1028/11744.htm">材料收集</A></LI>
+    </UL>
+    </LI>
+    <LI><A href="../../zdxy.htm">直达学院</A>
+    <UL>
+      <LI><A href="https://gaokaobang.360eol.com/rector/ahau/index.html">资讯平台</A></LI>
+      <LI><A href="http://www.ahau.edu.cn/yxbm/jxdw.htm">学院官网</A></LI>
+      <LI><A href="../../zdxy/zyjj.htm">专业简介</A></LI>
+    </UL>
+    </LI>
+    <LI><A href="../../zjan.htm">走进安农</A>
+    <UL>
+      <LI><A href="../../zjan/xcsp.htm">宣传视频</A></LI>
+      <LI><A href="../../zjan/xxfg.htm">学校风光</A></LI>
+      <LI><A href="../../zjan/xysh.htm">校园生活</A></LI>
+      <LI><A href="../../zjan/ssfc.htm">师生风采</A></LI>
+    </UL>
+    </LI>
+    <LI><A href="../../lxwm.htm">联系我们</A>
+    </LI>
+    </UL>
+        </div>
+<div class="clearfix"></div>
+
+
+<div class="w">
+    <div class="Route">
+
+
+                
+        <li>
+
+                <a href="../../index.htm">招生首页</a>
+            
+            </li>
+        
+        <li>
+               &nbsp;&nbsp;&gt;&nbsp;&nbsp;            
+                <a href="../../tzgg.htm">通知公告</a>
+            
+            </li>
+        
+        <li>
+               &nbsp;&nbsp;&gt;&nbsp;&nbsp;            
+                正文
+            
+            </li>
+</div>
+    
+    <div class="clearfix"></div>
+
+    <div class="container_left fl mr20">
+            
+        
+        <!--二级侧栏开始-->
+ <div style="text-align:center;background:#1093d5;width:255px;height:45px;font-size:18px;margin-top:20px;margin-bottom:10px;line-height:45px;"> 
+      
+ <span style="padding-top:10px;color:white;">通知公告</span>
+           </div>  
+
+
+        <div id="content">
+            
+            <ul id="expmenu-freebie">
+                <li>
+                    <!-- Start Freebie -->
+                    <ul class="expmenu">
+
+
+  </ul>
+                    <!-- End Freebie -->
+                </li>
+            </ul>
+        </div>
+        <!--二级侧栏结束-->
+        
+    </div>
+    
+    <div class="container_right fr mb20">
+    
+
+<script language="javascript" src="../../_dwr/interface/NewsvoteDWR.js"></script><script language="javascript" src="../../_dwr/engine.js"></script><script language="javascript" src="/system/resource/js/news/newscontent.js"></script><script language="javascript" src="/system/resource/js/ajax.js"></script><form name="_newscontent_fromname">
+
+<div class="container_right_title2">
+            <h3 style="font-family:微软雅黑; font-size:18px;">安徽农业大学2026年本科招生章程</h3>
+            <p>发布日期：2026-05-22&nbsp;&nbsp;&nbsp;&nbsp;浏览次数：<script>_showDynClicks("wbnews", 1877718840, 12044)</script></p>
+        </div>
+
+
+
+   
+    <div id="vsb_content" class="mt10 gray2"><div class="v_news_content">
+<p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">一、学校全称</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px"><span style="font-family:宋体">安徽农业大学（院校标识码：</span><span style="font-family:宋体">4134010364）。</span></span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">二、办学层次和类型</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">公办普通本科高校，安徽省“地方特色高水平”大学建设高校，安徽省人民政府与农业农村部、国家林业和草原局合作共建高校。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">三、办学地址和联系方式</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">地址：安徽省合肥市长江西路130号 &nbsp; </span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">邮编：230036</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">电话：0551-65786603、65786135</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">邮箱：zsb@ahau.edu.cn</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">网址：</span><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">https://www.ahau.edu.cn</span><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">（安徽农业大学官网）</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">https://zsb.ahau.edu.cn（安徽农业大学本科招生信息网）</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">四、录取规则</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">1. 学校按照公平、公正、公开、择优录取的原则，参照各省份录取有关规定，按照“分数优先、遵循志愿”规则，依据考生投档成绩从高分到低分择优录取，专业之间不设级差，同分考生按各省同分位次排序录取。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">2. 艺术类专业考生，专业成绩使用生源省份专业统考成绩，认可生源省份投档规则，学校对进档考生按照投档成绩从高分到低分择优录取。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">3. 我校不限考生应试外语语种。非外语语言类专业学生入学后可选择英语、俄语、日语、法语等语种中一种作为大学外语课程修读。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">五、入学资格复查</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">新生入学后，学校在三个月内进行全面复查（包括入学资格审查和体检等）。复查不合格者，按照教育部和我校有关规定进行处理。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">六、证书颁发</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">学生完成本专业人才培养方案规定的学习内容、成绩合格符合毕业条件的，由安徽农业大学颁发全日制普通高等学校本科学历证书；符合安徽农业大学学士学位授予条件的，由安徽农业大学授予学士学位。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">七、学费标准</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">按照安徽省发展和改革委员会、安徽省财政厅和安徽省教育厅现行文件标准执行。收费标准如有变动，以安徽省发展和改革委员会颁布的最新收费标准执行。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">八、相关政策</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">1.转专业政策：学校实施宽松的转专业政策，学生入学后第一学期末可申请转专业（专升本、艺术类、中外合作及定向培养专业除外），具体事宜按学校当年转专业文件执行。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">2.奖助政策：学校健全“奖、贷、助、补、免、勤”保障型资助体系，通过国家奖学金、国家励志奖学金、国家助学金、专业奖学金、社会资助、生源地信用助学贷款、临时困难补助、学费减免、勤工助学、新生入学资助等多项资助政策，精准对接家庭经济困难学生需求，保障学生顺利完成学业；搭建学生发展支持项目、公益助学活动等发展型资助育人平台，多元助力学生全面发展。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><span style="color: rgb(51, 51, 51); letter-spacing: 0px; font-size: 19px; font-family: 宋体;">3.主辅修政策：学校实行学分制教学管理制度，学生修满规定学分，成绩合格的可提前一年毕业。学校实行主辅修制，鼓励学生辅修本专业以外的其他专业，学生修满规定课程学分后，学校颁发相应专业的辅修学位证书。</span></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">九、以上内容如有变动，以教育部、各省级招生主管部门最新文件为准。</span></strong></p><p style="text-indent: 28px;padding: 0;line-height: 37px"><strong><span style="color: rgb(51, 51, 51);letter-spacing: 0;font-size: 19px">十、本章程由安徽农业大学本科生院负责解释。</span></strong></p><p><br></p>
+</div></div><div id="div_vote_id"></div>
+       
+</form>
+
+  </div>  
+</div>
+
+
+
+<div class="clearfix"></div>
+
+
+ <div class="foot">
+
+
+                    <!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>地址：安徽省合肥市长江西路130号 &nbsp;邮编：230036<br />联系电话：0551—65786603 监督电话：0551-65786116 邮箱：zsb@ahau.edu.cn</p><p><br /></p>
+ 
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

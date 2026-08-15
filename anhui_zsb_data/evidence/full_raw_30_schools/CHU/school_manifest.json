@@ -1,0 +1,72 @@
+{
+  "school_id": "CHU",
+  "school_name": "巢湖学院",
+  "official_domains": [
+    "chu.edu.cn"
+  ],
+  "sources": [],
+  "assets": [],
+  "failures": [
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "year": 2024,
+      "url": "https://www.chu.edu.cn/zsw/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.chu.edu.cn\\', port=443): Max retries exceeded with url: /zsw/ (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.chu.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "year": 2024,
+      "url": "https://www.chu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.chu.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.chu.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "year": 2025,
+      "url": "https://www.chu.edu.cn/zsw/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.chu.edu.cn\\', port=443): Max retries exceeded with url: /zsw/ (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.chu.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "year": 2025,
+      "url": "https://www.chu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.chu.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.chu.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "year": 2026,
+      "url": "https://www.chu.edu.cn/zsw/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.chu.edu.cn\\', port=443): Max retries exceeded with url: /zsw/ (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.chu.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "year": 2026,
+      "url": "https://www.chu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.chu.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.chu.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    }
+  ],
+  "sanitized": true
+}

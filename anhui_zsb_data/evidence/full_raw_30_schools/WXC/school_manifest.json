@@ -1,0 +1,72 @@
+{
+  "school_id": "WXC",
+  "school_name": "皖西学院",
+  "official_domains": [
+    "wxc.edu.cn"
+  ],
+  "sources": [],
+  "assets": [],
+  "failures": [
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2024,
+      "url": "https://www.wxc.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://www.wxc.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://www.wxc.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+    }
+  ],
+  "sanitized": true
+}

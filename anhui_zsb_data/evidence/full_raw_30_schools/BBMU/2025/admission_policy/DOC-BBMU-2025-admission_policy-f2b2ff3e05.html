@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <title>招生动态-招生信息网</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="招生动态">
+<META Name="keywords" Content="招生信息网,招生动态" />
+
+    <link rel="stylesheet" type="text/css" href="../../css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/banner.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/h5.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+     <link rel="stylesheet" type="text/css" href="../../css/layouts.css" />
+  <!--Announced by Visual SiteBuilder 9-->
+<link rel="stylesheet" type="text/css" href="../../_sitegray/_sitegray_d.css" />
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307678475353515742000300004156 -->
+<link rel="stylesheet" type="text/css" href="../../list.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1006,'/list.jsp',-1,1938110186)</script>
+</head>
+  <body>
+      <!-- 头部 -->
+    <div class="header clearfix">
+      <div class="container clearfix">
+        <div class="logo fl">
+
+
+
+<a href="../../index.htm" title="招生信息网">
+    <img src="../../images/logo.png" />
+  </a></div>
+        <div class="head_fr fr">
+          <div class="top_l clearfix">
+            <div class="search fr">
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><style>
+    #appu1 .qwss{
+        height: 31px;
+        font-size: 12px;
+        min-width: 190px;
+        max-width: 600px;
+        width: 60%;
+        margin-top: -15px;
+        outline: none;
+        padding-left: 10px;
+        border-radius: 2px;
+        border: 1px solid #e4e7ed;}
+    #appu1 .tj{
+        padding-left: 6px;
+        letter-spacing: 5px;
+        color: white;
+        min-width: 53px;
+        max-width: 150px;
+        height: 32px;
+        border: 0;
+        border-radius: 2px;
+        background-color: #1890FF;
+        position: relative;
+        top: 1px;
+        width: 20%;
+        margin-top: -15px;}
+</style>
+<div id="divu1"></div>
+<script type="text/html" id="htmlu1">
+    <div id="appu1">
+        <div v-if="!isError">
+            <input type="text" class="text" placeholder="请输入关键词" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+            <input type="submit" value="" class="submit" v-on:click="onSubmit()"/>
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu1").html($("#htmlu1").text());
+</script>
+<script>
+    var appOwner = "1938110186";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu1",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script></div>
+          </div>
+          <div class="nav clearfix">
+           <ul class="clearfix ul1">
+            <li class="">
+            <a href="../../index.htm" title="学校首页">学校首页</a>
+        </li>
+        <li class="active">
+            <a href="../../zsxx.htm" title="招生信息">招生信息</a>
+                     <ol>
+                            <li>
+                                <a href="../zsdt.htm" title="招生动态">招生动态</a>
+                            </li>
+                            <li>
+                                <a href="../zszc.htm" title="招生政策">招生政策</a>
+                            </li>
+                            <li>
+                                <a href="../zsjh.htm" title="招生计划">招生计划</a>
+                            </li>
+                    </ol>
+        </li>
+        <li class="">
+            <a href="../../lnsj.htm" title="历年数据">历年数据</a>
+                     <ol>
+                            <li>
+                                <a href="../../lnsj/bkzssj.htm" title="本科招生数据">本科招生数据</a>
+                            </li>
+                            <li>
+                                <a href="../../lnsj/crgdjyzssj.htm" title="成人高等教育招生数据">成人高等教育招生数据</a>
+                            </li>
+                    </ol>
+        </li>
+        <li class="">
+            <a href="../../zyjs.htm" title="专业介绍">专业介绍</a>
+                     <ol>
+                            <li>
+                                <a href="../../zyjs/ptjybkzy.htm" title="普通教育本科专业">普通教育本科专业</a>
+                            </li>
+                            <li>
+                                <a href="../../zyjs/crgdjybkzy.htm" title="成人高等教育本科专业">成人高等教育本科专业</a>
+                            </li>
+                    </ol>
+        </li>
+        <li class="">
+            <a href="../../lqcx.htm" title="录取查询">录取查询</a>
+        </li>
+</ul>
+
+<ul class="clearfix ul2">
+        <li class="">
+            <a href="../../index.htm" title="学校首页">学校首页</a>
+                <i></i>
+                <ol>
+                        <li>
+                            <a href="../../index/xyhj.htm" title="校园环境">校园环境</a>
+                        </li>
+                        <li>
+                            <a href="../../index/xsfc.htm" title="学生风采">学生风采</a>
+                        </li>
+                        <li>
+                            <a href="../../index/tmgzzl.htm" title="推免工作专栏">推免工作专栏</a>
+                        </li>
+                        <li>
+                            <a href="../../index/ewm.htm" title="二维码">二维码</a>
+                        </li>
+                   
+                  
+                </ol>
+        </li>
+        <li class="active">
+            <a href="../../zsxx.htm" title="招生信息">招生信息</a>
+                <i></i>
+                <ol>
+                        <li>
+                            <a href="../zsdt.htm" title="招生动态">招生动态</a>
+                        </li>
+                        <li>
+                            <a href="../zszc.htm" title="招生政策">招生政策</a>
+                        </li>
+                        <li>
+                            <a href="../zsjh.htm" title="招生计划">招生计划</a>
+                        </li>
+                   
+                  
+                </ol>
+        </li>
+        <li class="">
+            <a href="../../lnsj.htm" title="历年数据">历年数据</a>
+                <i></i>
+                <ol>
+                        <li>
+                            <a href="../../lnsj/bkzssj.htm" title="本科招生数据">本科招生数据</a>
+                        </li>
+                        <li>
+                            <a href="../../lnsj/crgdjyzssj.htm" title="成人高等教育招生数据">成人高等教育招生数据</a>
+                        </li>
+                   
+                  
+                </ol>
+        </li>
+        <li class="">
+            <a href="../../zyjs.htm" title="专业介绍">专业介绍</a>
+                <i></i>
+                <ol>
+                        <li>
+                            <a href="../../zyjs/ptjybkzy.htm" title="普通教育本科专业">普通教育本科专业</a>
+                        </li>
+                        <li>
+                            <a href="../../zyjs/crgdjybkzy.htm" title="成人高等教育本科专业">成人高等教育本科专业</a>
+                        </li>
+                   
+                  
+                </ol>
+        </li>
+        <li class="">
+            <a href="../../lqcx.htm" title="录取查询">录取查询</a>
+        </li>
+              
+</ul>
+          </div>
+          <!-- <div class="search_an"><img src="images/icon_sc_new2.png" /></div> -->
+          <div class="menu"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+    <!-- 内页banner -->
+    <div class="ny_banner">
+        <script language="javascript" src="/system/resource/js/dynclicks.js"></script>
+        
+                
+                        <a href="#" title="" onclick="_addDynClicks(&#34;wbimage&#34;, 1938110186, 74880)" target="_blank">
+                            <img src="../../images/nybanner.jpg" border="0">
+                        </a>  
+                
+        
+
+   </div>
+    
+    <!-- 内容区 -->
+    <main>
+        <div class="w1400 clearfix">
+            <div class="left_dh fl">
+                
+<h2>招生信息</h2>
+<h3>招生信息</h3>
+                <ul>
+
+
+
+<li><a href="../zsdt.htm" title="招生动态" class="hover">招生动态</a></li>
+                    
+<li><a href="../zszc.htm" title="招生政策" class="">招生政策</a></li>
+                    
+<li><a href="../zsjh.htm" title="招生计划" class="">招生计划</a></li>
+                    
+</ul>
+            </div>
+            <div class="right_con fr">
+                  <div class="dqwz clearfix">
+                     
+    您当前所在位置：
+                        <a href="../../index.htm">学校首页</a>
+                <i>&gt;</i>
+                <a href="../../zsxx.htm">招生信息</a>
+                <i>&gt;</i>
+                <a href="../zsdt.htm">招生动态</a>
+
+
+
+
+                 </div>
+                <div class="list"><script language="javascript" src="/system/resource/js/centerCutImg.js"></script><script language="javascript" src="/system/resource/js/ajax.js"></script><ul>
+            <li>
+            <a href="../../info/1006/3002.htm" target="_blank" title="蚌埠医科大学2025年普通本科招生计划">
+                <p class="time"><span>06-25</span>2025</p>
+                <p class="con">
+                    <span class="tit">蚌埠医科大学2025年普通本科招生计划</span>
+                    <span class="txt">蚌埠医科大学2025年普通本科分专业招生计划（安徽省）普通类（历史科目类）录取批次专业组别专业名称招生计划选考科目计划性质普通本科批001专业组(不限)应用心理学10历史+不限普通本科批健康服务与管理30历史+不限普通类（物理科目类）录取批次专业组别专业名称招生计划选考科目计划性质普通本科提前批 001专业组(化学)临床医学80物理+化学国家免费医学生普通本科提前批 口腔医学10物理+化学地方免费医学生国家专项计划002专业组(化学)...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2992.htm" target="_blank" title="蚌埠医科大学2025年第二学士学位招生章程">
+                <p class="time"><span>06-17</span>2025</p>
+                <p class="con">
+                    <span class="tit">蚌埠医科大学2025年第二学士学位招生章程</span>
+                    <span class="txt">一、学校全称：蚌埠医科大学二、办学层次：本科三、办学类型：公办普通高等学校四、办学地址：蚌埠市东海大道2600号五、招生专业及计划：专业名称招生计划学制学费（元/年）制药工程152学费按照省物价主管部门核准的标准收费，学费标准与普通本科相应专业学费标准相同信息管理与信息系统152六、报名条件普通高校本科毕业并获得学士学位的应届毕业生，以及近三年普通高校本科毕业并获得学士学位、目前未就业的往届生。同时具备以下条件：...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2972.htm" target="_blank" title="关于我校2025年普通专升本拟录取结果查询的通知">
+                <p class="time"><span>05-23</span>2025</p>
+                <p class="con">
+                    <span class="tit">关于我校2025年普通专升本拟录取结果查询的通知</span>
+                    <span class="txt">各位考生：我校根据安徽省2025年普通专升本招生录取相关政策和《蚌埠医科大学2025年普通高校专升本招生章程》中公布的录取原则完成招生录取工作，所有计划均已完成，不接受校外调剂。经我校2025年普通专升本招生工作领导小组集体审议通过，现将各专业录取最低分予以公布，请各位考生于5月23日-5月27日登录我校录取查询系统（https://zhuanshengben.bbmu.edu.cn/）查询拟录取结果。登录名：身份证号，密码：身份证号后六位。拟录取结果查询期间如有异议，...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2962.htm" target="_blank" title="关于收集2025年硕士研究生拟录取考生现用收件信息的通知">
+                <p class="time"><span>05-21</span>2025</p>
+                <p class="con">
+                    <span class="tit">关于收集2025年硕士研究生拟录取考生现用收件信息的通知</span>
+                    <span class="txt">各位拟录取考生：  因部分考生反映本人手机号码、档案所在单位、收件地址等信息发生变更，为不影响后续收取调档函及录取通知书，请需要修改信息的考生统一于5月27日之前使用微信扫描如下二维码自行修改并提交（请勿重复提交）。初试报名时填写信息不变的考生无需提交。</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2952.htm" target="_blank" title="蚌埠医科大学2025年本科招生章程">
+                <p class="time"><span>05-15</span>2025</p>
+                <p class="con">
+                    <span class="tit">蚌埠医科大学2025年本科招生章程</span>
+                    <span class="txt">一、学校全称：蚌埠医科大学二、办学层次：本科三、办学类型：公办普通本科高校四、办学地址：安徽省蚌埠市东海大道2600号五、录取规则及要求：1.根据《教育部关于做好2025年普通高校招生工作的通知》（教学【2025】1号）及有关省（区）的各项招生政策和规定，遵循“公平竞争、公正选拔、公开程序，德智体美劳全面考核、综合评价、择优录取”的原则进行招生录取工作。2.2025年学校面向全国招收全日制普通本科生，高考综合改革省（区）...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2942.htm" target="_blank" title="关于公布我校2025年普通专升本成绩复查结果的通知">
+                <p class="time"><span>04-30</span>2025</p>
+                <p class="con">
+                    <span class="tit">关于公布我校2025年普通专升本成绩复查结果的通知</span>
+                    <span class="txt">各位考生：        我校2025年普通专升本成绩复查工作已经结束，共有27人次考生提出了复查申请，我校组织专人在纪委监督下进行核查，经查，所有科目成绩无误。      特此通知。蚌埠医科大学招生办公室2025年4月30日</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2932.htm" target="_blank" title="蚌埠医科大学2025年普通专升本专业课成绩查询通知">
+                <p class="time"><span>04-25</span>2025</p>
+                <p class="con">
+                    <span class="tit">蚌埠医科大学2025年普通专升本专业课成绩查询通知</span>
+                    <span class="txt">各位考生：请于4月25日下午14：30—4月28日下午14：00登录查询系统（网址：https://zhuanshengben.bbmu.edu.cn/）查询专业课考试成绩。登录系统用户名为身份证号，原始密码为身份证号末六位。如考生对自己的成绩有异议，请于4月28日下午14:30之前将考生本人身份证、查分申请表电子版以及亲笔签字的查分申请表拍成照片以附件的形式发送至我校招生办电子邮箱：bbmczsk@126.com，邮件标题命名为“考生姓名+专升本查分申请”，逾期不予受理。...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2922.htm" target="_blank" title="蚌埠医科大学2025年硕士研究生拟录取名单公示">
+                <p class="time"><span>04-24</span>2025</p>
+                <p class="con">
+                    <span class="tit">蚌埠医科大学2025年硕士研究生拟录取名单公示</span>
+                    <span class="txt">各位考生：经我校硕士研究生招生工作领导小组审议通过，现将我校2025年硕士研究生拟录取名单予以公示，公示时间：4月24日至5月1日，如有异议，请及时反馈至我校。公示结束后，我校将陆续公布调档案等相关通知，请各位考生耐心等待，随时关注招生信息网发布的信息，保持手机畅通。联系电话：0552-3178336监督电话：0552-3175335附件：蚌埠医科大学2025年硕士研究生拟录取名单考生编号姓名专业代码专业名称研究方向初试总分复试成绩录取总成绩备注102855210001003武美辰045200体育不区分研究方向34189....</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2902.htm" target="_blank" title="关于我校2025年硕士研究生待录取考生提交体检报告和定向协议等材料的通知">
+                <p class="time"><span>04-21</span>2025</p>
+                <p class="con">
+                    <span class="tit">关于我校2025年硕士研究生待录取考生提交体检报告和定向协议等材料的通知</span>
+                    <span class="txt">各位考生：根据教育部、安徽省相关文件要求，现将待录取（含递补待录取）考生体检、签订定向协议等事宜通知如下：一、体检工作请所有待录取（含递补待录取）考生持《蚌埠医科大学2025年硕士研究生招生考生体格检查表》到当地二级甲等及以上医院进行体检，如医院不同意使用我校模板，可使用医院体检表格，但我校体检表格上的项目必须都要涵盖，尤其是色觉检查，不得缺项漏项。考生体检结束后将加盖公章的个人体检报告材料扫描成PDF格式打包压缩，...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+        <li>
+            <a href="../../info/1006/2892.htm" target="_blank" title="蚌埠医科大学2025年硕士研究生调剂考生复试结果（第三轮调剂）">
+                <p class="time"><span>04-21</span>2025</p>
+                <p class="con">
+                    <span class="tit">蚌埠医科大学2025年硕士研究生调剂考生复试结果（第三轮调剂）</span>
+                    <span class="txt">根据《蚌埠医科大学2025年硕士研究生招生复试录取办法》第五章第二十一条规定，结合我校第三轮调剂生源具体情况，经学校领导小组集体审议通过，将部分专业招生计划进行相应调整，现将待录取情况公布如下：考生编号姓名专业代码专业名称研究方向外国语政治理论业务课1业务课2总分专业知识英语水平综合素质复试成绩录取总成绩复试结果备注104145045201174龙茂坤045200体育不区分研究方向3758243033878.667 66.667 78.333 76.200 71.040 ...</span>
+                </p>
+                <p class="more">查看更多</p>
+            </a>
+        </li>
+</ul>
+<link rel="stylesheet" Content-type="text/css" href="/system/resource/css/pagedown/sys.css"><div class="pb_sys_common pb_sys_normal pb_sys_style1" style="margin-top:30px;text-align:center;"><span class="p_pages"><span class="p_first p_fun"><a href="../zsdt.htm">首页</a></span><span class="p_prev p_fun"><a href="62.htm">上页</a></span><span class="p_no"><a href="../zsdt.htm">1</a></span><span class="p_dot">...</span><span class="p_no"><a href="63.htm">3</a></span><span class="p_no"><a href="62.htm">4</a></span><span class="p_no_d">5</span><span class="p_no"><a href="60.htm">6</a></span><span class="p_no"><a href="59.htm">7</a></span><span class="p_dot">...</span><span class="p_no"><a href="1.htm">65</a></span><span class="p_next p_fun"><a href="60.htm">下页</a></span><span class="p_last p_fun"><a href="1.htm">尾页</a></span></span></div><script>_showDynClickBatch(['dynclicks_u7_3002','dynclicks_u7_2992','dynclicks_u7_2972','dynclicks_u7_2962','dynclicks_u7_2952','dynclicks_u7_2942','dynclicks_u7_2932','dynclicks_u7_2922','dynclicks_u7_2902','dynclicks_u7_2892'],[3002,2992,2972,2962,2952,2942,2932,2922,2902,2892],"wbnews", 1938110186)</script></div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 尾部 -->
+    <div class="footer">
+      <div class="footer_top">
+        <ul>
+          <li class="footer_top_left">    
+         
+                <td>
+                        <a href="../../index.htm" title="" onclick="_addDynClicks(&#34;wbimage&#34;, 1938110186, 74878)" target="_blank">
+                            <img src="../../images/logo.png" border="0">
+                        </a>  
+         
+      
+
+
+
+</li>
+          <li class="footer_top_reight">
+            <div class="footer_top_reight_l">    
+        <img src="../../images/36534bf5-d0b8-4900-8603-c752558f84f711.png" border="0" />
+        <p></p>
+</div>
+            <div class="footer_top_reight_r"><script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<p>热线：0552-3178336　</p>
+<p>邮箱：bbmugzb@bbmu.edu.cn</p>
+<p>地址：安徽省蚌埠市东海大道2600号　</p>
+<p>邮编：233030</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="footer_btm"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>copyright © 蚌埠医科大学招生信息网
+ &nbsp; &nbsp; &nbsp; &nbsp;版权所有　<a href="https://beian.miit.gov.cn/" target="_blank">皖ICP证06000434号</a>　皖公安网备34030002000596号</p></div>
+    </div>
+  </body>
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../js/slick.js"></script>
+  <script type="text/javascript" src="../../js/base.js"></script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
