@@ -1,0 +1,65 @@
+name: P0 Reader Transport Probe
+
+on:
+  push:
+    branches:
+      - agent/data-p0-batch-01-targeted
+    paths:
+      - .github/workflows/p0-reader-transport-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p0-reader-transport-probe-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/data-p0-batch-01-targeted
+          fetch-depth: 0
+
+      - name: Fetch rendered official-page snapshots through reader transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT='anhui_zsb_data/evidence/full_raw_30_schools/_acquisition_reports/p0_batch_01/reader_probe'
+          mkdir -p "$OUT"
+          curl --fail --location --retry 2 --retry-all-errors --connect-timeout 15 --max-time 150 \
+            -H 'X-Respond-With: html' \
+            -H 'X-With-Links-Summary: all' \
+            'https://r.jina.ai/https://www.ahszu.edu.cn/zs/info/1062/8249.htm' \
+            -o "$OUT/AHSZU-2026-8249.reader.html"
+          curl --fail --location --retry 2 --retry-all-errors --connect-timeout 15 --max-time 150 \
+            -H 'X-Respond-With: markdown' \
+            'https://r.jina.ai/https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf' \
+            -o "$OUT/WXC-2025-exam-subjects-reference-books.reader.md"
+          grep -q '2026年普通高校专升本拟招生' "$OUT/AHSZU-2026-8249.reader.html"
+          grep -q '2025年皖西学院专升本招生专业考试科目及参考书目' "$OUT/WXC-2025-exam-subjects-reference-books.reader.md"
+          test "$(wc -c < "$OUT/AHSZU-2026-8249.reader.html")" -gt 1000
+          test "$(wc -c < "$OUT/WXC-2025-exam-subjects-reference-books.reader.md")" -gt 1000
+          sha256sum "$OUT"/* > "$OUT/SHA256SUMS"
+          cat > "$OUT/README.md" <<'EOF'
+          # Reader transport probe
+
+          These files are rendered/extracted snapshots of official URLs fetched through the Jina Reader transport because the GitHub-hosted runner could not establish TCP connections to the official school hosts.
+
+          They are **not** the original server bytes and must not be labeled as raw official files. Use `source_level=secondary_transport_snapshot`; retain the original official URL and keep the raw-file status as `manual_download_required` or `access_restricted` until the original bytes are acquired.
+          EOF
+
+      - name: Commit successful probe snapshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anhui_zsb_data/evidence/full_raw_30_schools/_acquisition_reports/p0_batch_01/reader_probe
+          git commit -m 'data: add reader transport probe for blocked official sources'
+          git push origin HEAD:agent/data-p0-batch-01-targeted
