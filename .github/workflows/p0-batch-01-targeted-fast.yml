@@ -1,0 +1,106 @@
+name: P0 Batch 01 Targeted Fast Acquisition
+
+on:
+  push:
+    branches:
+      - agent/data-p0-batch-01-targeted
+    paths:
+      - scripts/acquire_p0_batch_01_targeted.py
+      - .github/workflows/p0-batch-01-targeted-fast.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p0-batch-01-targeted-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout acquisition branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/data-p0-batch-01-targeted
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Syntax check
+        run: python -m py_compile scripts/acquire_p0_batch_01_targeted.py
+
+      - name: Add IPv4 DNS hints for intermittently failing official hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/p0-hosts || true
+          import requests
+          hosts = ['www.ahszu.edu.cn', 'zsb.wxc.edu.cn', 'www.wxc.edu.cn']
+          for host in hosts:
+              addresses = []
+              for endpoint, headers in [
+                  ('https://1.1.1.1/dns-query', {'accept': 'application/dns-json', 'Host': 'cloudflare-dns.com'}),
+                  ('https://8.8.8.8/resolve', {'accept': 'application/dns-json', 'Host': 'dns.google'}),
+              ]:
+                  try:
+                      response = requests.get(endpoint, params={'name': host, 'type': 'A'}, headers=headers, timeout=12, verify=False)
+                      for answer in response.json().get('Answer', []):
+                          if answer.get('type') == 1 and answer.get('data') not in addresses:
+                              addresses.append(answer['data'])
+                  except Exception:
+                      pass
+              for address in addresses[:2]:
+                  print(address, host)
+          PY
+          if test -s /tmp/p0-hosts; then
+            cat /tmp/p0-hosts
+            sudo tee -a /etc/hosts < /tmp/p0-hosts >/dev/null
+          fi
+
+      - name: Acquire, sanitize, hash and audit official evidence
+        env:
+          PYTHONUNBUFFERED: '1'
+          PYTHONWARNINGS: ignore:Unverified HTTPS request
+        run: python scripts/acquire_p0_batch_01_targeted.py
+
+      - name: Show audit summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat anhui_zsb_data/reports/p0_batch_01_audit.md
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path('anhui_zsb_data/reports/p0_batch_01_result.json').read_text(encoding='utf-8'))
+          totals = result['totals']
+          assert totals['schools'] == 2
+          print(json.dumps(totals, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit verified raw evidence to acquisition branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC \
+            anhui_zsb_data/evidence/full_raw_30_schools/AHSZU \
+            anhui_zsb_data/evidence/full_raw_30_schools/_acquisition_reports/p0_batch_01 \
+            anhui_zsb_data/reports/p0_batch_01_audit.md \
+            anhui_zsb_data/reports/p0_batch_01_result.json
+          if git diff --cached --quiet; then
+            echo 'No evidence changes were produced.'
+            exit 0
+          fi
+          git commit -m 'data: add targeted P0 raw evidence batch 01 for WXC and AHSZU'
+          git push origin HEAD:agent/data-p0-batch-01-targeted
