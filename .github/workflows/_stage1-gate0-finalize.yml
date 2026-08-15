@@ -55,6 +55,20 @@ jobs:
         run: |
           set -euo pipefail
           python3 anhui_zsb_data/scripts/_finalize_stage1_gate0.py /tmp/pr2-stage1
+          python3 anhui_zsb_data/scripts/_gate0_postprocess_60.py /tmp/pr2-stage1
+
+      - name: Confirm reconciliation did not touch forbidden project layers
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- \
+            anhui_zsb_data/schema \
+            anhui_zsb_data/staging \
+            anhui_zsb_data/normalized \
+            anhui_zsb_data/db \
+            anhui_zsb_data/raw \
+            anhui_zsb_data/config/source_catalog.json \
+            anhui_zsb_data/config/source_assets.json
 
       - name: Validate supported collector and evidence inventory
         working-directory: anhui_zsb_data
@@ -74,21 +88,34 @@ jobs:
           PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
           python3 scripts/run_quality_gate.py
 
-      - name: Confirm forbidden project layers are unchanged
+      - name: Restore transient generated outputs and confirm Gate 0 boundaries
         shell: bash
         run: |
           set -euo pipefail
+          git restore --source=HEAD --worktree --staged -- \
+            anhui_zsb_data/schema \
+            anhui_zsb_data/staging \
+            anhui_zsb_data/normalized \
+            anhui_zsb_data/db \
+            anhui_zsb_data/raw \
+            anhui_zsb_data/config/source_catalog.json \
+            anhui_zsb_data/config/source_assets.json
+
           git diff --exit-code -- \
             anhui_zsb_data/schema \
             anhui_zsb_data/staging \
             anhui_zsb_data/normalized \
             anhui_zsb_data/db \
-            anhui_zsb_data/raw
+            anhui_zsb_data/raw \
+            anhui_zsb_data/config/source_catalog.json \
+            anhui_zsb_data/config/source_assets.json
+
           test ! -e anhui_zsb_data/scripts/collect_stage1_evidence_v2.py
           test ! -e anhui_zsb_data/scripts/_gate0_collect_stage1_evidence.py
           test ! -e anhui_zsb_data/scripts/_gate0_verify_stage1_evidence.py
           test ! -e anhui_zsb_data/scripts/_gate0_stage1_evidence_validation.yml
           test ! -e anhui_zsb_data/scripts/_finalize_stage1_gate0.py
+          test ! -e anhui_zsb_data/scripts/_gate0_postprocess_60.py
           test ! -e .github/workflows/_stage1-gate0-finalize.yml
 
       - name: Commit the reconciled Gate 0 package
@@ -115,9 +142,10 @@ jobs:
             anhui_zsb_data/scripts/_gate0_collect_stage1_evidence.py \
             anhui_zsb_data/scripts/_gate0_verify_stage1_evidence.py \
             anhui_zsb_data/scripts/_gate0_stage1_evidence_validation.yml \
-            anhui_zsb_data/scripts/_finalize_stage1_gate0.py
+            anhui_zsb_data/scripts/_finalize_stage1_gate0.py \
+            anhui_zsb_data/scripts/_gate0_postprocess_60.py
 
-          forbidden="$(git diff --cached --name-only | grep -E '^anhui_zsb_data/(schema|staging|normalized|db|raw)/' || true)"
+          forbidden="$(git diff --cached --name-only | grep -E '^anhui_zsb_data/(schema|staging|normalized|db|raw)/|^anhui_zsb_data/config/(source_catalog|source_assets)\.json$' || true)"
           if [[ -n "${forbidden}" ]]; then
             echo "Refusing to commit forbidden Gate 0 paths:"
             echo "${forbidden}"
