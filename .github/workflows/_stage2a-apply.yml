@@ -6,7 +6,7 @@ on:
       - data/stage2a-hfnu-evidence-integration
     paths:
       - .github/workflows/_stage2a-apply.yml
-      - .stage2a_source_bundle.zip
+      - .stage2a_bundle/**
   workflow_dispatch:
 
 permissions:
@@ -55,6 +55,7 @@ jobs:
           python3 - <<'PY'
           from __future__ import annotations
 
+          import base64
           import hashlib
           import json
           import os
@@ -62,7 +63,16 @@ jobs:
           import zipfile
           from pathlib import Path, PurePosixPath
 
-          archive = Path('.stage2a_source_bundle.zip')
+          chunk_dir = Path('.stage2a_bundle')
+          chunks = sorted(chunk_dir.glob('chunk*.b64'))
+          if [path.name for path in chunks] != [f'chunk{i:02d}.b64' for i in range(9)]:
+              raise SystemExit(f'unexpected bundle chunks: {[path.name for path in chunks]}')
+          encoded = b''.join(path.read_bytes() for path in chunks)
+          archive = Path('/tmp/stage2a_source_bundle.zip')
+          try:
+              archive.write_bytes(base64.b64decode(encoded, validate=True))
+          except Exception as exc:
+              raise SystemExit(f'invalid base64 source bundle: {exc}') from exc
           actual_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
           expected_sha = os.environ['STAGE2A_SOURCE_BUNDLE_SHA256']
           if actual_sha != expected_sha:
