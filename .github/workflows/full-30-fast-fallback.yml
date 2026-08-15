@@ -1,0 +1,61 @@
+name: Full 30 Fast Fallback
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/full-30-fast-fallback.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fallback:
+    name: fallback-${{ matrix.group }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Bound slow-site retries for this fallback run only
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('scripts/acquire_full_30_raw_evidence.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Retry(total=3, connect=3, read=3,', 'Retry(total=1, connect=1, read=1,')
+          s=s.replace('session.get(url,timeout=35,allow_redirects=True,stream=stream)', 'session.get(url,timeout=12,allow_redirects=True,stream=stream)')
+          p.write_text(s,encoding='utf-8')
+      - name: Syntax check
+        run: python -m py_compile scripts/acquire_full_30_raw_evidence.py scripts/sanitize_full_30_evidence.py
+      - name: Acquire fallback evidence
+        env:
+          ACQ_GROUP: ${{ matrix.group }}
+          MAX_PAGES_PER_SCHOOL_YEAR: '25'
+          ACQ_DELAY: '0.20'
+        run: python scripts/acquire_full_30_raw_evidence.py
+      - name: Enforce year binding and privacy/image policy
+        env:
+          ACQ_GROUP: ${{ matrix.group }}
+        run: python scripts/sanitize_full_30_evidence.py
+      - name: Upload fallback artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-raw-fast-group-${{ matrix.group }}
+          path: acquisition_output/
+          if-no-files-found: error
+          retention-days: 7
