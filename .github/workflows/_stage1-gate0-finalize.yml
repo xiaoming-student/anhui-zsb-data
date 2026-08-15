@@ -116,7 +116,6 @@ jobs:
           test ! -e anhui_zsb_data/scripts/_gate0_stage1_evidence_validation.yml
           test ! -e anhui_zsb_data/scripts/_finalize_stage1_gate0.py
           test ! -e anhui_zsb_data/scripts/_gate0_postprocess_60.py
-          test ! -e .github/workflows/_stage1-gate0-finalize.yml
 
       - name: Commit the reconciled Gate 0 package
         shell: bash
@@ -125,9 +124,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A -- \
+          # The workflow GITHUB_TOKEN cannot modify workflow files. Preserve both
+          # workflow paths in this bot-authored commit; the connected GitHub app
+          # applies the final read-only workflow and removes this one afterwards.
+          git restore --source=HEAD --worktree --staged -- \
             .github/workflows/stage1-evidence-validation.yml \
-            .github/workflows/_stage1-gate0-finalize.yml \
+            .github/workflows/_stage1-gate0-finalize.yml
+
+          git add -A -- \
             anhui_zsb_data/config/phase1_evidence_inventory.json \
             anhui_zsb_data/evidence \
             anhui_zsb_data/reports/stage1_pr_reconciliation.json \
