@@ -1,0 +1,85 @@
+﻿school_id,school_name,year,topic,status,evidence_count,evidence_ids,notes
+BCTB,蚌埠工商学院,2024,admission_policy,collected,5,AST-BCTB-2024-3e4a5e62b2|AST-BCTB-2024-68c051b43b|AST-BCTB-2024-8100c1f108|AST-BCTB-2024-d61a363d27|SRC-BCTB-2024-083afa870f,5 evidence record(s)
+BCTB,蚌埠工商学院,2024,enrollment_plan,collected,5,AST-BCTB-2024-3e4a5e62b2|AST-BCTB-2024-68c051b43b|AST-BCTB-2024-8100c1f108|AST-BCTB-2024-d61a363d27|SRC-BCTB-2024-083afa870f,5 evidence record(s)
+BCTB,蚌埠工商学院,2024,major_catalog,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,training_location,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,tuition_and_duration,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,eligibility,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,exam_subjects,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,exam_syllabus,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,reference_books,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,exam_schedule,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,exam_location,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,admission_rules,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,score_formula,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,control_line,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,admission_min_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,admission_max_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,admission_average_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,application_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,qualified_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,admitted_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,registered_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,plan_adjustment,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,adjustment,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,exemption,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,retired_soldier,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,registered_poor_family,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2024,skill_competition,collected,5,AST-BCTB-2024-3e4a5e62b2|AST-BCTB-2024-68c051b43b|AST-BCTB-2024-8100c1f108|AST-BCTB-2024-d61a363d27|SRC-BCTB-2024-083afa870f,5 evidence record(s)
+BCTB,蚌埠工商学院,2024,other_official_notice,collected,5,AST-BCTB-2024-3e4a5e62b2|AST-BCTB-2024-68c051b43b|AST-BCTB-2024-8100c1f108|AST-BCTB-2024-d61a363d27|SRC-BCTB-2024-083afa870f,5 evidence record(s)
+BCTB,蚌埠工商学院,2025,admission_policy,collected,25,AST-BCTB-2025-02a100d112|AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-4e8330f4fa|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-64ad05b7e1|AST-BCTB-2025-6e47c72768|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|AST-BCTB-2025-fa9f7561a6|SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-c11dde24ff|SRC-BCTB-2025-d04a32279a|SRC-BCTB-2025-e02c9d51ca|SRC-BCTB-2025-e4fde497f0,25 evidence record(s)
+BCTB,蚌埠工商学院,2025,enrollment_plan,collected,25,AST-BCTB-2025-02a100d112|AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-4e8330f4fa|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-64ad05b7e1|AST-BCTB-2025-6e47c72768|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|AST-BCTB-2025-fa9f7561a6|SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-c11dde24ff|SRC-BCTB-2025-d04a32279a|SRC-BCTB-2025-e02c9d51ca|SRC-BCTB-2025-e4fde497f0,25 evidence record(s)
+BCTB,蚌埠工商学院,2025,major_catalog,collected,17,AST-BCTB-2025-02a100d112|AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|SRC-BCTB-2025-e4fde497f0,17 evidence record(s)
+BCTB,蚌埠工商学院,2025,training_location,collected,1,SRC-BCTB-2025-a98ddfcb6f,1 evidence record(s)
+BCTB,蚌埠工商学院,2025,tuition_and_duration,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,eligibility,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,exam_subjects,collected,17,AST-BCTB-2025-02a100d112|AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|SRC-BCTB-2025-e4fde497f0,17 evidence record(s)
+BCTB,蚌埠工商学院,2025,exam_syllabus,collected,17,AST-BCTB-2025-02a100d112|AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|SRC-BCTB-2025-e4fde497f0,17 evidence record(s)
+BCTB,蚌埠工商学院,2025,reference_books,collected,14,AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3,14 evidence record(s)
+BCTB,蚌埠工商学院,2025,exam_schedule,collected,4,AST-BCTB-2025-086c6e5897|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-89765d1c3f|SRC-BCTB-2025-a98ddfcb6f,4 evidence record(s)
+BCTB,蚌埠工商学院,2025,exam_location,collected,1,AST-BCTB-2025-748b2c27b7,1 evidence record(s)
+BCTB,蚌埠工商学院,2025,admission_rules,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,score_formula,collected,1,SRC-BCTB-2025-c11dde24ff,1 evidence record(s)
+BCTB,蚌埠工商学院,2025,control_line,collected,2,SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-c11dde24ff,2 evidence record(s)
+BCTB,蚌埠工商学院,2025,admission_min_score,collected,1,SRC-BCTB-2025-c11dde24ff,1 evidence record(s)
+BCTB,蚌埠工商学院,2025,admission_max_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,admission_average_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,application_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,qualified_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,admitted_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,registered_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,plan_adjustment,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2025,adjustment,collected,3,SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-c11dde24ff|SRC-BCTB-2025-d04a32279a,3 evidence record(s)
+BCTB,蚌埠工商学院,2025,exemption,collected,2,SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-d04a32279a,2 evidence record(s)
+BCTB,蚌埠工商学院,2025,retired_soldier,collected,16,AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-d04a32279a,16 evidence record(s)
+BCTB,蚌埠工商学院,2025,registered_poor_family,collected,1,SRC-BCTB-2025-a98ddfcb6f,1 evidence record(s)
+BCTB,蚌埠工商学院,2025,skill_competition,collected,5,AST-BCTB-2025-4e8330f4fa|AST-BCTB-2025-64ad05b7e1|AST-BCTB-2025-6e47c72768|AST-BCTB-2025-fa9f7561a6|SRC-BCTB-2025-e02c9d51ca,5 evidence record(s)
+BCTB,蚌埠工商学院,2025,other_official_notice,collected,25,AST-BCTB-2025-02a100d112|AST-BCTB-2025-086c6e5897|AST-BCTB-2025-252b5a5612|AST-BCTB-2025-2824d2087d|AST-BCTB-2025-3b55a35c27|AST-BCTB-2025-4b6d7a8750|AST-BCTB-2025-4e8330f4fa|AST-BCTB-2025-50d91d24e3|AST-BCTB-2025-549c57c5ed|AST-BCTB-2025-54fc9b513c|AST-BCTB-2025-567ce0751e|AST-BCTB-2025-64ad05b7e1|AST-BCTB-2025-6e47c72768|AST-BCTB-2025-748b2c27b7|AST-BCTB-2025-892d060bf2|AST-BCTB-2025-89765d1c3f|AST-BCTB-2025-89844e378f|AST-BCTB-2025-94b363ea0d|AST-BCTB-2025-fa184e98e3|AST-BCTB-2025-fa9f7561a6|SRC-BCTB-2025-a98ddfcb6f|SRC-BCTB-2025-c11dde24ff|SRC-BCTB-2025-d04a32279a|SRC-BCTB-2025-e02c9d51ca|SRC-BCTB-2025-e4fde497f0,25 evidence record(s)
+BCTB,蚌埠工商学院,2026,admission_policy,collected,26,AST-BCTB-2026-075e0f3400|AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2128117762|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-33f1f90307|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-794815cfab|AST-BCTB-2026-83df66670a|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-cbb9b9e509|AST-BCTB-2026-d15a2b7039|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7|SRC-BCTB-2026-467b2d269d|SRC-BCTB-2026-6d87716ca2|SRC-BCTB-2026-71f3cec9dc|SRC-BCTB-2026-df407a7dd1|SRC-BCTB-2026-f3c45d1dd5,26 evidence record(s)
+BCTB,蚌埠工商学院,2026,enrollment_plan,collected,26,AST-BCTB-2026-075e0f3400|AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2128117762|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-33f1f90307|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-794815cfab|AST-BCTB-2026-83df66670a|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-cbb9b9e509|AST-BCTB-2026-d15a2b7039|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7|SRC-BCTB-2026-467b2d269d|SRC-BCTB-2026-6d87716ca2|SRC-BCTB-2026-71f3cec9dc|SRC-BCTB-2026-df407a7dd1|SRC-BCTB-2026-f3c45d1dd5,26 evidence record(s)
+BCTB,蚌埠工商学院,2026,major_catalog,collected,18,AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-794815cfab|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-d15a2b7039|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7|SRC-BCTB-2026-6d87716ca2|SRC-BCTB-2026-71f3cec9dc,18 evidence record(s)
+BCTB,蚌埠工商学院,2026,training_location,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,tuition_and_duration,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,eligibility,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,exam_subjects,collected,18,AST-BCTB-2026-075e0f3400|AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-33f1f90307|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-794815cfab|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7|SRC-BCTB-2026-6d87716ca2,18 evidence record(s)
+BCTB,蚌埠工商学院,2026,exam_syllabus,collected,16,AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-794815cfab|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7|SRC-BCTB-2026-6d87716ca2,16 evidence record(s)
+BCTB,蚌埠工商学院,2026,reference_books,collected,14,AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7,14 evidence record(s)
+BCTB,蚌埠工商学院,2026,exam_schedule,collected,3,AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-794815cfab|AST-BCTB-2026-b4125460ea,3 evidence record(s)
+BCTB,蚌埠工商学院,2026,exam_location,collected,1,AST-BCTB-2026-794815cfab,1 evidence record(s)
+BCTB,蚌埠工商学院,2026,admission_rules,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,score_formula,collected,1,SRC-BCTB-2026-467b2d269d,1 evidence record(s)
+BCTB,蚌埠工商学院,2026,control_line,collected,1,SRC-BCTB-2026-467b2d269d,1 evidence record(s)
+BCTB,蚌埠工商学院,2026,admission_min_score,collected,1,SRC-BCTB-2026-467b2d269d,1 evidence record(s)
+BCTB,蚌埠工商学院,2026,admission_max_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,admission_average_score,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,application_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,qualified_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,admitted_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,registered_statistics,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,plan_adjustment,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,adjustment,collected,1,SRC-BCTB-2026-467b2d269d,1 evidence record(s)
+BCTB,蚌埠工商学院,2026,exemption,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,retired_soldier,collected,14,AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7,14 evidence record(s)
+BCTB,蚌埠工商学院,2026,registered_poor_family,not_found,0,,not obtained in this targeted deep-search batch
+BCTB,蚌埠工商学院,2026,skill_competition,collected,5,AST-BCTB-2026-2128117762|AST-BCTB-2026-33f1f90307|AST-BCTB-2026-83df66670a|AST-BCTB-2026-cbb9b9e509|SRC-BCTB-2026-f3c45d1dd5,5 evidence record(s)
+BCTB,蚌埠工商学院,2026,other_official_notice,collected,26,AST-BCTB-2026-075e0f3400|AST-BCTB-2026-08b4caa187|AST-BCTB-2026-2128117762|AST-BCTB-2026-2d3a2e32a2|AST-BCTB-2026-2fb7a943b7|AST-BCTB-2026-33f1f90307|AST-BCTB-2026-3e07e2d247|AST-BCTB-2026-54c80d3db2|AST-BCTB-2026-6e78acf7c2|AST-BCTB-2026-76a1210413|AST-BCTB-2026-794815cfab|AST-BCTB-2026-83df66670a|AST-BCTB-2026-87d7347e9c|AST-BCTB-2026-ab8f087bb8|AST-BCTB-2026-b4125460ea|AST-BCTB-2026-b70e81e13d|AST-BCTB-2026-cbb9b9e509|AST-BCTB-2026-d15a2b7039|AST-BCTB-2026-d403186691|AST-BCTB-2026-f700da20f7|AST-BCTB-2026-fc67acc9f7|SRC-BCTB-2026-467b2d269d|SRC-BCTB-2026-6d87716ca2|SRC-BCTB-2026-71f3cec9dc|SRC-BCTB-2026-df407a7dd1|SRC-BCTB-2026-f3c45d1dd5,26 evidence record(s)
