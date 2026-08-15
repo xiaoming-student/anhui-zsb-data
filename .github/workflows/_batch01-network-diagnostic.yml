@@ -20,7 +20,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Compare curl and urllib on official sources
+      - name: Verify replacement school and inspect blocked attachment
         shell: bash
         run: |
           set -u
@@ -28,44 +28,44 @@ jobs:
           ua='Mozilla/5.0 (compatible; AnhuiZSBDataEvidenceCollector/1.0; official-public-evidence-only)'
 
           echo '===== DNS ====='
-          getent ahostsv4 www.ahszu.edu.cn || true
+          getent ahostsv4 zsw.chzu.edu.cn || true
           getent ahostsv4 zs.czu.edu.cn || true
 
-          echo '===== curl AHSZU page ====='
+          echo '===== curl CHZU page ====='
           curl -4 -L --max-time 30 --retry 1 --retry-delay 1 \
             -A "$ua" -H 'Accept-Language: zh-CN,zh;q=0.9' \
-            -D /tmp/ahszu.headers -o /tmp/ahszu.html \
+            -D /tmp/chzu.headers -o /tmp/chzu.html \
             -w 'http=%{http_code} final=%{url_effective} type=%{content_type} bytes=%{size_download} time=%{time_total}\n' \
-            'https://www.ahszu.edu.cn/zs/info/1039/5667.htm' || true
-          sed -n '1,20p' /tmp/ahszu.headers 2>/dev/null || true
-          file /tmp/ahszu.html 2>/dev/null || true
-          grep -ao '宿州学院2024年普通高校专升本招生章程' /tmp/ahszu.html 2>/dev/null | head -n 1 || true
+            'https://zsw.chzu.edu.cn/2025/0318/c14891a315661/pagem.htm' || true
+          sed -n '1,20p' /tmp/chzu.headers 2>/dev/null || true
+          file /tmp/chzu.html 2>/dev/null || true
+          grep -ao '滁州学院2025年普通高校专升本招生章程' /tmp/chzu.html 2>/dev/null | head -n 1 || true
 
-          echo '===== urllib AHSZU page ====='
+          echo '===== urllib CHZU page ====='
           timeout 35s python3 - <<'PY' || true
           import urllib.request
-          url='https://www.ahszu.edu.cn/zs/info/1039/5667.htm'
+          url='https://zsw.chzu.edu.cn/2025/0318/c14891a315661/pagem.htm'
           req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; AnhuiZSBDataEvidenceCollector/1.0; official-public-evidence-only)','Accept-Language':'zh-CN,zh;q=0.9'})
           with urllib.request.urlopen(req,timeout=30) as r:
               data=r.read()
               print('status=',getattr(r,'status',None),'final=',r.geturl(),'type=',r.headers.get_content_type(),'bytes=',len(data))
           PY
 
-          echo '===== curl CZU attachment ====='
+          echo '===== curl CZU attachment / body ====='
           curl -4 -L --max-time 30 --retry 1 --retry-delay 1 \
             -A "$ua" -e 'https://zs.czu.edu.cn/info/1004/1502.htm' \
             -D /tmp/czu.headers -o /tmp/czu.asset \
             -w 'http=%{http_code} final=%{url_effective} type=%{content_type} bytes=%{size_download} time=%{time_total}\n' \
-            'https://zs.czu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1834245800&wbfileid=12263872' || true
+            'https://zs.czu.edu.cn/system/_content/download.jsp?owner=1834245800&urltype=news.DownloadAttachUrl&wbfileid=12263872' || true
           sed -n '1,20p' /tmp/czu.headers 2>/dev/null || true
           file /tmp/czu.asset 2>/dev/null || true
-          xxd -l 16 /tmp/czu.asset 2>/dev/null || true
+          sed -n '1,120p' /tmp/czu.asset 2>/dev/null || true
 
       - name: Upload diagnostic log
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: batch01-network-diagnostic
+          name: batch01-network-diagnostic-2
           path: /tmp/batch01-network-diagnostic.log
           if-no-files-found: error
           retention-days: 7
