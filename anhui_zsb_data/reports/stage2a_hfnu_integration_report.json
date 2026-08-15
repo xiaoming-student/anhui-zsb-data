@@ -207,9 +207,11 @@
   },
   "generated_at": "2026-08-15T05:47:05+00:00",
   "git": {
+    "actions_verified_head_sha": "66ed30d4061ca46326d29e8cd2d02a7710531780",
     "base_sha": "5d16b24801979c070699514698d4ff9877575593",
     "branch": "data/stage2a-hfnu-evidence-integration",
-    "implementation_head_sha": "pending_draft_pr"
+    "draft_pr_number": 4,
+    "implementation_head_sha": "66ed30d4061ca46326d29e8cd2d02a7710531780"
   },
   "key_facts": {
     "admission_scores_2026": 140,
@@ -251,7 +253,23 @@
   },
   "tests": {
     "clean_rebuild": "PASS",
-    "github_actions": "PENDING_DRAFT_PR",
+    "github_actions": {
+      "quality_gate": {
+        "python_3_10": "PASS",
+        "python_3_11": "PASS",
+        "python_3_12": "PASS",
+        "run_id": 31867904929,
+        "run_number": 14,
+        "status": "PASS"
+      },
+      "stage1_evidence_validation": {
+        "run_id": 31867904946,
+        "run_number": 12,
+        "status": "PASS"
+      },
+      "status": "PASS",
+      "verified_head_sha": "66ed30d4061ca46326d29e8cd2d02a7710531780"
+    },
     "idempotence": "PASS",
     "local_quality_gate": "PASS",
     "unit_tests": {
