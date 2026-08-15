@@ -1,0 +1,81 @@
+name: BCTB P0 Connectivity Probe
+
+on:
+  push:
+    branches:
+      - agent/data-p0-batch-02-bctb
+    paths:
+      - .github/workflows/bctb-p0-connectivity-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Resolve and fetch representative official pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, subprocess, sys, urllib.parse, urllib.request
+
+          host = 'zs.bctb.edu.cn'
+          answers = []
+          for endpoint in (
+              'https://cloudflare-dns.com/dns-query?' + urllib.parse.urlencode({'name': host, 'type': 'A'}),
+              'https://dns.google/resolve?' + urllib.parse.urlencode({'name': host, 'type': 'A'}),
+          ):
+              try:
+                  req = urllib.request.Request(endpoint, headers={'accept': 'application/dns-json'})
+                  with urllib.request.urlopen(req, timeout=15) as response:
+                      payload = json.load(response)
+                  for row in payload.get('Answer', []):
+                      if row.get('type') == 1 and row.get('data') not in answers:
+                          answers.append(row['data'])
+              except Exception as exc:
+                  print('DoH error:', endpoint, repr(exc), file=sys.stderr)
+          if not answers:
+              raise SystemExit('No A record resolved for ' + host)
+          print('resolved', host, answers)
+          urls = [
+              'https://zs.bctb.edu.cn/2024/0321/c1031a24235/page.psp',
+              'https://zs.bctb.edu.cn/2024/1107/c1028a27024/page.psp',
+              'https://zs.bctb.edu.cn/2025/1117/c1028a31309/page.psp',
+              'https://zs.bctb.edu.cn/2026/0318/c1031a34139/page.psp',
+          ]
+          ok = False
+          for ip in answers[:3]:
+              for url in urls:
+                  output = '/tmp/' + url.rsplit('/', 1)[-2] + '-' + ip.replace('.', '_') + '.html'
+                  cmd = [
+                      'curl', '--silent', '--show-error', '--location', '--compressed',
+                      '--connect-timeout', '8', '--max-time', '25',
+                      '--resolve', f'{host}:443:{ip}',
+                      '--user-agent', 'Mozilla/5.0 (compatible; AnhuiZSBDataResearch/1.0)',
+                      '--write-out', '%{http_code} %{size_download} %{url_effective}',
+                      '--output', output, url,
+                  ]
+                  try:
+                      result = subprocess.run(cmd, check=False, text=True, capture_output=True)
+                      size = 0
+                      try:
+                          import os
+                          size = os.path.getsize(output)
+                      except OSError:
+                          pass
+                      print(ip, url, 'rc=', result.returncode, 'meta=', result.stdout.strip(), 'size=', size, 'err=', result.stderr.strip())
+                      if result.returncode == 0 and size > 1000:
+                          text = open(output, 'rb').read(200000).decode('utf-8', 'ignore')
+                          if '蚌埠工商学院' in text and '专升本' in text:
+                              ok = True
+                  except Exception as exc:
+                      print(ip, url, repr(exc), file=sys.stderr)
+              if ok:
+                  break
+          if not ok:
+              raise SystemExit('Official BCTB pages were not retrievable as valid HTML')
+          PY
