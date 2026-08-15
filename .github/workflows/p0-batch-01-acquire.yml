@@ -1,0 +1,241 @@
+name: P0 Batch 01 Raw Evidence Acquisition
+
+on:
+  push:
+    branches:
+      - agent/data-p0-batch-01
+    paths:
+      - .github/workflows/p0-batch-01-acquire.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p0-batch-01-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout acquisition branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/data-p0-batch-01
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Build targeted P0 collector from the audited collector
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp scripts/acquire_full_30_raw_evidence.py /tmp/acquire_p0.py
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('/tmp/acquire_p0.py')
+          s = p.read_text(encoding='utf-8')
+          old = 'SCHOOLS = SCHOOLS[(GROUP-1)*5:GROUP*5]'
+          new = '''SCHOOLS = SCHOOLS[(GROUP-1)*5:GROUP*5]
+          _only = {x.strip() for x in os.environ.get("ACQ_SCHOOL_IDS", "").split(",") if x.strip()}
+          if _only:
+              SCHOOLS = [x for x in SCHOOLS if x[0] in _only]
+          TARGETED_URLS = {
+              "WXC": {
+                  2024: [],
+                  2025: [
+                      "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+                      "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+                  ],
+                  2026: [],
+              },
+              "AHSZU": {
+                  2024: [
+                      "https://www.ahszu.edu.cn/zs/info/1039/5667.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/5639.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1062/5673.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/5739.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/5762.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/5786.htm",
+                  ],
+                  2025: [
+                      "https://www.ahszu.edu.cn/zs/info/1062/6003.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/6239.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/6309.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/7209.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1062/8129.htm",
+                  ],
+                  2026: [
+                      "https://www.ahszu.edu.cn/zs/info/1062/8249.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1062/8549.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/8559.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/8789.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1039/8869.htm",
+                      "https://www.ahszu.edu.cn/zs/info/1062/8889.htm",
+                  ],
+              },
+          }
+          assert SCHOOLS, "ACQ_SCHOOL_IDS selected no school in this group"'''
+          if old not in s:
+              raise SystemExit('school slice marker not found')
+          s = s.replace(old, new, 1)
+          old_seed = 'seeds=[(u,"configured-root",0) for u in roots]+[(u,a,0) for u,a in bing(school,year)]'
+          new_seed = 'seeds=[(u,"configured-root",0) for u in roots]+[(u,"targeted-official",0) for u in TARGETED_URLS.get(sid,{}).get(year,[])]+[(u,a,0) for u,a in bing(school,year)]'
+          if old_seed not in s:
+              raise SystemExit('seed marker not found')
+          s = s.replace(old_seed, new_seed, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+          python -m py_compile /tmp/acquire_p0.py scripts/sanitize_full_30_evidence.py
+
+      - name: Add IPv4 DNS hints for intermittently failing official hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/p0-hosts || true
+          import requests
+          hosts = ['www.ahszu.edu.cn', 'zsb.wxc.edu.cn', 'www.wxc.edu.cn']
+          for host in hosts:
+              answers = []
+              for endpoint, headers in [
+                  ('https://1.1.1.1/dns-query', {'accept':'application/dns-json','Host':'cloudflare-dns.com'}),
+                  ('https://8.8.8.8/resolve', {'accept':'application/dns-json','Host':'dns.google'}),
+              ]:
+                  try:
+                      r = requests.get(endpoint, params={'name':host,'type':'A'}, headers=headers, timeout=15, verify=False)
+                      for row in r.json().get('Answer', []):
+                          if row.get('type') == 1 and row.get('data') not in answers:
+                              answers.append(row['data'])
+                  except Exception:
+                      pass
+              for ip in answers[:2]:
+                  print(ip, host)
+          PY
+          if test -s /tmp/p0-hosts; then
+            cat /tmp/p0-hosts
+            sudo tee -a /etc/hosts < /tmp/p0-hosts >/dev/null
+          fi
+
+      - name: Acquire WXC official raw evidence
+        env:
+          ACQ_GROUP: '3'
+          ACQ_SCHOOL_IDS: WXC
+          ACQ_OUT: acquisition_wxc
+          MAX_PAGES_PER_SCHOOL_YEAR: '100'
+          ACQ_DELAY: '0.25'
+          PYTHONWARNINGS: ignore:Unverified HTTPS request
+        run: |
+          python /tmp/acquire_p0.py
+          python scripts/sanitize_full_30_evidence.py
+
+      - name: Acquire AHSZU official raw evidence
+        env:
+          ACQ_GROUP: '4'
+          ACQ_SCHOOL_IDS: AHSZU
+          ACQ_OUT: acquisition_ahszu
+          MAX_PAGES_PER_SCHOOL_YEAR: '120'
+          ACQ_DELAY: '0.25'
+          PYTHONWARNINGS: ignore:Unverified HTTPS request
+        run: |
+          python /tmp/acquire_p0.py
+          python scripts/sanitize_full_30_evidence.py
+
+      - name: Materialize verified school archives and audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='anhui_zsb_data/evidence/full_raw_30_schools'
+          REPORT_DIR="$ROOT/_acquisition_reports/p0_batch_01"
+          mkdir -p "$ROOT" "$REPORT_DIR" anhui_zsb_data/reports
+          unzip -oq acquisition_wxc/anhui_zsb_data/evidence/full_raw_30_schools/WXC_official_raw_2024_2026.zip -d "$ROOT"
+          unzip -oq acquisition_ahszu/anhui_zsb_data/evidence/full_raw_30_schools/AHSZU_official_raw_2024_2026.zip -d "$ROOT"
+          cp acquisition_wxc/reports/group_3_result.json "$REPORT_DIR/WXC_result.json"
+          cp acquisition_ahszu/reports/group_4_result.json "$REPORT_DIR/AHSZU_result.json"
+          python - <<'PY'
+          import csv, json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          root = Path('anhui_zsb_data/evidence/full_raw_30_schools')
+          schools = [('WXC','皖西学院'),('AHSZU','宿州学院')]
+          rows=[]; totals={'sources':0,'raw_files':0,'bytes':0,'collected':0,'not_found':0,'access_restricted':0,'manual_download_required':0,'privacy':0}
+          for sid,name in schools:
+              m=json.loads((root/sid/'school_manifest.json').read_text(encoding='utf-8'))
+              with (root/sid/'school_coverage.csv').open(encoding='utf-8-sig',newline='') as f:
+                  cov=list(csv.DictReader(f))
+              result_path=root/'_acquisition_reports'/'p0_batch_01'/f'{sid}_result.json'
+              result=json.loads(result_path.read_text(encoding='utf-8'))
+              source_count=len(m.get('sources',[]))
+              raw_assets=[a for a in m.get('assets',[]) if a.get('asset_type')!='parsed_text']
+              raw_files=source_count+len(raw_assets)
+              byte_count=sum(int(x.get('file_size') or 0) for x in m.get('sources',[]))+sum(int(x.get('file_size') or 0) for x in raw_assets)
+              status_counts={}
+              for r in cov: status_counts[r['status']]=status_counts.get(r['status'],0)+1
+              access=sum(1 for x in m.get('failures',[]) if x.get('status')=='access_restricted')
+              manual=sum(1 for x in m.get('failures',[]) if x.get('status')=='manual_download_required')
+              privacy=len(result.get('privacy',[]))
+              topics={}
+              for y in (2024,2025,2026):
+                  topics[y]=[r['topic'] for r in cov if int(r['year'])==y and r['status']=='collected']
+              rows.append({'sid':sid,'name':name,'sources':source_count,'raw_files':raw_files,'bytes':byte_count,'collected':status_counts.get('collected',0),'not_found':status_counts.get('not_found',0),'access':access,'manual':manual,'privacy':privacy,'topics':topics})
+              totals['sources']+=source_count; totals['raw_files']+=raw_files; totals['bytes']+=byte_count; totals['collected']+=status_counts.get('collected',0); totals['not_found']+=status_counts.get('not_found',0); totals['access_restricted']+=access; totals['manual_download_required']+=manual; totals['privacy']+=privacy
+          out=['# P0 Batch 01 原始证据采集审计','',f"- 生成时间：{datetime.now(timezone.utc).isoformat()}",'- 范围：WXC 皖西学院、AHSZU 宿州学院；2024—2026；28 主题','', '## 批次汇总','',f"- 本批学校数：{len(rows)}",f"- 新采 source document 数：{totals['sources']}",f"- 新采原始文件数（HTML + 非解析附件）：{totals['raw_files']}",f"- 原始文件总字节数：{totals['bytes']}",f"- collected 覆盖格数：{totals['collected']}",f"- not_found 覆盖格数：{totals['not_found']}",f"- access_restricted 记录数：{totals['access_restricted']}",f"- manual_download_required 记录数：{totals['manual_download_required']}",f"- candidate personal data excluded：{totals['privacy']}",'','## 分校明细','']
+          for r in rows:
+              out += [f"### {r['sid']} {r['name']}",f"- source documents：{r['sources']}",f"- 原始文件：{r['raw_files']}；{r['bytes']} bytes",f"- collected：{r['collected']}；not_found：{r['not_found']}",f"- access_restricted：{r['access']}；manual_download_required：{r['manual']}；privacy excluded：{r['privacy']}"]
+              for y in (2024,2025,2026):
+                  got=', '.join(r['topics'][y]) if r['topics'][y] else '无'
+                  out.append(f"- {y} 已补主题：{got}")
+              out.append('')
+          out += ['## 质量说明','','- 仅保存学校官方域名页面和附件；搜索引擎只作 URL 发现。','- 所有保存文件在 manifest 中记录 SHA-256 与字节数。','- 拟录取名单、考生名单、考生号、准考证号、个人成绩等候选人级数据被排除。','- `not_found` 仅表示本轮深度检索仍未取得，不等同于官方从未发布。','']
+          Path('anhui_zsb_data/reports/p0_batch_01_audit.md').write_text('\n'.join(out),encoding='utf-8')
+          Path('anhui_zsb_data/reports/p0_batch_01_result.json').write_text(json.dumps({'schools':rows,'totals':totals},ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+
+      - name: Validate evidence, hashes, year matrix and privacy boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          root=Path('anhui_zsb_data/evidence/full_raw_30_schools')
+          forbidden=['拟录取名单','预录取名单','考生名单','考生号','准考证号','身份证号','个人成绩']
+          for sid in ('WXC','AHSZU'):
+              manifest=json.loads((root/sid/'school_manifest.json').read_text(encoding='utf-8'))
+              with (root/sid/'school_coverage.csv').open(encoding='utf-8-sig',newline='') as f: cov=list(csv.DictReader(f))
+              assert len(cov)==84, (sid,len(cov))
+              assert {(int(r['year']),r['topic']) for r in cov} and {int(r['year']) for r in cov}=={2024,2025,2026}
+              for rec in manifest.get('sources',[])+manifest.get('assets',[]):
+                  p=Path(rec['local_path'])
+                  assert p.is_file(), p
+                  b=p.read_bytes()
+                  assert len(b)==int(rec['file_size']), p
+                  assert hashlib.sha256(b).hexdigest()==rec['sha256'], p
+                  label=' '.join(str(rec.get(k,'')) for k in ('title','original_file_name','stored_file_name','retrieval_url'))
+                  assert not any(x in label for x in forbidden), label
+          PY
+
+      - name: Commit raw evidence to acquisition branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anhui_zsb_data/evidence/full_raw_30_schools/WXC \
+                  anhui_zsb_data/evidence/full_raw_30_schools/AHSZU \
+                  anhui_zsb_data/evidence/full_raw_30_schools/_acquisition_reports/p0_batch_01 \
+                  anhui_zsb_data/reports/p0_batch_01_audit.md \
+                  anhui_zsb_data/reports/p0_batch_01_result.json
+          if git diff --cached --quiet; then
+            echo 'No new evidence produced.'
+            exit 0
+          fi
+          git commit -m 'data: add P0 raw evidence batch 01 for WXC and AHSZU'
+          git push origin HEAD:agent/data-p0-batch-01
