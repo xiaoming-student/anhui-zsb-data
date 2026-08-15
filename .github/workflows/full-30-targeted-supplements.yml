@@ -1,0 +1,86 @@
+name: Full 30 Targeted Supplements
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/full-30-targeted-supplements.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Fetch curated official pages only
+        shell: python
+        run: |
+          import hashlib, json, re, time
+          from datetime import datetime, timezone
+          from pathlib import Path
+          import requests
+          from bs4 import BeautifulSoup
+          from requests.adapters import HTTPAdapter
+          from urllib3.util.retry import Retry
+
+          targets = [
+            {'school_id':'AHUA','school_name':'安徽艺术学院','year':2024,'topics':['admission_policy','enrollment_plan','major_catalog','training_location','tuition_and_duration','eligibility','exam_subjects','admission_rules','exemption','retired_soldier','registered_poor_family','skill_competition'],'url':'https://www.ahua.edu.cn/zsw/2024/0321/c201a29345/page.htm'},
+            {'school_id':'AHUA','school_name':'安徽艺术学院','year':2025,'topics':['admission_policy','enrollment_plan','major_catalog','training_location','tuition_and_duration','eligibility','exam_subjects','admission_rules','exemption','retired_soldier','registered_poor_family','skill_competition'],'url':'https://www.ahua.edu.cn/zsw/2025/0318/c201a36548/page.htm'},
+            {'school_id':'AHUA','school_name':'安徽艺术学院','year':2026,'topics':['admission_policy','enrollment_plan','major_catalog','training_location','tuition_and_duration','eligibility','exam_subjects','admission_rules','exemption','retired_soldier','registered_poor_family','skill_competition'],'url':'https://www.ahua.edu.cn/zsw/2026/0318/c201a46012/page.htm'},
+            {'school_id':'AHUA','school_name':'安徽艺术学院','year':2024,'topics':['admission_min_score','plan_adjustment'],'url':'https://www.ahua.edu.cn/zsw/2024/0524/c201a31068/page.htm'},
+            {'school_id':'AHSZU','school_name':'宿州学院','year':2024,'topics':['admission_policy','enrollment_plan','major_catalog','tuition_and_duration','eligibility','exam_subjects','exam_schedule','exam_location','admission_rules','adjustment','exemption','retired_soldier','registered_poor_family','skill_competition'],'url':'https://xxgk.ahszu.edu.cn/info/1039/3994.htm'},
+            {'school_id':'AHSZU','school_name':'宿州学院','year':2025,'topics':['admission_policy'],'url':'https://www.ahszu.edu.cn/zs/info/1062/6259.htm'},
+            {'school_id':'AHSZU','school_name':'宿州学院','year':2026,'topics':['admission_policy'],'url':'https://www.ahszu.edu.cn/zs/info/1062/8549.htm'},
+            {'school_id':'UWH','school_name':'芜湖学院','year':2024,'topics':['enrollment_plan','major_catalog'],'url':'https://www.uwh.edu.cn/zsw/detail/435/239.html'},
+            {'school_id':'UWH','school_name':'芜湖学院','year':2024,'topics':['control_line','admission_rules'],'url':'https://www.uwh.edu.cn/zsw/detail/435/3281.html'},
+            {'school_id':'UWH','school_name':'芜湖学院','year':2025,'topics':['admission_policy'],'url':'https://www.uwh.edu.cn/zsw/detail/434/8996.html'},
+            {'school_id':'UWH','school_name':'芜湖学院','year':2025,'topics':['adjustment','retired_soldier','skill_competition','score_formula'],'url':'https://www.uwh.edu.cn/zsw/detail/435/11102.html'},
+            {'school_id':'UWH','school_name':'芜湖学院','year':2026,'topics':['admission_policy'],'url':'https://www.uwh.edu.cn/zsw/detail/434/15349.html'},
+            {'school_id':'UWH','school_name':'芜湖学院','year':2026,'topics':['enrollment_plan','major_catalog'],'url':'https://www.uwh.edu.cn/zsw/detail/435/14938.html'},
+          ]
+          deny = ['拟录取名单公示','预录取名单公示','考生名单','面试名单公示','审核名单','免试名单公示']
+          out = Path('targeted_supplement'); out.mkdir()
+          sess=requests.Session(); sess.headers.update({'User-Agent':'Mozilla/5.0 (compatible; AnhuiZSBDataResearch/1.0)','Accept':'text/html,*/*;q=0.8'})
+          retry=Retry(total=1,connect=1,read=1,backoff_factor=.5,status_forcelist=[429,500,502,503,504],allowed_methods=['GET'])
+          sess.mount('https://',HTTPAdapter(max_retries=retry)); sess.mount('http://',HTTPAdapter(max_retries=retry))
+          results=[]
+          for i,t in enumerate(targets,1):
+            rec=dict(t); rec['retrieved_at']=datetime.now(timezone.utc).isoformat()
+            try:
+              r=sess.get(t['url'],timeout=15,allow_redirects=True)
+              b=r.content; ct=r.headers.get('Content-Type','')
+              rec.update({'http_status':r.status_code,'final_url':r.url,'content_type':ct,'file_size':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+              if r.status_code >= 400: rec['status']='access_restricted' if r.status_code==403 else 'removed_or_unavailable'; results.append(rec); continue
+              text=BeautifulSoup(b,'html.parser').get_text('\n',strip=True) if 'html' in ct.lower() else ''
+              if any(x in text[:800] for x in deny):
+                rec['status']='candidate_personal_data_excluded'; results.append(rec); continue
+              base=f"DOC-{t['school_id']}-{t['year']}-targeted-{i:02d}"
+              hp=out/(base+'.html'); tp=out/(base+'_parsed.txt')
+              hp.write_bytes(b); tp.write_text(text,encoding='utf-8')
+              rec.update({'status':'collected','local_html':hp.name,'local_parsed':tp.name,'title':(BeautifulSoup(b,'html.parser').title.get_text(' ',strip=True) if 'html' in ct.lower() and BeautifulSoup(b,'html.parser').title else '')})
+            except Exception as e:
+              rec.update({'status':'access_restricted','http_status':'error','error':repr(e)})
+            results.append(rec); time.sleep(.25)
+          (out/'targeted_result.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps([{'school':x['school_id'],'year':x['year'],'status':x['status'],'http':x.get('http_status')} for x in results],ensure_ascii=False,indent=2))
+      - name: Upload targeted supplement
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-raw-targeted-supplement
+          path: targeted_supplement/
+          if-no-files-found: error
+          retention-days: 7
