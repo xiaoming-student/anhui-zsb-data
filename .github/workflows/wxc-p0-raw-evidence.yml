@@ -20,7 +20,7 @@ concurrency:
 jobs:
   acquire-and-commit:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: Checkout acquisition branch
         uses: actions/checkout@v4
@@ -54,7 +54,7 @@ jobs:
           )
           text = text.replace(
               '"--retry", "3", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "20", "--max-time", "150",',
-              '"--retry", "1", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "6", "--max-time", "25",',
+              '"--retry", "0", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "4", "--max-time", "10",',
           )
           text = text.replace(
               'failures = [f for f in failures if f.get("url") not in success_urls]',
@@ -64,10 +64,10 @@ jobs:
           PY
           python -m py_compile scripts/acquire_wxc_p0_raw_evidence.py
 
-      - name: Acquire official public raw evidence
+      - name: Acquire six located official originals
         env:
-          WXC_MAX_CRAWL_PAGES: '18'
-          WXC_MAX_CRAWL_DEPTH: '2'
+          WXC_MAX_CRAWL_PAGES: '0'
+          WXC_MAX_CRAWL_DEPTH: '0'
         run: python scripts/acquire_wxc_p0_raw_evidence.py | tee "$RUNNER_TEMP/wxc-acquisition.log"
 
       - name: Validate generated evidence metadata and raw bytes
