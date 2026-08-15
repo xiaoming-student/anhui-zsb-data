@@ -1,0 +1,638 @@
+name: Batch 01 Temporary Targeted Recovery V11
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-targeted-recovery-v11.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+concurrency:
+  group: batch01-temporary-targeted-recovery-v11
+  cancel-in-progress: false
+
+jobs:
+  recover-finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      PYTHONUTF8: '1'
+      TARGET_BRANCH: data/batch-01-raw-evidence-acquisition
+      SNAPSHOT_BRANCH: automation/batch-01-acquisition-snapshot
+      MAIN_SHA: 35de88d7977c1937c4a3d01da0859f61a2fdf34f
+      MANUAL_TIMESTAMP: 2026-08-15T00:00:00+00:00
+    steps:
+      - name: Checkout complete temporary history
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF parser
+        run: |
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+
+      - name: Restore historical finalizer inputs and acquisition snapshot
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          bootstrap_ref=''
+          v8_ref=''
+          while read -r candidate; do
+            if [[ -z "${bootstrap_ref}" ]] \
+              && git cat-file -e "${candidate}:.batch01_bootstrap/chunk00.b64" 2>/dev/null \
+              && git cat-file -e "${candidate}:.github/workflows/_batch01-collect-v5.yml" 2>/dev/null; then
+              bootstrap_ref="${candidate}"
+            fi
+            if [[ -z "${v8_ref}" ]] \
+              && git cat-file -e "${candidate}:.github/workflows/_batch01-finalize-v8.yml" 2>/dev/null; then
+              v8_ref="${candidate}"
+            fi
+          done < <(git rev-list --max-count=100 HEAD)
+          test -n "${bootstrap_ref}"
+          test -n "${v8_ref}"
+          echo "BOOTSTRAP_REF=${bootstrap_ref}" >> "$GITHUB_ENV"
+          echo "V8_REF=${v8_ref}" >> "$GITHUB_ENV"
+
+          rm -rf /tmp/batch01-bootstrap-source /tmp/batch01-snapshot
+          mkdir -p /tmp/batch01-bootstrap-source/.batch01_bootstrap \
+            /tmp/batch01-bootstrap-source/.github/workflows
+          for index in $(seq -w 0 7); do
+            git show "${bootstrap_ref}:.batch01_bootstrap/chunk${index}.b64" \
+              > "/tmp/batch01-bootstrap-source/.batch01_bootstrap/chunk${index}.b64"
+          done
+          git show "${bootstrap_ref}:.github/workflows/_batch01-collect-v5.yml" \
+            > /tmp/batch01-bootstrap-source/.github/workflows/_batch01-collect-v5.yml
+          git show "${v8_ref}:.github/workflows/_batch01-finalize-v8.yml" \
+            > /tmp/batch01-bootstrap-source/.github/workflows/_batch01-finalize-v8.yml
+
+          for attempt in $(seq 1 30); do
+            if git fetch --force origin "+refs/heads/${SNAPSHOT_BRANCH}:refs/remotes/origin/${SNAPSHOT_BRANCH}"; then
+              break
+            fi
+            sleep 20
+          done
+          git cat-file -e "refs/remotes/origin/${SNAPSHOT_BRANCH}^{commit}"
+          git worktree add --detach /tmp/batch01-snapshot "refs/remotes/origin/${SNAPSHOT_BRANCH}"
+          test -f /tmp/batch01-snapshot/anhui_zsb_data/config/batch_01_evidence_inventory.json
+          test -d /tmp/batch01-snapshot/anhui_zsb_data/evidence/batch_01
+
+      - name: Recover the 13 manually downloaded official PDFs from Git objects
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/batch01-object-probes /tmp/batch01-manual.zip /tmp/batch01-manual-extract
+          mkdir -p /tmp/batch01-object-probes /tmp/batch01-manual-extract
+          for sha in \
+            7805fea128a874e0d5f1fec434870b1fe64c1db5 \
+            973ec4e425d99c30c2e79f8f6eda2f6464f1407c \
+            d4aa443c0d8a36cef050944f4d387a54f4a9fc90 \
+            e4f9c6810e80e4a4f6d69a82a6dd8e7cc561e1e4; do
+            gh api "repos/${GITHUB_REPOSITORY}/git/blobs/${sha}" --jq .content \
+              | tr -d '\n' | base64 --decode > "/tmp/batch01-object-probes/${sha}.raw"
+          done
+          python3 - <<'PY'
+          import base64
+          import io
+          import zipfile
+          from pathlib import Path
+
+          choices = []
+          for path in Path('/tmp/batch01-object-probes').glob('*.raw'):
+              raw = path.read_bytes()
+              variants = [('raw', raw)]
+              try:
+                  variants.append(('base64', base64.b64decode(b''.join(raw.split()), validate=True)))
+              except Exception:
+                  pass
+              for label, data in variants:
+                  try:
+                      with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                          pdfs = [n for n in archive.namelist() if n.lower().endswith('.pdf')]
+                          if len(pdfs) >= 13:
+                              choices.append((len(pdfs), path.name, label, data))
+                  except Exception:
+                      pass
+          if not choices:
+              raise SystemExit('manual PDF archive not found in retained Git objects')
+          choices.sort(key=lambda item: (-item[0], item[1], item[2]))
+          Path('/tmp/batch01-manual.zip').write_bytes(choices[0][3])
+          with zipfile.ZipFile('/tmp/batch01-manual.zip') as archive:
+              if archive.testzip() is not None:
+                  raise SystemExit('manual archive CRC failure')
+          print(f'recovered manual archive with {choices[0][0]} PDF files')
+          PY
+          unzip -q /tmp/batch01-manual.zip -d /tmp/batch01-manual-extract
+
+      - name: Build payload, restore reviewed tools, and targeted-recover failed sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/batch01-final-payload /tmp/batch01-bootstrap.zip
+          mkdir -p /tmp/batch01-final-payload/anhui_zsb_data/{config,evidence,reports,scripts,tests} \
+            /tmp/batch01-final-payload/.github/workflows
+          cp -a /tmp/batch01-snapshot/anhui_zsb_data/evidence/batch_01 \
+            /tmp/batch01-final-payload/anhui_zsb_data/evidence/
+          cp -f /tmp/batch01-snapshot/anhui_zsb_data/config/batch_01_evidence_inventory.json \
+            /tmp/batch01-final-payload/anhui_zsb_data/config/
+          find /tmp/batch01-snapshot/anhui_zsb_data/reports -maxdepth 1 -type f -name 'batch_01_*' \
+            -exec cp -f {} /tmp/batch01-final-payload/anhui_zsb_data/reports/ \;
+
+          cat /tmp/batch01-bootstrap-source/.batch01_bootstrap/chunk*.b64 \
+            | base64 --decode > /tmp/batch01-bootstrap.zip
+          echo "be6d927a739be8124bfb912cfe52afc64b2488297399689017c09bf7891a1864  /tmp/batch01-bootstrap.zip" | sha256sum --check
+          for path in \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py; do
+            unzip -p /tmp/batch01-bootstrap.zip "$path" \
+              > "/tmp/batch01-final-payload/${path}"
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          import gzip
+          import hashlib
+          import re
+
+          workflow = Path('/tmp/batch01-bootstrap-source/.github/workflows/_batch01-collect-v5.yml').read_text(encoding='utf-8')
+          match = re.search(r'BATCH01_SCOPE_GZ_B64: "([A-Za-z0-9+/=]+)"', workflow)
+          if not match:
+              raise SystemExit('clean scope not found')
+          raw = gzip.decompress(base64.b64decode(match.group(1)))
+          if hashlib.sha256(raw).hexdigest() != 'b3bc4300ea873518ccbc54c45d24d20b0a4100360f67a001567b3ceaa6059631':
+              raise SystemExit('clean scope checksum mismatch')
+          Path('/tmp/batch01-final-payload/anhui_zsb_data/config/batch_01_school_scope.json').write_bytes(raw)
+          PY
+
+          cat > /tmp/batch01-targeted-recovery.py <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import html
+          import http.cookiejar
+          import json
+          import mimetypes
+          import re
+          import shutil
+          import subprocess
+          import time
+          import urllib.parse
+          import urllib.request
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          ROOT = Path('/tmp/batch01-final-payload/anhui_zsb_data')
+          inventory_path = ROOT / 'config/batch_01_evidence_inventory.json'
+          scope_path = ROOT / 'config/batch_01_school_scope.json'
+          inventory = json.loads(inventory_path.read_text(encoding='utf-8'))
+          scope = json.loads(scope_path.read_text(encoding='utf-8'))
+          scope_sources = {
+              source['source_id']: (school, source)
+              for school in scope['schools']
+              for source in school['sources']
+          }
+          failed = [
+              source for source in inventory['sources']
+              if source.get('required') and source.get('status') != 'collected'
+              and source.get('source_id') != 'SRC-CZU-2024-DG'
+          ]
+          print('targeted required failures:', [item['source_id'] for item in failed])
+
+          class TextExtractor(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.parts = []
+                  self.skip = 0
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() in {'script', 'style', 'noscript'}:
+                      self.skip += 1
+                  if tag.lower() in {'p', 'div', 'br', 'li', 'tr', 'h1', 'h2', 'h3', 'h4'}:
+                      self.parts.append('\n')
+              def handle_endtag(self, tag):
+                  if tag.lower() in {'script', 'style', 'noscript'} and self.skip:
+                      self.skip -= 1
+                  if tag.lower() in {'p', 'div', 'li', 'tr', 'h1', 'h2', 'h3', 'h4'}:
+                      self.parts.append('\n')
+              def handle_data(self, data):
+                  if not self.skip:
+                      self.parts.append(data)
+
+          def clean_text(raw_html: str) -> str:
+              parser = TextExtractor()
+              parser.feed(raw_html)
+              text = html.unescape(''.join(parser.parts))
+              lines = [' '.join(line.split()) for line in text.splitlines()]
+              return '\n'.join(line for line in lines if line).strip() + '\n'
+
+          def digest(path: Path) -> str:
+              h = hashlib.sha256()
+              h.update(path.read_bytes())
+              return h.hexdigest()
+
+          def decode_page(data: bytes) -> str:
+              for encoding in ('utf-8', 'gb18030'):
+                  try:
+                      text = data.decode(encoding)
+                      if '专升本' in text:
+                          return text
+                  except UnicodeDecodeError:
+                      pass
+              return data.decode('utf-8', errors='replace')
+
+          def extension_for(data: bytes, content_type: str, url: str) -> str | None:
+              lower = data[:16].lower()
+              if data.startswith(b'%PDF-'):
+                  return '.pdf'
+              if data.startswith(b'PK\x03\x04'):
+                  suffix = Path(urllib.parse.urlparse(url).path).suffix.lower()
+                  return suffix if suffix in {'.docx', '.xlsx', '.pptx', '.zip'} else '.zip'
+              if data.startswith(bytes.fromhex('D0CF11E0A1B11AE1')):
+                  suffix = Path(urllib.parse.urlparse(url).path).suffix.lower()
+                  return suffix if suffix in {'.doc', '.xls', '.ppt'} else '.doc'
+              if b'<html' in lower or b'<!doctype html' in data[:200].lower():
+                  return None
+              guessed = mimetypes.guess_extension(content_type.split(';', 1)[0].strip())
+              return guessed
+
+          for failed_source in failed:
+              source_id = failed_source['source_id']
+              school, planned = scope_sources[source_id]
+              school_id = school['school_id']
+              year = planned['year']
+              allowed_domains = tuple(school['official_domains'])
+              url = planned['document_url']
+              jar = http.cookiejar.CookieJar()
+              opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+              headers = {
+                  'User-Agent': 'Mozilla/5.0 (compatible; AnhuiZSBDataEvidenceCollector/1.0; official-public-evidence-only)',
+                  'Accept-Language': 'zh-CN,zh;q=0.9',
+              }
+              page_data = None
+              final_url = None
+              content_type = 'text/html'
+              error = None
+              for attempt in range(1, 7):
+                  try:
+                      request = urllib.request.Request(url, headers=headers)
+                      with opener.open(request, timeout=90) as response:
+                          page_data = response.read(25 * 1024 * 1024 + 1)
+                          final_url = response.geturl()
+                          content_type = response.headers.get('Content-Type', 'text/html')
+                      if len(page_data) > 25 * 1024 * 1024:
+                          raise RuntimeError('page exceeds 25 MiB')
+                      break
+                  except Exception as exc:
+                      error = exc
+                      time.sleep(min(20, attempt * 3))
+              if page_data is None:
+                  raise RuntimeError(f'targeted page recovery failed for {source_id}: {error}')
+              hostname = (urllib.parse.urlparse(final_url).hostname or '').lower()
+              if not any(hostname == domain or hostname.endswith('.' + domain) for domain in allowed_domains):
+                  raise RuntimeError(f'off-domain redirect for {source_id}: {final_url}')
+              page_html = decode_page(page_data)
+              for marker in planned.get('expected_markers', []):
+                  if marker and marker not in page_html:
+                      raise RuntimeError(f'missing expected marker {marker!r} for {source_id}')
+
+              target_dir = ROOT / f'evidence/batch_01/{school_id}/{year}'
+              target_dir.mkdir(parents=True, exist_ok=True)
+              base_id = source_id.replace('SRC-', 'ASSET-') + '-RECOVERED'
+              page_path = target_dir / f'{base_id}-PAGE.html'
+              text_path = target_dir / f'{base_id}-PAGE_parsed.txt'
+              page_path.write_bytes(page_data)
+              text_path.write_text(clean_text(page_html), encoding='utf-8', newline='\n')
+              page_id = base_id + '-PAGE'
+              parsed_id = page_id + '-PARSED'
+              rel_page = page_path.relative_to(ROOT).as_posix()
+              rel_text = text_path.relative_to(ROOT).as_posix()
+
+              inventory['assets'] = [
+                  item for item in inventory.get('assets', [])
+                  if item.get('asset_id') not in {page_id, parsed_id}
+              ]
+              common = {
+                  'school_id': school_id,
+                  'year': year,
+                  'source_id': source_id,
+                  'status': 'collected',
+                  'official_domain': hostname,
+                  'privacy_classification': planned.get('privacy_classification', 'aggregate_or_policy'),
+                  'collected_at': scope.get('created_at'),
+              }
+              inventory['assets'].extend([
+                  {
+                      **common,
+                      'asset_id': page_id,
+                      'asset_role': 'source_page',
+                      'asset_type': 'source_page',
+                      'kind': 'source_page',
+                      'file_type': 'html',
+                      'extension': '.html',
+                      'media_type': content_type,
+                      'mime_type': 'text/html',
+                      'local_path': rel_page,
+                      'file_size': page_path.stat().st_size,
+                      'sha256': digest(page_path),
+                      'source_url': url,
+                      'final_url': final_url,
+                      'acquisition_method': 'targeted_official_source_retry',
+                  },
+                  {
+                      **common,
+                      'asset_id': parsed_id,
+                      'asset_role': 'parsed_text',
+                      'asset_type': 'parsed_text',
+                      'kind': 'parsed_text',
+                      'file_type': 'txt',
+                      'extension': '.txt',
+                      'media_type': 'text/plain; charset=utf-8',
+                      'mime_type': 'text/plain',
+                      'local_path': rel_text,
+                      'file_size': text_path.stat().st_size,
+                      'sha256': digest(text_path),
+                      'parent_asset_id': page_id,
+                      'parser': 'python.html.parser',
+                      'parser_version': 'stdlib',
+                      'parser_command': 'HTMLParser text extraction',
+                      'source_url': final_url,
+                      'acquisition_method': 'deterministic_local_parse',
+                  },
+              ])
+              recovered_ids = [page_id, parsed_id]
+
+              hrefs = re.findall(r'''(?:href|src)\s*=\s*["']([^"']+)["']''', page_html, flags=re.I)
+              candidates = []
+              for href in hrefs:
+                  absolute = urllib.parse.urljoin(final_url, html.unescape(href))
+                  parsed = urllib.parse.urlparse(absolute)
+                  host = (parsed.hostname or '').lower()
+                  if not any(host == domain or host.endswith('.' + domain) for domain in allowed_domains):
+                      continue
+                  lower_url = absolute.lower()
+                  if any(token in lower_url for token in ('download.jsp', '/__local/', '.pdf', '.doc', '.docx', '.xls', '.xlsx')):
+                      if absolute not in candidates:
+                          candidates.append(absolute)
+
+              attachment_count = 0
+              for candidate in candidates:
+                  try:
+                      request = urllib.request.Request(candidate, headers={**headers, 'Referer': final_url})
+                      with opener.open(request, timeout=90) as response:
+                          data = response.read(25 * 1024 * 1024 + 1)
+                          attachment_final = response.geturl()
+                          attachment_type = response.headers.get('Content-Type', 'application/octet-stream')
+                      if len(data) > 25 * 1024 * 1024:
+                          continue
+                      ext = extension_for(data, attachment_type, attachment_final)
+                      if ext is None:
+                          continue
+                      attachment_count += 1
+                      asset_id = f'{base_id}-ATT-{attachment_count:02d}'
+                      dest = target_dir / f'{asset_id}{ext}'
+                      dest.write_bytes(data)
+                      rel = dest.relative_to(ROOT).as_posix()
+                      inventory['assets'].append({
+                          **common,
+                          'asset_id': asset_id,
+                          'asset_role': 'attachment',
+                          'asset_type': 'attachment',
+                          'kind': 'attachment',
+                          'file_type': ext.lstrip('.'),
+                          'extension': ext,
+                          'media_type': attachment_type,
+                          'mime_type': attachment_type.split(';', 1)[0],
+                          'local_path': rel,
+                          'file_size': dest.stat().st_size,
+                          'sha256': digest(dest),
+                          'source_url': candidate,
+                          'final_url': attachment_final,
+                          'parent_asset_id': page_id,
+                          'acquisition_method': 'targeted_official_attachment_retry',
+                      })
+                      recovered_ids.append(asset_id)
+                      if ext == '.pdf':
+                          parsed_path = target_dir / f'{asset_id}_parsed.txt'
+                          subprocess.run(['pdftotext', '-layout', '-enc', 'UTF-8', str(dest), str(parsed_path)], check=True)
+                          parsed_text = parsed_path.read_text(encoding='utf-8').replace('\r\n', '\n').replace('\r', '\n').rstrip() + '\n'
+                          parsed_path.write_text(parsed_text, encoding='utf-8', newline='\n')
+                          parsed_asset_id = asset_id + '-PARSED'
+                          inventory['assets'].append({
+                              **common,
+                              'asset_id': parsed_asset_id,
+                              'asset_role': 'parsed_text',
+                              'asset_type': 'parsed_text',
+                              'kind': 'parsed_text',
+                              'file_type': 'txt',
+                              'extension': '.txt',
+                              'media_type': 'text/plain; charset=utf-8',
+                              'mime_type': 'text/plain',
+                              'local_path': parsed_path.relative_to(ROOT).as_posix(),
+                              'file_size': parsed_path.stat().st_size,
+                              'sha256': digest(parsed_path),
+                              'parent_asset_id': asset_id,
+                              'parser': 'pdftotext',
+                              'parser_version': subprocess.check_output(['pdftotext', '-v'], stderr=subprocess.STDOUT, text=True).splitlines()[0].rsplit(' ', 1)[-1],
+                              'parser_command': 'pdftotext -layout -enc UTF-8',
+                              'source_url': attachment_final,
+                              'acquisition_method': 'deterministic_local_parse',
+                          })
+                          recovered_ids.append(parsed_asset_id)
+                  except Exception as exc:
+                      print(f'attachment retry skipped for {source_id}: {candidate}: {exc}')
+
+              minimum = int(planned.get('min_required_attachments', 0) or 0)
+              if attachment_count < minimum:
+                  raise RuntimeError(f'{source_id} recovered {attachment_count} attachments; minimum is {minimum}')
+              failed_source['status'] = 'collected'
+              failed_source['asset_ids'] = sorted(set(failed_source.get('asset_ids', [])) | set(recovered_ids))
+              failed_source['final_url'] = final_url
+              failed_source['targeted_recovery'] = True
+              inventory['collection_errors'] = [item for item in inventory.get('collection_errors', []) if item.get('source_id') != source_id]
+              time.sleep(1.2)
+
+          inventory['assets'] = sorted(inventory.get('assets', []), key=lambda item: item.get('asset_id', ''))
+          inventory_path.write_text(json.dumps(inventory, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          remaining = [source['source_id'] for source in inventory['sources'] if source.get('required') and source.get('status') != 'collected' and source.get('source_id') != 'SRC-CZU-2024-DG']
+          if remaining:
+              raise SystemExit(f'targeted recovery left required failures: {remaining}')
+          PY
+          python3 /tmp/batch01-targeted-recovery.py
+
+      - name: Reuse the reviewed V8 manual merge, tests, and final CI definitions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          text = Path('/tmp/batch01-bootstrap-source/.github/workflows/_batch01-finalize-v8.yml').read_text(encoding='utf-8')
+
+          def extract(start: str, end: str) -> str:
+              if start not in text:
+                  raise SystemExit(f'missing V8 block start: {start}')
+              body = text.split(start, 1)[1]
+              if end not in body:
+                  raise SystemExit(f'missing V8 block end: {end}')
+              return body.split(end, 1)[0]
+
+          merge = extract("cat > /tmp/batch01-merge-manual.py <<'PY'\n", "\n          PY\n          python3 /tmp/batch01-merge-manual.py")
+          test_file = extract("cat > /tmp/batch01-final-payload/anhui_zsb_data/tests/test_batch_01_evidence.py <<'PY'\n", "\n          PY\n\n          cat > /tmp/batch01-final-payload/.github/workflows/batch-evidence-validation.yml")
+          ci_file = extract("cat > /tmp/batch01-final-payload/.github/workflows/batch-evidence-validation.yml <<'YAML'\n", "\n          YAML\n          sed -i")
+
+          Path('/tmp/batch01-merge-manual.py').write_text(merge, encoding='utf-8')
+          Path('/tmp/batch01-final-payload/anhui_zsb_data/tests/test_batch_01_evidence.py').write_text(test_file, encoding='utf-8')
+          ci_path = Path('/tmp/batch01-final-payload/.github/workflows/batch-evidence-validation.yml')
+          ci_path.write_text(ci_file, encoding='utf-8')
+          PY
+          python3 /tmp/batch01-merge-manual.py
+          (
+            cd /tmp/batch01-final-payload/anhui_zsb_data
+            python3 scripts/discover_batch_evidence.py --batch batch_01
+            python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+          )
+          test "$(find /tmp/batch01-final-payload/anhui_zsb_data/reports -maxdepth 1 -type f -name 'batch_01_*' | wc -l)" = '10'
+
+      - name: Create clean branch, validate everything, and force-push final commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          test "$(git rev-parse origin/main)" = "${MAIN_SHA}"
+          git switch -C "${TARGET_BRANCH}" "${MAIN_SHA}"
+          git clean -ffd
+          cp -a /tmp/batch01-final-payload/. .
+
+          cd anhui_zsb_data
+          python3 -m py_compile scripts/batch_evidence_common.py scripts/discover_batch_evidence.py scripts/collect_batch_evidence.py scripts/verify_batch_evidence.py tests/test_batch_01_evidence.py
+          python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+          before="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          python3 scripts/collect_batch_evidence.py --batch batch_01 --dry-run
+          after="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          test "${before}" = "${after}"
+          python3 scripts/verify_batch_evidence.py --batch batch_01 --skip-git-boundary
+          python3 scripts/stage1_evidence_guard.py
+          python3 scripts/verify_stage1_evidence.py
+          python3 -m unittest discover -s tests -v
+          PYTHONPATH=scripts python3 scripts/check_idempotence.py
+          PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
+          python3 scripts/run_quality_gate.py
+          cd ..
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil
+          import subprocess
+          exact = {
+              '.github/workflows/batch-evidence-validation.yml',
+              'anhui_zsb_data/config/batch_01_school_scope.json',
+              'anhui_zsb_data/config/batch_01_evidence_inventory.json',
+              'anhui_zsb_data/scripts/batch_evidence_common.py',
+              'anhui_zsb_data/scripts/discover_batch_evidence.py',
+              'anhui_zsb_data/scripts/collect_batch_evidence.py',
+              'anhui_zsb_data/scripts/verify_batch_evidence.py',
+              'anhui_zsb_data/tests/test_batch_01_evidence.py',
+          }
+          prefixes = ('anhui_zsb_data/evidence/batch_01/', 'anhui_zsb_data/reports/batch_01_')
+          for line in subprocess.check_output(['git', 'status', '--porcelain=v1'], text=True).splitlines():
+              path = line[3:].split(' -> ')[-1]
+              if path in exact or path.startswith(prefixes):
+                  continue
+              tracked = subprocess.run(['git', 'ls-files', '--error-unmatch', '--', path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+              if tracked:
+                  subprocess.run(['git', 'restore', '--source=origin/main', '--staged', '--worktree', '--', path], check=True)
+              else:
+                  target = Path(path)
+                  if target.is_dir(): shutil.rmtree(target)
+                  elif target.exists() or target.is_symlink(): target.unlink()
+          PY
+          git diff --check
+          test "$(find anhui_zsb_data/reports -maxdepth 1 -type f -name 'batch_01_*' | wc -l)" = '10'
+          test ! -e .batch01_bootstrap
+          test ! -e .github/workflows/_batch01-targeted-recovery-v11.yml
+
+          git add .github/workflows/batch-evidence-validation.yml \
+            anhui_zsb_data/config/batch_01_school_scope.json \
+            anhui_zsb_data/config/batch_01_evidence_inventory.json \
+            anhui_zsb_data/evidence/batch_01 \
+            anhui_zsb_data/reports/batch_01_* \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py \
+            anhui_zsb_data/tests/test_batch_01_evidence.py
+          git commit -m 'data(batch01): acquire audited raw evidence for three schools'
+          python3 anhui_zsb_data/scripts/verify_batch_evidence.py --batch batch_01
+          git push --force origin "HEAD:refs/heads/${TARGET_BRANCH}"
+          echo "FINAL_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Keep Draft PR, wait for checks, and publish final recovery audit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          pr="$(gh pr list --repo "${GITHUB_REPOSITORY}" --head "${TARGET_BRANCH}" --base main --state open --json number --jq '.[0].number // empty')"
+          if [[ -z "${pr}" ]]; then
+            gh pr create --repo "${GITHUB_REPOSITORY}" --draft --base main --head "${TARGET_BRANCH}" \
+              --title 'data(batch01): acquire audited raw evidence for three schools' \
+              --body 'Batch 01 official raw evidence acquisition. Keep Draft; do not merge automatically.'
+            pr="$(gh pr list --repo "${GITHUB_REPOSITORY}" --head "${TARGET_BRANCH}" --base main --state open --json number --jq '.[0].number')"
+          fi
+          gh pr ready "${pr}" --repo "${GITHUB_REPOSITORY}" --undo || true
+          sleep 30
+          set +e
+          timeout 3000s gh pr checks "${pr}" --repo "${GITHUB_REPOSITORY}" --watch --fail-fast
+          status=$?
+          set -e
+          python3 - <<'PY' > /tmp/batch01-v11-audit.md
+          import json, os
+          from pathlib import Path
+          root = Path('anhui_zsb_data')
+          inventory = json.loads((root / 'config/batch_01_evidence_inventory.json').read_text(encoding='utf-8'))
+          files = len([p for p in (root / 'evidence/batch_01').rglob('*') if p.is_file()])
+          failures = [s['source_id'] for s in inventory['sources'] if s.get('required') and s.get('status') != 'collected']
+          print('## Batch 01 targeted-recovery final audit\n')
+          print(f'- Final commit: `{os.environ["FINAL_SHA"]}`')
+          print('- PR remains Draft')
+          print('- Schools: AHSTU, CHZU, CZU')
+          print(f'- Official source records: {len(inventory["sources"])}')
+          print(f'- Inventory assets: {len(inventory["assets"])}')
+          print(f'- Evidence files: {files}')
+          print('- Manual official CZU PDFs / parsed text: 13 / 13')
+          print(f'- Required source failures: {failures or "none"}')
+          print('- Candidate-level personal records: excluded')
+          print('- Access-control bypass: no')
+          print('- Canonical datasets, SQLite, and Schema: unchanged')
+          print('- Batch Ready: false')
+          print('\nAll local discovery, closure, privacy, test, idempotence, clean-room, and quality gates passed.')
+          PY
+          if [[ "${status}" = '0' ]]; then
+            echo -e '\nRemote PR checks: **PASS**.' >> /tmp/batch01-v11-audit.md
+            gh pr comment "${pr}" --repo "${GITHUB_REPOSITORY}" --body-file /tmp/batch01-v11-audit.md
+          else
+            echo -e "\nRemote PR checks: **not all passing** (exit ${status}); PR remains Draft." >> /tmp/batch01-v11-audit.md
+            gh pr comment "${pr}" --repo "${GITHUB_REPOSITORY}" --body-file /tmp/batch01-v11-audit.md
+            exit "${status}"
+          fi
