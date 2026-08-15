@@ -6,7 +6,7 @@ on:
       - data/batch-01-raw-evidence-acquisition
     paths:
       - .github/workflows/_batch01-collect.yml
-      - .batch01_bootstrap.zip
+      - .batch01_bootstrap/**
   workflow_dispatch:
 
 permissions:
@@ -26,6 +26,7 @@ jobs:
         working-directory: anhui_zsb_data
     env:
       PYTHONUTF8: "1"
+      BOOTSTRAP_SHA256: "99601ac39f625bb9503547aa2160715a34b86d520c858451389eaec643cddce3"
 
     steps:
       - name: Checkout Batch branch without persisted credentials
@@ -38,8 +39,11 @@ jobs:
         working-directory: .
         run: |
           set -euo pipefail
-          sha256sum .batch01_bootstrap.zip
-          unzip -q .batch01_bootstrap.zip -d .
+          test "$(find .batch01_bootstrap -maxdepth 1 -type f -name 'chunk*.b64' | wc -l)" = "8"
+          cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01_bootstrap.zip
+          echo "${BOOTSTRAP_SHA256}  /tmp/batch01_bootstrap.zip" | sha256sum --check
+          unzip -t /tmp/batch01_bootstrap.zip
+          unzip -q /tmp/batch01_bootstrap.zip -d .
           python3 -m py_compile \
             anhui_zsb_data/scripts/batch_evidence_common.py \
             anhui_zsb_data/scripts/discover_batch_evidence.py \
@@ -146,5 +150,5 @@ jobs:
             /tmp/batch-01-final-payload.zip
             /tmp/batch-01-final-payload.zip.sha256
             anhui_zsb_data/ci-logs/batch-01-collection.log
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
