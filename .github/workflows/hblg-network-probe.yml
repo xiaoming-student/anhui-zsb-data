@@ -1,0 +1,122 @@
+name: HBLG Network Probe
+
+on:
+  push:
+    branches:
+      - agent/hblg-network-probe
+    paths:
+      - .github/workflows/hblg-network-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Install probe dependency
+        run: python -m pip install --disable-pip-version-check requests
+
+      - name: Resolve through system DNS and DNS-over-HTTPS
+        shell: bash
+        run: |
+          set +e
+          echo 'system DNS:'
+          getent ahostsv4 zsb.hblgxy.edu.cn
+          getent ahostsv4 www.hblgxy.edu.cn
+          echo 'proxy environment names:'
+          env | cut -d= -f1 | grep -Ei '(^|_)https?_proxy$|(^|_)all_proxy$|(^|_)no_proxy$' || true
+          python - <<'PY'
+          import json
+          import requests
+          import urllib3
+
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          for host in ('zsb.hblgxy.edu.cn', 'www.hblgxy.edu.cn'):
+              result = {'host': host, 'answers': [], 'errors': []}
+              for endpoint, headers in (
+                  ('https://1.1.1.1/dns-query', {'accept':'application/dns-json','Host':'cloudflare-dns.com'}),
+                  ('https://8.8.8.8/resolve', {'accept':'application/dns-json','Host':'dns.google'}),
+              ):
+                  try:
+                      response = requests.get(endpoint, params={'name':host,'type':'A'}, headers=headers, timeout=12, verify=False)
+                      response.raise_for_status()
+                      result['answers'].append({'endpoint':endpoint, 'body':response.json()})
+                  except Exception as exc:
+                      result['errors'].append({'endpoint':endpoint, 'error':repr(exc)})
+              print(json.dumps(result, ensure_ascii=False))
+          PY
+
+      - name: Probe official article with bounded curl variants
+        shell: bash
+        run: |
+          set +e
+          URL='https://zsb.hblgxy.edu.cn/info/1020/2103.htm'
+          HOST='zsb.hblgxy.edu.cn'
+          IPS=$(python - <<'PY'
+          import ipaddress
+          import requests
+          import urllib3
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          seen=[]
+          for endpoint,headers in (
+              ('https://1.1.1.1/dns-query',{'accept':'application/dns-json','Host':'cloudflare-dns.com'}),
+              ('https://8.8.8.8/resolve',{'accept':'application/dns-json','Host':'dns.google'}),
+          ):
+              try:
+                  r=requests.get(endpoint,params={'name':'zsb.hblgxy.edu.cn','type':'A'},headers=headers,timeout=12,verify=False)
+                  for row in r.json().get('Answer',[]):
+                      value=str(row.get('data','')).strip()
+                      try: address=ipaddress.ip_address(value)
+                      except ValueError: continue
+                      if address.version==4 and address.is_global and value not in seen: seen.append(value)
+              except Exception: pass
+          print(' '.join(seen[:6]))
+          PY
+          )
+          echo "candidate IPs: $IPS"
+          for IP in $IPS; do
+            echo "===== HTTPS direct --resolve $IP ====="
+            date -u +'%FT%TZ'
+            curl --verbose --location --insecure --noproxy '*' \
+              --connect-timeout 6 --max-time 18 \
+              --resolve "$HOST:443:$IP" \
+              --range 0-4095 \
+              --dump-header /tmp/headers-direct \
+              --output /tmp/body-direct \
+              --write-out 'http=%{http_code} remote=%{remote_ip} connect=%{time_connect} tls=%{time_appconnect} start=%{time_starttransfer} total=%{time_total} size=%{size_download}\n' \
+              "$URL"
+            RC=$?
+            echo "rc=$RC"
+            test -f /tmp/headers-direct && sed -n '1,25p' /tmp/headers-direct
+            test -f /tmp/body-direct && { wc -c /tmp/body-direct; head -c 80 /tmp/body-direct | xxd; }
+
+            echo "===== HTTPS environment/default route --resolve $IP ====="
+            curl --verbose --location --insecure \
+              --connect-timeout 6 --max-time 18 \
+              --resolve "$HOST:443:$IP" \
+              --range 0-4095 \
+              --output /dev/null \
+              --write-out 'http=%{http_code} remote=%{remote_ip} connect=%{time_connect} tls=%{time_appconnect} start=%{time_starttransfer} total=%{time_total} size=%{size_download}\n' \
+              "$URL"
+            echo "rc=$?"
+
+            echo "===== HTTP direct --resolve $IP ====="
+            curl --verbose --location --noproxy '*' \
+              --connect-timeout 6 --max-time 18 \
+              --resolve "$HOST:80:$IP" \
+              --range 0-4095 \
+              --output /dev/null \
+              --write-out 'http=%{http_code} remote=%{remote_ip} connect=%{time_connect} start=%{time_starttransfer} total=%{time_total} size=%{size_download}\n' \
+              "http://$HOST/info/1020/2103.htm"
+            echo "rc=$?"
+          done
+          exit 0
