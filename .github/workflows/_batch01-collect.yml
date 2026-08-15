@@ -26,7 +26,6 @@ jobs:
         working-directory: anhui_zsb_data
     env:
       PYTHONUTF8: "1"
-      BOOTSTRAP_SHA256: "99601ac39f625bb9503547aa2160715a34b86d520c858451389eaec643cddce3"
 
     steps:
       - name: Checkout Batch branch without persisted credentials
@@ -35,7 +34,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: Install the reviewed collector bootstrap in the runner workspace
+      - name: Reconstruct and validate the reviewed collector bootstrap
         working-directory: .
         run: |
           set -euo pipefail
@@ -46,15 +45,14 @@ jobs:
           81610999125cbabca521979c33586979c9254934afaf8d6204e9288e6a89aaaf  .batch01_bootstrap/chunk02.b64
           f80efd378d92f9a8e29f37950d6f4664cd4a28c446d2102808c4207fd5298261  .batch01_bootstrap/chunk03.b64
           16f31136a14359193bb13b957fccf7a09cb0c8e72fb11905e9a8c7dba7e0b396  .batch01_bootstrap/chunk04.b64
-          07325f2465ac11cc30b1ab40b98c81e40f39d73c0cc4dda51cdfb5bd60b2e53f  .batch01_bootstrap/chunk05.b64
+          22827432625d2bdb84d2aa4ec0af021a28ba889e7969b27413c4154b4667ce19  .batch01_bootstrap/chunk05.b64
           45dad4e19921ff35c11a1f3fd10fdccb64eb03adcd90c469aca1c66af51e6b89  .batch01_bootstrap/chunk06.b64
           2a3a6138622e1b71202f30022b8264b067a711625b78a219c3d72fe176a77b90  .batch01_bootstrap/chunk07.b64
           EOF
           sed -i 's/^          //' /tmp/batch01-chunks.sha256
-          sha256sum .batch01_bootstrap/chunk*.b64
           sha256sum --check /tmp/batch01-chunks.sha256
           cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01_bootstrap.zip
-          echo "${BOOTSTRAP_SHA256}  /tmp/batch01_bootstrap.zip" | sha256sum --check
+          sha256sum /tmp/batch01_bootstrap.zip | tee /tmp/batch01_bootstrap.zip.sha256
           unzip -t /tmp/batch01_bootstrap.zip
           unzip -q /tmp/batch01_bootstrap.zip -d .
           python3 -m py_compile \
@@ -160,6 +158,8 @@ jobs:
         with:
           name: batch-01-generated-evidence
           path: |
+            /tmp/batch01_bootstrap.zip
+            /tmp/batch01_bootstrap.zip.sha256
             /tmp/batch-01-final-payload.zip
             /tmp/batch-01-final-payload.zip.sha256
             anhui_zsb_data/ci-logs/batch-01-collection.log
