@@ -1,4 +1,4 @@
-# 阶段 1 官方证据包
+# Stage 1 官方证据包
 
 `evidence/` 保存尚未进入 canonical/staging 的官方原始证据，与流水线输入目录 `raw/` 隔离。
 
@@ -6,34 +6,36 @@
 
 ```text
 evidence/
-├── pilot_a/HFNU/       # 合肥师范学院缺失证据闭环
-└── pilot_b/AHUA/       # 安徽艺术学院异构 Pilot B 证据包
+├── pilot_a/HFNU/
+└── pilot_b/AHUA/
 ```
 
-## Pilot A：合肥师范学院
+## Gate 0 收敛结果
 
-已归档：
+- PR #3 是唯一 Stage 1 主 PR；
+- 22 个官方 source document；
+- 60 个证据资产，60 个唯一 SHA-256；
+- 已纳入 PR #2 独有的 AHUA 2025、HFNU 2024 报名人数、HTML 解析文本和页面内嵌 PDF；
+- 排除公共模板图片；两个官方空白申请/承诺表经隐私复核后作为章程附件保留；
+- 不包含姓名、身份证号、考生号、准考证号或个人成绩明细。
 
-- 2024 年招生章程 HTML；
-- 2024、2025、2026 年录取分数网页 HTML；
-- 2024、2025、2026 年专业课考试大纲官方通知 HTML；
-- 2024、2025、2026 年考试大纲/参考书目 PDF 原件；
-- PDF 解析文本，用于确认三个年份均存在参考书目相关内容；
-- 2024 年招生章程关联的官方申请表附件。
-
-## Pilot B：安徽艺术学院
-
-选择安徽艺术学院是因为其同时具有艺术类实践考试、理论笔试专业、多所联合培养院校及多个培养校区，结构与 HFNU 明显不同。
-
-证据包覆盖：招生章程、招生计划、专业和培养地点、考试科目、考试内容/大纲、参考教材、报考范围、录取规则、录取分数、调剂信息，以及官方分专业报考人数。
-
-## 完整性
-
-资产 URL、检索时间、大小和 SHA-256 记录在：
+完整审计：
 
 ```text
 config/phase1_evidence_inventory.json
+reports/stage1_pr_reconciliation.json
+reports/stage1_pr_reconciliation.md
 ```
+
+## 唯一采集入口
+
+```bash
+python3 scripts/collect_stage1_evidence.py --check-config
+python3 scripts/collect_stage1_evidence.py --dry-run
+python3 scripts/collect_stage1_evidence.py
+```
+
+采集器只能写入 `evidence/`，不会写入或清理 canonical `raw/`。官方字节、大小或最终 URL 与审计清单不一致时会立即失败。
 
 离线验证：
 
@@ -41,4 +43,4 @@ config/phase1_evidence_inventory.json
 python3 scripts/verify_stage1_evidence.py
 ```
 
-阶段 1 仅补齐证据文件，不修改 Schema、staging、normalized、SQLite 或现有 HFNU canonical 数据。
+Stage 1 不修改 Schema、staging、normalized、SQLite 或现有 canonical 业务数据。
