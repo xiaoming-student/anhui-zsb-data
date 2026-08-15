@@ -1,0 +1,73 @@
+name: HBLG Attachment Census
+
+on:
+  push:
+    branches:
+      - agent/hblg-network-probe
+    paths:
+      - .github/workflows/hblg-attachment-census.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Fetch charter pages and census attachments
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import json
+          import time
+          from pathlib import Path
+          from urllib.parse import urljoin, urlparse
+
+          import requests
+          import urllib3
+          from bs4 import BeautifulSoup
+
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          session = requests.Session()
+          session.trust_env = False
+          session.headers['User-Agent'] = 'Mozilla/5.0 (compatible; AnhuiZSBDataResearch/2.0)'
+          pages = [
+              'https://zsb.hblgxy.edu.cn/info/1020/2103.htm',
+              'https://zsb.hblgxy.edu.cn/info/1020/2238.htm',
+              'https://zsb.hblgxy.edu.cn/info/1020/2361.htm',
+          ]
+          extensions = {'.pdf','.doc','.docx','.xls','.xlsx','.zip','.jpg','.jpeg','.png'}
+          all_links=[]
+          for page in pages:
+              started=time.monotonic()
+              response=session.get(page,timeout=(8,30),verify=False,allow_redirects=True)
+              elapsed=time.monotonic()-started
+              print(json.dumps({'page':page,'status':response.status_code,'bytes':len(response.content),'seconds':round(elapsed,3),'content_type':response.headers.get('Content-Type')},ensure_ascii=False))
+              response.raise_for_status()
+              soup=BeautifulSoup(response.content,'html.parser')
+              links=[]
+              for tag in soup.find_all('a',href=True):
+                  anchor=tag.get_text(' ',strip=True)
+                  url=urljoin(response.url,tag['href']).split('#',1)[0]
+                  ext=Path(urlparse(url).path).suffix.lower()
+                  if ext in extensions or '/_upload/' in url or 'downloadattach' in url.lower() or 'DownloadAttachUrl' in url:
+                      links.append({'anchor':anchor,'url':url})
+                      if url not in [x['url'] for x in all_links]: all_links.append({'anchor':anchor,'url':url,'parent':page})
+              print(json.dumps({'page':page,'attachment_count':len(links),'attachments':links},ensure_ascii=False))
+          print(json.dumps({'unique_attachment_count':len(all_links)},ensure_ascii=False))
+          for item in all_links[:12]:
+              started=time.monotonic()
+              try:
+                  response=session.get(item['url'],headers={'Referer':item['parent'],'Range':'bytes=0-4095'},timeout=(8,35),verify=False,allow_redirects=True)
+                  print(json.dumps({'probe':item,'status':response.status_code,'bytes':len(response.content),'seconds':round(time.monotonic()-started,3),'content_type':response.headers.get('Content-Type'),'final_url':response.url,'magic':response.content[:12].hex()},ensure_ascii=False))
+              except Exception as exc:
+                  print(json.dumps({'probe':item,'seconds':round(time.monotonic()-started,3),'error':repr(exc)},ensure_ascii=False))
+          PY
