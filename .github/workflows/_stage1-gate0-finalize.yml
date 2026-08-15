@@ -1,0 +1,129 @@
+name: Gate 0 Stage 1 Finalizer
+
+on:
+  push:
+    branches:
+      - data/stage1-evidence-collection
+    paths:
+      - .github/workflows/_stage1-gate0-finalize.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: gate0-stage1-finalizer-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONUTF8: "1"
+      GITHUB_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout Stage 1 branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Download audited PR 2 evidence artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pr2-stage1 /tmp/pr2-stage1.zip
+          curl --fail --location --retry 3 \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/9227580228/zip" \
+            -o /tmp/pr2-stage1.zip
+          mkdir -p /tmp/pr2-stage1
+          unzip -q /tmp/pr2-stage1.zip -d /tmp/pr2-stage1
+          test -f /tmp/pr2-stage1/reports/stage1_evidence_fetch_report.json
+
+      - name: Reconcile PR 2 and PR 3 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 anhui_zsb_data/scripts/_finalize_stage1_gate0.py /tmp/pr2-stage1
+
+      - name: Validate supported collector and evidence inventory
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/collect_stage1_evidence.py --check-config
+          python3 scripts/verify_stage1_evidence.py
+
+      - name: Run Gate 0 tests explicitly
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -v
+          PYTHONPATH=scripts python3 scripts/check_idempotence.py
+          PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
+          python3 scripts/run_quality_gate.py
+
+      - name: Confirm forbidden project layers are unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- \
+            anhui_zsb_data/schema \
+            anhui_zsb_data/staging \
+            anhui_zsb_data/normalized \
+            anhui_zsb_data/db \
+            anhui_zsb_data/raw
+          test ! -e anhui_zsb_data/scripts/collect_stage1_evidence_v2.py
+          test ! -e anhui_zsb_data/scripts/_gate0_collect_stage1_evidence.py
+          test ! -e anhui_zsb_data/scripts/_gate0_verify_stage1_evidence.py
+          test ! -e anhui_zsb_data/scripts/_gate0_stage1_evidence_validation.yml
+          test ! -e anhui_zsb_data/scripts/_finalize_stage1_gate0.py
+          test ! -e .github/workflows/_stage1-gate0-finalize.yml
+
+      - name: Commit the reconciled Gate 0 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A -- \
+            .github/workflows/stage1-evidence-validation.yml \
+            .github/workflows/_stage1-gate0-finalize.yml \
+            anhui_zsb_data/config/phase1_evidence_inventory.json \
+            anhui_zsb_data/evidence \
+            anhui_zsb_data/reports/stage1_pr_reconciliation.json \
+            anhui_zsb_data/reports/stage1_pr_reconciliation.md \
+            anhui_zsb_data/reports/stage1_evidence_collection_report.json \
+            anhui_zsb_data/reports/stage1_evidence_collection_report.md \
+            anhui_zsb_data/reports/hfnu_reference_books_check.json \
+            anhui_zsb_data/reports/hfnu_reference_books_check.md \
+            anhui_zsb_data/scripts/collect_stage1_evidence.py \
+            anhui_zsb_data/scripts/collect_stage1_evidence_v2.py \
+            anhui_zsb_data/scripts/verify_stage1_evidence.py \
+            anhui_zsb_data/scripts/_gate0_collect_stage1_evidence.py \
+            anhui_zsb_data/scripts/_gate0_verify_stage1_evidence.py \
+            anhui_zsb_data/scripts/_gate0_stage1_evidence_validation.yml \
+            anhui_zsb_data/scripts/_finalize_stage1_gate0.py
+
+          forbidden="$(git diff --cached --name-only | grep -E '^anhui_zsb_data/(schema|staging|normalized|db|raw)/' || true)"
+          if [[ -n "${forbidden}" ]]; then
+            echo "Refusing to commit forbidden Gate 0 paths:"
+            echo "${forbidden}"
+            exit 1
+          fi
+
+          git diff --cached --stat
+          git commit -m "data(evidence): finalize official evidence package"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
