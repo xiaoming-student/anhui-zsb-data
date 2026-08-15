@@ -1,0 +1,303 @@
+name: HBLG P0 Raw Evidence Acquisition
+
+on:
+  push:
+    branches:
+      - agent/hblg-p0-raw-data
+    paths:
+      - scripts/acquire_hblg_p0_raw_evidence.py
+      - .github/workflows/hblg-p0-raw-evidence.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: hblg-p0-raw-evidence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acquire-validate-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout acquisition branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 requests
+
+      - name: Compile collector
+        run: python -m py_compile scripts/acquire_hblg_p0_raw_evidence.py
+
+      - name: Resolve and probe official hosts through DNS-over-HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from __future__ import annotations
+
+          import ipaddress
+          import json
+          import subprocess
+          from pathlib import Path
+
+          import requests
+          import urllib3
+
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+          targets = {
+              'zsb.hblgxy.edu.cn': 'https://zsb.hblgxy.edu.cn/info/1020/2103.htm',
+              'www.hblgxy.edu.cn': 'https://www.hblgxy.edu.cn/',
+          }
+          endpoints = [
+              ('https://1.1.1.1/dns-query', {'accept': 'application/dns-json', 'Host': 'cloudflare-dns.com'}),
+              ('https://8.8.8.8/resolve', {'accept': 'application/dns-json', 'Host': 'dns.google'}),
+          ]
+
+          chosen: dict[str, str] = {}
+          audit: dict[str, object] = {}
+          for host, probe_url in targets.items():
+              candidates: list[str] = []
+              endpoint_errors: list[str] = []
+              for endpoint, headers in endpoints:
+                  try:
+                      response = requests.get(
+                          endpoint,
+                          params={'name': host, 'type': 'A'},
+                          headers=headers,
+                          timeout=15,
+                          verify=False,
+                      )
+                      response.raise_for_status()
+                      for answer in response.json().get('Answer', []):
+                          if answer.get('type') != 1:
+                              continue
+                          value = str(answer.get('data', '')).strip()
+                          try:
+                              address = ipaddress.ip_address(value)
+                          except ValueError:
+                              continue
+                          if address.version == 4 and address.is_global and value not in candidates:
+                              candidates.append(value)
+                  except Exception as exc:
+                      endpoint_errors.append(f'{endpoint}: {type(exc).__name__}: {exc}')
+
+              probe_results: list[dict[str, object]] = []
+              for ip in candidates:
+                  command = [
+                      'curl', '--silent', '--show-error', '--location', '--insecure',
+                      '--connect-timeout', '7', '--max-time', '20',
+                      '--resolve', f'{host}:443:{ip}',
+                      '--output', '/dev/null', '--write-out', '%{http_code}',
+                      probe_url,
+                  ]
+                  process = subprocess.run(command, text=True, capture_output=True, check=False)
+                  code = process.stdout.strip()[-3:] if process.stdout.strip() else '000'
+                  probe_results.append(
+                      {
+                          'ip': ip,
+                          'curl_returncode': process.returncode,
+                          'http_code': code,
+                          'stderr': process.stderr.strip()[:500],
+                      }
+                  )
+                  if process.returncode == 0 and code != '000':
+                      chosen[host] = ip
+                      break
+
+              if host not in chosen and candidates:
+                  # Preserve the best DNS result even when the probe is blocked; the collector
+                  # will record access_restricted rather than misclassifying it as not_found.
+                  chosen[host] = candidates[0]
+              audit[host] = {
+                  'candidates': candidates,
+                  'chosen': chosen.get(host),
+                  'probe_results': probe_results,
+                  'endpoint_errors': endpoint_errors,
+              }
+
+          Path('/tmp/hblg-dns-audit.json').write_text(
+              json.dumps(audit, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(audit, ensure_ascii=False, indent=2))
+          if not chosen:
+              raise SystemExit('No globally routable official-host address was resolved')
+          Path('/tmp/hblg-hosts').write_text(
+              ''.join(f'{ip} {host}\n' for host, ip in chosen.items()),
+              encoding='utf-8',
+          )
+          PY
+
+          sudo tee -a /etc/hosts < /tmp/hblg-hosts >/dev/null
+          echo 'Effective IPv4 mappings:'
+          getent ahostsv4 zsb.hblgxy.edu.cn || true
+          getent ahostsv4 www.hblgxy.edu.cn || true
+
+      - name: Acquire official public pages and attachments
+        shell: bash
+        env:
+          HBLG_DISCOVERY_PAGE_LIMIT: '8'
+          HBLG_CONNECT_TIMEOUT: '10'
+          HBLG_READ_TIMEOUT: '70'
+          HBLG_REQUEST_DELAY: '0.12'
+          HBLG_MAX_FILE_BYTES: '99614720'
+        run: |
+          set -o pipefail
+          python scripts/acquire_hblg_p0_raw_evidence.py | tee "$RUNNER_TEMP/hblg-acquisition.log"
+
+      - name: Validate metadata, raw bytes, year matrix, and source boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='anhui_zsb_data/evidence/full_raw_30_schools/HBLG'
+          REPORT='anhui_zsb_data/reports/hblg_p0_raw_evidence_batch_01.md'
+          test -s "$ROOT/school_manifest.json"
+          test -s "$ROOT/school_coverage.csv"
+          test -s "$ROOT/school_notes.md"
+          test -s "$REPORT"
+
+          python - <<'PY'
+          from __future__ import annotations
+
+          import csv
+          import hashlib
+          import json
+          from collections import Counter
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          root = Path('anhui_zsb_data/evidence/full_raw_30_schools/HBLG')
+          manifest = json.loads((root / 'school_manifest.json').read_text('utf-8-sig'))
+          sources = manifest.get('sources', [])
+          assets = manifest.get('assets', [])
+          documents = sources + assets
+
+          if len(sources) < 3:
+              raise SystemExit(f'expected at least 3 official HTML sources, found {len(sources)}')
+          if not assets:
+              raise SystemExit('no official attachments were archived')
+          if manifest.get('school_id') != 'HBLG':
+              raise SystemExit('manifest school_id mismatch')
+          if manifest.get('years_audited') != [2024, 2025, 2026]:
+              raise SystemExit('manifest years_audited mismatch')
+          if manifest.get('sanitized') is not False or manifest.get('original_information_preserved') is not True:
+              raise SystemExit('raw-information preservation flags are incorrect')
+
+          allowed_domains = ('hblgxy.edu.cn',)
+          checked_paths: dict[str, tuple[int, str]] = {}
+          relation_count_by_year: Counter[int] = Counter()
+          public_records = 0
+          for item in documents:
+              year = int(item.get('year', 0))
+              if year not in {2024, 2025, 2026}:
+                  raise SystemExit(f'invalid year binding: {item}')
+              relation_count_by_year[year] += 1
+
+              url = item.get('official_url') or item.get('attachment_url') or ''
+              host = (urlparse(url).hostname or '').lower()
+              if not any(host == domain or host.endswith('.' + domain) for domain in allowed_domains):
+                  raise SystemExit(f'non-official URL in manifest: {url}')
+
+              path = Path(item['local_path'])
+              if not path.is_file():
+                  raise SystemExit(f'missing raw file: {path}')
+              data = path.read_bytes()
+              digest = hashlib.sha256(data).hexdigest()
+              if digest != item.get('sha256'):
+                  raise SystemExit(f'SHA-256 mismatch: {path}')
+              if len(data) != int(item.get('file_size', -1)):
+                  raise SystemExit(f'file-size mismatch: {path}')
+              if len(data) >= 100 * 1024 * 1024:
+                  raise SystemExit(f'raw file exceeds GitHub per-file safety limit: {path}')
+
+              suffix = path.suffix.lower()
+              if suffix == '.pdf' and not data.startswith(b'%PDF-'):
+                  raise SystemExit(f'non-PDF response saved as PDF: {path}')
+              if suffix in {'.docx', '.xlsx', '.zip'} and not data.startswith(b'PK\x03\x04'):
+                  raise SystemExit(f'non-OOXML/ZIP response saved as {suffix}: {path}')
+              if suffix in {'.doc', '.xls'} and not data.startswith(b'\xd0\xcf\x11\xe0'):
+                  raise SystemExit(f'non-OLE response saved as {suffix}: {path}')
+              if suffix == '.html':
+                  prefix = data[:2048].lstrip().lower()
+                  if not prefix.startswith((b'<!doctype html', b'<html', b'<?xml')) and b'<html' not in prefix:
+                      raise SystemExit(f'non-HTML response saved as HTML: {path}')
+
+              previous = checked_paths.get(path.as_posix())
+              if previous and previous != (len(data), digest):
+                  raise SystemExit(f'inconsistent deduplicated file relation: {path}')
+              checked_paths[path.as_posix()] = (len(data), digest)
+
+              status = item.get('status')
+              if status not in {'collected', 'public_official_record'}:
+                  raise SystemExit(f'invalid collected-document status: {status}')
+              if status == 'public_official_record':
+                  public_records += 1
+
+          if any(relation_count_by_year[year] == 0 for year in (2024, 2025, 2026)):
+              raise SystemExit(f'missing year evidence: {dict(relation_count_by_year)}')
+
+          rows = list(csv.DictReader((root / 'school_coverage.csv').open(encoding='utf-8-sig')))
+          expected_topics = manifest.get('topics_audited', [])
+          if len(expected_topics) != 28:
+              raise SystemExit(f'expected 28 topics, got {len(expected_topics)}')
+          if len(rows) != 84:
+              raise SystemExit(f'expected 84 coverage rows, got {len(rows)}')
+          expected_keys = {
+              (year, topic)
+              for year in (2024, 2025, 2026)
+              for topic in expected_topics
+          }
+          actual_keys = {(int(row['year']), row['topic']) for row in rows}
+          if actual_keys != expected_keys:
+              raise SystemExit('coverage matrix is not the complete 3 x 28 grid')
+          valid_statuses = {
+              'collected', 'official_not_published', 'not_found', 'not_applicable',
+              'removed_or_unavailable', 'access_restricted', 'manual_download_required',
+              'public_official_record', 'awaiting_manual_review',
+          }
+          invalid = [row for row in rows if row['status'] not in valid_statuses]
+          if invalid:
+              raise SystemExit(f'invalid coverage statuses: {invalid[:3]}')
+          collected_cells = sum(row['status'] == 'collected' for row in rows)
+          if collected_cells == 0:
+              raise SystemExit('coverage contains no collected cells')
+
+          print(json.dumps({
+              'sources': len(sources),
+              'attachment_relations': len(assets),
+              'unique_raw_files': len(checked_paths),
+              'raw_bytes': sum(size for size, _ in checked_paths.values()),
+              'relations_by_year': dict(relation_count_by_year),
+              'collected_cells': collected_cells,
+              'public_official_records': public_records,
+              'failure_count': len(manifest.get('failures', [])),
+          }, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit HBLG raw evidence to acquisition branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anhui_zsb_data/evidence/full_raw_30_schools/HBLG
+          git add anhui_zsb_data/reports/hblg_p0_raw_evidence_batch_01.md
+          if git diff --cached --quiet; then
+            echo 'No evidence changes to commit.'
+            exit 0
+          fi
+          git commit -m 'data: add raw evidence for HBLG 2024-2026'
+          git push origin HEAD:${GITHUB_REF_NAME}
