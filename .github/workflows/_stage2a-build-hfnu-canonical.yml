@@ -1,0 +1,187 @@
+name: Stage 2A HFNU Canonical Build
+
+on:
+  push:
+    branches:
+      - data/stage2a-hfnu-evidence-integration
+    paths:
+      - .github/workflows/_stage2a-build-hfnu-canonical.yml
+      - anhui_zsb_data/scripts/build_stage2a_hfnu_staging.py
+      - anhui_zsb_data/scripts/stage2a_hfnu_extension.py
+      - anhui_zsb_data/scripts/_patch_stage2a_pipeline.py
+      - anhui_zsb_data/tests/test_stage2a_hfnu_integration.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: stage2a-hfnu-canonical-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: Checkout Stage 2A branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install PDF text tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+          pdftotext -v 2>&1 | head -n 1
+
+      - name: Verify prerequisite Gate 2A-1 and Gate 2A-2 outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF_NAME}" = "data/stage2a-hfnu-evidence-integration"
+          test -f anhui_zsb_data/reports/stage2a_baseline.json
+          test -f anhui_zsb_data/reports/stage2a_hfnu_evidence_integration.json
+          test -f anhui_zsb_data/config/stage2a_hfnu_evidence_map.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('anhui_zsb_data')
+          baseline = json.loads((root / 'reports/stage2a_baseline.json').read_text(encoding='utf-8'))
+          promoted = json.loads((root / 'reports/stage2a_hfnu_evidence_integration.json').read_text(encoding='utf-8'))
+          assert baseline['git']['base_sha'] == '5d16b24801979c070699514698d4ff9877575593'
+          assert promoted['ok'] is True
+          assert promoted['hfnu']['source_count'] == 8
+          assert promoted['hfnu']['asset_count'] == 26
+          assert promoted['hash_verification']['mismatches'] == 0
+          assert not promoted['scope']['schema_modified']
+          assert not promoted['scope']['ahua_modified']
+          print('Gate 2A-1/2 prerequisite: PASS')
+          PY
+
+      - name: Build HFNU evidence-backed staging
+        working-directory: anhui_zsb_data
+        run: python3 scripts/build_stage2a_hfnu_staging.py
+
+      - name: Install deterministic Stage 2A pipeline hook
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/_patch_stage2a_pipeline.py
+          rm scripts/_patch_stage2a_pipeline.py
+          python3 -m py_compile run_pipeline.py scripts/stage2a_hfnu_extension.py
+
+      - name: Build once and establish post-change stable-ID report
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 run_pipeline.py
+          python3 scripts/verify_stage2a_stable_ids.py
+
+      - name: Run full Stage 2A validation suite
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/stage1_evidence_guard.py
+          python3 scripts/verify_stage1_evidence.py
+          python3 scripts/run_quality_gate.py
+          python3 scripts/verify_stage2a_stable_ids.py
+          python3 -m unittest tests.test_stage2a_hfnu_integration -v
+
+      - name: Enforce scope and semantic gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- anhui_zsb_data/schema anhui_zsb_data/evidence
+          test ! -d anhui_zsb_data/staging/AHUA
+          if find anhui_zsb_data/raw -type f -path '*AHUA*' -print -quit | grep -q .; then
+            echo 'AHUA canonical files are forbidden in Stage 2A.'
+            exit 1
+          fi
+          test ! -e anhui_zsb_data/scripts/_patch_stage2a_pipeline.py
+          python3 - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root = Path('anhui_zsb_data')
+          baseline = json.loads((root / 'reports/stage2a_baseline.json').read_text(encoding='utf-8'))
+          stage = json.loads((root / 'reports/stage2a_hfnu_staging_report.json').read_text(encoding='utf-8'))
+          extension = json.loads((root / 'reports/stage2a_hfnu_normalized_extension.json').read_text(encoding='utf-8'))
+          stable = json.loads((root / 'reports/stage2a_stable_ids_verification.json').read_text(encoding='utf-8'))
+          quality = json.loads((root / 'reports/quality_gate_report.json').read_text(encoding='utf-8'))
+          assert stage['ok'] and extension['ok'] and stable['ok'] and quality['ok']
+          assert len(stage['files']) == 8
+          assert not stage['scope']['ahua_read']
+          assert quality['steps'] and all(item['ok'] for item in quality['steps'])
+          def count(table):
+              with (root / 'normalized' / f'{table}.csv').open(encoding='utf-8-sig', newline='') as handle:
+                  return sum(1 for _ in csv.DictReader(handle))
+          assert count('admission_scores') > baseline['normalized_counts']['admission_scores']
+          assert count('application_statistics') > 0
+          assert count('syllabus') > 0
+          assert count('reference_books') > 0
+          assert count('fact_sources') > baseline['normalized_counts']['fact_sources']
+          print('Gate 2A-3/4 semantic assertions: PASS')
+          PY
+
+      - name: Commit Stage 2A HFNU staging and canonical outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A -- \
+            anhui_zsb_data/run_pipeline.py \
+            anhui_zsb_data/staging/HFNU \
+            anhui_zsb_data/normalized \
+            anhui_zsb_data/db \
+            anhui_zsb_data/qa \
+            anhui_zsb_data/reports \
+            anhui_zsb_data/scripts/_patch_stage2a_pipeline.py
+
+          forbidden="$(git diff --cached --name-only | grep -E '^anhui_zsb_data/(schema|evidence)/|AHUA' || true)"
+          if [[ -n "${forbidden}" ]]; then
+            echo "Refusing to commit forbidden Stage 2A paths:"
+            echo "${forbidden}"
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo 'No Stage 2A canonical changes to commit.'
+            exit 0
+          fi
+          git diff --cached --stat
+          git commit -m "data(stage2a): integrate HFNU scores syllabus books and applications"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload Stage 2A build reports and logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: stage2a-hfnu-canonical-build
+          path: |
+            anhui_zsb_data/reports/stage2a_baseline.json
+            anhui_zsb_data/reports/stage2a_hfnu_evidence_integration.json
+            anhui_zsb_data/reports/stage2a_hfnu_staging_report.json
+            anhui_zsb_data/reports/stage2a_hfnu_normalized_extension.json
+            anhui_zsb_data/reports/stage2a_stable_ids_verification.json
+            anhui_zsb_data/reports/quality_gate_report.json
+            anhui_zsb_data/reports/quality_gate_report.md
+            anhui_zsb_data/qa/*.csv
+          if-no-files-found: warn
+          retention-days: 30
