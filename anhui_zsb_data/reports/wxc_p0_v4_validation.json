@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-08-16T04:09:49.325319+00:00",
+  "school_id": "WXC",
+  "coverage_cells": 84,
+  "status_counts": {
+    "access_restricted": 18,
+    "awaiting_manual_review": 45,
+    "not_found": 21
+  },
+  "formal_evidence_items": 0,
+  "formal_evidence_bytes": 0,
+  "failures": 35,
+  "privacy_exclusions": 0,
+  "acquisition_exit_code": 0,
+  "validation_passed": true
+}

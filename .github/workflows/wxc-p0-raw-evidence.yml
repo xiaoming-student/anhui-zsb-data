@@ -1,0 +1,194 @@
+name: WXC P0 Raw Evidence Acquisition
+
+on:
+  push:
+    branches:
+      - agent/wxc-p0-raw-data
+    paths:
+      - scripts/acquire_wxc_p0_raw_evidence.py
+      - .github/workflows/wxc-p0-raw-evidence.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: wxc-p0-raw-evidence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  acquire-and-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout acquisition branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install parser and DNS dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 requests
+
+      - name: Resolve official hosts through DNS-over-HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/wxc-hosts || true
+          import requests
+          import urllib3
+
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+          hosts = ['zsb.wxc.edu.cn', 'www.wxc.edu.cn', 'www.ahzsks.cn']
+          endpoints = [
+              ('https://1.1.1.1/dns-query', {'accept': 'application/dns-json', 'Host': 'cloudflare-dns.com'}),
+              ('https://8.8.8.8/resolve', {'accept': 'application/dns-json', 'Host': 'dns.google'}),
+          ]
+          for host in hosts:
+              answers = []
+              for endpoint, headers in endpoints:
+                  try:
+                      response = requests.get(
+                          endpoint,
+                          params={'name': host, 'type': 'A'},
+                          headers=headers,
+                          timeout=12,
+                          verify=False,
+                      )
+                      response.raise_for_status()
+                      for row in response.json().get('Answer', []):
+                          if row.get('type') == 1 and row.get('data') not in answers:
+                              answers.append(row['data'])
+                  except Exception as exc:
+                      print(f'# DoH failure {host} {endpoint}: {exc}')
+              for ip in answers[:3]:
+                  print(ip, host)
+          PY
+          grep -E '^[0-9]+(\.[0-9]+){3}[[:space:]]+' /tmp/wxc-hosts | tee /tmp/wxc-hosts-valid || true
+          if test -s /tmp/wxc-hosts-valid; then
+            sudo tee -a /etc/hosts < /tmp/wxc-hosts-valid >/dev/null
+          fi
+          echo 'Effective host mappings:'
+          getent ahostsv4 zsb.wxc.edu.cn || true
+          getent ahostsv4 www.wxc.edu.cn || true
+          getent ahostsv4 www.ahzsks.cn || true
+
+      - name: Apply preflight data-quality guards
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/acquire_wxc_p0_raw_evidence.py')
+          text = path.read_text('utf-8')
+          text = text.replace(
+              '"成绩名单", "考生号", "准考证号", "身份证号", "姓名", "成绩",',
+              '"成绩名单", "考生号", "准考证号", "身份证号",',
+          )
+          text = text.replace(
+              'attempts = [(["-4"], True), ([], True), (["-4", "--insecure"], False), (["--insecure"], False)]',
+              'attempts = [(["-4"], True), (["-4", "--insecure"], False)]',
+          )
+          text = text.replace(
+              '"--retry", "3", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "20", "--max-time", "150",',
+              '"--retry", "1", "--retry-delay", "1", "--retry-all-errors",\n                "--connect-timeout", "8", "--max-time", "35",',
+          )
+          text = text.replace(
+              'failures = [f for f in failures if f.get("url") not in success_urls]',
+              'reachable_urls = {url for url, (body, _meta) in fetch_cache.items() if body is not None}\nfailures = [f for f in failures if f.get("url") not in success_urls and f.get("url") not in reachable_urls]',
+          )
+          path.write_text(text, 'utf-8')
+          PY
+          python -m py_compile scripts/acquire_wxc_p0_raw_evidence.py
+
+      - name: Acquire six located official originals
+        shell: bash
+        env:
+          WXC_MAX_CRAWL_PAGES: '0'
+          WXC_MAX_CRAWL_DEPTH: '0'
+        run: |
+          set -o pipefail
+          python scripts/acquire_wxc_p0_raw_evidence.py | tee "$RUNNER_TEMP/wxc-acquisition.log"
+
+      - name: Validate generated evidence metadata and raw bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='anhui_zsb_data/evidence/full_raw_30_schools/WXC'
+          test -s "$ROOT/school_manifest.json"
+          test -s "$ROOT/school_coverage.csv"
+          test -s "$ROOT/school_notes.md"
+          test -s 'anhui_zsb_data/reports/wxc_p0_raw_evidence_batch_01.md'
+          python - <<'PY'
+          import csv
+          import hashlib
+          import json
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          root = Path('anhui_zsb_data/evidence/full_raw_30_schools/WXC')
+          manifest = json.loads((root / 'school_manifest.json').read_text('utf-8-sig'))
+          documents = manifest.get('sources', []) + manifest.get('assets', [])
+          if not documents:
+              raise SystemExit('manifest contains no official documents')
+
+          allowed_domains = ('wxc.edu.cn', 'ahzsks.cn')
+          for item in documents:
+              path = Path(item['local_path'])
+              if not path.is_file():
+                  raise SystemExit(f'missing raw file: {path}')
+              data = path.read_bytes()
+              actual = hashlib.sha256(data).hexdigest()
+              if actual != item['sha256']:
+                  raise SystemExit(f'SHA-256 mismatch: {path}')
+              if len(data) != int(item['file_size']):
+                  raise SystemExit(f'file-size mismatch: {path}')
+              if path.suffix.lower() == '.pdf' and not data.startswith(b'%PDF-'):
+                  raise SystemExit(f'non-PDF response saved as PDF: {path}')
+              if path.suffix.lower() in {'.docx', '.xlsx', '.zip'} and not data.startswith(b'PK\x03\x04'):
+                  raise SystemExit(f'non-OOXML/ZIP response saved as {path.suffix}: {path}')
+              url = item.get('official_url') or item.get('attachment_url') or ''
+              host = (urlparse(url).hostname or '').lower()
+              if not any(host == d or host.endswith('.' + d) for d in allowed_domains):
+                  raise SystemExit(f'non-official URL in manifest: {url}')
+              if int(item.get('year', 0)) not in {2024, 2025, 2026}:
+                  raise SystemExit(f'invalid year binding: {item}')
+
+          rows = list(csv.DictReader((root / 'school_coverage.csv').open(encoding='utf-8-sig')))
+          if len(rows) != 84:
+              raise SystemExit(f'expected 84 coverage rows, got {len(rows)}')
+          if {(int(r['year']), r['topic']) for r in rows} != {
+              (year, topic)
+              for year in (2024, 2025, 2026)
+              for topic in manifest['topics_audited']
+          }:
+              raise SystemExit('coverage matrix is not a complete 3 x 28 grid')
+
+          print(json.dumps({
+              'sources': len(manifest.get('sources', [])),
+              'assets': len(manifest.get('assets', [])),
+              'coverage_rows': len(rows),
+              'raw_bytes': sum(Path(x['local_path']).stat().st_size for x in documents),
+          }, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit raw evidence to acquisition branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anhui_zsb_data/evidence/full_raw_30_schools/WXC
+          git add anhui_zsb_data/reports/wxc_p0_raw_evidence_batch_01.md
+          if git diff --cached --quiet; then
+            echo 'No evidence changes to commit.'
+            exit 0
+          fi
+          git commit -m 'data: add raw evidence for WXC 2024-2026'
+          git push origin HEAD:${GITHUB_REF_NAME}

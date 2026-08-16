@@ -1,0 +1,1679 @@
+{
+  "schema_version": "full-42-raw-evidence-audit-v1",
+  "generated_at": "2026-08-16T03:52:28+00:00",
+  "source_sha": "8408de3427a86f0e91a138e3ba7fa2f9487038ca",
+  "school_count": 42,
+  "years": [
+    2024,
+    2025,
+    2026
+  ],
+  "topics": [
+    "admission_policy",
+    "enrollment_plan",
+    "major_catalog",
+    "training_location",
+    "tuition_and_duration",
+    "eligibility",
+    "exam_subjects",
+    "exam_syllabus",
+    "reference_books",
+    "exam_schedule",
+    "exam_location",
+    "admission_rules",
+    "score_formula",
+    "control_line",
+    "admission_min_score",
+    "admission_max_score",
+    "admission_average_score",
+    "application_statistics",
+    "qualified_statistics",
+    "admitted_statistics",
+    "registered_statistics",
+    "plan_adjustment",
+    "adjustment",
+    "exemption",
+    "retired_soldier",
+    "registered_poor_family",
+    "skill_competition",
+    "other_official_notice"
+  ],
+  "expected_coverage_cells": 3528,
+  "directory_count": 30,
+  "manifest_count": 30,
+  "coverage_file_count": 30,
+  "explicit_status_cells": 2520,
+  "collected_cells": 580,
+  "raw_file_count": 1427,
+  "raw_bytes": 73660977,
+  "global_status_counts": {
+    "access_restricted": 18,
+    "awaiting_manual_review": 45,
+    "collected": 580,
+    "not_found": 1877
+  },
+  "schools": [
+    {
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "school_type": "公办",
+      "official_domain": "hfnu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 46,
+        "not_found": 38
+      },
+      "collected_cells": 46,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 23,
+        "2025": 13,
+        "2026": 10
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 56,
+      "raw_file_count_by_year": {
+        "2024": 12,
+        "2025": 14,
+        "2026": 30
+      },
+      "raw_bytes": 1262853,
+      "manifest_source_count": 28,
+      "manifest_asset_count": 28,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "school_type": "公办",
+      "official_domain": "ahua.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "not_found": 84
+      },
+      "collected_cells": 0,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHSTU",
+      "school_name": "安徽科技工程大学（原安徽科技学院）",
+      "school_type": "公办",
+      "official_domain": "ahstu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 66,
+        "not_found": 18
+      },
+      "collected_cells": 66,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 22,
+        "2025": 22,
+        "2026": 22
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 48,
+      "raw_file_count_by_year": {
+        "2024": 20,
+        "2025": 14,
+        "2026": 14
+      },
+      "raw_bytes": 1122597,
+      "manifest_source_count": 24,
+      "manifest_asset_count": 24,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "CHZU",
+      "school_name": "滁州学院",
+      "school_type": "公办",
+      "official_domain": "chzu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 8,
+        "not_found": 76
+      },
+      "collected_cells": 8,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 3,
+        "2025": 3,
+        "2026": 2
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 54,
+      "raw_file_count_by_year": {
+        "2024": 18,
+        "2025": 18,
+        "2026": 18
+      },
+      "raw_bytes": 20688704,
+      "manifest_source_count": 7,
+      "manifest_asset_count": 47,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "CZU",
+      "school_name": "池州学院",
+      "school_type": "公办",
+      "official_domain": "czu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 21,
+        "not_found": 63
+      },
+      "collected_cells": 21,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 7,
+        "2025": 6,
+        "2026": 8
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 119,
+      "raw_file_count_by_year": {
+        "2024": 26,
+        "2025": 36,
+        "2026": 57
+      },
+      "raw_bytes": 6937534,
+      "manifest_source_count": 47,
+      "manifest_asset_count": 72,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHAU",
+      "school_name": "安徽农业大学",
+      "school_type": "公办",
+      "official_domain": "ahau.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 57,
+        "not_found": 27
+      },
+      "collected_cells": 57,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 20,
+        "2025": 20,
+        "2026": 17
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 66,
+      "raw_file_count_by_year": {
+        "2024": 14,
+        "2025": 18,
+        "2026": 34
+      },
+      "raw_bytes": 1169465,
+      "manifest_source_count": 33,
+      "manifest_asset_count": 33,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHMU",
+      "school_name": "安徽医科大学",
+      "school_type": "公办",
+      "official_domain": "ahmu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 34,
+        "not_found": 50
+      },
+      "collected_cells": 34,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 9,
+        "2025": 14,
+        "2026": 11
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 96,
+      "raw_file_count_by_year": {
+        "2024": 27,
+        "2025": 28,
+        "2026": 41
+      },
+      "raw_bytes": 4594558,
+      "manifest_source_count": 38,
+      "manifest_asset_count": 58,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHTCM",
+      "school_name": "安徽中医药大学",
+      "school_type": "公办",
+      "official_domain": "ahtcm.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 26,
+        "not_found": 58
+      },
+      "collected_cells": 26,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 6,
+        "2025": 6,
+        "2026": 14
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 113,
+      "raw_file_count_by_year": {
+        "2024": 38,
+        "2025": 32,
+        "2026": 43
+      },
+      "raw_bytes": 9590120,
+      "manifest_source_count": 46,
+      "manifest_asset_count": 67,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "BBMU",
+      "school_name": "蚌埠医科大学",
+      "school_type": "公办",
+      "official_domain": "bbmu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 24,
+        "not_found": 60
+      },
+      "collected_cells": 24,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 4,
+        "2026": 19
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 48,
+      "raw_file_count_by_year": {
+        "2024": 2,
+        "2025": 18,
+        "2026": 28
+      },
+      "raw_bytes": 1010132,
+      "manifest_source_count": 24,
+      "manifest_asset_count": 24,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "FYNU",
+      "school_name": "阜阳师范大学",
+      "school_type": "公办",
+      "official_domain": "fynu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 39,
+        "not_found": 45
+      },
+      "collected_cells": 39,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 13,
+        "2025": 14,
+        "2026": 12
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 38,
+      "raw_file_count_by_year": {
+        "2024": 12,
+        "2025": 10,
+        "2026": 16
+      },
+      "raw_bytes": 573839,
+      "manifest_source_count": 19,
+      "manifest_asset_count": 19,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AQNU",
+      "school_name": "安庆师范大学",
+      "school_type": "公办",
+      "official_domain": "aqnu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 31,
+        "not_found": 53
+      },
+      "collected_cells": 31,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 7,
+        "2025": 13,
+        "2026": 11
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 98,
+      "raw_file_count_by_year": {
+        "2024": 26,
+        "2025": 36,
+        "2026": 36
+      },
+      "raw_bytes": 2656742,
+      "manifest_source_count": 49,
+      "manifest_asset_count": 49,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "WNMC",
+      "school_name": "皖南医科大学（原皖南医学院）",
+      "school_type": "公办",
+      "official_domain": "wnmc.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 4,
+        "not_found": 80
+      },
+      "collected_cells": 4,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 1,
+        "2026": 2
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 24,
+      "raw_file_count_by_year": {
+        "2024": 6,
+        "2025": 8,
+        "2026": 10
+      },
+      "raw_bytes": 420975,
+      "manifest_source_count": 12,
+      "manifest_asset_count": 12,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "school_type": "公办",
+      "official_domain": "wxc.edu.cn",
+      "priority": "P0-A",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "access_restricted": 18,
+        "awaiting_manual_review": 45,
+        "not_found": 21
+      },
+      "collected_cells": 0,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 31,
+      "last_attempt_at": "2026-08-16T03:52:28+00:00"
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "school_type": "公办",
+      "official_domain": "bzuu.edu.cn",
+      "priority": "P0-A",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "not_found": 84
+      },
+      "collected_cells": 0,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 6,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "school_type": "公办",
+      "official_domain": "chu.edu.cn",
+      "priority": "P0-A",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "not_found": 84
+      },
+      "collected_cells": 0,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 6,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "HSU",
+      "school_name": "黄山学院",
+      "school_type": "公办",
+      "official_domain": "hsu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 25,
+        "not_found": 59
+      },
+      "collected_cells": 25,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 6,
+        "2025": 9,
+        "2026": 10
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 104,
+      "raw_file_count_by_year": {
+        "2024": 24,
+        "2025": 30,
+        "2026": 50
+      },
+      "raw_bytes": 3469958,
+      "manifest_source_count": 31,
+      "manifest_asset_count": 73,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "school_type": "公办",
+      "official_domain": "ahszu.edu.cn",
+      "priority": "P0-A",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "not_found": 84
+      },
+      "collected_cells": 0,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 6,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "HFUU",
+      "school_name": "合肥大学",
+      "school_type": "公办",
+      "official_domain": "hfuu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 21,
+        "not_found": 63
+      },
+      "collected_cells": 21,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 1,
+        "2026": 19
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 114,
+      "raw_file_count_by_year": {
+        "2024": 15,
+        "2025": 14,
+        "2026": 85
+      },
+      "raw_bytes": 2818873,
+      "manifest_source_count": 50,
+      "manifest_asset_count": 64,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "BBC",
+      "school_name": "蚌埠学院",
+      "school_type": "公办",
+      "official_domain": "bbc.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 16,
+        "not_found": 68
+      },
+      "collected_cells": 16,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 4,
+        "2025": 5,
+        "2026": 7
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 78,
+      "raw_file_count_by_year": {
+        "2024": 24,
+        "2025": 23,
+        "2026": 31
+      },
+      "raw_bytes": 2085409,
+      "manifest_source_count": 17,
+      "manifest_asset_count": 61,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHUT",
+      "school_name": "安徽工业大学",
+      "school_type": "公办",
+      "official_domain": "ahut.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 23,
+        "not_found": 61
+      },
+      "collected_cells": 23,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 7,
+        "2025": 7,
+        "2026": 9
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 52,
+      "raw_file_count_by_year": {
+        "2024": 14,
+        "2025": 16,
+        "2026": 22
+      },
+      "raw_bytes": 721668,
+      "manifest_source_count": 26,
+      "manifest_asset_count": 26,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AUFE",
+      "school_name": "安徽财经大学",
+      "school_type": "公办",
+      "official_domain": "aufe.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 3,
+        "not_found": 81
+      },
+      "collected_cells": 3,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 1,
+        "2026": 1
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 12,
+      "raw_file_count_by_year": {
+        "2024": 2,
+        "2025": 4,
+        "2026": 6
+      },
+      "raw_bytes": 116655,
+      "manifest_source_count": 6,
+      "manifest_asset_count": 6,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHNU",
+      "school_name": "安徽师范大学",
+      "school_type": "公办",
+      "official_domain": "ahnu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 13,
+        "not_found": 71
+      },
+      "collected_cells": 13,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 12,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 28,
+      "raw_file_count_by_year": {
+        "2024": 10,
+        "2025": 18,
+        "2026": 0
+      },
+      "raw_bytes": 429750,
+      "manifest_source_count": 14,
+      "manifest_asset_count": 14,
+      "manifest_failure_count": 4,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "TLU",
+      "school_name": "铜陵学院",
+      "school_type": "公办",
+      "official_domain": "tlu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 42,
+        "not_found": 42
+      },
+      "collected_cells": 42,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 15,
+        "2025": 16,
+        "2026": 11
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 107,
+      "raw_file_count_by_year": {
+        "2024": 35,
+        "2025": 31,
+        "2026": 41
+      },
+      "raw_bytes": 4080643,
+      "manifest_source_count": 39,
+      "manifest_asset_count": 68,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHYZ",
+      "school_name": "安徽第二医学院",
+      "school_type": "公办",
+      "official_domain": "ahyz.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 2,
+        "not_found": 82
+      },
+      "collected_cells": 2,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 1,
+        "2026": 1
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 4,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 2,
+        "2026": 2
+      },
+      "raw_bytes": 92676,
+      "manifest_source_count": 2,
+      "manifest_asset_count": 2,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "school_type": "公办",
+      "official_domain": "hnnu.edu.cn",
+      "priority": "P0-A",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "not_found": 84
+      },
+      "collected_cells": 0,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 6,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AHJZU",
+      "school_name": "安徽建筑大学",
+      "school_type": "公办",
+      "official_domain": "ahjzu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 3,
+        "not_found": 81
+      },
+      "collected_cells": 3,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 1,
+        "2026": 1
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 27,
+      "raw_file_count_by_year": {
+        "2024": 8,
+        "2025": 9,
+        "2026": 10
+      },
+      "raw_bytes": 7582906,
+      "manifest_source_count": 13,
+      "manifest_asset_count": 14,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AXHU",
+      "school_name": "安徽新华学院",
+      "school_type": "民办",
+      "official_domain": "axhu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 4,
+        "not_found": 80
+      },
+      "collected_cells": 4,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 4
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 8,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 8
+      },
+      "raw_bytes": 330442,
+      "manifest_source_count": 2,
+      "manifest_asset_count": 6,
+      "manifest_failure_count": 2,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "SLU",
+      "school_name": "安徽三联学院",
+      "school_type": "民办",
+      "official_domain": "slu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 37,
+        "not_found": 47
+      },
+      "collected_cells": 37,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 9,
+        "2025": 9,
+        "2026": 19
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 53,
+      "raw_file_count_by_year": {
+        "2024": 12,
+        "2025": 20,
+        "2026": 21
+      },
+      "raw_bytes": 848620,
+      "manifest_source_count": 27,
+      "manifest_asset_count": 26,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AISU",
+      "school_name": "安徽外国语学院",
+      "school_type": "民办",
+      "official_domain": "aisu.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 32,
+        "not_found": 52
+      },
+      "collected_cells": 32,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 19,
+        "2026": 12
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 70,
+      "raw_file_count_by_year": {
+        "2024": 18,
+        "2025": 18,
+        "2026": 34
+      },
+      "raw_bytes": 892942,
+      "manifest_source_count": 35,
+      "manifest_asset_count": 35,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "UWH",
+      "school_name": "芜湖学院",
+      "school_type": "民办",
+      "official_domain": "uwh.edu.cn",
+      "priority": "P1",
+      "directory_exists": true,
+      "manifest_exists": true,
+      "coverage_exists": true,
+      "coverage_cells": 84,
+      "coverage_errors": [],
+      "status_counts": {
+        "collected": 3,
+        "not_found": 81
+      },
+      "collected_cells": 3,
+      "explicit_status_cells": 84,
+      "collected_by_year": {
+        "2024": 1,
+        "2025": 1,
+        "2026": 1
+      },
+      "explicit_by_year": {
+        "2024": 28,
+        "2025": 28,
+        "2026": 28
+      },
+      "raw_file_count": 10,
+      "raw_file_count_by_year": {
+        "2024": 2,
+        "2025": 4,
+        "2026": 4
+      },
+      "raw_bytes": 162916,
+      "manifest_source_count": 5,
+      "manifest_asset_count": 5,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "UTA",
+      "school_name": "安徽职业技术大学",
+      "school_type": "公办",
+      "official_domain": "uta.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "WHIT",
+      "school_name": "芜湖职业技术大学",
+      "school_type": "公办",
+      "official_domain": "whit.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "MASU",
+      "school_name": "马鞍山学院",
+      "school_type": "民办",
+      "official_domain": "masu.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "WJIT",
+      "school_name": "皖江工学院",
+      "school_type": "民办",
+      "official_domain": "wjut.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "HFUE",
+      "school_name": "合肥经济学院",
+      "school_type": "民办",
+      "official_domain": "hfue.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "CUHF",
+      "school_name": "合肥城市学院",
+      "school_type": "民办",
+      "official_domain": "cuhf.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "FYUT",
+      "school_name": "阜阳理工学院",
+      "school_type": "民办",
+      "official_domain": "fyut.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "HBLG",
+      "school_name": "淮北理工学院",
+      "school_type": "民办",
+      "official_domain": "hblgxy.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "BCTB",
+      "school_name": "蚌埠工商学院",
+      "school_type": "民办",
+      "official_domain": "bctb.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AIIT",
+      "school_name": "安徽信息工程学院",
+      "school_type": "民办",
+      "official_domain": "aiit.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "WDU",
+      "school_name": "安徽文达信息工程学院",
+      "school_type": "民办",
+      "official_domain": "wenda.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    },
+    {
+      "school_id": "AYCC",
+      "school_name": "安徽医科大学临床医学院",
+      "school_type": "独立学院",
+      "official_domain": "aycc.edu.cn",
+      "priority": "P0-B",
+      "directory_exists": false,
+      "manifest_exists": false,
+      "coverage_exists": false,
+      "coverage_cells": 0,
+      "coverage_errors": [
+        "coverage_missing"
+      ],
+      "status_counts": {},
+      "collected_cells": 0,
+      "explicit_status_cells": 0,
+      "collected_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "explicit_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_file_count": 0,
+      "raw_file_count_by_year": {
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "raw_bytes": 0,
+      "manifest_source_count": 0,
+      "manifest_asset_count": 0,
+      "manifest_failure_count": 0,
+      "last_attempt_at": ""
+    }
+  ]
+}
