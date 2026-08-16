@@ -1,1 +1,0 @@
-The isolated branch must be created before BZU workflow installation.
