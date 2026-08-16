@@ -1,0 +1,43 @@
+name: Ensure transient bootstrap probes are removed
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/cleanup-transient-bootstrap-v2.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cleanup-transient-bootstrap-probes
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Remove all one-shot branch-bootstrap probes and self
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/bzu-p0-bootstrap-v2.yml
+          rm -f .github/workflows/cleanup-accidental-bzu-bootstrap.yml
+          rm -f .github/workflows/cleanup-transient-bootstrap-v2.yml
+          rm -f reports/BZU_BRANCH_MISSING_FIXME.md
+          rm -f reports/bzu_p0_branch_request.json
+          rm -f reports/bzu_branch_creation_blocker.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No transient bootstrap probes remain.'
+            exit 0
+          fi
+          git commit -m 'chore: remove transient bootstrap probes'
+          git push origin HEAD:main
