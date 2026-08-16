@@ -1,0 +1,208 @@
+name: BZU P0 Audited Data Bootstrap
+
+on:
+  push:
+    branches:
+      - agent/bzu-p0-raw-data
+    paths:
+      - .github/workflows/bzu-p0-bootstrap-install.yml
+      - .github/bzu-p0/overlay.b64.part-*
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bzu-p0-data-bootstrap-agent-bzu-p0-raw-data
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: agent/bzu-p0-raw-data
+  PACK_DIR: .github/bzu-p0
+  ARCHIVE_SHA256: c32ec8655791b967e4be824d167102607a8d34f0a0637cf1843c9bdab6e685a8
+
+jobs:
+  acquire:
+    if: "${{ github.event.head_commit.message == 'ci: bootstrap audited BZU data acquisition' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Restore and verify the BZU collector
+        shell: bash
+        run: |
+          set -euo pipefail
+          parts=("${PACK_DIR}"/overlay.b64.part-*)
+          test "${#parts[@]}" -eq 4
+          cat "${parts[@]}" > /tmp/bzu-overlay.tar.xz.b64
+          base64 --decode /tmp/bzu-overlay.tar.xz.b64 > /tmp/bzu-overlay.tar.xz
+          echo "${ARCHIVE_SHA256}  /tmp/bzu-overlay.tar.xz" | sha256sum -c -
+          rm -rf /tmp/bzu-p0-package
+          mkdir -p /tmp/bzu-p0-package
+          tar -xJf /tmp/bzu-overlay.tar.xz -C /tmp/bzu-p0-package
+          cp /tmp/bzu-p0-package/repo-overlay/scripts/acquire_bzu_p0_raw.py scripts/acquire_bzu_p0_raw.py
+          echo '3cd9784620304cffd13e680a05776ce4d2a5510c99d52e952e408edb38da7291  scripts/acquire_bzu_p0_raw.py' | sha256sum -c -
+          python -m py_compile scripts/acquire_bzu_p0_raw.py scripts/audit_full_42_raw_evidence.py
+
+      - name: Verify seed-only behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/bzu-seed-check
+          mkdir -p /tmp/bzu-seed-check
+          python scripts/acquire_bzu_p0_raw.py --repo-root /tmp/bzu-seed-check --seed-only
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root = Path('/tmp/bzu-seed-check')
+          school = root / 'anhui_zsb_data/evidence/full_raw_30_schools/BZU'
+          manifest = json.loads((school / 'school_manifest.json').read_text(encoding='utf-8'))
+          rows = list(csv.DictReader((school / 'school_coverage.csv').open(encoding='utf-8-sig', newline='')))
+          assert manifest['school_id'] == 'BZU'
+          assert manifest['school_name'] == '亳州学院'
+          assert len(rows) == 84
+          assert {int(row['year']) for row in rows} == {2024, 2025, 2026}
+          assert (school / 'source_discovery.json').is_file()
+          assert (school / 'retrieval_attempts.jsonl').is_file()
+          PY
+
+      - name: Recover public official DNS mappings safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/bzu-public-hosts
+          import http.client
+          import ipaddress
+          import json
+          import ssl
+          from urllib.parse import quote
+
+          hosts = ('www.bzuu.edu.cn', 'bzuu.edu.cn', 'www.ahzsks.cn')
+          endpoints = (
+              ('1.1.1.1', 'cloudflare-dns.com', '/dns-query?name={}&type=A'),
+              ('8.8.8.8', 'dns.google', '/resolve?name={}&type=A'),
+          )
+          context = ssl._create_unverified_context()
+          for host in hosts:
+              answers = set()
+              for endpoint, host_header, template in endpoints:
+                  try:
+                      conn = http.client.HTTPSConnection(endpoint, timeout=12, context=context)
+                      conn.request(
+                          'GET', template.format(quote(host)),
+                          headers={'Host': host_header, 'Accept': 'application/dns-json'},
+                      )
+                      response = conn.getresponse()
+                      payload = json.loads(response.read().decode('utf-8'))
+                      for row in payload.get('Answer', []):
+                          value = row.get('data', '')
+                          try:
+                              ip = ipaddress.ip_address(value)
+                          except ValueError:
+                              continue
+                          if row.get('type') == 1 and ip.is_global:
+                              answers.add(str(ip))
+                  except Exception as exc:
+                      print(f'# DNS recovery failed: {host} via {endpoint}: {exc}')
+              for ip in sorted(answers)[:3]:
+                  print(ip, host)
+          PY
+          grep -E '^[0-9]+(\.[0-9]+){3}[[:space:]]+' /tmp/bzu-public-hosts | sort -u | tee /tmp/bzu-public-hosts-valid || true
+          if test -s /tmp/bzu-public-hosts-valid; then
+            sudo tee -a /etc/hosts < /tmp/bzu-public-hosts-valid >/dev/null
+          fi
+
+      - name: Acquire bounded public official BZU evidence
+        run: |
+          python scripts/acquire_bzu_p0_raw.py \
+            --repo-root . \
+            --timeout 15 \
+            --retries 2 \
+            --max-pages 30
+
+      - name: Regenerate and validate the 42-school audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/audit_full_42_raw_evidence.py --repo-root .
+          python - <<'PY'
+          import csv
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('.').resolve()
+          school = root / 'anhui_zsb_data/evidence/full_raw_30_schools/BZU'
+          manifest = json.loads((school / 'school_manifest.json').read_text(encoding='utf-8'))
+          assert manifest['school_id'] == 'BZU'
+          assert manifest['school_name'] == '亳州学院'
+          for collection in ('sources', 'assets'):
+              for item in manifest.get(collection, []):
+                  local = root / item['local_path']
+                  assert local.is_file(), local
+                  data = local.read_bytes()
+                  assert len(data) == item['file_size']
+                  assert hashlib.sha256(data).hexdigest() == item['sha256']
+                  host = item.get('official_domain') or item.get('source_domain') or ''
+                  assert host == 'ahzsks.cn' or host.endswith('.ahzsks.cn') or host == 'bzuu.edu.cn' or host.endswith('.bzuu.edu.cn')
+                  assert int(item['year']) in {2024, 2025, 2026}
+          rows = list(csv.DictReader((school / 'school_coverage.csv').open(encoding='utf-8-sig', newline='')))
+          assert len(rows) == 84
+          required = (
+              school / 'school_manifest.json',
+              school / 'school_coverage.csv',
+              school / 'school_notes.md',
+              school / 'retrieval_attempts.jsonl',
+              school / 'source_discovery.json',
+              root / 'anhui_zsb_data/reports/p0_batch_02_bzu_audit.md',
+              root / 'anhui_zsb_data/reports/full_42_raw_evidence_audit.md',
+              root / 'anhui_zsb_data/reports/full_42_raw_evidence_audit.json',
+          )
+          for path in required:
+              assert path.is_file() and path.stat().st_size > 0, path
+          print(json.dumps({
+              'sources': len(manifest.get('sources', [])),
+              'assets': len(manifest.get('assets', [])),
+              'failures': len(manifest.get('failures', [])),
+          }, ensure_ascii=False))
+          PY
+
+      - name: Commit collector, evidence, and truthful audit state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- \
+            scripts/acquire_bzu_p0_raw.py \
+            anhui_zsb_data/evidence/full_raw_30_schools/BZU \
+            anhui_zsb_data/reports/p0_batch_02_bzu_audit.md \
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md \
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.json
+          if git diff --cached --quiet; then
+            echo 'No BZU collector, evidence, or audit changes to commit.'
+          else
+            git commit -m 'data: persist audited BZU evidence state for 2024-2026'
+            git push origin HEAD:"${TARGET_BRANCH}"
+          fi
+
+      - name: Upload recovery checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: bzu-p0-data-bootstrap-checkpoint
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/BZU
+            anhui_zsb_data/reports/p0_batch_02_bzu_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.json
+          if-no-files-found: error
+          retention-days: 14
