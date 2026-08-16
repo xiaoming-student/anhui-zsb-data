@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-08-16T03:45:10.858440+00:00",
+  "school_id": "BZU",
+  "required_files": {
+    "scripts/acquire_bzu_p0_raw.py": true,
+    "scripts/sanitize_bzu_p0_evidence.py": true,
+    ".github/workflows/bzu-p0-sanitized-acquisition-v3.yml": true,
+    "anhui_zsb_data/evidence/full_raw_30_schools/BZU/school_manifest.json": true,
+    "anhui_zsb_data/evidence/full_raw_30_schools/BZU/school_coverage.csv": true,
+    "anhui_zsb_data/reports/p0_batch_02_bzu_audit.md": true,
+    "anhui_zsb_data/reports/p0_batch_02_bzu_sanitization_audit.md": true,
+    "anhui_zsb_data/reports/p0_batch_02_bzu_validation.json": true
+  },
+  "checkpoint_complete": true,
+  "transient_files_removed": true
+}
