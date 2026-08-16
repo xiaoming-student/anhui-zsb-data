@@ -1,0 +1,420 @@
+name: BZU P0 Audited Raw Acquisition
+
+on:
+  push:
+    branches:
+      - agent/bzu-p0-raw-data
+    paths:
+      - .github/workflows/bzu-p0-bootstrap.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  acquire-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/bzu-p0-raw-data
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Run bounded official-domain BZU collector
+        env:
+          TARGET_SCHOOL_ID: BZU
+          TARGET_SCHOOL_NAME: 亳州学院
+          TARGET_DOMAIN: bzuu.edu.cn
+          TARGET_YEARS: 2024,2025,2026
+          MAX_PAGES: '90'
+          TOTAL_WALL_SECONDS: '900'
+        run: |
+          set -euo pipefail
+          cat > /tmp/acquire_bzu_p0.py <<'PY'
+          from __future__ import annotations
+
+          import csv
+          import hashlib
+          import html
+          import json
+          import os
+          import re
+          import socket
+          import ssl
+          import subprocess
+          import time
+          from collections import deque
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.parse import unquote, urljoin, urlparse
+
+          import requests
+          from bs4 import BeautifulSoup
+          from requests.adapters import HTTPAdapter
+          from urllib3.util.retry import Retry
+
+          SCHOOL_ID = 'BZU'
+          SCHOOL_NAME = '亳州学院'
+          YEARS = (2024, 2025, 2026)
+          DOMAIN = 'bzuu.edu.cn'
+          ROOT = Path('anhui_zsb_data/evidence/full_raw_30_schools/BZU')
+          ROOT.mkdir(parents=True, exist_ok=True)
+          MAX_PAGES = int(os.environ.get('MAX_PAGES', '90'))
+          DEADLINE = time.monotonic() + int(os.environ.get('TOTAL_WALL_SECONDS', '900'))
+          MAX_FILE = 100 * 1024 * 1024
+
+          TOPICS = [
+              'admission_policy', 'enrollment_plan', 'major_catalog', 'training_location',
+              'tuition_and_duration', 'eligibility', 'exam_subjects', 'exam_syllabus',
+              'reference_books', 'exam_schedule', 'exam_location', 'admission_rules',
+              'score_formula', 'control_line', 'admission_min_score', 'admission_max_score',
+              'admission_average_score', 'application_statistics', 'qualified_statistics',
+              'admitted_statistics', 'registered_statistics', 'plan_adjustment', 'adjustment',
+              'exemption', 'retired_soldier', 'registered_poor_family', 'skill_competition',
+              'other_official_notice',
+          ]
+          TOPIC_KW = {
+              'admission_policy': ['招生章程', '招生简章'],
+              'enrollment_plan': ['招生计划', '拟招生方案'],
+              'major_catalog': ['招生专业', '专业招生范围'],
+              'training_location': ['联合培养', '培养地点', '培养校区'],
+              'tuition_and_duration': ['学费', '学制'],
+              'eligibility': ['报名条件', '报考范围', '资格条件'],
+              'exam_subjects': ['考试科目', '专业课', '公共课'],
+              'exam_syllabus': ['考试大纲', '测试大纲', '考查大纲'],
+              'reference_books': ['参考书目', '参考教材'],
+              'exam_schedule': ['考试时间', '考试安排'],
+              'exam_location': ['考试地点', '考点', '考场'],
+              'admission_rules': ['录取规则', '录取细则', '同分排序'],
+              'score_formula': ['计分公式', '综合成绩', '总成绩'],
+              'control_line': ['合格线', '控制线', '专业课合格'],
+              'admission_min_score': ['最低录取分', '最低投档分', '录取分数线', '预录取分数线'],
+              'admission_max_score': ['最高录取分', '录取最高分'],
+              'admission_average_score': ['平均录取分', '录取平均分'],
+              'application_statistics': ['报考人数', '报名人数', '报考志愿数'],
+              'qualified_statistics': ['资格审核通过人数', '资格通过人数'],
+              'admitted_statistics': ['录取人数', '录取统计'],
+              'registered_statistics': ['报到人数', '注册人数'],
+              'plan_adjustment': ['计划调整', '调整计划', '扩招', '缩招'],
+              'adjustment': ['调剂', '补录', '征集志愿'],
+              'exemption': ['免试', '免文化课'],
+              'retired_soldier': ['退役大学生士兵', '退役士兵'],
+              'registered_poor_family': ['建档立卡'],
+              'skill_competition': ['技能大赛', '职业技能大赛'],
+              'other_official_notice': ['专升本'],
+          }
+          PRIVACY = [
+              '拟录取名单', '预录取名单', '录取名单', '考生名单', '面试名单',
+              '审核名单', '免试名单', '成绩名单', '成绩查询', '录取查询',
+              '考生号', '准考证号', '身份证号',
+          ]
+          RELEVANT = [
+              '专升本', '招生章程', '招生计划', '考试大纲', '参考书', '专业课',
+              '录取分数', '最低分', '最高分', '平均分', '合格线', '控制线',
+              '调剂', '计划调整', '报考人数', '录取人数', '报到人数',
+              '退役士兵', '建档立卡', '技能大赛',
+          ]
+          FILE_EXTS = {'.pdf', '.doc', '.docx', '.xls', '.xlsx', '.csv'}
+          SEEDS = [
+              'https://www.bzuu.edu.cn/zzzs/',
+              'https://www.bzuu.edu.cn/',
+              'http://www.bzuu.edu.cn/zzzs/',
+              'http://www.bzuu.edu.cn/',
+          ]
+
+          def now() -> str:
+              return datetime.now(timezone.utc).isoformat()
+
+          def digest(data: bytes) -> str:
+              return hashlib.sha256(data).hexdigest()
+
+          def short(value: str) -> str:
+              return hashlib.sha1(value.encode('utf-8', 'replace')).hexdigest()[:10]
+
+          def allowed(url: str) -> bool:
+              host = (urlparse(url).hostname or '').lower()
+              return host == DOMAIN or host.endswith('.' + DOMAIN)
+
+          def normalize(url: str) -> str:
+              return html.unescape(url).split('#', 1)[0].strip()
+
+          def compact(text: str) -> str:
+              return re.sub(r'\s+', '', text or '')
+
+          def privacy_hit(text: str) -> str | None:
+              value = compact(text)
+              return next((item for item in PRIVACY if item in value), None)
+
+          def detect_year(text: str, url: str) -> int | None:
+              merged = compact(text) + url
+              years = [year for year in YEARS if str(year) in merged]
+              return years[0] if len(set(years)) == 1 else None
+
+          def detect_topics(text: str) -> list[str]:
+              value = compact(text)
+              result = [name for name, words in TOPIC_KW.items() if any(word in value for word in words)]
+              return result or (['other_official_notice'] if '专升本' in value else [])
+
+          def primary_topic(items: list[str]) -> str:
+              return next((item for item in TOPICS if item in items and item != 'other_official_notice'), 'other_official_notice')
+
+          def topic_dir(topic: str) -> str:
+              if topic == 'admission_policy': return 'admission_policy'
+              if topic in {'enrollment_plan', 'major_catalog', 'training_location', 'tuition_and_duration', 'eligibility'}: return 'enrollment_plan'
+              if topic in {'exam_subjects', 'exam_syllabus', 'reference_books', 'exam_schedule', 'exam_location'}: return 'exam_syllabus'
+              if topic in {'admission_rules', 'score_formula', 'control_line', 'admission_min_score', 'admission_max_score', 'admission_average_score'}: return 'admission_scores'
+              if topic in {'application_statistics', 'qualified_statistics', 'admitted_statistics', 'registered_statistics'}: return 'statistics'
+              if topic in {'plan_adjustment', 'adjustment'}: return 'adjustments'
+              return 'other'
+
+          session = requests.Session()
+          retry = Retry(total=2, connect=2, read=2, backoff_factor=.7, status_forcelist=[429, 500, 502, 503, 504], allowed_methods=['GET'])
+          session.mount('https://', HTTPAdapter(max_retries=retry))
+          session.mount('http://', HTTPAdapter(max_retries=retry))
+          session.headers.update({'User-Agent': 'Mozilla/5.0 (compatible; AnhuiZSBDataResearch/1.1)', 'Accept': '*/*'})
+
+          attempts: list[dict] = []
+          sources: list[dict] = []
+          assets: list[dict] = []
+          failures: list[dict] = []
+          privacy_exclusions: list[dict] = []
+          discovery: list[dict] = []
+          status_map = {(year, topic): 'not_found' for year in YEARS for topic in TOPICS}
+          seen_saved: set[tuple[int, str]] = set()
+
+          def request(url: str) -> tuple[bytes | None, dict]:
+              if time.monotonic() >= DEADLINE:
+                  return None, {'status': 'deadline', 'final_url': url, 'error': 'batch wall-clock deadline reached'}
+              started = time.monotonic()
+              try:
+                  response = session.get(url, timeout=(12, 35), allow_redirects=True)
+                  data = response.content
+                  meta = {
+                      'status': response.status_code,
+                      'final_url': response.url,
+                      'content_type': response.headers.get('Content-Type', ''),
+                      'content_disposition': response.headers.get('Content-Disposition', ''),
+                      'size': len(data),
+                      'sha256': digest(data),
+                  }
+                  if response.status_code >= 400:
+                      data = None
+              except Exception as exc:
+                  data = None
+                  meta = {'status': 'error', 'final_url': url, 'error': repr(exc)}
+              attempts.append({
+                  'retrieved_at': now(), 'url': url, 'elapsed_seconds': round(time.monotonic() - started, 3), **meta,
+              })
+              return data, meta
+
+          queue: deque[tuple[str, str]] = deque((seed, '') for seed in SEEDS)
+          visited: set[str] = set()
+          pages = 0
+
+          while queue and pages < MAX_PAGES and time.monotonic() < DEADLINE:
+              url, parent = queue.popleft()
+              url = normalize(url)
+              if not url or url in visited or not allowed(url):
+                  continue
+              visited.add(url)
+              ext = Path(urlparse(url).path).suffix.lower()
+              data, meta = request(url)
+              if data is None:
+                  failures.append({
+                      'school_id': SCHOOL_ID, 'school_name': SCHOOL_NAME, 'year': None,
+                      'url': url, 'parent_url': parent, 'status': 'access_restricted',
+                      'http_status': meta.get('status'), 'reason': meta.get('error') or f'HTTP {meta.get("status")}',
+                  })
+                  continue
+              if len(data) > MAX_FILE:
+                  failures.append({'url': url, 'parent_url': parent, 'status': 'manual_download_required', 'reason': 'over 100 MB'})
+                  continue
+
+              content_type = str(meta.get('content_type', '')).lower()
+              is_file = ext in FILE_EXTS or not ('html' in content_type or data.lstrip().startswith((b'<!DOCTYPE', b'<html', b'<?xml')))
+              if is_file:
+                  label = unquote(Path(urlparse(url).path).name)
+                  context = label + ' ' + parent
+                  year = detect_year(context, url)
+                  topics = detect_topics(context)
+                  if not year or not topics or privacy_hit(context):
+                      if privacy_hit(context):
+                          privacy_exclusions.append({'url': url, 'parent_url': parent, 'reason': privacy_hit(context), 'retrieved_at': now()})
+                      else:
+                          discovery.append({'url': url, 'parent_url': parent, 'status': 'unbound_attachment', 'retrieved_at': now()})
+                      continue
+                  topic = primary_topic(topics)
+                  suffix = ext if ext else '.bin'
+                  rel = Path(str(year)) / topic_dir(topic) / f'ASSET-{SCHOOL_ID}-{year}-{topic}-{short(url)}{suffix}'
+                  path = ROOT / rel
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  path.write_bytes(data)
+                  assets.append({
+                      'school_id': SCHOOL_ID, 'school_name': SCHOOL_NAME, 'year': year,
+                      'asset_id': f'ASSET-{SCHOOL_ID}-{year}-{short(url)}', 'document_type': suffix.lstrip('.'),
+                      'topics': '|'.join(topics), 'title': label, 'official_url': url,
+                      'final_url': meta.get('final_url', url), 'parent_page_url': parent,
+                      'retrieved_at': now(), 'official_domain': urlparse(meta.get('final_url', url)).hostname,
+                      'source_level': 'school_official', 'http_status': meta.get('status'),
+                      'content_type': meta.get('content_type', ''), 'status': 'collected',
+                      'local_path': str(Path('anhui_zsb_data/evidence/full_raw_30_schools/BZU') / rel),
+                      'sha256': digest(data), 'file_size': len(data),
+                  })
+                  for item in topics: status_map[(year, item)] = 'collected'
+                  seen_saved.add((year, url))
+                  continue
+
+              pages += 1
+              text = data.decode('utf-8', 'replace')
+              soup = BeautifulSoup(text, 'html.parser')
+              title = soup.title.get_text(' ', strip=True) if soup.title else ''
+              visible = soup.get_text(' ', strip=True)
+              context = f'{title} {visible[:12000]}'
+              year = detect_year(context, url)
+              topics = detect_topics(context)
+              relevant = any(word in compact(context) for word in RELEVANT)
+              hit = privacy_hit(context)
+
+              if year and topics and relevant and not hit and (year, url) not in seen_saved:
+                  topic = primary_topic(topics)
+                  rel = Path(str(year)) / topic_dir(topic) / f'DOC-{SCHOOL_ID}-{year}-{topic}-{short(url)}.html'
+                  path = ROOT / rel
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  path.write_bytes(data)
+                  parsed = path.with_name(path.stem + '_parsed.txt')
+                  parsed.write_text(visible, encoding='utf-8')
+                  sources.append({
+                      'school_id': SCHOOL_ID, 'school_name': SCHOOL_NAME, 'year': year,
+                      'source_id': f'SRC-{SCHOOL_ID}-{year}-{short(url)}', 'document_type': 'html',
+                      'topics': '|'.join(topics), 'title': title, 'official_url': url,
+                      'final_url': meta.get('final_url', url), 'parent_page_url': parent,
+                      'publish_date': '', 'retrieved_at': now(),
+                      'official_domain': urlparse(meta.get('final_url', url)).hostname,
+                      'source_level': 'school_official', 'http_status': meta.get('status'),
+                      'content_type': meta.get('content_type', ''), 'status': 'collected', 'notes': '',
+                      'local_path': str(Path('anhui_zsb_data/evidence/full_raw_30_schools/BZU') / rel),
+                      'sha256': digest(data), 'file_size': len(data),
+                  })
+                  for item in topics: status_map[(year, item)] = 'collected'
+                  seen_saved.add((year, url))
+              elif hit:
+                  privacy_exclusions.append({'url': url, 'parent_url': parent, 'reason': hit, 'retrieved_at': now()})
+
+              links: list[tuple[int, str, str]] = []
+              for anchor in soup.find_all('a', href=True):
+                  href = normalize(urljoin(meta.get('final_url', url), anchor.get('href', '')))
+                  if not href or not allowed(href) or href in visited:
+                      continue
+                  label = anchor.get_text(' ', strip=True)
+                  merged = compact(label + ' ' + href)
+                  priority = 0
+                  if '专升本' in merged: priority += 100
+                  if any(str(year) in merged for year in YEARS): priority += 40
+                  if any(word in merged for word in RELEVANT): priority += 30
+                  if Path(urlparse(href).path).suffix.lower() in FILE_EXTS: priority += 20
+                  links.append((priority, href, url))
+              for _, href, source_url in sorted(links, reverse=True):
+                  queue.append((href, source_url))
+
+          # Convert unresolved cells carefully. A located but inaccessible school site is not 'not found'.
+          any_access_failure = bool(failures)
+          for key, value in list(status_map.items()):
+              if value == 'not_found' and any_access_failure:
+                  status_map[key] = 'awaiting_manual_review'
+
+          coverage_path = ROOT / 'school_coverage.csv'
+          with coverage_path.open('w', encoding='utf-8-sig', newline='') as handle:
+              writer = csv.writer(handle)
+              writer.writerow(['school_id', 'school_name', 'year', 'topic', 'status'])
+              for year in YEARS:
+                  for topic in TOPICS:
+                      writer.writerow([SCHOOL_ID, SCHOOL_NAME, year, topic, status_map[(year, topic)]])
+
+          manifest = {
+              'school_id': SCHOOL_ID, 'school_name': SCHOOL_NAME,
+              'official_domains': [DOMAIN], 'sources': sources, 'assets': assets,
+              'failures': failures, 'privacy_exclusions': privacy_exclusions,
+              'discovery': discovery, 'sanitized': True, 'generated_at': now(),
+          }
+          (ROOT / 'school_manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          (ROOT / 'source_discovery.json').write_text(json.dumps({'school_id': SCHOOL_ID, 'entries': discovery, 'privacy_exclusions': privacy_exclusions}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          with (ROOT / 'retrieval_attempts.jsonl').open('w', encoding='utf-8') as handle:
+              for item in attempts:
+                  handle.write(json.dumps(item, ensure_ascii=False) + '\n')
+          collected = len(sources) + len(assets)
+          notes = f'''# 亳州学院 (BZU) P0 原始证据采集\n\n- 采集时间：{now()}\n- 官方域名：`bzuu.edu.cn`\n- 已保存官方来源页面：{len(sources)}\n- 已保存官方附件：{len(assets)}\n- 检索尝试：{len(attempts)}\n- 访问失败：{len(failures)}\n- 隐私排除：{len(privacy_exclusions)}\n- 原始文件总数：{collected}\n\n仅实际取得官方原始字节的资料标记为 `collected`；搜索线索、访问失败和个人名单均不冒充正式原件。\n'''
+          (ROOT / 'school_notes.md').write_text(notes, encoding='utf-8')
+          report_dir = Path('anhui_zsb_data/reports')
+          report_dir.mkdir(parents=True, exist_ok=True)
+          statuses = {}
+          for value in status_map.values(): statuses[value] = statuses.get(value, 0) + 1
+          report = [
+              '# BZU P0 原始数据采集审计', '',
+              f'- 学校：{SCHOOL_NAME}（{SCHOOL_ID}）',
+              f'- 年份：2024–2026', f'- 覆盖单元：{len(status_map)}',
+              f'- 官方页面原件：{len(sources)}', f'- 官方附件原件：{len(assets)}',
+              f'- 检索尝试：{len(attempts)}', f'- 访问失败：{len(failures)}', '',
+              '## 状态统计', '',
+          ]
+          report.extend(f'- `{key}`：{value}' for key, value in sorted(statuses.items()))
+          report.extend(['', '## 审计结论', '', '所有 `collected` 项均有本地原始文件、SHA-256、官方 URL 和抓取时间；其余项保留真实失败状态。', ''])
+          (report_dir / 'p0_batch_02_bzu_audit.md').write_text('\n'.join(report), encoding='utf-8')
+          print(json.dumps({'pages_visited': pages, 'sources': len(sources), 'assets': len(assets), 'failures': len(failures), 'statuses': statuses}, ensure_ascii=False, indent=2))
+          PY
+          python /tmp/acquire_bzu_p0.py
+
+      - name: Validate evidence invariants
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv, hashlib, json
+          from pathlib import Path
+          root = Path('anhui_zsb_data/evidence/full_raw_30_schools/BZU')
+          rows = list(csv.DictReader((root / 'school_coverage.csv').open(encoding='utf-8-sig')))
+          assert len(rows) == 84, len(rows)
+          assert {(int(r['year']), r['topic']) for r in rows} and len({(int(r['year']), r['topic']) for r in rows}) == 84
+          manifest = json.loads((root / 'school_manifest.json').read_text(encoding='utf-8'))
+          assert manifest['school_id'] == 'BZU'
+          for item in manifest.get('sources', []) + manifest.get('assets', []):
+              path = Path(item['local_path'])
+              assert path.is_file(), path
+              assert path.stat().st_size == item['file_size']
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == item['sha256']
+              assert item['status'] == 'collected'
+              assert item['official_domain'].endswith('bzuu.edu.cn')
+          print(f"validated coverage=84 sources={len(manifest.get('sources', []))} assets={len(manifest.get('assets', []))}")
+          PY
+
+      - name: Commit truthful BZU evidence state
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add anhui_zsb_data/evidence/full_raw_30_schools/BZU anhui_zsb_data/reports/p0_batch_02_bzu_audit.md
+          if git diff --cached --quiet; then
+            echo 'No evidence changes.'
+            exit 0
+          fi
+          git commit -m 'data: acquire audited BZU P0 raw evidence'
+          git push origin HEAD:agent/bzu-p0-raw-data
+
+      - name: Upload BZU checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bzu-p0-raw-evidence
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/BZU/
+            anhui_zsb_data/reports/p0_batch_02_bzu_audit.md
+          if-no-files-found: warn
+          retention-days: 14
