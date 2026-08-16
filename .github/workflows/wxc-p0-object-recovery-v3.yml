@@ -1,0 +1,266 @@
+name: WXC P0 Object Recovery V3
+
+on:
+  push:
+    branches:
+      - agent/wxc-p0-raw-data
+    paths:
+      - .github/workflows/wxc-p0-object-recovery-v3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wxc-p0-object-recovery
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: agent/wxc-p0-raw-data
+  EXPECTED_PACKAGE_SHA256: d0576b193c2fcaf041e10dfc4fb83a185b935f88d83a0e05a71518384006f294
+
+jobs:
+  recover-install-acquire-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout latest target branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/wxc-p0-raw-data
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify installed files or reconstruct validated package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from __future__ import annotations
+
+          import base64
+          import hashlib
+          import itertools
+          import json
+          import os
+          import struct
+          import urllib.request
+          import zipfile
+          from pathlib import Path
+
+          expected_files = {
+              '.github/workflows/wxc-p0-raw-acquisition.yml': '5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a',
+              'anhui_zsb_data/config/full_42_school_scope.json': 'd88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/retrieval_attempts.jsonl': 'af0ba3be05e5b90eb2206fe739bf1023314a09c1323cf205f66fac4b227aeec6',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv': '315b023f18b11c73f5d48f6be3d54e1af93ef94f5a7890421cc121b29d7b8f12',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_manifest.json': '7f55b950cb1bd23033c715716b192209a722a88ee61063d179a35109d2f4e743',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_notes.md': '776d95f6f0ce66066efcd8c30092c7e97e214584eb99bfc61a3fe0cdafdd9e4d',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/source_discovery.json': '3c1ba53d5125bb822c604d4a4988487e72929cd320cb02f9d9b32f91a58f1d8f',
+              'anhui_zsb_data/reports/full_42_raw_evidence_audit.md': '3180ad9c876545dd2f15f18c1497134a7c7f81992723dcb0d40f694bba6bd48f',
+              'anhui_zsb_data/reports/p0_batch_01_wxc_audit.md': '96075446fcd132cb2d5a126c7d44fe85b8550feec0b17c09191f2265bd8fa6a0',
+              'scripts/acquire_wxc_p0_raw.py': 'a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc',
+              'scripts/audit_full_42_raw_evidence.py': '2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5',
+              'tests/test_acquire_wxc_p0_raw.py': '2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348',
+              'tests/test_full_42_scope.py': '13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0',
+          }
+
+          def sha(path: Path) -> str:
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          exact = all(Path(path).is_file() and sha(Path(path)) == digest
+                      for path, digest in expected_files.items())
+          if exact:
+              print('All 13 validated implementation files are already installed exactly.')
+              raise SystemExit(0)
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          token = os.environ['GH_TOKEN']
+          expected_package = os.environ['EXPECTED_PACKAGE_SHA256']
+          object_shas = [
+              'fc718a9dfc299134a7624eb8fd91df57292c3ad9',
+              '05708d1f95a7d790b0fd4f57b1b077c1796a1128',
+              'c9535cf3ca7500f27f388b667c916ca8e78bfcca',
+              'b1d5c47e8d7b8d0a1a0b4c964714ee5d89732394',
+              'b3752e84c0f6d3fd13f6280d33a7f11ef4ead75b',
+              'b79f72c8473cdb216b8aa196612923fed83514e4',
+              'abac9a3a8da92e4aa068d6c732655c872964036d',
+              '9d30d1384cadb4b757c316b9808c554c5e32130d',
+              '6fed7f1dd15de5cd51f2a2c98c514ecff6aae256',
+              'b85c173e7631787f4dab51ce927dbc6c86e0f677',
+              'a25411e43a7b1b0f3888fcd1aa90be4b4accebd7',
+          ]
+
+          def get_blob(object_sha: str) -> bytes:
+              request = urllib.request.Request(
+                  f'https://api.github.com/repos/{repo}/git/blobs/{object_sha}',
+                  headers={
+                      'Authorization': f'Bearer {token}',
+                      'Accept': 'application/vnd.github+json',
+                      'X-GitHub-Api-Version': '2022-11-28',
+                      'User-Agent': 'anhui-zsb-data-wxc-recovery-v3',
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  payload = json.load(response)
+              return base64.b64decode(payload['content'])
+
+          blobs: dict[str, bytes] = {}
+          package: bytes | None = None
+          for object_sha in object_shas:
+              try:
+                  data = get_blob(object_sha)
+              except Exception as exc:
+                  print(f'WARN {object_sha}: {exc!r}')
+                  continue
+              blobs[object_sha] = data
+              digest = hashlib.sha256(data).hexdigest()
+              print(f'OBJECT {object_sha} bytes={len(data)} sha256={digest}')
+              if digest == expected_package:
+                  package = data
+                  print(f'Using complete package object {object_sha}')
+                  break
+
+          if package is None:
+              beginnings = [key for key, data in blobs.items() if data.startswith(b'PK\x03\x04')]
+              endings: list[tuple[str, int]] = []
+              for key, data in blobs.items():
+                  offset = data.rfind(b'PK\x05\x06')
+                  if offset < 0 or offset + 22 > len(data):
+                      continue
+                  fields = struct.unpack_from('<4s4H2LH', data, offset)
+                  archive_size = fields[6] + fields[5] + 22 + fields[7]
+                  endings.append((key, archive_size))
+              for first in beginnings:
+                  for last, archive_size in endings:
+                      if first == last:
+                          continue
+                      target_middle = archive_size - len(blobs[first]) - len(blobs[last])
+                      if target_middle < 0:
+                          continue
+                      pool = [key for key in blobs if key not in {first, last}]
+                      for count in range(len(pool) + 1):
+                          for subset in itertools.combinations(pool, count):
+                              if sum(len(blobs[key]) for key in subset) != target_middle:
+                                  continue
+                              for middle in itertools.permutations(subset):
+                                  order = (first, *middle, last)
+                                  digest = hashlib.sha256()
+                                  for key in order:
+                                      digest.update(blobs[key])
+                                  if digest.hexdigest() == expected_package:
+                                      package = b''.join(blobs[key] for key in order)
+                                      print('Recovered order:', ' '.join(order))
+                                      break
+                              if package is not None:
+                                  break
+                          if package is not None:
+                              break
+                      if package is not None:
+                          break
+                  if package is not None:
+                      break
+
+          if package is None:
+              raise SystemExit('Expected package could not be reconstructed from available Git objects')
+          if hashlib.sha256(package).hexdigest() != expected_package:
+              raise SystemExit('Recovered package SHA-256 mismatch')
+
+          package_path = Path('/tmp/wxc-package.zip')
+          package_path.write_bytes(package)
+          with zipfile.ZipFile(package_path) as archive:
+              failed = archive.testzip()
+              if failed:
+                  raise SystemExit(f'ZIP CRC failure: {failed}')
+              archive.extractall('/tmp/wxc-p0-package')
+          package_root = Path('/tmp/wxc-p0-package/anhui-zsb-wxc-p0-implementation')
+          manifest_lines = (package_root / 'SHA256SUMS').read_text(encoding='utf-8').splitlines()
+          for line in manifest_lines:
+              digest, relative = line.split(maxsplit=1)
+              relative = relative.lstrip('*')
+              path = package_root / relative
+              if sha(path) != digest:
+                  raise SystemExit(f'Package manifest mismatch: {relative}')
+
+          overlay = package_root / 'repo-overlay'
+          for source in overlay.rglob('*'):
+              if not source.is_file():
+                  continue
+              relative = source.relative_to(overlay)
+              destination = Path(relative)
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              destination.write_bytes(source.read_bytes())
+
+          for path, digest in expected_files.items():
+              target = Path(path)
+              if not target.is_file() or sha(target) != digest:
+                  raise SystemExit(f'Installed file mismatch: {path}')
+          print('Installed and validated all 13 implementation files.')
+          PY
+
+      - name: Validate implementation tests
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/acquire_wxc_p0_raw.py scripts/audit_full_42_raw_evidence.py
+          python -m unittest -v tests.test_acquire_wxc_p0_raw tests.test_full_42_scope
+
+      - name: Acquire WXC public official raw bytes
+        continue-on-error: true
+        env:
+          WXC_TOTAL_TIMEOUT: '720'
+          WXC_REQUEST_TIMEOUT: '25'
+        run: python scripts/acquire_wxc_p0_raw.py
+
+      - name: Regenerate and validate 42-school audit
+        if: always()
+        run: |
+          set -euo pipefail
+          python scripts/audit_full_42_raw_evidence.py
+          python -m unittest -v tests.test_acquire_wxc_p0_raw tests.test_full_42_scope
+
+      - name: Remove temporary recovery payloads
+        if: always()
+        run: |
+          rm -f reports/implementation-heartbeat-wxc.txt
+          rm -f .github/workflows/wxc-p0-bootstrap-install.yml
+          rm -f .github/workflows/wxc-p0-object-recovery-v2.yml
+          rm -f .github/workflows/wxc-p0-object-recovery-v3.yml
+          rm -rf .github/wxc-p0
+
+      - name: Commit and push with remote rebase retry
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: install and run audited WXC P0 acquisition'
+          fi
+          pushed=0
+          for attempt in 1 2 3 4; do
+            git fetch origin "${TARGET_BRANCH}"
+            git rebase "origin/${TARGET_BRANCH}"
+            if git push origin "HEAD:${TARGET_BRANCH}"; then
+              pushed=1
+              break
+            fi
+            sleep $((attempt * 3))
+          done
+          test "${pushed}" = 1
+
+      - name: Upload WXC audit checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wxc-p0-object-recovery-v3
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC/
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md
+          if-no-files-found: warn
+          retention-days: 14
