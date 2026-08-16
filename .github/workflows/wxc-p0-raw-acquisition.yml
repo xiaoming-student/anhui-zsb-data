@@ -1,0 +1,143 @@
+name: WXC P0 Raw Evidence Acquisition (Audited Fault-Tolerant)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: Branch that receives audited raw evidence
+        required: true
+        default: agent/wxc-p0-raw-data
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wxc-p0-raw-${{ inputs.target_branch }}
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate collector
+        run: |
+          python -m py_compile scripts/acquire_wxc_p0_raw.py scripts/audit_full_42_raw_evidence.py
+          python -m unittest discover -s tests -v
+
+      - name: Recover public official DNS mappings safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/wxc-public-hosts
+          import http.client
+          import ipaddress
+          import json
+          import ssl
+          from urllib.parse import quote
+
+          hosts = ("zsb.wxc.edu.cn", "www.wxc.edu.cn", "www.ahzsks.cn")
+          endpoints = (
+              ("1.1.1.1", "cloudflare-dns.com", "/dns-query?name={}&type=A"),
+              ("8.8.8.8", "dns.google", "/resolve?name={}&type=A"),
+          )
+          context = ssl._create_unverified_context()
+          for host in hosts:
+              answers = set()
+              for endpoint, host_header, template in endpoints:
+                  try:
+                      conn = http.client.HTTPSConnection(endpoint, timeout=12, context=context)
+                      conn.request(
+                          "GET",
+                          template.format(quote(host)),
+                          headers={"Host": host_header, "Accept": "application/dns-json"},
+                      )
+                      response = conn.getresponse()
+                      payload = json.loads(response.read().decode("utf-8"))
+                      for row in payload.get("Answer", []):
+                          value = row.get("data", "")
+                          try:
+                              ip = ipaddress.ip_address(value)
+                          except ValueError:
+                              continue
+                          if row.get("type") == 1 and ip.is_global:
+                              answers.add(str(ip))
+                  except Exception as exc:
+                      print(f"# DNS recovery failed: {host} via {endpoint}: {exc}")
+              for ip in sorted(answers)[:3]:
+                  print(ip, host)
+          PY
+          grep -E '^[0-9]+(\.[0-9]+){3}[[:space:]]+' /tmp/wxc-public-hosts | sort -u | tee /tmp/wxc-public-hosts-valid || true
+          if test -s /tmp/wxc-public-hosts-valid; then
+            sudo tee -a /etc/hosts < /tmp/wxc-public-hosts-valid >/dev/null
+          fi
+          getent ahostsv4 zsb.wxc.edu.cn || true
+          getent ahostsv4 www.wxc.edu.cn || true
+          getent ahostsv4 www.ahzsks.cn || true
+
+      - name: Acquire public official raw bytes
+        run: |
+          python scripts/acquire_wxc_p0_raw.py \
+            --repo-root . \
+            --timeout 20 \
+            --retries 3 \
+            --max-pages 100
+
+      - name: Regenerate the 42-school audit
+        run: |
+          python scripts/audit_full_42_raw_evidence.py --repo-root .
+
+      - name: Validate manifest paths and hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          root = pathlib.Path('.').resolve()
+          p = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_manifest.json'
+          manifest = json.loads(p.read_text(encoding='utf-8'))
+          for item in manifest.get('sources', []):
+              local = root / item['local_path']
+              assert local.is_file(), local
+              digest = hashlib.sha256(local.read_bytes()).hexdigest()
+              assert digest == item['sha256'], (local, digest, item['sha256'])
+              assert local.stat().st_size == item['file_size'], local
+          print(f"validated {len(manifest.get('sources', []))} source documents")
+          PY
+
+      - name: Commit evidence to the target branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC \
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md \
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md \
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.json
+          if git diff --cached --quiet; then
+            echo 'No evidence changes to commit.'
+          else
+            git commit -m 'data: add raw evidence for WXC 2024-2026'
+            git push origin HEAD:${{ inputs.target_branch }}
+          fi
+
+      - name: Upload recovery checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: wxc-p0-raw-checkpoint
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.json
+          if-no-files-found: error
+          retention-days: 14

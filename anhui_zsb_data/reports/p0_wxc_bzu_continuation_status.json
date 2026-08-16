@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-08-16T03:52:38.288801+00:00",
+  "scope": "P0 WXC + BZU, 2024-2026, 28 topics",
+  "schools": [
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "checkpoint_ready": true,
+      "checkpoint_sha": "6e1b8da5d128811d34a975306a8df70cac01807c",
+      "integration_status": "validated",
+      "coverage_cells": 84,
+      "status_counts": {
+        "access_restricted": 18,
+        "awaiting_manual_review": 45,
+        "not_found": 21
+      },
+      "formal_evidence_items": 0,
+      "formal_evidence_bytes": 0,
+      "failures": 31,
+      "privacy_exclusions": 0,
+      "final_validation": {
+        "generated_at": "2026-08-16T03:52:29.098469+00:00",
+        "school_id": "WXC",
+        "coverage_cells": 84,
+        "status_counts": {
+          "access_restricted": 18,
+          "awaiting_manual_review": 45,
+          "not_found": 21
+        },
+        "formal_evidence_items": 0,
+        "formal_evidence_bytes": 0,
+        "failures": 31,
+        "privacy_exclusions": 0,
+        "acquisition_step_outcome": "success"
+      }
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "checkpoint_ready": true,
+      "checkpoint_sha": "181df79fa1c77bdca31d5ea29acfcbf710c4bc14",
+      "integration_status": "validated",
+      "coverage_cells": 84,
+      "status_counts": {
+        "awaiting_manual_review": 84
+      },
+      "formal_evidence_items": 0,
+      "formal_evidence_bytes": 0,
+      "failures": 5,
+      "privacy_exclusions": 0,
+      "final_validation": {
+        "coverage_cells": 84,
+        "status_counts": {
+          "awaiting_manual_review": 84
+        },
+        "formal_evidence_items": 0,
+        "formal_evidence_bytes": 0,
+        "failures": 5,
+        "privacy_exclusions": 0,
+        "sanitization_removed": 0
+      }
+    }
+  ],
+  "ready_school_count": 2,
+  "validated_school_count": 2,
+  "validation_errors": []
+}

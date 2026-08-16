@@ -1,0 +1,43 @@
+{
+  "school_id": "BZU",
+  "entries": [
+    {
+      "source": "search_engine_discovery_only",
+      "query": "site:bzuu.edu.cn 专升本 2024 亳州学院",
+      "status": 200,
+      "retrieved_at": "2026-08-16T03:40:08.831393+00:00"
+    },
+    {
+      "source": "search_engine_discovery_only",
+      "query": "site:bzuu.edu.cn/zzzs 专升本 2024",
+      "status": 200,
+      "retrieved_at": "2026-08-16T03:40:09.044115+00:00"
+    },
+    {
+      "source": "search_engine_discovery_only",
+      "query": "site:bzuu.edu.cn 专升本 2025 亳州学院",
+      "status": 200,
+      "retrieved_at": "2026-08-16T03:40:09.230343+00:00"
+    },
+    {
+      "source": "search_engine_discovery_only",
+      "query": "site:bzuu.edu.cn/zzzs 专升本 2025",
+      "status": 200,
+      "retrieved_at": "2026-08-16T03:40:09.396493+00:00"
+    },
+    {
+      "source": "search_engine_discovery_only",
+      "query": "site:bzuu.edu.cn 专升本 2026 亳州学院",
+      "status": 200,
+      "retrieved_at": "2026-08-16T03:40:09.556465+00:00"
+    },
+    {
+      "source": "search_engine_discovery_only",
+      "query": "site:bzuu.edu.cn/zzzs 专升本 2026",
+      "status": 200,
+      "retrieved_at": "2026-08-16T03:40:09.725849+00:00"
+    }
+  ],
+  "privacy_exclusions": [],
+  "sanitization_removed": []
+}
