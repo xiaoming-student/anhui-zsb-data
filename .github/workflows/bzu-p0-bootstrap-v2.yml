@@ -1,0 +1,9 @@
+# Staging placeholder only. BZU implementation is applied on an isolated branch.
+name: BZU P0 Staging Placeholder
+on:
+  workflow_dispatch:
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Use agent/bzu-p0-raw-data'
