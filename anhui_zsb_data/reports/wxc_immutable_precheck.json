@@ -1,0 +1,32 @@
+{
+  ".github/workflows/wxc-p0-raw-acquisition.yml": {
+    "expected": "5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a",
+    "actual": "5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a",
+    "ok": true
+  },
+  "anhui_zsb_data/config/full_42_school_scope.json": {
+    "expected": "d88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d",
+    "actual": "d88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d",
+    "ok": true
+  },
+  "scripts/acquire_wxc_p0_raw.py": {
+    "expected": "a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc",
+    "actual": "a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc",
+    "ok": true
+  },
+  "scripts/audit_full_42_raw_evidence.py": {
+    "expected": "2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5",
+    "actual": "2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5",
+    "ok": true
+  },
+  "tests/test_acquire_wxc_p0_raw.py": {
+    "expected": "2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348",
+    "actual": "2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348",
+    "ok": true
+  },
+  "tests/test_full_42_scope.py": {
+    "expected": "13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0",
+    "actual": "13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0",
+    "ok": true
+  }
+}

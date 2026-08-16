@@ -524,9 +524,126 @@
         "reference_books",
         "other_official_notice"
       ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 20002 milliseconds | https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 20002 milliseconds | https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 20002 milliseconds | http://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 20002 milliseconds | http://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 20002 milliseconds | http://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 20002 milliseconds",
+      "retrieved_at": "2026-08-16T03:41:51+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8108.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 443 after 63 ms: Couldn't connect to server | https://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 443 after 201 ms: Couldn't connect to server | https://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 443 after 64 ms: Couldn't connect to server | http://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 80 after 56 ms: Couldn't connect to server | http://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 80 after 54 ms: Couldn't connect to server | http://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 80 after 80 ms: Couldn't connect to server",
+      "retrieved_at": "2026-08-16T03:41:58+00:00",
+      "topics": [
+        "admission_policy",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 20002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 20002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 20002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 20002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 20002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 20001 milliseconds",
+      "retrieved_at": "2026-08-16T03:44:04+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 20002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 20001 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 20001 milliseconds",
+      "retrieved_at": "2026-08-16T03:46:10+00:00",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 20001 milliseconds | https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 20001 milliseconds | https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 20001 milliseconds",
+      "retrieved_at": "2026-08-16T03:48:16+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 20001 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 20001 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 20001 milliseconds",
+      "retrieved_at": "2026-08-16T03:50:22+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 20001 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 20000 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 20000 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 20001 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 20001 milliseconds",
+      "retrieved_at": "2026-08-16T03:52:28+00:00",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
     }
   ],
-  "last_attempt_at": "2026-08-16T03:07:12+00:00",
+  "last_attempt_at": "2026-08-16T03:52:28+00:00",
   "raw_information_policy": "Preserve complete bytes of public official pages and attachments; do not bypass access controls.",
   "sanitized": false
 }
