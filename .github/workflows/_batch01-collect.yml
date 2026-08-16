@@ -1,0 +1,262 @@
+name: Batch 01 Temporary Read-Only Collector
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-collect.yml
+      - .batch01_bootstrap/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: batch01-temporary-collector-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: anhui_zsb_data
+    env:
+      PYTHONUTF8: "1"
+      BOOTSTRAP_SHA256: "be6d927a739be8124bfb912cfe52afc64b2488297399689017c09bf7891a1864"
+
+    steps:
+      - name: Checkout Batch branch without persisted credentials
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Reconstruct reviewed collector and freeze revised school scope
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(find .batch01_bootstrap -maxdepth 1 -type f -name 'chunk*.b64' | wc -l)" = "8"
+          cat > /tmp/batch01-chunks.sha256 <<'EOF'
+          836141643178d4e46831db5c80c103c4d09c4987463f5bec384bccbbdef139bc  .batch01_bootstrap/chunk00.b64
+          43f41737048ee5ba7dc98bd0c1110d0b4ff6d2d35e3643437d30b05ca2d6bede  .batch01_bootstrap/chunk01.b64
+          81610999125cbabca521979c33586979c9254934afaf8d6204e9288e6a89aaaf  .batch01_bootstrap/chunk02.b64
+          f80efd378d92f9a8e29f37950d6f4664cd4a28c446d2102808c4207fd5298261  .batch01_bootstrap/chunk03.b64
+          16f31136a14359193bb13b957fccf7a09cb0c8e72fb11905e9a8c7dba7e0b396  .batch01_bootstrap/chunk04.b64
+          22827432625d2bdb84d2aa4ec0af021a28ba889e7969b27413c4154b4667ce19  .batch01_bootstrap/chunk05.b64
+          45dad4e19921ff35c11a1f3fd10fdccb64eb03adcd90c469aca1c66af51e6b89  .batch01_bootstrap/chunk06.b64
+          2a3a6138622e1b71202f30022b8264b067a711625b78a219c3d72fe176a77b90  .batch01_bootstrap/chunk07.b64
+          EOF
+          sed -i 's/^          //' /tmp/batch01-chunks.sha256
+          sha256sum --check /tmp/batch01-chunks.sha256
+          cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01_bootstrap.zip
+          echo "${BOOTSTRAP_SHA256}  /tmp/batch01_bootstrap.zip" | sha256sum --check
+
+          set +e
+          unzip -oq /tmp/batch01_bootstrap.zip -d .
+          unzip_status=$?
+          set -e
+          test "${unzip_status}" = "0" -o "${unzip_status}" = "2"
+
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import json
+          from pathlib import Path
+
+          scope_path = Path('anhui_zsb_data/config/batch_01_school_scope.json')
+          scope = json.loads(scope_path.read_text(encoding='utf-8'))
+          schools = {school['school_id']: school for school in scope['schools']}
+
+          if set(schools) != {'AHSTU', 'AHSZU', 'CZU'}:
+              raise SystemExit(f'unexpected initial Batch school IDs: {sorted(schools)}')
+
+          def source(*, year, code, title, url, publish_date, document_type, topics, privacy='aggregate_or_policy'):
+              return {
+                  'source_id': f'SRC-CHZU-{year}-{code}',
+                  'year': year,
+                  'type_code': code,
+                  'title': title,
+                  'document_url': url,
+                  'publish_date': publish_date,
+                  'document_type': document_type,
+                  'topics': topics,
+                  'expected_markers': [str(year), '专升本', '招生章程' if code == 'ZC' else ('录取' if code == 'LQ' else '考试')],
+                  'follow_attachments': True,
+                  'required': True,
+                  'status': 'selected',
+                  'privacy_classification': privacy,
+                  'discovery_method': 'official_site_navigation_and_search',
+              }
+
+          common_policy_topics = [
+              'admission_policy', 'enrollment_plan', 'major_and_training_location',
+              'exam_subjects', 'eligibility', 'admission_rules',
+              'adjustments', 'schedule_and_location',
+          ]
+          common_scheme_topics = [
+              'enrollment_plan', 'major_and_training_location', 'exam_subjects',
+              'exam_syllabus', 'reference_books', 'eligibility',
+              'schedule_and_location',
+          ]
+          score_topics = ['admission_scores', 'admission_rules', 'adjustments']
+
+          chzu = {
+              'school_id': 'CHZU',
+              'school_name_std': '滁州学院',
+              'school_name_raw': '滁州学院',
+              'aliases': ['滁州学院'],
+              'school_id_basis': '采用学校官方域名 chzu.edu.cn 的稳定大写 ASCII 标识，与仓库现有 ID 不冲突。',
+              'official_school_url': 'https://www.chzu.edu.cn/',
+              'official_admission_url': 'https://zsw.chzu.edu.cn/',
+              'official_domains': ['chzu.edu.cn'],
+              'selection_reason': '官方招生网可稳定公开访问，2024—2026均有招生章程、拟招生方案或考试科目材料及聚合录取分数通知；同时覆盖双校区、附件和校内计划调剂。',
+              'structure_features': ['会峰校区与琅琊校区', '常规笔试专业', '免文化课退役士兵面试', '招生章程及考试材料附件', '校内计划调剂与不进行校外调剂结论'],
+              'possible_schema_risks': ['multiple campuses', 'special-candidate interview score semantics', 'blank official forms'],
+              'years_with_official_materials': [2024, 2025, 2026],
+              'missing_checks': [
+                  {
+                      'year': year,
+                      'topic': 'application_statistics',
+                      'status': 'not_found',
+                      'notes': '已检查官方专升本通知列表和已冻结页面，未定位分专业报名人数或报录聚合统计。',
+                      'next_action': '后续人工复核学校信息公开网及主管部门公开材料。',
+                  }
+                  for year in (2024, 2025, 2026)
+              ],
+              'sources': [
+                  source(year=2024, code='ZC', title='滁州学院2024年普通高校专升本招生章程', url='https://zsw.chzu.edu.cn/2024/0321/c5395a293324/pagem.htm', publish_date='2024-03-21', document_type='admission_policy', topics=common_policy_topics),
+                  source(year=2024, code='DG', title='关于公布滁州学院2024年普通专升本招生考试科目、专业课参考书目及考试大纲的通知', url='https://zsw.chzu.edu.cn/2024/0312/c5395a292622/pagem.htm', publish_date='2024-03-12', document_type='exam_syllabus_and_reference_books', topics=common_scheme_topics),
+                  source(year=2024, code='LQ', title='关于公布2024年专升本考试拟录取分数线及拟录取查询方式的通知', url='https://zsw.chzu.edu.cn/2024/0523/c5395a297158/pagem.htm', publish_date='2024-05-23', document_type='admission_scores', topics=score_topics, privacy='aggregate_scores_and_query_notice'),
+                  source(year=2025, code='ZC', title='滁州学院2025年普通高校专升本招生章程', url='https://zsw.chzu.edu.cn/2025/0318/c5395a316184/pagem.htm', publish_date='2025-03-18', document_type='admission_policy', topics=common_policy_topics),
+                  source(year=2025, code='DG', title='关于公布我校2025年普通高校专升本拟招生方案的通知', url='https://zsw.chzu.edu.cn/2024/1030/c5395a308702/pagem.htm', publish_date='2024-10-30', document_type='enrollment_scheme', topics=common_scheme_topics),
+                  source(year=2025, code='LQ', title='关于公布2025年专升本考试拟录取分数线的通知', url='https://zsw.chzu.edu.cn/2025/0526/c5395a324217/pagem.htm', publish_date='2025-05-26', document_type='admission_scores', topics=score_topics, privacy='aggregate_scores_and_query_notice'),
+                  source(year=2026, code='ZC', title='滁州学院2026年普通高校专升本招生章程', url='https://zsw.chzu.edu.cn/2026/0319/c5395a340880/pagem.htm', publish_date='2026-03-19', document_type='admission_policy', topics=common_policy_topics),
+                  source(year=2026, code='DG', title='关于公布我校2026年普通高校专升本拟招生方案的通知', url='https://zsw.chzu.edu.cn/2025/1215/c5395a337385/pagem.htm', publish_date='2025-12-15', document_type='enrollment_scheme', topics=common_scheme_topics),
+                  source(year=2026, code='LQ', title='关于公布2026年专升本考试拟录取分数线以及拟录取查询方式的通知', url='https://zsw.chzu.edu.cn/2026/0521/c5395a344320/pagem.htm', publish_date='2026-05-21', document_type='admission_scores', topics=score_topics, privacy='aggregate_scores_and_query_notice'),
+              ],
+          }
+
+          czu = schools['CZU']
+          for item in czu['sources']:
+              if item['source_id'] == 'SRC-CZU-2024-DG':
+                  item.pop('min_required_attachments', None)
+                  item.pop('required_attachment_types', None)
+                  item['topics'] = [topic for topic in item['topics'] if topic not in {'exam_syllabus', 'reference_books'}]
+                  item['notes'] = '官方 HTML 可公开归档；PDF 下载入口返回验证码页，未绕过访问控制，附件主题标记 access_restricted。'
+          czu.setdefault('missing_checks', []).extend([
+              {
+                  'year': 2024,
+                  'topic': topic,
+                  'status': 'access_restricted',
+                  'notes': '官方附件下载入口要求验证码；本 Batch 不绕过访问控制，仅归档公开 HTML 通知。',
+                  'next_action': '人工浏览器复核并在遵守网站规则的前提下决定是否补充。',
+              }
+              for topic in ('exam_syllabus', 'reference_books')
+          ])
+
+          scope['schools'] = sorted([schools['AHSTU'], chzu, czu], key=lambda item: item['school_id'])
+          excluded = [item for item in scope.get('excluded_candidates', []) if item.get('school_id') != 'CHZU']
+          excluded.append({
+              'school_id': 'AHSZU',
+              'school_name': '宿州学院',
+              'official_admission_url': 'https://www.ahszu.edu.cn/zs/',
+              'excluded_reason': '官方域名在 GitHub Actions 多区域运行器连续 DNS 解析失败，无法完成可重复的官方证据采集；由可稳定访问的 CHZU 替换。',
+          })
+          scope['excluded_candidates'] = sorted(excluded, key=lambda item: item.get('school_id', ''))
+          scope_path.write_text(json.dumps(scope, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          print('Frozen Batch 01 school IDs:', [school['school_id'] for school in scope['schools']])
+          print('Frozen source documents:', sum(len(school['sources']) for school in scope['schools']))
+          PY
+
+          python3 -m py_compile \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py
+          cd anhui_zsb_data
+          python3 scripts/discover_batch_evidence.py --batch batch_01
+          python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+
+      - name: Ensure deterministic PDF text parser is available
+        run: |
+          set -euo pipefail
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+          pdftotext -v 2>&1 | head -n 1
+
+      - name: Confirm collector dry-run is non-mutating
+        run: |
+          set -euo pipefail
+          before="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          python3 scripts/collect_batch_evidence.py --batch batch_01 --dry-run
+          after="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          test "${before}" = "${after}"
+
+      - name: Collect official source pages and assets
+        run: |
+          set -o pipefail
+          mkdir -p ci-logs
+          python3 scripts/collect_batch_evidence.py --batch batch_01 2>&1 \
+            | tee ci-logs/batch-01-collection.log
+
+      - name: Run offline Batch verifier and existing project gates
+        run: |
+          set -o pipefail
+          {
+            python3 scripts/verify_batch_evidence.py --batch batch_01
+            python3 scripts/stage1_evidence_guard.py
+            python3 scripts/verify_stage1_evidence.py
+            python3 -m unittest discover -s tests -v
+            PYTHONPATH=scripts python3 scripts/check_idempotence.py
+            PYTHONPATH=scripts python3 scripts/check_clean_rebuild.py
+            python3 scripts/run_quality_gate.py
+          } 2>&1 | tee -a ci-logs/batch-01-collection.log
+
+      - name: Build exact final payload archive
+        working-directory: .
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+
+          include = [
+              Path('anhui_zsb_data/config/batch_01_school_scope.json'),
+              Path('anhui_zsb_data/config/batch_01_evidence_inventory.json'),
+              Path('anhui_zsb_data/scripts/batch_evidence_common.py'),
+              Path('anhui_zsb_data/scripts/discover_batch_evidence.py'),
+              Path('anhui_zsb_data/scripts/collect_batch_evidence.py'),
+              Path('anhui_zsb_data/scripts/verify_batch_evidence.py'),
+          ]
+          include += sorted(Path('anhui_zsb_data/evidence/batch_01').rglob('*'))
+          include += sorted(Path('anhui_zsb_data/reports').glob('batch_01_*'))
+          include = [path for path in include if path.is_file()]
+          with zipfile.ZipFile('/tmp/batch-01-final-payload.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+              for path in include:
+                  archive.write(path, path.as_posix())
+          print(f"Payload files: {len(include)}")
+          PY
+          sha256sum /tmp/batch-01-final-payload.zip | tee /tmp/batch-01-final-payload.zip.sha256
+
+      - name: Upload generated evidence package
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch-01-generated-evidence
+          path: |
+            /tmp/batch-01-final-payload.zip
+            /tmp/batch-01-final-payload.zip.sha256
+            anhui_zsb_data/ci-logs/batch-01-collection.log
+          if-no-files-found: warn
+          retention-days: 7

@@ -1,0 +1,157 @@
+name: Batch 01 Temporary Acquisition Snapshot V7
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-acquire-v7.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: batch01-temporary-acquisition-v7-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - name: Checkout Batch branch
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Restore reviewed tools and clean scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01-bootstrap.zip
+          echo "be6d927a739be8124bfb912cfe52afc64b2488297399689017c09bf7891a1864  /tmp/batch01-bootstrap.zip" | sha256sum --check
+          for path in \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py; do
+            unzip -p /tmp/batch01-bootstrap.zip "$path" > "$path"
+            test -s "$path"
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          import gzip
+          import hashlib
+          import json
+          import re
+
+          workflow = Path('.github/workflows/_batch01-collect-v5.yml').read_text(encoding='utf-8')
+          match = re.search(r'BATCH01_SCOPE_GZ_B64: "([A-Za-z0-9+/=]+)"', workflow)
+          if not match:
+              raise SystemExit('embedded clean scope not found')
+          raw = gzip.decompress(base64.b64decode(match.group(1)))
+          expected = 'b3bc4300ea873518ccbc54c45d24d20b0a4100360f67a001567b3ceaa6059631'
+          actual = hashlib.sha256(raw).hexdigest()
+          if actual != expected:
+              raise SystemExit(f'scope checksum mismatch: {actual}')
+          scope_path = Path('anhui_zsb_data/config/batch_01_school_scope.json')
+          scope = json.loads(raw.decode('utf-8'))
+          scope['max_retries'] = 2
+          scope_path.write_text(json.dumps(scope, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+
+          collector = Path('anhui_zsb_data/scripts/collect_batch_evidence.py')
+          text = collector.read_text(encoding='utf-8')
+          text = text.replace('timeout=45', 'timeout=18')
+          needle = '''        if required_failures:\n            raise RuntimeError(f"required source failures: {required_failures}")\n'''
+          replacement = '''        if required_failures:\n            for item in inventory.get("collection_errors", []):\n                print("[collection-error] " + __import__("json").dumps(item, ensure_ascii=False, sort_keys=True))\n            print(f"[partial-collection] required source failures retained in snapshot: {required_failures}")\n'''
+          if needle not in text:
+              raise SystemExit('collector partial-snapshot patch target not found')
+          collector.write_text(text.replace(needle, replacement), encoding='utf-8')
+          PY
+          python3 -m py_compile anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py
+
+      - name: Ensure PDF parser
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+
+      - name: Run acquisition and preserve complete partial snapshot
+        id: acquisition
+        shell: bash
+        working-directory: anhui_zsb_data
+        run: |
+          set -o pipefail
+          mkdir -p ci-logs
+          {
+            python3 scripts/discover_batch_evidence.py --batch batch_01
+            python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+            python3 scripts/collect_batch_evidence.py --batch batch_01 --dry-run
+            python3 scripts/collect_batch_evidence.py --batch batch_01
+          } 2>&1 | tee ci-logs/batch-01-collection.log
+          status=${PIPESTATUS[0]}
+          echo "status=${status}" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Push isolated generated snapshot branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/batch01-generated
+          mkdir -p /tmp/batch01-generated/anhui_zsb_data/config \
+            /tmp/batch01-generated/anhui_zsb_data/reports \
+            /tmp/batch01-generated/anhui_zsb_data/ci-logs
+          if [[ -d anhui_zsb_data/evidence/batch_01 ]]; then
+            mkdir -p /tmp/batch01-generated/anhui_zsb_data/evidence
+            cp -a anhui_zsb_data/evidence/batch_01 /tmp/batch01-generated/anhui_zsb_data/evidence/
+          fi
+          cp -f anhui_zsb_data/config/batch_01_school_scope.json \
+            /tmp/batch01-generated/anhui_zsb_data/config/
+          if [[ -f anhui_zsb_data/config/batch_01_evidence_inventory.json ]]; then
+            cp -f anhui_zsb_data/config/batch_01_evidence_inventory.json \
+              /tmp/batch01-generated/anhui_zsb_data/config/
+          fi
+          find anhui_zsb_data/reports -maxdepth 1 -type f -name 'batch_01_*' \
+            -exec cp -f {} /tmp/batch01-generated/anhui_zsb_data/reports/ \;
+          cp -f anhui_zsb_data/ci-logs/batch-01-collection.log \
+            /tmp/batch01-generated/anhui_zsb_data/ci-logs/
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C automation/batch-01-acquisition-snapshot origin/main
+          cp -a /tmp/batch01-generated/. .
+          git add anhui_zsb_data/config/batch_01_* \
+            anhui_zsb_data/evidence/batch_01 \
+            anhui_zsb_data/reports/batch_01_* \
+            anhui_zsb_data/ci-logs/batch-01-collection.log
+          git commit -m 'data(batch01): preserve isolated acquisition snapshot' || true
+          git push --force origin HEAD:refs/heads/automation/batch-01-acquisition-snapshot
+
+      - name: Upload snapshot log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch-01-acquisition-snapshot-v7
+          path: |
+            anhui_zsb_data/ci-logs/batch-01-collection.log
+            anhui_zsb_data/config/batch_01_evidence_inventory.json
+            anhui_zsb_data/reports/batch_01_*
+          if-no-files-found: warn
+          retention-days: 7

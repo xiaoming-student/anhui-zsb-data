@@ -1,0 +1,158 @@
+name: Batch 01 Temporary Read-Only Collector V5
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-collect-v5.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: batch01-temporary-collector-v5-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+        working-directory: anhui_zsb_data
+    env:
+      PYTHONUTF8: "1"
+      BATCH01_SCOPE_GZ_B64: "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"
+
+    steps:
+      - name: Checkout Batch branch without persisted credentials
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Restore reviewed Batch tools and isolated collection scope
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test "$(find .batch01_bootstrap -maxdepth 1 -type f -name 'chunk*.b64' | wc -l)" = "8"
+          cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01-bootstrap.zip
+          echo "be6d927a739be8124bfb912cfe52afc64b2488297399689017c09bf7891a1864  /tmp/batch01-bootstrap.zip" | sha256sum --check
+          for path in \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py; do
+            mkdir -p "$(dirname "$path")"
+            unzip -p /tmp/batch01-bootstrap.zip "$path" > "$path"
+            test -s "$path"
+          done
+          printf '%s' "${BATCH01_SCOPE_GZ_B64}" | base64 --decode | gzip -dc \
+            > anhui_zsb_data/config/batch_01_school_scope.json
+          echo "b3bc4300ea873518ccbc54c45d24d20b0a4100360f67a001567b3ceaa6059631  anhui_zsb_data/config/batch_01_school_scope.json" | sha256sum --check
+          python3 -m py_compile anhui_zsb_data/scripts/*.py
+
+      - name: Ensure deterministic PDF parser is available
+        run: |
+          set -euo pipefail
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+          pdftotext -v 2>&1 | head -n 1
+
+      - name: Regenerate and validate frozen discovery reports
+        run: |
+          set -euo pipefail
+          python3 scripts/discover_batch_evidence.py --batch batch_01
+          python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+
+      - name: Confirm collector dry-run is non-mutating
+        run: |
+          set -euo pipefail
+          before="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          python3 scripts/collect_batch_evidence.py --batch batch_01 --dry-run
+          after="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          test "${before}" = "${after}"
+
+      - name: Collect official source pages and assets
+        run: |
+          set -o pipefail
+          mkdir -p ci-logs
+          python3 scripts/collect_batch_evidence.py --batch batch_01 2>&1 \
+            | tee ci-logs/batch-01-collection.log
+
+      - name: Validate generated inventory and evidence closure
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('.')
+          inventory = json.loads((root / 'config/batch_01_evidence_inventory.json').read_text(encoding='utf-8'))
+          assert inventory['schema_version'] == 'batch-evidence-v1'
+          assert inventory['batch_id'] == 'batch_01'
+          assert [item['school_id'] for item in inventory['schools']] == ['AHSTU', 'CHZU', 'CZU']
+          assert len(inventory['sources']) == 27
+          assert all(not item.get('required') or item.get('status') == 'collected' for item in inventory['sources'])
+          declared = set()
+          for asset in inventory['assets']:
+              if asset.get('status') not in {'collected', 'awaiting_manual_review'}:
+                  continue
+              path = root / asset['local_path']
+              assert path.is_file() and not path.is_symlink(), asset['asset_id']
+              assert path.stat().st_size == asset['file_size'], asset['asset_id']
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == asset['sha256'], asset['asset_id']
+              declared.add(asset['local_path'])
+          actual = {
+              path.as_posix()
+              for path in (root / 'evidence/batch_01').rglob('*')
+              if path.is_file()
+          }
+          assert declared == actual, (sorted(declared - actual), sorted(actual - declared))
+          print(f"Generated Batch 01 package: sources={len(inventory['sources'])}, files={len(actual)}")
+          PY
+
+      - name: Build exact generated payload archive
+        working-directory: .
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+
+          include = [Path('anhui_zsb_data/config/batch_01_evidence_inventory.json')]
+          include += sorted(Path('anhui_zsb_data/evidence/batch_01').rglob('*'))
+          include += sorted(Path('anhui_zsb_data/reports').glob('batch_01_*'))
+          include = [path for path in include if path.is_file()]
+          with zipfile.ZipFile('/tmp/batch-01-generated-payload-v5.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+              for path in include:
+                  archive.write(path, path.as_posix())
+          print(f"Payload files: {len(include)}")
+          PY
+          sha256sum /tmp/batch-01-generated-payload-v5.zip \
+            | tee /tmp/batch-01-generated-payload-v5.zip.sha256
+
+      - name: Upload generated Batch package and full log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch-01-generated-evidence-v5
+          path: |
+            /tmp/batch-01-generated-payload-v5.zip
+            /tmp/batch-01-generated-payload-v5.zip.sha256
+            anhui_zsb_data/ci-logs/batch-01-collection.log
+            anhui_zsb_data/config/batch_01_evidence_inventory.json
+            anhui_zsb_data/reports/batch_01_*
+          if-no-files-found: warn
+          retention-days: 7

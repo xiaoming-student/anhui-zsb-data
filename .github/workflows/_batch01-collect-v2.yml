@@ -1,0 +1,184 @@
+name: Batch 01 Temporary Read-Only Collector V2
+
+on:
+  push:
+    branches:
+      - data/batch-01-raw-evidence-acquisition
+    paths:
+      - .github/workflows/_batch01-collect-v2.yml
+      - .batch01_scope_temp_v2/**
+      - .batch01_bootstrap/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: batch01-read-only-collector-v2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: Checkout Batch branch without persisted credentials
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Restore reviewed Batch tooling and valid temporary scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .batch01_bootstrap/chunk*.b64 | base64 --decode > /tmp/batch01_bootstrap.zip
+          echo "be6d927a739be8124bfb912cfe52afc64b2488297399689017c09bf7891a1864  /tmp/batch01_bootstrap.zip" | sha256sum --check
+          for path in \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py; do
+            mkdir -p "$(dirname "$path")"
+            unzip -p /tmp/batch01_bootstrap.zip "$path" > "$path"
+            test -s "$path"
+          done
+          python3 -m py_compile \
+            anhui_zsb_data/scripts/batch_evidence_common.py \
+            anhui_zsb_data/scripts/discover_batch_evidence.py \
+            anhui_zsb_data/scripts/collect_batch_evidence.py \
+            anhui_zsb_data/scripts/verify_batch_evidence.py
+
+          test "$(find .batch01_scope_temp_v2 -maxdepth 1 -type f -name 'part*.b64' | wc -l)" = "7"
+          cat .batch01_scope_temp_v2/part*.b64 | base64 --decode \
+            > anhui_zsb_data/config/batch_01_school_scope.json
+          echo "96b6a5828bbae22fcfb29b4dcee33627be70a127392f89473e8c84ad216ee016  anhui_zsb_data/config/batch_01_school_scope.json" \
+            | sha256sum --check
+          python3 -m json.tool anhui_zsb_data/config/batch_01_school_scope.json >/dev/null
+
+      - name: Ensure deterministic PDF parser is available
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends poppler-utils
+          fi
+          pdftotext -v 2>&1 | head -n 1
+
+      - name: Regenerate and validate discovery reports
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-logs
+          {
+            python3 scripts/discover_batch_evidence.py --batch batch_01
+            python3 scripts/discover_batch_evidence.py --batch batch_01 --check
+          } 2>&1 | tee ci-logs/batch-01-collection.log
+
+      - name: Confirm collector dry-run is non-mutating
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          before="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          python3 scripts/collect_batch_evidence.py --batch batch_01 --dry-run 2>&1 \
+            | tee -a ci-logs/batch-01-collection.log
+          after="$(find config reports scripts -type f -printf '%p %s\n' | sort | sha256sum)"
+          test "${before}" = "${after}"
+
+      - name: Collect official source pages and unrestricted assets
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 scripts/collect_batch_evidence.py --batch batch_01 2>&1 \
+            | tee -a ci-logs/batch-01-collection.log
+
+      - name: Validate generated inventory basics
+        if: always()
+        working-directory: anhui_zsb_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f config/batch_01_evidence_inventory.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('.')
+          inventory = json.loads((root / 'config/batch_01_evidence_inventory.json').read_text(encoding='utf-8'))
+          assert inventory['schema_version'] == 'batch-evidence-v1'
+          assert inventory['batch_id'] == 'batch_01'
+          assert [item['school_id'] for item in inventory['schools']] == ['AHSTU', 'CHZU', 'CZU']
+          assert len(inventory['sources']) == 27
+          declared = set()
+          for asset in inventory['assets']:
+              if asset.get('status') not in {'collected', 'awaiting_manual_review'}:
+                  continue
+              path = root / asset['local_path']
+              assert path.is_file() and not path.is_symlink(), asset['asset_id']
+              assert path.stat().st_size == asset['file_size'], asset['asset_id']
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == asset['sha256'], asset['asset_id']
+              declared.add(asset['local_path'])
+          actual = {
+              path.as_posix()
+              for path in (root / 'evidence/batch_01').rglob('*')
+              if path.is_file()
+          }
+          assert declared == actual, (sorted(declared - actual), sorted(actual - declared))
+          failures = [item['source_id'] for item in inventory['sources'] if item.get('required') and item.get('status') != 'collected']
+          print(f"sources={len(inventory['sources'])} files={len(actual)} required_failures={failures}")
+          PY
+
+      - name: Build exact generated payload archive
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+
+          include = []
+          for path in [
+              Path('anhui_zsb_data/config/batch_01_evidence_inventory.json'),
+              *sorted(Path('anhui_zsb_data/evidence/batch_01').rglob('*')),
+              *sorted(Path('anhui_zsb_data/reports').glob('batch_01_*')),
+              Path('anhui_zsb_data/ci-logs/batch-01-collection.log'),
+          ]:
+              if path.is_file():
+                  include.append(path)
+          if not include:
+              raise SystemExit('no generated Batch files available')
+          with zipfile.ZipFile('/tmp/batch-01-automatic-payload-v2.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+              for path in include:
+                  archive.write(path, path.as_posix())
+          print(f'payload_files={len(include)}')
+          PY
+          sha256sum /tmp/batch-01-automatic-payload-v2.zip \
+            > /tmp/batch-01-automatic-payload-v2.zip.sha256
+
+      - name: Upload generated automatic package and full log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: batch-01-automatic-evidence-v2
+          path: |
+            /tmp/batch-01-automatic-payload-v2.zip
+            /tmp/batch-01-automatic-payload-v2.zip.sha256
+            anhui_zsb_data/ci-logs/batch-01-collection.log
+            anhui_zsb_data/config/batch_01_evidence_inventory.json
+            anhui_zsb_data/reports/batch_01_*
+          if-no-files-found: warn
+          retention-days: 7
