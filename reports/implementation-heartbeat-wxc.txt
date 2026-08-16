@@ -1,0 +1,4 @@
+WXC object-recovery deployment heartbeat
+UTC deployment date: 2026-08-16
+Expected package SHA-256: d0576b193c2fcaf041e10dfc4fb83a185b935f88d83a0e05a71518384006f294
+This file is intentionally temporary and may be removed by the recovery workflow.
