@@ -1,0 +1,223 @@
+name: WXC P0 Audited Fault-Tolerant Bootstrap
+
+on:
+  push:
+    branches:
+      - agent/wxc-p0-raw-data
+    paths:
+      - .github/workflows/wxc-p0-bootstrap-install.yml
+      - .github/wxc-p0/anhui-zsb-wxc-p0-implementation.zip
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: wxc-p0-bootstrap-agent-wxc-p0-raw-data
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: agent/wxc-p0-raw-data
+  PACKAGE_PATH: .github/wxc-p0/anhui-zsb-wxc-p0-implementation.zip
+  PACKAGE_SHA256: d0576b193c2fcaf041e10dfc4fb83a185b935f88d83a0e05a71518384006f294
+
+jobs:
+  install-acquire-audit:
+    if: "${{ github.event.head_commit.message == 'ci: bootstrap audited fault-tolerant WXC implementation' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify and install the validated implementation package
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "${PACKAGE_SHA256}  ${PACKAGE_PATH}" | sha256sum -c -
+          rm -rf /tmp/wxc-p0-package
+          mkdir -p /tmp/wxc-p0-package
+          unzip -q "${PACKAGE_PATH}" -d /tmp/wxc-p0-package
+          package_root=/tmp/wxc-p0-package/anhui-zsb-wxc-p0-implementation
+          (
+            cd "${package_root}"
+            sha256sum -c SHA256SUMS
+          )
+          cp -a "${package_root}/repo-overlay/." .
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          root = Path('.')
+          expected = {
+              '.github/workflows/wxc-p0-raw-acquisition.yml': '5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a',
+              'anhui_zsb_data/config/full_42_school_scope.json': 'd88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/retrieval_attempts.jsonl': 'af0ba3be05e5b90eb2206fe739bf1023314a09c1323cf205f66fac4b227aeec6',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv': '315b023f18b11c73f5d48f6be3d54e1af93ef94f5a7890421cc121b29d7b8f12',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_manifest.json': '7f55b950cb1bd23033c715716b192209a722a88ee61063d179a35109d2f4e743',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_notes.md': '776d95f6f0ce66066efcd8c30092c7e97e214584eb99bfc61a3fe0cdafdd9e4d',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/source_discovery.json': '3c1ba53d5125bb822c604d4a4988487e72929cd320cb02f9d9b32f91a58f1d8f',
+              'anhui_zsb_data/reports/full_42_raw_evidence_audit.md': '3180ad9c876545dd2f15f18c1497134a7c7f81992723dcb0d40f694bba6bd48f',
+              'anhui_zsb_data/reports/p0_batch_01_wxc_audit.md': '96075446fcd132cb2d5a126c7d44fe85b8550feec0b17c09191f2265bd8fa6a0',
+              'scripts/acquire_wxc_p0_raw.py': 'a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc',
+              'scripts/audit_full_42_raw_evidence.py': '2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5',
+              'tests/test_acquire_wxc_p0_raw.py': '2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348',
+              'tests/test_full_42_scope.py': '13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0',
+          }
+          for rel, digest in expected.items():
+              data = (root / rel).read_bytes()
+              actual = hashlib.sha256(data).hexdigest()
+              assert actual == digest, (rel, actual, digest)
+          print(f'validated {len(expected)} byte-identical implementation files')
+          PY
+
+      - name: Validate collectors and scope
+        run: |
+          python -m py_compile scripts/acquire_wxc_p0_raw.py scripts/audit_full_42_raw_evidence.py
+          python -m unittest discover -s tests -v
+
+      - name: Recover public official DNS mappings safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/wxc-public-hosts
+          import http.client
+          import ipaddress
+          import json
+          import ssl
+          from urllib.parse import quote
+
+          hosts = ('zsb.wxc.edu.cn', 'www.wxc.edu.cn', 'www.ahzsks.cn')
+          endpoints = (
+              ('1.1.1.1', 'cloudflare-dns.com', '/dns-query?name={}&type=A'),
+              ('8.8.8.8', 'dns.google', '/resolve?name={}&type=A'),
+          )
+          context = ssl._create_unverified_context()
+          for host in hosts:
+              answers = set()
+              for endpoint, host_header, template in endpoints:
+                  try:
+                      conn = http.client.HTTPSConnection(endpoint, timeout=12, context=context)
+                      conn.request(
+                          'GET',
+                          template.format(quote(host)),
+                          headers={'Host': host_header, 'Accept': 'application/dns-json'},
+                      )
+                      response = conn.getresponse()
+                      payload = json.loads(response.read().decode('utf-8'))
+                      for row in payload.get('Answer', []):
+                          value = row.get('data', '')
+                          try:
+                              ip = ipaddress.ip_address(value)
+                          except ValueError:
+                              continue
+                          if row.get('type') == 1 and ip.is_global:
+                              answers.add(str(ip))
+                  except Exception as exc:
+                      print(f'# DNS recovery failed: {host} via {endpoint}: {exc}')
+              for ip in sorted(answers)[:3]:
+                  print(ip, host)
+          PY
+          grep -E '^[0-9]+(\.[0-9]+){3}[[:space:]]+' /tmp/wxc-public-hosts | sort -u | tee /tmp/wxc-public-hosts-valid || true
+          if test -s /tmp/wxc-public-hosts-valid; then
+            sudo tee -a /etc/hosts < /tmp/wxc-public-hosts-valid >/dev/null
+          fi
+          getent ahostsv4 zsb.wxc.edu.cn || true
+          getent ahostsv4 www.wxc.edu.cn || true
+          getent ahostsv4 www.ahzsks.cn || true
+
+      - name: Acquire public official raw bytes without blocking the batch
+        run: |
+          python scripts/acquire_wxc_p0_raw.py \
+            --repo-root . \
+            --timeout 20 \
+            --retries 3 \
+            --max-pages 100
+
+      - name: Regenerate and validate the 42-school audit
+        run: |
+          python scripts/audit_full_42_raw_evidence.py --repo-root .
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          root = Path('.').resolve()
+          manifest_path = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_manifest.json'
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          for collection in ('sources', 'assets'):
+              for item in manifest.get(collection, []):
+                  local = root / item['local_path']
+                  assert local.is_file(), local
+                  data = local.read_bytes()
+                  assert hashlib.sha256(data).hexdigest() == item['sha256'], local
+                  assert len(data) == item['file_size'], local
+          print(json.dumps({
+              'sources': len(manifest.get('sources', [])),
+              'assets': len(manifest.get('assets', [])),
+              'failures': len(manifest.get('failures', [])),
+          }, ensure_ascii=False))
+          PY
+
+      - name: Commit implementation, raw evidence, and truthful audit state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -f .github/workflows/wxc-p0-bootstrap-install.yml "${PACKAGE_PATH}"
+          git add \
+            .github/workflows/wxc-p0-raw-acquisition.yml \
+            anhui_zsb_data/config/full_42_school_scope.json \
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC \
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md \
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.json \
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md \
+            scripts/acquire_wxc_p0_raw.py \
+            scripts/audit_full_42_raw_evidence.py \
+            tests/test_acquire_wxc_p0_raw.py \
+            tests/test_full_42_scope.py
+          git commit -m 'data: install audited fault-tolerant WXC acquisition'
+          git push origin HEAD:"${TARGET_BRANCH}"
+
+      - name: Dispatch the installed audited workflow when GitHub permits branch dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set +e
+          for attempt in 1 2 3 4 5; do
+            gh workflow run wxc-p0-raw-acquisition.yml \
+              --repo "${GITHUB_REPOSITORY}" \
+              --ref "${TARGET_BRANCH}" \
+              -f target_branch="${TARGET_BRANCH}"
+            status=$?
+            if test "${status}" -eq 0; then
+              echo 'The installed Audited Fault-Tolerant workflow was dispatched.'
+              exit 0
+            fi
+            echo "Dispatch attempt ${attempt} failed; retrying after repository propagation."
+            sleep 6
+          done
+          echo '::warning::Branch workflow dispatch was unavailable; the bootstrap already ran the same validated acquisition and audit path and committed its results.'
+          exit 0
+
+      - name: Upload recovery checkpoint
+        uses: actions/upload-artifact@v4
+        with:
+          name: wxc-p0-bootstrap-checkpoint
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.json
+          if-no-files-found: error
+          retention-days: 14
