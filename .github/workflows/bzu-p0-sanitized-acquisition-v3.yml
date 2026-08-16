@@ -1,0 +1,180 @@
+name: BZU P0 Privacy-safe Acquisition V3
+
+on:
+  push:
+    branches:
+      - agent/bzu-p0-raw-data
+    paths:
+      - scripts/sanitize_bzu_p0_evidence.py
+      - .github/workflows/bzu-p0-sanitized-acquisition-v3.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bzu-p0-audited-raw-acquisition
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: agent/bzu-p0-raw-data
+
+jobs:
+  acquire-sanitize-validate-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout latest BZU branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/bzu-p0-raw-data
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition and document-inspection dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 pypdf
+
+      - name: Validate collector and sanitizer syntax
+        run: python -m py_compile scripts/acquire_bzu_p0_raw.py scripts/sanitize_bzu_p0_evidence.py
+
+      - name: Acquire BZU public official original bytes
+        env:
+          BZU_MAX_PAGES: '120'
+          BZU_TOTAL_TIMEOUT: '1000'
+          BZU_REQUEST_TIMEOUT: '30'
+        run: python scripts/acquire_bzu_p0_raw.py
+
+      - name: Enforce privacy, integrity, official-domain and strict-year policy
+        run: python scripts/sanitize_bzu_p0_evidence.py
+
+      - name: Validate final 84-cell coverage and every surviving formal byte
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from __future__ import annotations
+
+          import csv
+          import hashlib
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          root = Path('anhui_zsb_data/evidence/full_raw_30_schools/BZU')
+          coverage_path = root / 'school_coverage.csv'
+          manifest_path = root / 'school_manifest.json'
+          rows = list(csv.DictReader(coverage_path.open(encoding='utf-8-sig')))
+          keys = {(int(row['year']), row['topic']) for row in rows}
+          assert len(rows) == 84, len(rows)
+          assert len(keys) == 84, len(keys)
+          assert {year for year, _ in keys} == {2024, 2025, 2026}
+
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          assert manifest.get('school_id') == 'BZU'
+          assert manifest.get('sanitized') is True
+          domains = tuple(manifest.get('official_domains') or [])
+          assert domains == ('bzuu.edu.cn',), domains
+          formal = list(manifest.get('sources') or []) + list(manifest.get('assets') or [])
+          total_bytes = 0
+          for item in formal:
+              assert item.get('status') == 'collected', item
+              assert item.get('privacy_scan') == 'passed', item
+              assert item.get('integrity_scan') == 'passed', item
+              domain = str(item.get('official_domain') or '')
+              assert domain == 'bzuu.edu.cn' or domain.endswith('.bzuu.edu.cn'), domain
+              path = Path(item['local_path'])
+              data = path.read_bytes()
+              assert len(data) == int(item['file_size']), path
+              assert hashlib.sha256(data).hexdigest() == item['sha256'], path
+              total_bytes += len(data)
+
+          statuses = Counter(row['status'] for row in rows)
+          result = {
+              'coverage_cells': len(rows),
+              'status_counts': dict(sorted(statuses.items())),
+              'formal_evidence_items': len(formal),
+              'formal_evidence_bytes': total_bytes,
+              'failures': len(manifest.get('failures') or []),
+              'privacy_exclusions': len(manifest.get('privacy_exclusions') or []),
+              'sanitization_removed': len(manifest.get('sanitization_removed') or []),
+          }
+          Path('anhui_zsb_data/reports/p0_batch_02_bzu_validation.json').write_text(
+              json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          print(json.dumps(result, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Freeze the validated BZU publication payload
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/bzu-publish
+          mkdir -p /tmp/bzu-publish/anhui_zsb_data/evidence/full_raw_30_schools
+          mkdir -p /tmp/bzu-publish/anhui_zsb_data/reports
+          mkdir -p /tmp/bzu-publish/scripts
+          mkdir -p /tmp/bzu-publish/.github/workflows
+          cp -a anhui_zsb_data/evidence/full_raw_30_schools/BZU \
+            /tmp/bzu-publish/anhui_zsb_data/evidence/full_raw_30_schools/
+          cp -a anhui_zsb_data/reports/p0_batch_02_bzu_audit.md \
+            anhui_zsb_data/reports/p0_batch_02_bzu_sanitization_audit.md \
+            anhui_zsb_data/reports/p0_batch_02_bzu_validation.json \
+            /tmp/bzu-publish/anhui_zsb_data/reports/
+          cp -a scripts/acquire_bzu_p0_raw.py scripts/sanitize_bzu_p0_evidence.py \
+            /tmp/bzu-publish/scripts/
+          cp -a .github/workflows/bzu-p0-sanitized-acquisition-v3.yml \
+            /tmp/bzu-publish/.github/workflows/
+
+      - name: Publish from the current remote head without rebase conflicts
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          published=0
+          for attempt in 1 2 3 4 5; do
+            git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+            git reset --hard "origin/${TARGET_BRANCH}"
+
+            rm -rf anhui_zsb_data/evidence/full_raw_30_schools/BZU
+            cp -a /tmp/bzu-publish/anhui_zsb_data/evidence/full_raw_30_schools/BZU \
+              anhui_zsb_data/evidence/full_raw_30_schools/
+            cp -a /tmp/bzu-publish/anhui_zsb_data/reports/. anhui_zsb_data/reports/
+            cp -a /tmp/bzu-publish/scripts/. scripts/
+            cp -a /tmp/bzu-publish/.github/workflows/. .github/workflows/
+
+            rm -f .github/workflows/bzu-p0-bootstrap.yml
+            rm -f .github/workflows/bzu-p0-bootstrap-v2.yml
+            rm -f .github/workflows/cleanup-bzu-branch-probes.yml
+            rm -f .github/workflows/bzu-p0-raw-acquisition.yml
+            rm -f .github/workflows/bzu-p0-raw-acquisition-v2.yml
+            rm -f reports/bzu-branch-bootstrap-sentinel.txt
+            rm -f reports/DO_NOT_USE_THIS_FILE.tmp
+            rm -f reports/BZU_BRANCH_MISSING_FIXME.md
+            rm -f reports/bzu_p0_branch_request.json
+            rm -f reports/bzu_branch_creation_blocker.txt
+
+            git add -A
+            if ! git diff --cached --quiet; then
+              git commit -m 'data: acquire and sanitize audited BZU P0 raw evidence'
+            fi
+            if git push origin "HEAD:${TARGET_BRANCH}"; then
+              published=1
+              break
+            fi
+            sleep $((attempt * 4))
+          done
+          test "${published}" = 1
+
+      - name: Upload final BZU sanitized checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bzu-p0-sanitized-raw-evidence-v3
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/BZU/
+            anhui_zsb_data/reports/p0_batch_02_bzu_audit.md
+            anhui_zsb_data/reports/p0_batch_02_bzu_sanitization_audit.md
+            anhui_zsb_data/reports/p0_batch_02_bzu_validation.json
+          if-no-files-found: warn
+          retention-days: 14

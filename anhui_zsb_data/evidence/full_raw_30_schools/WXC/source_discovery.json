@@ -1,0 +1,178 @@
+{
+  "school_id": "WXC",
+  "school_name": "皖西学院",
+  "generated_at": "2026-08-16T03:07:12+00:00",
+  "official_candidates": [
+    {
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm",
+      "title": "皖西学院2024年专升本考试大纲及参考书目通知",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "page",
+      "parent_page": "",
+      "expected_filename": "",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8108.htm",
+      "title": "皖西学院2025年普通高校专升本招生章程",
+      "topics": [
+        "admission_policy",
+        "other_official_notice"
+      ],
+      "kind": "page",
+      "parent_page": "",
+      "expected_filename": "",
+      "discovery_basis": "seeded_exact_provincial_official_url",
+      "source_domain": "www.ahzsks.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+      "title": "皖西学院2025年专升本考试大纲（专业课）",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "",
+      "expected_filename": "皖西学院2025年专升本考试大纲（专业课）.pdf",
+      "discovery_basis": "seeded_exact_official_attachment_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+      "title": "2025年皖西学院专升本招生专业考试科目及参考书目",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "",
+      "expected_filename": "2025年皖西学院专升本招生专业考试科目及参考书目.pdf",
+      "discovery_basis": "seeded_exact_official_attachment_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "title": "关于公布皖西学院2026年普通专升本拟招生专业考试科目、考试大纲及参考书目的通知",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "page",
+      "parent_page": "",
+      "expected_filename": "",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf",
+      "title": "皖西学院2026年专升本考试大纲（专业课）",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "expected_filename": "皖西学院2026年专升本考试大纲（专业课）.pdf",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf",
+      "title": "2026年皖西学院专升本招生专业考试科目及参考书目",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "expected_filename": "2026年皖西学院专升本招生专业考试科目及参考书目.pdf",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    }
+  ],
+  "secondary_leads_are_not_formal_evidence": true,
+  "unresolved_parent_page_leads": [
+    {
+      "year": 2025,
+      "title": "关于公布皖西学院2025年普通专升本拟招生专业考试科目、考试大纲及参考书目的通知",
+      "publish_date": "2024-11-08",
+      "status": "awaiting_manual_review",
+      "notes": "The parent notice URL still requires recovery, but both school-official attachment URLs have been recovered and seeded directly."
+    }
+  ],
+  "secondary_leads": [
+    {
+      "year": 2024,
+      "title": "2024年皖西学院专升本招生章程公布",
+      "url": "https://www.hlsok.com/news/60142.html",
+      "source_level": "secondary_evidence",
+      "formal_evidence": false
+    },
+    {
+      "year": 2025,
+      "title": "2025年皖西学院普通高校专升本招生章程",
+      "url": "https://www.hlsok.com/ah/news/71315.html",
+      "source_level": "secondary_evidence",
+      "formal_evidence": false
+    },
+    {
+      "year": 2025,
+      "title": "2025皖西学院普通专升本拟招生专业考试科目、大纲及参考书目通知",
+      "url": "https://m.ah.huatu.com/2024/1118/2951340.html",
+      "source_level": "secondary_evidence",
+      "formal_evidence": false
+    },
+    {
+      "year": 2025,
+      "title": "皖西学院2025年专升本考试大纲（专业课）镜像下载跳转",
+      "url": "https://ah.huatu.com/z/go/u3/?u=241118%2Fccb3c4d54c5c32379af5d3acf8d206fb94927.pdf",
+      "source_level": "secondary_evidence",
+      "formal_evidence": false
+    },
+    {
+      "year": 2025,
+      "title": "2025年皖西学院专升本招生专业考试科目及参考书目镜像下载跳转",
+      "url": "https://ah.huatu.com/z/go/u3/?u=241118%2F4dac5d483c3c5fb3d75572830bd14ec173447.pdf",
+      "source_level": "secondary_evidence",
+      "formal_evidence": false
+    },
+    {
+      "year": 2026,
+      "title": "皖西学院2026年普通高校专升本招生章程转载",
+      "url": "https://www.cnedu.cn/shengxue/zx/wa20260319175011.shtml",
+      "source_level": "secondary_evidence",
+      "formal_evidence": false
+    }
+  ]
+}
