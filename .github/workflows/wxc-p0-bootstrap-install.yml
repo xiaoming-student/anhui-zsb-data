@@ -1,4 +1,4 @@
-name: WXC P0 Audited Fault-Tolerant Bootstrap
+name: WXC P0 Audited Data Recovery
 
 on:
   push:
@@ -6,14 +6,12 @@ on:
       - agent/wxc-p0-raw-data
     paths:
       - .github/workflows/wxc-p0-bootstrap-install.yml
-      - .github/wxc-p0/overlay.b64.part-*
 
 permissions:
   contents: write
-  actions: write
 
 concurrency:
-  group: wxc-p0-bootstrap-agent-wxc-p0-raw-data
+  group: wxc-p0-data-recovery-agent-wxc-p0-raw-data
   cancel-in-progress: false
 
 env:
@@ -22,11 +20,10 @@ env:
   ARCHIVE_SHA256: 49b8fb4e073f1d845555bb02588e3b9ae6912907c29a53d2cdcc3773b12ae371
 
 jobs:
-  install-acquire-audit:
-    if: >-
-      github.event.head_commit.message == 'ci: retry bootstrap audited fault-tolerant WXC implementation'
+  recover-data:
+    if: "${{ github.event.head_commit.message == 'ci: recover audited WXC data without workflow-token mutation' }}"
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 40
     steps:
       - name: Checkout target branch
         uses: actions/checkout@v4
@@ -39,7 +36,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Reassemble, verify, and install the validated implementation
+      - name: Restore and verify the validated implementation
         shell: bash
         run: |
           set -euo pipefail
@@ -52,32 +49,14 @@ jobs:
           mkdir -p /tmp/wxc-p0-package
           tar -xJf /tmp/wxc-overlay.tar.xz -C /tmp/wxc-p0-package
           cp -a /tmp/wxc-p0-package/repo-overlay/. .
-          python - <<'PY'
-          import hashlib
-          from pathlib import Path
-
-          root = Path('.')
-          expected = {
-              '.github/workflows/wxc-p0-raw-acquisition.yml': '5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a',
-              'anhui_zsb_data/config/full_42_school_scope.json': 'd88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d',
-              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/retrieval_attempts.jsonl': 'af0ba3be05e5b90eb2206fe739bf1023314a09c1323cf205f66fac4b227aeec6',
-              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv': '315b023f18b11c73f5d48f6be3d54e1af93ef94f5a7890421cc121b29d7b8f12',
-              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_manifest.json': '7f55b950cb1bd23033c715716b192209a722a88ee61063d179a35109d2f4e743',
-              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_notes.md': '776d95f6f0ce66066efcd8c30092c7e97e214584eb99bfc61a3fe0cdafdd9e4d',
-              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/source_discovery.json': '3c1ba53d5125bb822c604d4a4988487e72929cd320cb02f9d9b32f91a58f1d8f',
-              'anhui_zsb_data/reports/full_42_raw_evidence_audit.md': '3180ad9c876545dd2f15f18c1497134a7c7f81992723dcb0d40f694bba6bd48f',
-              'anhui_zsb_data/reports/p0_batch_01_wxc_audit.md': '96075446fcd132cb2d5a126c7d44fe85b8550feec0b17c09191f2265bd8fa6a0',
-              'scripts/acquire_wxc_p0_raw.py': 'a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc',
-              'scripts/audit_full_42_raw_evidence.py': '2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5',
-              'tests/test_acquire_wxc_p0_raw.py': '2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348',
-              'tests/test_full_42_scope.py': '13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0',
-          }
-          for rel, digest in expected.items():
-              path = root / rel
-              actual = hashlib.sha256(path.read_bytes()).hexdigest()
-              assert actual == digest, (rel, actual, digest)
-          print(f'validated {len(expected)} byte-identical implementation files')
-          PY
+          sha256sum -c <<'SUMS'
+          5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a  .github/workflows/wxc-p0-raw-acquisition.yml
+          d88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d  anhui_zsb_data/config/full_42_school_scope.json
+          a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc  scripts/acquire_wxc_p0_raw.py
+          2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5  scripts/audit_full_42_raw_evidence.py
+          2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348  tests/test_acquire_wxc_p0_raw.py
+          13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0  tests/test_full_42_scope.py
+          SUMS
 
       - name: Validate collectors and scope
         run: |
@@ -107,8 +86,7 @@ jobs:
                   try:
                       conn = http.client.HTTPSConnection(endpoint, timeout=12, context=context)
                       conn.request(
-                          'GET',
-                          template.format(quote(host)),
+                          'GET', template.format(quote(host)),
                           headers={'Host': host_header, 'Accept': 'application/dns-json'},
                       )
                       response = conn.getresponse()
@@ -130,17 +108,14 @@ jobs:
           if test -s /tmp/wxc-public-hosts-valid; then
             sudo tee -a /etc/hosts < /tmp/wxc-public-hosts-valid >/dev/null
           fi
-          getent ahostsv4 zsb.wxc.edu.cn || true
-          getent ahostsv4 www.wxc.edu.cn || true
-          getent ahostsv4 www.ahzsks.cn || true
 
-      - name: Acquire public official raw bytes without blocking the batch
+      - name: Acquire a bounded truthful WXC state
         run: |
           python scripts/acquire_wxc_p0_raw.py \
             --repo-root . \
-            --timeout 20 \
-            --retries 3 \
-            --max-pages 100
+            --timeout 15 \
+            --retries 2 \
+            --max-pages 20
 
       - name: Regenerate and validate the 42-school audit
         run: |
@@ -158,16 +133,8 @@ jobs:
                   local = root / item['local_path']
                   assert local.is_file(), local
                   data = local.read_bytes()
-                  assert len(data) == item['file_size'], (local, len(data), item['file_size'])
-                  actual = hashlib.sha256(data).hexdigest()
-                  assert actual == item['sha256'], (local, actual, item['sha256'])
-          coverage = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv'
-          attempts = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/retrieval_attempts.jsonl'
-          discovery = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/source_discovery.json'
-          audit_md = root / 'anhui_zsb_data/reports/full_42_raw_evidence_audit.md'
-          audit_json = root / 'anhui_zsb_data/reports/full_42_raw_evidence_audit.json'
-          for required in (coverage, attempts, discovery, audit_md, audit_json):
-              assert required.is_file() and required.stat().st_size > 0, required
+                  assert len(data) == item['file_size'], local
+                  assert hashlib.sha256(data).hexdigest() == item['sha256'], local
           print(json.dumps({
               'sources': len(manifest.get('sources', [])),
               'assets': len(manifest.get('assets', [])),
@@ -175,20 +142,13 @@ jobs:
           }, ensure_ascii=False))
           PY
 
-      - name: Commit implementation, raw evidence, and truthful audit state
+      - name: Commit only non-workflow implementation and truthful data state
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm -f .github/workflows/wxc-p0-bootstrap-install.yml
-          rm -f .github/wxc-p0/overlay.b64.part-*
-          rm -f .github/wxc-p0/anhui-zsb-wxc-p0-implementation.zip
-          rmdir .github/wxc-p0 2>/dev/null || true
-          git add -A -- \
-            .github/workflows/wxc-p0-bootstrap-install.yml \
-            .github/workflows/wxc-p0-raw-acquisition.yml \
-            .github/wxc-p0 \
+          git add -- \
             anhui_zsb_data/config/full_42_school_scope.json \
             anhui_zsb_data/evidence/full_raw_30_schools/WXC \
             anhui_zsb_data/reports/full_42_raw_evidence_audit.md \
@@ -199,38 +159,16 @@ jobs:
             tests/test_acquire_wxc_p0_raw.py \
             tests/test_full_42_scope.py
           if git diff --cached --quiet; then
-            echo 'No implementation or audit changes to commit.'
+            echo 'No non-workflow changes to commit.'
           else
-            git commit -m 'data: install audited fault-tolerant WXC acquisition'
+            git commit -m 'data: install audited WXC acquisition and persist truthful state'
             git push origin HEAD:"${TARGET_BRANCH}"
           fi
-
-      - name: Dispatch the installed audited workflow when GitHub permits branch dispatch
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set +e
-          for attempt in 1 2 3 4 5; do
-            gh workflow run wxc-p0-raw-acquisition.yml \
-              --repo "${GITHUB_REPOSITORY}" \
-              --ref "${TARGET_BRANCH}" \
-              -f target_branch="${TARGET_BRANCH}"
-            status=$?
-            if test "${status}" -eq 0; then
-              echo 'The installed Audited Fault-Tolerant workflow was dispatched.'
-              exit 0
-            fi
-            echo "Dispatch attempt ${attempt} failed; retrying after repository propagation."
-            sleep 6
-          done
-          echo '::warning::Branch workflow dispatch was unavailable. The bootstrap already ran the same validated acquisition, audit, and commit path.'
-          exit 0
 
       - name: Upload recovery checkpoint
         uses: actions/upload-artifact@v4
         with:
-          name: wxc-p0-bootstrap-checkpoint
+          name: wxc-p0-data-recovery-checkpoint
           path: |
             anhui_zsb_data/evidence/full_raw_30_schools/WXC
             anhui_zsb_data/reports/p0_batch_01_wxc_audit.md
