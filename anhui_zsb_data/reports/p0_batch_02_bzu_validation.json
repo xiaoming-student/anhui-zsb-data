@@ -1,0 +1,11 @@
+{
+  "coverage_cells": 84,
+  "status_counts": {
+    "awaiting_manual_review": 84
+  },
+  "formal_evidence_items": 0,
+  "formal_evidence_bytes": 0,
+  "failures": 5,
+  "privacy_exclusions": 0,
+  "sanitization_removed": 0
+}
