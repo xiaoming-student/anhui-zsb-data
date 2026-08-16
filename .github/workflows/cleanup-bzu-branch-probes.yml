@@ -1,0 +1,40 @@
+name: One-shot cleanup for BZU branch probes
+
+on:
+  push:
+    branches:
+      - agent/bzu-p0-raw-data
+    paths:
+      - .github/workflows/cleanup-bzu-branch-probes.yml
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/bzu-p0-raw-data
+          fetch-depth: 0
+      - name: Remove probe-only files
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/bzu-p0-bootstrap-v2.yml
+          rm -f .github/workflows/bzu-p0-bootstrap.yml
+          rm -f reports/BZU_BRANCH_MISSING_FIXME.md
+          rm -f reports/bzu_p0_branch_request.json
+          rm -f reports/bzu_branch_creation_blocker.txt
+          rm -f reports/bzu-branch-bootstrap-sentinel.txt
+          rm -f reports/DO_NOT_USE_THIS_FILE.tmp
+          rm -f .github/workflows/cleanup-bzu-branch-probes.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Nothing to clean.'
+            exit 0
+          fi
+          git commit -m 'chore: remove temporary BZU branch probes'
+          git push origin HEAD:agent/bzu-p0-raw-data
