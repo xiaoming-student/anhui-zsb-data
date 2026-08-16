@@ -1,0 +1,302 @@
+name: WXC P0 Success-gated Finalization V6
+
+on:
+  push:
+    branches:
+      - agent/wxc-p0-raw-data
+    paths:
+      - scripts/recover_wxc_p0_package_v2.py
+      - .github/workflows/wxc-p0-finalize-v6.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wxc-p0-object-recovery
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: agent/wxc-p0-raw-data
+
+jobs:
+  recover-test-acquire-validate-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Checkout latest WXC branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/wxc-p0-raw-data
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install acquisition dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Recover immutable implementation, acquire, audit, and validate
+        id: finalize
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WXC_TOTAL_TIMEOUT: '720'
+          WXC_REQUEST_TIMEOUT: '25'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          import subprocess
+          from pathlib import Path
+
+          immutable = {
+              '.github/workflows/wxc-p0-raw-acquisition.yml': '5fce15d1f87c81ab26bfb909c22f8231e17b2230162ec172162f05ac1afa546a',
+              'anhui_zsb_data/config/full_42_school_scope.json': 'd88e50bd6d1c8099d8642943d8f5fa21e586f01d5f827e4a9ff3559b8c29085d',
+              'scripts/acquire_wxc_p0_raw.py': 'a11aa273cc70a46ba8b8362ce6e400567bab9986f1f56f9a0bbf523f84cb0dcc',
+              'scripts/audit_full_42_raw_evidence.py': '2c57b8da8423c45e5a73a4d0371674adcfd8edd2068e8ac98ac33098bf7614a5',
+              'tests/test_acquire_wxc_p0_raw.py': '2de705414fe23968f5387082f28a748d653ebdf11c66e3cb62a40336f053c348',
+              'tests/test_full_42_scope.py': '13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0',
+          }
+
+          def digest(path: Path) -> str | None:
+              return hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else None
+
+          state = {
+              path: {'expected': expected, 'actual': digest(Path(path))}
+              for path, expected in immutable.items()
+          }
+          missing = [path for path, values in state.items() if values['actual'] != values['expected']]
+          reports = Path('anhui_zsb_data/reports')
+          reports.mkdir(parents=True, exist_ok=True)
+          (reports / 'wxc_v6_immutable_precheck.json').write_text(
+              json.dumps({'files': state, 'missing_or_mismatched': missing}, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          if missing:
+              print('Validated implementation incomplete; invoking durable package recovery:')
+              print('\n'.join(missing))
+              subprocess.run(['python', 'scripts/recover_wxc_p0_package_v2.py'], check=True)
+
+          final_state = {
+              path: {'expected': expected, 'actual': digest(Path(path))}
+              for path, expected in immutable.items()
+          }
+          failures = [path for path, values in final_state.items() if values['actual'] != values['expected']]
+          (reports / 'wxc_v6_immutable_postcheck.json').write_text(
+              json.dumps({'files': final_state, 'failures': failures}, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          if failures:
+              raise SystemExit(f'Immutable implementation mismatch after recovery: {failures}')
+          PY
+
+          python -m py_compile scripts/acquire_wxc_p0_raw.py scripts/audit_full_42_raw_evidence.py
+          python -m unittest -v tests.test_acquire_wxc_p0_raw tests.test_full_42_scope
+
+          set +e
+          python scripts/acquire_wxc_p0_raw.py
+          acquisition_code=$?
+          set -e
+          echo "WXC acquisition exit code: ${acquisition_code}"
+
+          python scripts/audit_full_42_raw_evidence.py
+          python -m unittest -v tests.test_acquire_wxc_p0_raw tests.test_full_42_scope
+
+          ACQUISITION_CODE="${acquisition_code}" python - <<'PY'
+          from __future__ import annotations
+
+          import csv
+          import hashlib
+          import json
+          import os
+          from collections import Counter
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          root = Path('anhui_zsb_data/evidence/full_raw_30_schools/WXC')
+          coverage_path = root / 'school_coverage.csv'
+          manifest_path = root / 'school_manifest.json'
+          if not coverage_path.is_file() or not manifest_path.is_file():
+              raise SystemExit('WXC manifest or coverage is missing after acquisition')
+
+          rows = list(csv.DictReader(coverage_path.open(encoding='utf-8-sig')))
+          keys = {(int(row['year']), row['topic']) for row in rows}
+          if len(rows) != 84 or len(keys) != 84:
+              raise SystemExit(f'WXC coverage invalid: rows={len(rows)} unique={len(keys)}')
+          if {year for year, _ in keys} != {2024, 2025, 2026}:
+              raise SystemExit('WXC coverage does not contain exactly 2024, 2025, 2026')
+
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          if manifest.get('school_id') != 'WXC':
+              raise SystemExit('WXC manifest school_id mismatch')
+          domains = tuple(manifest.get('official_domains') or [])
+          if not domains:
+              raise SystemExit('WXC official-domain allowlist is empty')
+          formal = list(manifest.get('sources') or []) + list(manifest.get('assets') or [])
+          total_bytes = 0
+          for item in formal:
+              if item.get('status') != 'collected':
+                  raise SystemExit(f'Non-collected item in WXC formal evidence: {item}')
+              domain = str(item.get('official_domain') or '')
+              if not any(domain == allowed or domain.endswith('.' + allowed) for allowed in domains):
+                  raise SystemExit(f'WXC official-domain violation: {domain}')
+              path = Path(item['local_path'])
+              data = path.read_bytes()
+              if len(data) != int(item['file_size']):
+                  raise SystemExit(f'WXC file-size mismatch: {path}')
+              if hashlib.sha256(data).hexdigest() != item['sha256']:
+                  raise SystemExit(f'WXC SHA-256 mismatch: {path}')
+              total_bytes += len(data)
+
+          status_counts = Counter(row['status'] for row in rows)
+          validation = {
+              'generated_at': datetime.now(timezone.utc).isoformat(),
+              'school_id': 'WXC',
+              'coverage_cells': len(rows),
+              'status_counts': dict(sorted(status_counts.items())),
+              'formal_evidence_items': len(formal),
+              'formal_evidence_bytes': total_bytes,
+              'failures': len(manifest.get('failures') or []),
+              'privacy_exclusions': len(manifest.get('privacy_exclusions') or []),
+              'acquisition_exit_code': int(os.environ['ACQUISITION_CODE']),
+              'validation_passed': True,
+          }
+          reports = Path('anhui_zsb_data/reports')
+          reports.mkdir(parents=True, exist_ok=True)
+          payload = json.dumps(validation, ensure_ascii=False, indent=2) + '\n'
+          (reports / 'wxc_p0_v6_validation.json').write_text(payload, encoding='utf-8')
+          # Keep the stable filename required by the integration gate.
+          (reports / 'wxc_p0_v4_validation.json').write_text(payload, encoding='utf-8')
+          print(json.dumps(validation, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Freeze validated final WXC checkpoint
+        if: steps.finalize.outcome == 'success'
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wxc-publish
+          mkdir -p /tmp/wxc-publish/.github/workflows
+          mkdir -p /tmp/wxc-publish/anhui_zsb_data/config
+          mkdir -p /tmp/wxc-publish/anhui_zsb_data/evidence/full_raw_30_schools
+          mkdir -p /tmp/wxc-publish/anhui_zsb_data/reports
+          mkdir -p /tmp/wxc-publish/scripts /tmp/wxc-publish/tests
+          cp -a .github/workflows/wxc-p0-raw-acquisition.yml /tmp/wxc-publish/.github/workflows/
+          cp -a anhui_zsb_data/config/full_42_school_scope.json /tmp/wxc-publish/anhui_zsb_data/config/
+          cp -a anhui_zsb_data/evidence/full_raw_30_schools/WXC \
+            /tmp/wxc-publish/anhui_zsb_data/evidence/full_raw_30_schools/
+          cp -a anhui_zsb_data/reports/full_42_raw_evidence_audit.md \
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md \
+            anhui_zsb_data/reports/wxc_p0_v4_validation.json \
+            anhui_zsb_data/reports/wxc_p0_v6_validation.json \
+            /tmp/wxc-publish/anhui_zsb_data/reports/
+          for optional in \
+            anhui_zsb_data/reports/wxc_package_recovery_diagnostic.json \
+            anhui_zsb_data/reports/wxc_package_recovery_diagnostic_v2.json; do
+            if [ -f "${optional}" ]; then
+              cp -a "${optional}" /tmp/wxc-publish/anhui_zsb_data/reports/
+            fi
+          done
+          cp -a scripts/acquire_wxc_p0_raw.py scripts/audit_full_42_raw_evidence.py /tmp/wxc-publish/scripts/
+          cp -a tests/test_acquire_wxc_p0_raw.py tests/test_full_42_scope.py /tmp/wxc-publish/tests/
+
+      - name: Publish validated checkpoint from current remote head and clean recovery files
+        if: steps.finalize.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          published=0
+          for attempt in 1 2 3 4 5; do
+            git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+            git reset --hard "origin/${TARGET_BRANCH}"
+
+            rm -rf anhui_zsb_data/evidence/full_raw_30_schools/WXC
+            cp -a /tmp/wxc-publish/.github/workflows/. .github/workflows/
+            cp -a /tmp/wxc-publish/anhui_zsb_data/config/. anhui_zsb_data/config/
+            cp -a /tmp/wxc-publish/anhui_zsb_data/evidence/full_raw_30_schools/WXC \
+              anhui_zsb_data/evidence/full_raw_30_schools/
+            cp -a /tmp/wxc-publish/anhui_zsb_data/reports/. anhui_zsb_data/reports/
+            cp -a /tmp/wxc-publish/scripts/. scripts/
+            cp -a /tmp/wxc-publish/tests/. tests/
+
+            rm -f reports/implementation-heartbeat-wxc.txt
+            rm -f scripts/recover_wxc_p0_package.py scripts/recover_wxc_p0_package_v2.py
+            rm -f .github/workflows/wxc-p0-bootstrap-install.yml
+            rm -f .github/workflows/wxc-p0-object-recovery-v2.yml
+            rm -f .github/workflows/wxc-p0-object-recovery-v3.yml
+            rm -f .github/workflows/wxc-p0-object-recovery-v4.yml
+            rm -f .github/workflows/wxc-p0-branch-hygiene-v5.yml
+            rm -f .github/workflows/wxc-p0-finalize-v6.yml
+            rm -rf .github/wxc-p0
+            rm -f anhui_zsb_data/reports/wxc_immutable_precheck.json
+            rm -f anhui_zsb_data/reports/wxc_immutable_postcheck.json
+            rm -f anhui_zsb_data/reports/wxc_v6_immutable_precheck.json
+            rm -f anhui_zsb_data/reports/wxc_v6_immutable_postcheck.json
+
+            git add -A
+            if ! git diff --cached --quiet; then
+              git commit -m 'data: finalize validated WXC P0 raw evidence checkpoint'
+            fi
+            if git push origin "HEAD:${TARGET_BRANCH}"; then
+              published=1
+              break
+            fi
+            sleep $((attempt * 4))
+          done
+          test "${published}" = 1
+
+      - name: Preserve recovery diagnostic when finalization fails
+        if: always() && steps.finalize.outcome == 'failure'
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wxc-failure
+          for report in \
+            anhui_zsb_data/reports/wxc_package_recovery_diagnostic_v2.json \
+            anhui_zsb_data/reports/wxc_v6_immutable_precheck.json \
+            anhui_zsb_data/reports/wxc_v6_immutable_postcheck.json; do
+            if [ -f "${report}" ]; then
+              cp -a "${report}" /tmp/wxc-failure/
+            fi
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          published=0
+          for attempt in 1 2 3 4 5; do
+            git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+            git reset --hard "origin/${TARGET_BRANCH}"
+            mkdir -p anhui_zsb_data/reports
+            cp -a /tmp/wxc-failure/. anhui_zsb_data/reports/ 2>/dev/null || true
+            git add scripts/recover_wxc_p0_package_v2.py \
+              .github/workflows/wxc-p0-finalize-v6.yml \
+              anhui_zsb_data/reports
+            if ! git diff --cached --quiet; then
+              git commit -m 'audit: preserve WXC P0 recovery failure diagnostics'
+            fi
+            if git push origin "HEAD:${TARGET_BRANCH}"; then
+              published=1
+              break
+            fi
+            sleep $((attempt * 4))
+          done
+          test "${published}" = 1
+
+      - name: Upload WXC V6 result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wxc-p0-success-gated-finalization-v6
+          path: |
+            anhui_zsb_data/evidence/full_raw_30_schools/WXC/
+            anhui_zsb_data/reports/p0_batch_01_wxc_audit.md
+            anhui_zsb_data/reports/full_42_raw_evidence_audit.md
+            anhui_zsb_data/reports/wxc_p0_v4_validation.json
+            anhui_zsb_data/reports/wxc_p0_v6_validation.json
+            anhui_zsb_data/reports/wxc_package_recovery_diagnostic*.json
+            anhui_zsb_data/reports/wxc_v6_immutable_*.json
+          if-no-files-found: warn
+          retention-days: 14
