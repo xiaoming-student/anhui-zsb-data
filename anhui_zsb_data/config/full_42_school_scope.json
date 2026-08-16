@@ -1,0 +1,695 @@
+{
+  "schema_version": "full-42-school-scope-v1",
+  "as_of": "2026-08-15",
+  "source_branch": "main",
+  "source_sha": "8408de3427a86f0e91a138e3ba7fa2f9487038ca",
+  "school_count": 42,
+  "year_count": 3,
+  "topic_count": 28,
+  "coverage_cell_count": 3528,
+  "years": [
+    2024,
+    2025,
+    2026
+  ],
+  "topics": [
+    "admission_policy",
+    "enrollment_plan",
+    "major_catalog",
+    "training_location",
+    "tuition_and_duration",
+    "eligibility",
+    "exam_subjects",
+    "exam_syllabus",
+    "reference_books",
+    "exam_schedule",
+    "exam_location",
+    "admission_rules",
+    "score_formula",
+    "control_line",
+    "admission_min_score",
+    "admission_max_score",
+    "admission_average_score",
+    "application_statistics",
+    "qualified_statistics",
+    "admitted_statistics",
+    "registered_statistics",
+    "plan_adjustment",
+    "adjustment",
+    "exemption",
+    "retired_soldier",
+    "registered_poor_family",
+    "skill_competition",
+    "other_official_notice"
+  ],
+  "schools": [
+    {
+      "order": 1,
+      "school_id": "HFNU",
+      "school_name": "合肥师范学院",
+      "school_type": "公办",
+      "official_domain": "hfnu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 2,
+      "school_id": "AHUA",
+      "school_name": "安徽艺术学院",
+      "school_type": "公办",
+      "official_domain": "ahua.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 3,
+      "school_id": "AHSTU",
+      "school_name": "安徽科技工程大学（原安徽科技学院）",
+      "school_type": "公办",
+      "official_domain": "ahstu.edu.cn",
+      "aliases": [
+        "安徽科技学院",
+        "安徽科技工程大学"
+      ],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 4,
+      "school_id": "CHZU",
+      "school_name": "滁州学院",
+      "school_type": "公办",
+      "official_domain": "chzu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 5,
+      "school_id": "CZU",
+      "school_name": "池州学院",
+      "school_type": "公办",
+      "official_domain": "czu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 6,
+      "school_id": "AHAU",
+      "school_name": "安徽农业大学",
+      "school_type": "公办",
+      "official_domain": "ahau.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 7,
+      "school_id": "AHMU",
+      "school_name": "安徽医科大学",
+      "school_type": "公办",
+      "official_domain": "ahmu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 8,
+      "school_id": "AHTCM",
+      "school_name": "安徽中医药大学",
+      "school_type": "公办",
+      "official_domain": "ahtcm.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 9,
+      "school_id": "BBMU",
+      "school_name": "蚌埠医科大学",
+      "school_type": "公办",
+      "official_domain": "bbmu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 10,
+      "school_id": "FYNU",
+      "school_name": "阜阳师范大学",
+      "school_type": "公办",
+      "official_domain": "fynu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 11,
+      "school_id": "AQNU",
+      "school_name": "安庆师范大学",
+      "school_type": "公办",
+      "official_domain": "aqnu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 12,
+      "school_id": "WNMC",
+      "school_name": "皖南医科大学（原皖南医学院）",
+      "school_type": "公办",
+      "official_domain": "wnmc.edu.cn",
+      "aliases": [
+        "皖南医学院",
+        "皖南医科大学"
+      ],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 13,
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "school_type": "公办",
+      "official_domain": "wxc.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P0-A",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 14,
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "school_type": "公办",
+      "official_domain": "bzuu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P0-A",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 15,
+      "school_id": "CHU",
+      "school_name": "巢湖学院",
+      "school_type": "公办",
+      "official_domain": "chu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P0-A",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 16,
+      "school_id": "HSU",
+      "school_name": "黄山学院",
+      "school_type": "公办",
+      "official_domain": "hsu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 17,
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "school_type": "公办",
+      "official_domain": "ahszu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P0-A",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 18,
+      "school_id": "HFUU",
+      "school_name": "合肥大学",
+      "school_type": "公办",
+      "official_domain": "hfuu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 19,
+      "school_id": "BBC",
+      "school_name": "蚌埠学院",
+      "school_type": "公办",
+      "official_domain": "bbc.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 20,
+      "school_id": "AHUT",
+      "school_name": "安徽工业大学",
+      "school_type": "公办",
+      "official_domain": "ahut.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 21,
+      "school_id": "AUFE",
+      "school_name": "安徽财经大学",
+      "school_type": "公办",
+      "official_domain": "aufe.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 22,
+      "school_id": "AHNU",
+      "school_name": "安徽师范大学",
+      "school_type": "公办",
+      "official_domain": "ahnu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 23,
+      "school_id": "TLU",
+      "school_name": "铜陵学院",
+      "school_type": "公办",
+      "official_domain": "tlu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 24,
+      "school_id": "AHYZ",
+      "school_name": "安徽第二医学院",
+      "school_type": "公办",
+      "official_domain": "ahyz.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 25,
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "school_type": "公办",
+      "official_domain": "hnnu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P0-A",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 26,
+      "school_id": "AHJZU",
+      "school_name": "安徽建筑大学",
+      "school_type": "公办",
+      "official_domain": "ahjzu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 27,
+      "school_id": "AXHU",
+      "school_name": "安徽新华学院",
+      "school_type": "民办",
+      "official_domain": "axhu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 28,
+      "school_id": "SLU",
+      "school_name": "安徽三联学院",
+      "school_type": "民办",
+      "official_domain": "slu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 29,
+      "school_id": "AISU",
+      "school_name": "安徽外国语学院",
+      "school_type": "民办",
+      "official_domain": "aisu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 30,
+      "school_id": "UWH",
+      "school_name": "芜湖学院",
+      "school_type": "民办",
+      "official_domain": "uwh.edu.cn",
+      "aliases": [],
+      "baseline_directory": "present",
+      "priority": "P1",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 31,
+      "school_id": "UTA",
+      "school_name": "安徽职业技术大学",
+      "school_type": "公办",
+      "official_domain": "uta.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 32,
+      "school_id": "WHIT",
+      "school_name": "芜湖职业技术大学",
+      "school_type": "公办",
+      "official_domain": "whit.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 33,
+      "school_id": "MASU",
+      "school_name": "马鞍山学院",
+      "school_type": "民办",
+      "official_domain": "masu.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 34,
+      "school_id": "WJIT",
+      "school_name": "皖江工学院",
+      "school_type": "民办",
+      "official_domain": "wjut.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 35,
+      "school_id": "HFUE",
+      "school_name": "合肥经济学院",
+      "school_type": "民办",
+      "official_domain": "hfue.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 36,
+      "school_id": "CUHF",
+      "school_name": "合肥城市学院",
+      "school_type": "民办",
+      "official_domain": "cuhf.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 37,
+      "school_id": "FYUT",
+      "school_name": "阜阳理工学院",
+      "school_type": "民办",
+      "official_domain": "fyut.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 38,
+      "school_id": "HBLG",
+      "school_name": "淮北理工学院",
+      "school_type": "民办",
+      "official_domain": "hblgxy.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 39,
+      "school_id": "BCTB",
+      "school_name": "蚌埠工商学院",
+      "school_type": "民办",
+      "official_domain": "bctb.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 40,
+      "school_id": "AIIT",
+      "school_name": "安徽信息工程学院",
+      "school_type": "民办",
+      "official_domain": "aiit.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 41,
+      "school_id": "WDU",
+      "school_name": "安徽文达信息工程学院",
+      "school_type": "民办",
+      "official_domain": "wenda.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "order": 42,
+      "school_id": "AYCC",
+      "school_name": "安徽医科大学临床医学院",
+      "school_type": "独立学院",
+      "official_domain": "aycc.edu.cn",
+      "aliases": [],
+      "baseline_directory": "missing",
+      "priority": "P0-B",
+      "years": [
+        2024,
+        2025,
+        2026
+      ]
+    }
+  ],
+  "status_vocabulary": [
+    "collected",
+    "official_not_published",
+    "not_found",
+    "not_applicable",
+    "removed_or_unavailable",
+    "access_restricted",
+    "manual_download_required",
+    "public_official_record",
+    "awaiting_manual_review"
+  ],
+  "notes": "Historical directory name full_raw_30_schools is intentionally retained; 42-school scope is expanded in place."
+}

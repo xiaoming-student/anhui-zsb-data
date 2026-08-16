@@ -1,11 +1,167 @@
 {
+  "schema_version": "full-raw-school-manifest-v2",
   "school_id": "WXC",
   "school_name": "皖西学院",
   "official_domains": [
-    "wxc.edu.cn"
+    "wxc.edu.cn",
+    "ahzsks.cn"
+  ],
+  "years": [
+    2024,
+    2025,
+    2026
+  ],
+  "topics": [
+    "admission_policy",
+    "enrollment_plan",
+    "major_catalog",
+    "training_location",
+    "tuition_and_duration",
+    "eligibility",
+    "exam_subjects",
+    "exam_syllabus",
+    "reference_books",
+    "exam_schedule",
+    "exam_location",
+    "admission_rules",
+    "score_formula",
+    "control_line",
+    "admission_min_score",
+    "admission_max_score",
+    "admission_average_score",
+    "application_statistics",
+    "qualified_statistics",
+    "admitted_statistics",
+    "registered_statistics",
+    "plan_adjustment",
+    "adjustment",
+    "exemption",
+    "retired_soldier",
+    "registered_poor_family",
+    "skill_competition",
+    "other_official_notice"
   ],
   "sources": [],
   "assets": [],
+  "source_candidates": [
+    {
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm",
+      "title": "皖西学院2024年专升本考试大纲及参考书目通知",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "page",
+      "parent_page": "",
+      "expected_filename": "",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8108.htm",
+      "title": "皖西学院2025年普通高校专升本招生章程",
+      "topics": [
+        "admission_policy",
+        "other_official_notice"
+      ],
+      "kind": "page",
+      "parent_page": "",
+      "expected_filename": "",
+      "discovery_basis": "seeded_exact_provincial_official_url",
+      "source_domain": "www.ahzsks.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+      "title": "皖西学院2025年专升本考试大纲（专业课）",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "",
+      "expected_filename": "皖西学院2025年专升本考试大纲（专业课）.pdf",
+      "discovery_basis": "seeded_exact_official_attachment_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+      "title": "2025年皖西学院专升本招生专业考试科目及参考书目",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "",
+      "expected_filename": "2025年皖西学院专升本招生专业考试科目及参考书目.pdf",
+      "discovery_basis": "seeded_exact_official_attachment_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "title": "关于公布皖西学院2026年普通专升本拟招生专业考试科目、考试大纲及参考书目的通知",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "page",
+      "parent_page": "",
+      "expected_filename": "",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf",
+      "title": "皖西学院2026年专升本考试大纲（专业课）",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "expected_filename": "皖西学院2026年专升本考试大纲（专业课）.pdf",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    },
+    {
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf",
+      "title": "2026年皖西学院专升本招生专业考试科目及参考书目",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ],
+      "kind": "attachment",
+      "parent_page": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "expected_filename": "2026年皖西学院专升本招生专业考试科目及参考书目.pdf",
+      "discovery_basis": "seeded_exact_official_url",
+      "source_domain": "zsb.wxc.edu.cn",
+      "status": "access_restricted"
+    }
+  ],
   "failures": [
     {
       "school_id": "WXC",
@@ -15,7 +171,7 @@
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "Historical full-30 acquisition: official admissions host was unreachable from the runner."
     },
     {
       "school_id": "WXC",
@@ -25,7 +181,7 @@
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "Historical full-30 acquisition: official main host was unreachable from the runner."
     },
     {
       "school_id": "WXC",
@@ -35,7 +191,7 @@
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "Historical full-30 acquisition: official admissions host was unreachable from the runner."
     },
     {
       "school_id": "WXC",
@@ -45,7 +201,7 @@
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "Historical full-30 acquisition: official main host was unreachable from the runner."
     },
     {
       "school_id": "WXC",
@@ -55,7 +211,7 @@
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'zsb.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'zsb.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "Historical full-30 acquisition: official admissions host was unreachable from the runner."
     },
     {
       "school_id": "WXC",
@@ -65,8 +221,312 @@
       "parent_url": "",
       "status": "access_restricted",
       "http_status": "error",
-      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.wxc.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPSConnection(host=\\'www.wxc.edu.cn\\', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))'))"
+      "reason": "Historical full-30 acquisition: official main host was unreachable from the runner."
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "Current implementation session: official page could not be fetched; web fetch timed out / local DNS unavailable.",
+      "retrieved_at": "2026-08-15T17:24:22+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "Current implementation session: official page could not be fetched; web fetch timed out / local DNS unavailable.",
+      "retrieved_at": "2026-08-15T17:24:22+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "Current implementation session: timeout fetching official PDF.",
+      "retrieved_at": "2026-08-15T17:24:22+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "Current implementation session: timeout fetching official PDF.",
+      "retrieved_at": "2026-08-15T17:24:22+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (6) Could not resolve host: zsb.wxc.edu.cn | http://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Resolving timed out after 501 milliseconds",
+      "retrieved_at": "2026-08-15T17:45:56+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8108.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://www.ahzsks.cn/zyyx/8108.htm:curl: (28) Resolving timed out after 501 milliseconds | http://www.ahzsks.cn/zyyx/8108.htm:curl: (28) Resolving timed out after 501 milliseconds",
+      "retrieved_at": "2026-08-15T17:45:57+00:00",
+      "topics": [
+        "admission_policy",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Resolving timed out after 501 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Resolving timed out after 501 milliseconds",
+      "retrieved_at": "2026-08-15T17:45:58+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Resolving timed out after 500 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Resolving timed out after 502 milliseconds",
+      "retrieved_at": "2026-08-15T17:45:59+00:00",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Resolving timed out after 500 milliseconds | http://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Resolving timed out after 502 milliseconds",
+      "retrieved_at": "2026-08-15T17:46:00+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Resolving timed out after 501 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Resolving timed out after 501 milliseconds",
+      "retrieved_at": "2026-08-15T17:46:01+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Resolving timed out after 500 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Resolving timed out after 502 milliseconds",
+      "retrieved_at": "2026-08-15T17:46:02+00:00",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2024,
+      "url": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 15002 milliseconds | https://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/2024/0312/c270a183191/page.htm:curl: (28) Connection timed out after 15002 milliseconds",
+      "retrieved_at": "2026-08-16T03:01:59+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8108.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 443 after 271 ms: Couldn't connect to server | https://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 443 after 272 ms: Couldn't connect to server | http://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 80 after 2 ms: Couldn't connect to server | http://www.ahzsks.cn/zyyx/8108.htm:curl: (7) Failed to connect to www.ahzsks.cn port 80 after 276 ms: Couldn't connect to server",
+      "retrieved_at": "2026-08-16T03:02:02+00:00",
+      "topics": [
+        "admission_policy",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 15002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/3b31146a-9b4a-4995-ba14-ab7eadc8c7c1.pdf:curl: (28) Connection timed out after 15002 milliseconds",
+      "retrieved_at": "2026-08-16T03:03:04+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2025,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 15002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/61/dc/c7c861c34e73a0b4a234a93c7f94/e4b3b43c-f1b7-4124-ba75-502aca08422d.pdf:curl: (28) Connection timed out after 15002 milliseconds",
+      "retrieved_at": "2026-08-16T03:04:06+00:00",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 15003 milliseconds | https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm:curl: (28) Connection timed out after 15003 milliseconds",
+      "retrieved_at": "2026-08-16T03:05:08+00:00",
+      "topics": [
+        "major_catalog",
+        "exam_subjects",
+        "exam_syllabus",
+        "reference_books",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 15002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/40a7ba02-ea56-4257-b910-508297c2d7f6.pdf:curl: (28) Connection timed out after 15002 milliseconds",
+      "retrieved_at": "2026-08-16T03:06:10+00:00",
+      "topics": [
+        "exam_syllabus",
+        "other_official_notice"
+      ]
+    },
+    {
+      "school_id": "WXC",
+      "school_name": "皖西学院",
+      "year": 2026,
+      "url": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf",
+      "parent_url": "https://zsb.wxc.edu.cn/2025/1208/c270a208230/page.htm",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 15002 milliseconds | https://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 15002 milliseconds | http://zsb.wxc.edu.cn/_upload/article/files/8b/4f/53caeb5d4bb18157fd3e1db9625d/aaee6026-93bb-4c9c-b085-0ea8486d84e4.pdf:curl: (28) Connection timed out after 15002 milliseconds",
+      "retrieved_at": "2026-08-16T03:07:12+00:00",
+      "topics": [
+        "major_catalog",
+        "training_location",
+        "exam_subjects",
+        "reference_books",
+        "other_official_notice"
+      ]
     }
   ],
-  "sanitized": true
+  "last_attempt_at": "2026-08-16T03:07:12+00:00",
+  "raw_information_policy": "Preserve complete bytes of public official pages and attachments; do not bypass access controls.",
+  "sanitized": false
 }
