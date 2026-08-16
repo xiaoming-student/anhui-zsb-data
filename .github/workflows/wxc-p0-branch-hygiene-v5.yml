@@ -1,0 +1,102 @@
+name: WXC P0 Branch Hygiene V5
+
+on:
+  push:
+    branches:
+      - agent/wxc-p0-raw-data
+    paths:
+      - .github/workflows/wxc-p0-branch-hygiene-v5.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wxc-p0-object-recovery
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: agent/wxc-p0-raw-data
+
+jobs:
+  clean-confirm-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout WXC branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/wxc-p0-raw-data
+          fetch-depth: 0
+
+      - name: Refresh exact latest branch head
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          git reset --hard "origin/${TARGET_BRANCH}"
+
+      - name: Remove transfer and one-shot recovery implementation
+        run: |
+          set -euo pipefail
+          rm -f reports/implementation-heartbeat-wxc.txt
+          rm -f scripts/recover_wxc_p0_package.py
+          rm -f .github/workflows/wxc-p0-bootstrap-install.yml
+          rm -f .github/workflows/wxc-p0-object-recovery-v2.yml
+          rm -f .github/workflows/wxc-p0-object-recovery-v3.yml
+          rm -f .github/workflows/wxc-p0-object-recovery-v4.yml
+          rm -f .github/workflows/wxc-p0-branch-hygiene-v5.yml
+          rm -rf .github/wxc-p0
+          rm -f anhui_zsb_data/reports/wxc_immutable_precheck.json
+          rm -f anhui_zsb_data/reports/wxc_immutable_postcheck.json
+
+      - name: Confirm final WXC checkpoint shape
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import csv
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          required = [
+              '.github/workflows/wxc-p0-raw-acquisition.yml',
+              'anhui_zsb_data/config/full_42_school_scope.json',
+              'scripts/acquire_wxc_p0_raw.py',
+              'scripts/audit_full_42_raw_evidence.py',
+              'tests/test_acquire_wxc_p0_raw.py',
+              'tests/test_full_42_scope.py',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_manifest.json',
+              'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv',
+              'anhui_zsb_data/reports/p0_batch_01_wxc_audit.md',
+              'anhui_zsb_data/reports/full_42_raw_evidence_audit.md',
+              'anhui_zsb_data/reports/wxc_p0_v4_validation.json',
+          ]
+          files = {path: Path(path).is_file() for path in required}
+          coverage_cells = 0
+          coverage = Path('anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv')
+          if coverage.is_file():
+              coverage_cells = len(list(csv.DictReader(coverage.open(encoding='utf-8-sig'))))
+          state = {
+              'generated_at': datetime.now(timezone.utc).isoformat(),
+              'school_id': 'WXC',
+              'required_files': files,
+              'coverage_cells': coverage_cells,
+              'checkpoint_complete': all(files.values()) and coverage_cells == 84,
+              'transient_recovery_files_removed': True,
+          }
+          output = Path('anhui_zsb_data/reports/p0_batch_01_wxc_branch_hygiene.json')
+          output.parent.mkdir(parents=True, exist_ok=True)
+          output.write_text(json.dumps(state, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(state, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Commit final branch shape
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: finalize WXC P0 branch after audited acquisition'
+          fi
+          git push origin "HEAD:${TARGET_BRANCH}"
