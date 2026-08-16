@@ -1,5 +1,11 @@
-# 亳州学院 (BZU)
+# 亳州学院 (BZU) P0 原始证据采集
 
-- Sources after sanitization: 0
-- Assets after sanitization: 0
-- Cross-year/decorative evidence was removed before artifact upload.
+- 采集时间：2026-08-16T03:34:26.970763+00:00
+- 官方域名：`bzuu.edu.cn`
+- 已保存官方来源页面：0
+- 已保存官方附件：0
+- 检索尝试：15
+- 访问失败：5
+- 隐私排除：0
+
+仅实际取得官方原始字节的资料标记为 `collected`；发现线索、访问失败和候选人名单不冒充正式原件。
