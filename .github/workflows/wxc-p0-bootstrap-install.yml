@@ -6,7 +6,7 @@ on:
       - agent/wxc-p0-raw-data
     paths:
       - .github/workflows/wxc-p0-bootstrap-install.yml
-      - .github/wxc-p0/anhui-zsb-wxc-p0-implementation.zip
+      - .github/wxc-p0/overlay.b64.part-*
 
 permissions:
   contents: write
@@ -18,12 +18,13 @@ concurrency:
 
 env:
   TARGET_BRANCH: agent/wxc-p0-raw-data
-  PACKAGE_PATH: .github/wxc-p0/anhui-zsb-wxc-p0-implementation.zip
-  PACKAGE_SHA256: d0576b193c2fcaf041e10dfc4fb83a185b935f88d83a0e05a71518384006f294
+  PACK_DIR: .github/wxc-p0
+  ARCHIVE_SHA256: 49b8fb4e073f1d845555bb02588e3b9ae6912907c29a53d2cdcc3773b12ae371
 
 jobs:
   install-acquire-audit:
-    if: "${{ github.event.head_commit.message == 'ci: bootstrap audited fault-tolerant WXC implementation' }}"
+    if: >-
+      github.event.head_commit.message == 'ci: retry bootstrap audited fault-tolerant WXC implementation'
     runs-on: ubuntu-latest
     timeout-minutes: 55
     steps:
@@ -38,20 +39,19 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Verify and install the validated implementation package
+      - name: Reassemble, verify, and install the validated implementation
         shell: bash
         run: |
           set -euo pipefail
-          echo "${PACKAGE_SHA256}  ${PACKAGE_PATH}" | sha256sum -c -
+          parts=("${PACK_DIR}"/overlay.b64.part-*)
+          test "${#parts[@]}" -eq 8
+          cat "${parts[@]}" > /tmp/wxc-overlay.tar.xz.b64
+          base64 --decode /tmp/wxc-overlay.tar.xz.b64 > /tmp/wxc-overlay.tar.xz
+          echo "${ARCHIVE_SHA256}  /tmp/wxc-overlay.tar.xz" | sha256sum -c -
           rm -rf /tmp/wxc-p0-package
           mkdir -p /tmp/wxc-p0-package
-          unzip -q "${PACKAGE_PATH}" -d /tmp/wxc-p0-package
-          package_root=/tmp/wxc-p0-package/anhui-zsb-wxc-p0-implementation
-          (
-            cd "${package_root}"
-            sha256sum -c SHA256SUMS
-          )
-          cp -a "${package_root}/repo-overlay/." .
+          tar -xJf /tmp/wxc-overlay.tar.xz -C /tmp/wxc-p0-package
+          cp -a /tmp/wxc-p0-package/repo-overlay/. .
           python - <<'PY'
           import hashlib
           from pathlib import Path
@@ -73,8 +73,8 @@ jobs:
               'tests/test_full_42_scope.py': '13fa8e588d984cf86f1f0f787c6dbd6e4ba10db1c5d06ef0ff996ab22610c7e0',
           }
           for rel, digest in expected.items():
-              data = (root / rel).read_bytes()
-              actual = hashlib.sha256(data).hexdigest()
+              path = root / rel
+              actual = hashlib.sha256(path.read_bytes()).hexdigest()
               assert actual == digest, (rel, actual, digest)
           print(f'validated {len(expected)} byte-identical implementation files')
           PY
@@ -158,8 +158,16 @@ jobs:
                   local = root / item['local_path']
                   assert local.is_file(), local
                   data = local.read_bytes()
-                  assert hashlib.sha256(data).hexdigest() == item['sha256'], local
-                  assert len(data) == item['file_size'], local
+                  assert len(data) == item['file_size'], (local, len(data), item['file_size'])
+                  actual = hashlib.sha256(data).hexdigest()
+                  assert actual == item['sha256'], (local, actual, item['sha256'])
+          coverage = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/school_coverage.csv'
+          attempts = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/retrieval_attempts.jsonl'
+          discovery = root / 'anhui_zsb_data/evidence/full_raw_30_schools/WXC/source_discovery.json'
+          audit_md = root / 'anhui_zsb_data/reports/full_42_raw_evidence_audit.md'
+          audit_json = root / 'anhui_zsb_data/reports/full_42_raw_evidence_audit.json'
+          for required in (coverage, attempts, discovery, audit_md, audit_json):
+              assert required.is_file() and required.stat().st_size > 0, required
           print(json.dumps({
               'sources': len(manifest.get('sources', [])),
               'assets': len(manifest.get('assets', [])),
@@ -173,9 +181,14 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm -f .github/workflows/wxc-p0-bootstrap-install.yml "${PACKAGE_PATH}"
-          git add \
+          rm -f .github/workflows/wxc-p0-bootstrap-install.yml
+          rm -f .github/wxc-p0/overlay.b64.part-*
+          rm -f .github/wxc-p0/anhui-zsb-wxc-p0-implementation.zip
+          rmdir .github/wxc-p0 2>/dev/null || true
+          git add -A -- \
+            .github/workflows/wxc-p0-bootstrap-install.yml \
             .github/workflows/wxc-p0-raw-acquisition.yml \
+            .github/wxc-p0 \
             anhui_zsb_data/config/full_42_school_scope.json \
             anhui_zsb_data/evidence/full_raw_30_schools/WXC \
             anhui_zsb_data/reports/full_42_raw_evidence_audit.md \
@@ -185,8 +198,12 @@ jobs:
             scripts/audit_full_42_raw_evidence.py \
             tests/test_acquire_wxc_p0_raw.py \
             tests/test_full_42_scope.py
-          git commit -m 'data: install audited fault-tolerant WXC acquisition'
-          git push origin HEAD:"${TARGET_BRANCH}"
+          if git diff --cached --quiet; then
+            echo 'No implementation or audit changes to commit.'
+          else
+            git commit -m 'data: install audited fault-tolerant WXC acquisition'
+            git push origin HEAD:"${TARGET_BRANCH}"
+          fi
 
       - name: Dispatch the installed audited workflow when GitHub permits branch dispatch
         env:
@@ -207,7 +224,7 @@ jobs:
             echo "Dispatch attempt ${attempt} failed; retrying after repository propagation."
             sleep 6
           done
-          echo '::warning::Branch workflow dispatch was unavailable; the bootstrap already ran the same validated acquisition and audit path and committed its results.'
+          echo '::warning::Branch workflow dispatch was unavailable. The bootstrap already ran the same validated acquisition, audit, and commit path.'
           exit 0
 
       - name: Upload recovery checkpoint
