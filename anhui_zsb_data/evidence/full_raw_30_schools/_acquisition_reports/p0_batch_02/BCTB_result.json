@@ -1,0 +1,91 @@
+{
+  "batch": "p0_batch_02_bctb",
+  "generated_at": "2026-08-15T17:48:20.002382+00:00",
+  "school_id": "BCTB",
+  "school_name": "蚌埠工商学院",
+  "source_documents": 11,
+  "raw_attachments_and_images": 45,
+  "raw_files": 56,
+  "raw_bytes": 2082128,
+  "collected": 37,
+  "not_found": 47,
+  "access_restricted": 0,
+  "manual_download_required": 0,
+  "privacy_excluded": 4,
+  "year_topics": {
+    "2024": [
+      "admission_policy",
+      "enrollment_plan",
+      "skill_competition",
+      "other_official_notice"
+    ],
+    "2025": [
+      "admission_policy",
+      "enrollment_plan",
+      "major_catalog",
+      "training_location",
+      "exam_subjects",
+      "exam_syllabus",
+      "reference_books",
+      "exam_schedule",
+      "exam_location",
+      "score_formula",
+      "control_line",
+      "admission_min_score",
+      "adjustment",
+      "exemption",
+      "retired_soldier",
+      "registered_poor_family",
+      "skill_competition",
+      "other_official_notice"
+    ],
+    "2026": [
+      "admission_policy",
+      "enrollment_plan",
+      "major_catalog",
+      "exam_subjects",
+      "exam_syllabus",
+      "reference_books",
+      "exam_schedule",
+      "exam_location",
+      "score_formula",
+      "control_line",
+      "admission_min_score",
+      "adjustment",
+      "retired_soldier",
+      "skill_competition",
+      "other_official_notice"
+    ]
+  },
+  "failures": [],
+  "privacy_exclusions": [
+    {
+      "year": 2025,
+      "url": "https://zs.bctb.edu.cn/2025/0326/c1028a28226/page.psp",
+      "title": "2025年免文化课退役士兵职业适应性综合考查通知（正文含考生号和姓名）",
+      "status": "candidate_personal_data_excluded",
+      "reason": "page contains candidate numbers and names"
+    },
+    {
+      "year": 2026,
+      "url": "https://zs.bctb.edu.cn/8a/55/c1028a35413/page.htm",
+      "title": "2026年校外调剂免文化课退役士兵面试成绩公示",
+      "status": "candidate_personal_data_excluded",
+      "reason": "page contains candidate numbers, names and individual scores"
+    },
+    {
+      "year": 2024,
+      "url": "https://zs.bctb.edu.cn/2024/0531/c1028a25201/page.psp",
+      "title": "【专升本】关于2024年专升本招生校外调剂免试文化课退役士兵职业适应性综合考查工作的通知",
+      "status": "candidate_personal_data_excluded",
+      "reason": "candidate-record-pattern"
+    },
+    {
+      "year": 2025,
+      "url": "https://zs.bctb.edu.cn/2025/0530/c1028a28977/page.psp",
+      "title": "【专升本】关于蚌埠工商学院2025年普通高校专升本招生校外调剂免试文化课退役士兵职业适应性综合考查工作的通知",
+      "status": "candidate_personal_data_excluded",
+      "reason": "candidate-record-pattern"
+    }
+  ]
+}
