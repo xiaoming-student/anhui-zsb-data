@@ -21,7 +21,6 @@ from common import (
     RAW_DIR,
     SCORE_FIELDS,
     SCHOOL_ID,
-    SCHOOL_IDS,
     STAGING_DIR,
     YEARS,
     as_decimal_string,
@@ -72,16 +71,15 @@ class CanonicalBuilder:
         self.eligibility_rule_items: list[dict[str, Any]] = []
         self.admission_scores: list[dict[str, Any]] = []
         self.admission_rules: list[dict[str, Any]] = []
+        self.syllabus: list[dict[str, Any]] = []
+        self.reference_books: list[dict[str, Any]] = []
+        self.application_statistics: list[dict[str, Any]] = []
 
-        self.program_year_by_key: dict[tuple[str, int, str], dict[str, Any]] = {}
-        self.offering_by_key: dict[tuple[str, int, str, str], dict[str, Any]] = {}
-        self._primary_school_name_by_id: dict[str, str] = {
-            "HFNU": "合肥师范学院",
-            "AHNU": "安徽师范大学",
-        }
+        self.program_year_by_key: dict[tuple[int, str], dict[str, Any]] = {}
+        self.offering_by_key: dict[tuple[int, str, str], dict[str, Any]] = {}
 
-    def _staging_payload(self, year: int, filename: str, school_id: str = SCHOOL_ID) -> dict[str, Any]:
-        path = STAGING_DIR / school_id / str(year) / filename
+    def _staging_payload(self, year: int, filename: str) -> dict[str, Any]:
+        path = STAGING_DIR / SCHOOL_ID / str(year) / filename
         if not path.exists():
             raise BuildError(f"Missing staging file: {path.relative_to(BASE_DIR)}")
         payload = load_json(path)
@@ -358,132 +356,122 @@ class CanonicalBuilder:
             compatibility_documents,
         )
 
-    def _institution_for_plan(self, plan: dict[str, Any], school_id: str) -> dict[str, Any]:
+    def _institution_for_plan(self, plan: dict[str, Any]) -> dict[str, Any]:
         training_type = normalize_text(plan.get("training_type"))
         if training_type == "main_school":
-            primary_name = self._primary_school_name_by_id.get(school_id, "合肥师范学院")
-            return self.institution_by_name[primary_name]
-        if training_type == "joint_training":
-            name = normalize_text(plan.get("training_institution_name")) or extract_joint_institution(
-                plan.get("remarks_source_raw")
-            )
-            if not name:
-                raise BuildError(f"Joint-training row has no institution: {plan!r}")
-            try:
-                return self.institution_by_name[name]
-            except KeyError:
-                raise BuildError(f"Unknown joint-training institution: {name}") from None
-        # For schools without explicit training_type (like AHNU), default to primary school
-        # but check notes_raw for joint training info
-        notes = normalize_text(plan.get("notes_raw"))
-        if notes:
-            extracted = extract_joint_institution(notes)
-            if extracted and extracted in self.institution_by_name:
-                return self.institution_by_name[extracted]
-        primary_name = self._primary_school_name_by_id.get(school_id, "合肥师范学院")
-        return self.institution_by_name[primary_name]
+            return self.institution_by_name["合肥师范学院"]
+        if training_type != "joint_training":
+            raise BuildError(f"Unsupported training_type: {training_type!r}")
+        name = normalize_text(plan.get("training_institution_name")) or extract_joint_institution(
+            plan.get("remarks_source_raw")
+        )
+        if not name:
+            raise BuildError(f"Joint-training row has no institution: {plan!r}")
+        try:
+            return self.institution_by_name[name]
+        except KeyError:
+            raise BuildError(f"Unknown joint-training institution: {name}") from None
 
     def build_programs_and_plans(self) -> None:
-        program_rows: dict[tuple[str, int, str], dict[str, Any]] = {}
-        offering_rows: dict[tuple[str, int, str, str], dict[str, Any]] = {}
+        program_rows: dict[tuple[int, str], dict[str, Any]] = {}
+        offering_rows: dict[tuple[int, str, str], dict[str, Any]] = {}
         plan_rows: list[dict[str, Any]] = []
 
-        for sid in SCHOOL_IDS:
-            for year in YEARS:
-                payload = self._staging_payload(year, "enrollment_plans.json", school_id=sid)
-                source = source_id(year, "admission_policy", school_id=sid)
-                publish_date = self.source_documents[source]["publish_date"]
-                for plan in payload["data"]:
-                    major_raw = normalize_text(plan["major_name_raw"])
-                    major_std = normalize_major_name(major_raw)
-                    raw_track = normalize_track_raw(plan.get("admission_track_raw", ""))
-                    program_key = (sid, year, major_std)
-                    locator = normalized_locator(
-                        plan.get("source_locator"),
-                        year=year,
-                        document_type="admission_policy",
-                        row_key=major_std,
-                        section="招生专业计划",
-                    )
-                    if program_key not in program_rows:
-                        py_id = stable_id("PY", sid, year, major_std)
-                        program_rows[program_key] = {
-                            "program_year_id": py_id,
-                            "year": year,
-                            "admission_school_id": sid,
-                            "undergraduate_major_id": stable_major_id(major_std),
-                            "major_name_raw": major_raw,
-                            "major_name_std": major_std,
-                            "admission_track_raw": raw_track,
-                            "admission_track_code": track_code(raw_track),
-                            "study_years": 2,
-                            "source_id": source,
-                            "source_locator": locator,
-                        }
-                    elif program_rows[program_key]["admission_track_code"] != track_code(raw_track):
-                        raise BuildError(f"Conflicting admission track for {sid} {year} {major_std}")
-
-                    institution = self._institution_for_plan(plan, sid)
-                    offering_key = (sid, year, major_std, institution["institution_id"])
-                    if offering_key in offering_rows:
-                        raise BuildError(f"Duplicate offering natural key: {offering_key}")
-                    offering_id = stable_id(
-                        "OFF",
-                        program_rows[program_key]["program_year_id"],
-                        plan.get("training_type"),
-                        institution["institution_id"],
-                        "",
-                    )
-                    training_type = normalize_text(plan.get("training_type"))
-                    remarks_raw = normalize_text(plan.get("remarks_source_raw"))
-                    offering = {
-                        "offering_id": offering_id,
-                        "program_year_id": program_rows[program_key]["program_year_id"],
+        for year in YEARS:
+            payload = self._staging_payload(year, "enrollment_plans.json")
+            source = source_id(year, "admission_policy")
+            publish_date = self.source_documents[source]["publish_date"]
+            for plan in payload["data"]:
+                major_raw = normalize_text(plan["major_name_raw"])
+                major_std = normalize_major_name(major_raw)
+                raw_track = normalize_track_raw(plan["admission_track_raw"])
+                program_key = (year, major_std)
+                locator = normalized_locator(
+                    plan.get("source_locator"),
+                    year=year,
+                    document_type="admission_policy",
+                    row_key=major_std,
+                    section="招生专业计划",
+                )
+                if program_key not in program_rows:
+                    py_id = stable_id("PY", SCHOOL_ID, year, major_std)
+                    program_rows[program_key] = {
+                        "program_year_id": py_id,
                         "year": year,
-                        "training_type": training_type,
-                        "training_institution_id": institution["institution_id"],
-                        "training_institution_name": institution["institution_name_std"],
-                        "training_campus": "",
-                        "training_campus_status": "not_published",
-                        "training_address": institution.get("address", "") if training_type == "joint_training" else "",
-                        "tuition_value": as_decimal_string(plan.get("tuition_value")),
+                        "admission_school_id": SCHOOL_ID,
+                        "undergraduate_major_id": stable_major_id(major_std),
+                        "major_name_raw": major_raw,
+                        "major_name_std": major_std,
+                        "admission_track_raw": raw_track,
+                        "admission_track_code": track_code(raw_track),
                         "study_years": 2,
-                        "remarks_source_raw": remarks_raw,
-                        "training_type_is_derived": training_type == "main_school",
-                        "training_type_derivation_method": (
-                            "official_plan_row_without_joint_training_remark" if training_type == "main_school" else ""
-                        ),
                         "source_id": source,
                         "source_locator": locator,
                     }
-                    offering_rows[offering_key] = offering
+                elif program_rows[program_key]["admission_track_code"] != track_code(raw_track):
+                    raise BuildError(f"Conflicting admission track for {year} {major_std}")
 
-                    for plan_type, field_name in PLAN_FIELDS:
-                        raw_value = plan.get(field_name)
-                        if raw_value is None or raw_value == "":
-                            value = ""
-                            value_status = "blank_in_source"
-                        else:
-                            value = as_decimal_string(raw_value)
-                            value_status = "explicit_zero" if value == "0" else "explicit_value"
-                        plan_rows.append(
-                            {
-                                "enrollment_plan_id": stable_id("PLAN", offering_id, plan_type, "original"),
-                                "offering_id": offering_id,
-                                "plan_type": plan_type,
-                                "plan_value": value,
-                                "value_status": value_status,
-                                "plan_version": "original",
-                                "announcement_date": publish_date,
-                                "is_derived": False,
-                                "derivation_method": "",
-                                "raw_value": "" if raw_value is None else normalize_text(raw_value),
-                                "source_id": source,
-                                "source_locator": locator,
-                            }
-                        )
+                institution = self._institution_for_plan(plan)
+                offering_key = (year, major_std, institution["institution_id"])
+                if offering_key in offering_rows:
+                    raise BuildError(f"Duplicate offering natural key: {offering_key}")
+                offering_id = stable_id(
+                    "OFF",
+                    program_rows[program_key]["program_year_id"],
+                    plan.get("training_type"),
+                    institution["institution_id"],
+                    "",
+                )
+                training_type = normalize_text(plan.get("training_type"))
+                remarks_raw = normalize_text(plan.get("remarks_source_raw"))
+                offering = {
+                    "offering_id": offering_id,
+                    "program_year_id": program_rows[program_key]["program_year_id"],
+                    "year": year,
+                    "training_type": training_type,
+                    "training_institution_id": institution["institution_id"],
+                    "training_institution_name": institution["institution_name_std"],
+                    "training_campus": "",
+                    "training_campus_status": "not_published",
+                    "training_address": institution.get("address", "") if training_type == "joint_training" else "",
+                    "tuition_value": as_decimal_string(plan.get("tuition_value")),
+                    "study_years": 2,
+                    "remarks_source_raw": remarks_raw,
+                    "training_type_is_derived": training_type == "main_school",
+                    "training_type_derivation_method": (
+                        "official_plan_row_without_joint_training_remark" if training_type == "main_school" else ""
+                    ),
+                    "source_id": source,
+                    "source_locator": locator,
+                }
+                offering_rows[offering_key] = offering
 
-        self.program_years = sorted(program_rows.values(), key=lambda row: (row["admission_school_id"], row["year"], row["major_name_std"]))
+                for plan_type, field_name in PLAN_FIELDS:
+                    raw_value = plan.get(field_name)
+                    if raw_value is None or raw_value == "":
+                        value = ""
+                        value_status = "blank_in_source"
+                    else:
+                        value = as_decimal_string(raw_value)
+                        value_status = "explicit_zero" if value == "0" else "explicit_value"
+                    plan_rows.append(
+                        {
+                            "enrollment_plan_id": stable_id("PLAN", offering_id, plan_type, "original"),
+                            "offering_id": offering_id,
+                            "plan_type": plan_type,
+                            "plan_value": value,
+                            "value_status": value_status,
+                            "plan_version": "original",
+                            "announcement_date": publish_date,
+                            "is_derived": False,
+                            "derivation_method": "",
+                            "raw_value": "" if raw_value is None else normalize_text(raw_value),
+                            "source_id": source,
+                            "source_locator": locator,
+                        }
+                    )
+
+        self.program_years = sorted(program_rows.values(), key=lambda row: (row["year"], row["major_name_std"]))
         self.program_offerings = sorted(
             offering_rows.values(),
             key=lambda row: (row["year"], self._major_for_program(row["program_year_id"]), row["training_institution_name"]),
@@ -567,88 +555,61 @@ class CanonicalBuilder:
     def _plan_order(plan_type: str) -> int:
         return [item[0] for item in PLAN_FIELDS].index(plan_type)
 
-    def _program_for_major(self, school_id: str, year: int, major: str) -> dict[str, Any]:
-        key = (school_id, year, normalize_major_name(major))
+    def _program_for_major(self, year: int, major: str) -> dict[str, Any]:
+        key = (year, normalize_major_name(major))
         try:
             return self.program_year_by_key[key]
         except KeyError:
-            raise BuildError(f"No program year for {school_id} {year} {major}") from None
+            raise BuildError(f"No program year for {year} {major}") from None
 
     def build_exam_data(self) -> None:
         subject_rows: list[dict[str, Any]] = []
         session_rows: list[dict[str, Any]] = []
-        for sid in SCHOOL_IDS:
-            for year in YEARS:
-                payload = self._staging_payload(year, "exam_subjects.json", school_id=sid)
-                source = source_id(year, "admission_policy", school_id=sid)
-                # Build a lookup from enrollment plans for schools that store
-                # public exam subjects there instead of in exam_subjects.json
-                public_subjects_by_major: dict[str, tuple[str, str]] = {}
-                if sid != SCHOOL_ID:
-                    plan_payload = self._staging_payload(year, "enrollment_plans.json", school_id=sid)
-                    for plan in plan_payload["data"]:
-                        plan_major = normalize_major_name(plan["major_name_raw"])
-                        pub_raw = normalize_text(plan.get("public_exam_subjects_raw", ""))
-                        if pub_raw and "+" in pub_raw:
-                            parts = pub_raw.split("+", 1)
-                            public_subjects_by_major[plan_major] = (
-                                normalize_text(parts[0]),
-                                normalize_text(parts[1]),
-                            )
-                seen_programs: set[str] = set()
-                for item in payload["data"]:
-                    major_std = normalize_major_name(item["major_name_raw"])
-                    program = self._program_for_major(sid, year, major_std)
-                    py_id = program["program_year_id"]
-                    if py_id in seen_programs:
-                        raise BuildError(f"Duplicate exam-subject row for {sid} {year} {major_std}")
-                    seen_programs.add(py_id)
-                    locator = normalized_locator(
-                        item.get("source_locator"),
-                        year=year,
-                        document_type="admission_policy",
-                        row_key=major_std,
-                        section="考试科目",
+        for year in YEARS:
+            payload = self._staging_payload(year, "exam_subjects.json")
+            source = source_id(year, "admission_policy")
+            seen_programs: set[str] = set()
+            for item in payload["data"]:
+                major_std = normalize_major_name(item["major_name_raw"])
+                program = self._program_for_major(year, major_std)
+                py_id = program["program_year_id"]
+                if py_id in seen_programs:
+                    raise BuildError(f"Duplicate exam-subject row for {year} {major_std}")
+                seen_programs.add(py_id)
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="admission_policy",
+                    row_key=major_std,
+                    section="考试科目",
+                )
+                slots = (
+                    ("public_1", item.get("public_subject_1")),
+                    ("public_2", item.get("public_subject_2")),
+                    ("professional_1", item.get("professional_subject_1")),
+                    ("professional_2", item.get("professional_subject_2")),
+                )
+                for slot, subject_raw in slots:
+                    subject_name = normalize_text(subject_raw)
+                    if not subject_name:
+                        raise BuildError(f"Missing {slot} for {year} {major_std}")
+                    subject_rows.append(
+                        {
+                            "exam_subject_id": stable_id("EXAM", py_id, slot),
+                            "program_year_id": py_id,
+                            "year": year,
+                            "subject_slot": slot,
+                            "subject_id": stable_subject_id(subject_name),
+                            "subject_name_raw": subject_name,
+                            "subject_name_std": subject_name,
+                            "score_max": 150,
+                            "exam_duration_minutes": 120 if slot == "public_1" else 90 if slot == "public_2" else "",
+                            "exam_method": "笔试",
+                            "source_id": source,
+                            "source_locator": locator,
+                        }
                     )
-                    if "public_subject_1" in item:
-                        # HFNU-style: 4 explicit slots
-                        slots = (
-                            ("public_1", item.get("public_subject_1")),
-                            ("public_2", item.get("public_subject_2")),
-                            ("professional_1", item.get("professional_subject_1")),
-                            ("professional_2", item.get("professional_subject_2")),
-                        )
-                    else:
-                        # AHNU-style: 2 professional subjects from exam_subjects,
-                        # public subjects from enrollment_plans
-                        pub = public_subjects_by_major.get(major_std, ("", ""))
-                        slots = (
-                            ("public_1", pub[0]),
-                            ("public_2", pub[1]),
-                            ("professional_1", item.get("subject_1_raw")),
-                            ("professional_2", item.get("subject_2_raw")),
-                        )
-                    for slot, subject_raw in slots:
-                        subject_name = normalize_text(subject_raw)
-                        if not subject_name:
-                            raise BuildError(f"Missing {slot} for {sid} {year} {major_std}")
-                        subject_rows.append(
-                            {
-                                "exam_subject_id": stable_id("EXAM", py_id, slot),
-                                "program_year_id": py_id,
-                                "year": year,
-                                "subject_slot": slot,
-                                "subject_id": stable_subject_id(subject_name),
-                                "subject_name_raw": subject_name,
-                                "subject_name_std": subject_name,
-                                "score_max": 150,
-                                "exam_duration_minutes": 120 if slot == "public_1" else 90 if slot == "public_2" else "",
-                                "exam_method": "笔试",
-                                "source_id": source,
-                                "source_locator": locator,
-                            }
-                        )
-                    session_rows.extend(self._exam_sessions_for_program(program, source, locator, sid))
+                session_rows.extend(self._exam_sessions_for_program(program, source, locator))
 
         self.exam_subjects = sorted(subject_rows, key=lambda row: (row["year"], self._major_for_program(row["program_year_id"]), row["subject_slot"]))
         self.exam_sessions = sorted(session_rows, key=lambda row: (row["year"], self._major_for_program(row["program_year_id"]), row["session_type"]))
@@ -690,14 +651,13 @@ class CanonicalBuilder:
             self.exam_sessions,
         )
 
-    def _exam_sessions_for_program(self, program: dict[str, Any], source: str, subject_locator: str, school_id: str) -> list[dict[str, Any]]:
+    def _exam_sessions_for_program(self, program: dict[str, Any], source: str, subject_locator: str) -> list[dict[str, Any]]:
         year = int(program["year"])
         py_id = program["program_year_id"]
         track = program["admission_track_code"]
         timetable: dict[str, tuple[str, str, str]] = {}
-        # Schedule dates are school-specific
-        hfnu_schedule = {
-            2025: {
+        if year == 2025:
+            timetable = {
                 "public_1": ("2025-04-19", "09:00", "11:00"),
                 "public_2": ("2025-04-19", "14:00", "15:30"),
                 "professional_combined": (
@@ -705,8 +665,9 @@ class CanonicalBuilder:
                     "14:00" if track == "science" else "08:00",
                     "17:00" if track == "science" else "11:00",
                 ),
-            },
-            2026: {
+            }
+        elif year == 2026:
+            timetable = {
                 "public_1": ("2026-04-18", "09:00", "11:00"),
                 "public_2": ("2026-04-18", "14:00", "15:30"),
                 "professional_combined": (
@@ -714,9 +675,7 @@ class CanonicalBuilder:
                     "14:00" if track == "science" else "08:00",
                     "17:00" if track == "science" else "11:00",
                 ),
-            },
-        }
-        timetable = hfnu_schedule.get(year, {})
+            }
         session_specs = (
             ("public_1", ["public_1"], 120),
             ("public_2", ["public_2"], 90),
@@ -726,7 +685,7 @@ class CanonicalBuilder:
         schedule_locator = subject_locator
         if year in {2025, 2026}:
             schedule_locator = normalized_locator(
-                {"asset_id": f"ASSET-{school_id}-{year}-ZC-PDF", "page": 13 if year == 2025 else 12},
+                {"asset_id": f"ASSET-HFNU-{year}-ZC-PDF", "page": 13 if year == 2025 else 12},
                 year=year,
                 document_type="admission_policy",
                 row_key=program["major_name_std"],
@@ -734,14 +693,9 @@ class CanonicalBuilder:
             )
         for session_type, slots, duration in session_specs:
             date, start, end = timetable.get(session_type, ("", "", ""))
-            # Exam site info is school-specific
             if session_type == "professional_combined" and year in {2025, 2026}:
-                if school_id == "HFNU":
-                    site = "合肥师范学院锦绣校区"
-                    site_status = "published"
-                else:
-                    site = ""
-                    site_status = "not_published"
+                site = "合肥师范学院锦绣校区"
+                site_status = "published"
             else:
                 site = ""
                 site_status = "not_published"
@@ -769,71 +723,70 @@ class CanonicalBuilder:
         eligibility_rows: list[dict[str, Any]] = []
         rule_sets: list[dict[str, Any]] = []
         rule_items: list[dict[str, Any]] = []
-        for sid in SCHOOL_IDS:
-            for year in YEARS:
-                payload = self._staging_payload(year, "eligibility.json", school_id=sid)
-                source = source_id(year, "admission_policy", school_id=sid)
-                seen: set[str] = set()
-                for item in payload["data"]:
-                    major_std = normalize_major_name(item["undergraduate_major_std"])
-                    program = self._program_for_major(sid, year, major_std)
-                    py_id = program["program_year_id"]
-                    if py_id in seen:
-                        raise BuildError(f"Duplicate eligibility row: {sid} {year} {major_std}")
-                    seen.add(py_id)
-                    raw_scope = normalize_text(item.get("allowed_major_categories_raw"))
-                    raw_restriction = normalize_text(item.get("restriction_raw_text")) or raw_scope
-                    parts = split_top_level_rules(raw_scope)
-                    parsed_parts = [parse_eligibility_item(part) for part in parts]
-                    categories_std = ",".join(part["scope_name_raw"] for part in parsed_parts)
-                    locator = normalized_locator(
-                        item.get("source_locator"),
-                        year=year,
-                        document_type="admission_policy",
-                        row_key=major_std,
-                        section="招生专业范围",
-                    )
-                    eligibility_id = stable_id("ELIG", py_id)
-                    rule_set_id = stable_id("ELIGSET", py_id)
-                    eligibility_rows.append(
+        for year in YEARS:
+            payload = self._staging_payload(year, "eligibility.json")
+            source = source_id(year, "admission_policy")
+            seen: set[str] = set()
+            for item in payload["data"]:
+                major_std = normalize_major_name(item["undergraduate_major_std"])
+                program = self._program_for_major(year, major_std)
+                py_id = program["program_year_id"]
+                if py_id in seen:
+                    raise BuildError(f"Duplicate eligibility row: {year} {major_std}")
+                seen.add(py_id)
+                raw_scope = normalize_text(item.get("allowed_major_categories_raw"))
+                raw_restriction = normalize_text(item.get("restriction_raw_text")) or raw_scope
+                parts = split_top_level_rules(raw_scope)
+                parsed_parts = [parse_eligibility_item(part) for part in parts]
+                categories_std = ",".join(part["scope_name_raw"] for part in parsed_parts)
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="admission_policy",
+                    row_key=major_std,
+                    section="招生专业范围",
+                )
+                eligibility_id = stable_id("ELIG", py_id)
+                rule_set_id = stable_id("ELIGSET", py_id)
+                eligibility_rows.append(
+                    {
+                        "eligibility_id": eligibility_id,
+                        "program_year_id": py_id,
+                        "year": year,
+                        "undergraduate_major_raw": normalize_text(item.get("undergraduate_major_raw", major_std)),
+                        "undergraduate_major_std": major_std,
+                        "allowed_major_categories_raw": raw_scope,
+                        "allowed_major_categories_std": categories_std,
+                        "restriction_raw_text": raw_restriction,
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
+                rule_sets.append(
+                    {
+                        "eligibility_rule_set_id": rule_set_id,
+                        "program_year_id": py_id,
+                        "year": year,
+                        "raw_text": raw_restriction,
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
+                for ordinal, parsed in enumerate(parsed_parts, 1):
+                    rule_items.append(
                         {
-                            "eligibility_id": eligibility_id,
-                            "program_year_id": py_id,
-                            "year": year,
-                            "undergraduate_major_raw": normalize_text(item.get("undergraduate_major_raw", major_std)),
-                            "undergraduate_major_std": major_std,
-                            "allowed_major_categories_raw": raw_scope,
-                            "allowed_major_categories_std": categories_std,
-                            "restriction_raw_text": raw_restriction,
-                            "source_id": source,
-                            "source_locator": locator,
-                        }
-                    )
-                    rule_sets.append(
-                        {
+                            "eligibility_rule_item_id": stable_id("ELIGITEM", rule_set_id, ordinal, parsed["scope_name_raw"]),
                             "eligibility_rule_set_id": rule_set_id,
-                            "program_year_id": py_id,
-                            "year": year,
-                            "raw_text": raw_restriction,
-                            "source_id": source,
-                            "source_locator": locator,
+                            "ordinal": ordinal,
+                            "scope_type": "major_category",
+                            "include_or_exclude": "include",
+                            "category_code": "",
+                            "category_name_raw": parsed["scope_name_raw"],
+                            "major_code": "",
+                            "major_name_raw": "",
+                            "condition_raw": parsed["condition_raw"],
                         }
                     )
-                    for ordinal, parsed in enumerate(parsed_parts, 1):
-                        rule_items.append(
-                            {
-                                "eligibility_rule_item_id": stable_id("ELIGITEM", rule_set_id, ordinal, parsed["scope_name_raw"]),
-                                "eligibility_rule_set_id": rule_set_id,
-                                "ordinal": ordinal,
-                                "scope_type": "major_category",
-                                "include_or_exclude": "include",
-                                "category_code": "",
-                                "category_name_raw": parsed["scope_name_raw"],
-                                "major_code": "",
-                                "major_name_raw": "",
-                                "condition_raw": parsed["condition_raw"],
-                            }
-                        )
 
         self.major_eligibility = sorted(eligibility_rows, key=lambda row: (row["year"], row["undergraduate_major_std"]))
         self.eligibility_rule_sets = sorted(rule_sets, key=lambda row: (row["year"], self._major_for_program(row["program_year_id"])))
@@ -876,87 +829,83 @@ class CanonicalBuilder:
             self.eligibility_rule_items,
         )
 
-    def _resolve_score_offering(self, school_id: str, year: int, score: dict[str, Any]) -> dict[str, Any]:
+    def _resolve_score_offering(self, year: int, score: dict[str, Any]) -> dict[str, Any]:
         major_std = normalize_major_name(score["major_name_raw"])
         notes = normalize_text(score.get("notes_raw"))
-        # Try exact match first (2025 style: direct institution name)
-        if notes in self.institution_by_name:
-            institution_name = notes
-        elif notes:
-            # Try extracting from "与XXX联合培养" pattern (2026 style)
-            extracted = extract_joint_institution(notes)
-            if extracted and extracted in self.institution_by_name:
-                institution_name = extracted
-            else:
-                # Fallback to primary school of current dataset
-                institution_name = self._primary_school_name_by_id.get(school_id, "合肥师范学院")
-        else:
-            institution_name = self._primary_school_name_by_id.get(school_id, "合肥师范学院")
+        institution_matches = [
+            name for name in self.institution_by_name if name and name in notes
+        ]
+        if len(institution_matches) > 1:
+            raise BuildError(
+                f"Score note resolves to multiple institutions: {year} {major_std} {notes!r}"
+            )
+        institution_name = (
+            institution_matches[0] if institution_matches else "合肥师范学院"
+        )
         institution_id = self.institution_by_name[institution_name]["institution_id"]
-        key = (school_id, year, major_std, institution_id)
+        key = (year, major_std, institution_id)
         try:
             return self.offering_by_key[key]
         except KeyError:
-            raise BuildError(f"Cannot resolve score offering: {school_id} {year} {major_std} {notes!r}") from None
+            raise BuildError(f"Cannot resolve score offering: {year} {major_std} {notes!r}") from None
 
     def build_admission_scores(self) -> None:
         rows: list[dict[str, Any]] = []
-        for sid in SCHOOL_IDS:
-            for year in (2024, 2025, 2026):
-                payload = self._staging_payload(year, "admission_scores.json", school_id=sid)
-                source = source_id(year, "admission_scores", school_id=sid)
-                seen_offering_rows: set[str] = set()
-                for item in payload["data"]:
-                    offering = self._resolve_score_offering(sid, year, item)
-                    offering_id = offering["offering_id"]
-                    if offering_id in seen_offering_rows:
-                        raise BuildError(f"Duplicate score source row for offering: {offering_id}")
-                    seen_offering_rows.add(offering_id)
-                    major_std = self._major_for_program(offering["program_year_id"])
-                    locator = normalized_locator(
-                        item.get("source_locator"),
-                        year=year,
-                        document_type="admission_scores",
-                        row_key=f"{major_std}|{offering['training_institution_name']}",
-                        section="录取最低分",
-                    )
-                    for candidate_category, field_name in SCORE_FIELDS:
-                        raw_value = item.get(field_name)
-                        raw = normalize_text(raw_value)
-                        semantics = score_semantics(candidate_category)
-                        parsed = parse_score(raw) if raw else {
-                            "score_value_numeric": "",
-                            "score_max_from_raw": "",
-                            "threshold_detail_json": "",
+        for year in YEARS:
+            payload = self._staging_payload(year, "admission_scores.json")
+            source = source_id(year, "admission_scores")
+            seen_offering_rows: set[str] = set()
+            for item in payload["data"]:
+                offering = self._resolve_score_offering(year, item)
+                offering_id = offering["offering_id"]
+                if offering_id in seen_offering_rows:
+                    raise BuildError(f"Duplicate score source row for offering: {offering_id}")
+                seen_offering_rows.add(offering_id)
+                major_std = self._major_for_program(offering["program_year_id"])
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="admission_scores",
+                    row_key=f"{major_std}|{offering['training_institution_name']}",
+                    section="录取最低分",
+                )
+                for candidate_category, field_name in SCORE_FIELDS:
+                    raw_value = item.get(field_name)
+                    raw = normalize_text(raw_value)
+                    semantics = score_semantics(candidate_category)
+                    parsed = parse_score(raw) if raw else {
+                        "score_value_numeric": "",
+                        "score_max_from_raw": "",
+                        "threshold_detail_json": "",
+                    }
+                    score_max = parsed["score_max_from_raw"] or semantics["score_max"]
+                    value_status = "published_value" if raw else "blank_in_source"
+                    admission_round = "first_choice"
+                    rows.append(
+                        {
+                            "admission_score_id": stable_id(
+                                "SCORE", offering_id, candidate_category, semantics["score_metric"], admission_round
+                            ),
+                            "offering_id": offering_id,
+                            "year": year,
+                            "candidate_category": candidate_category,
+                            "admission_round": admission_round,
+                            "score_metric": semantics["score_metric"],
+                            "score_basis": semantics["score_basis"],
+                            "score_max": score_max,
+                            "score_value_numeric": parsed["score_value_numeric"],
+                            "score_raw": raw,
+                            "value_status": value_status,
+                            "threshold_detail_json": parsed["threshold_detail_json"],
+                            "assessment_name": semantics["assessment_name"],
+                            "notes_source_raw": normalize_text(item.get("notes_raw")),
+                            "is_official_direct": True,
+                            "is_derived": False,
+                            "derivation_method": "",
+                            "source_id": source,
+                            "source_locator": locator,
                         }
-                        score_max = parsed["score_max_from_raw"] or semantics["score_max"]
-                        value_status = "published_value" if raw else "blank_in_source"
-                        admission_round = "first_choice"
-                        rows.append(
-                            {
-                                "admission_score_id": stable_id(
-                                    "SCORE", offering_id, candidate_category, semantics["score_metric"], admission_round
-                                ),
-                                "offering_id": offering_id,
-                                "year": year,
-                                "candidate_category": candidate_category,
-                                "admission_round": admission_round,
-                                "score_metric": semantics["score_metric"],
-                                "score_basis": semantics["score_basis"],
-                                "score_max": score_max,
-                                "score_value_numeric": parsed["score_value_numeric"],
-                                "score_raw": raw,
-                                "value_status": value_status,
-                                "threshold_detail_json": parsed["threshold_detail_json"],
-                                "assessment_name": semantics["assessment_name"],
-                                "notes_source_raw": normalize_text(item.get("notes_raw")),
-                                "is_official_direct": True,
-                                "is_derived": False,
-                                "derivation_method": "",
-                                "source_id": source,
-                                "source_locator": locator,
-                            }
-                        )
+                    )
         self.admission_scores = sorted(
             rows,
             key=lambda row: (self._offering_sort_key(row["offering_id"]), [item[0] for item in SCORE_FIELDS].index(row["candidate_category"])),
@@ -989,32 +938,31 @@ class CanonicalBuilder:
 
     def build_admission_rules(self) -> None:
         rows: list[dict[str, Any]] = []
-        for sid in SCHOOL_IDS:
-            for year in YEARS:
-                payload = self._staging_payload(year, "admission_rules.json", school_id=sid)
-                source = source_id(year, "admission_policy", school_id=sid)
-                for item in payload["data"]:
-                    rule_type = normalize_text(item["rule_type"])
-                    locator = normalized_locator(
-                        item.get("source_locator"),
-                        year=year,
-                        document_type="admission_policy",
-                        row_key=rule_type,
-                        section="录取规则",
-                    )
-                    rows.append(
-                        {
-                            "rule_id": stable_id("RULE", sid, year, rule_type, item.get("rule_scope", "")),
-                            "year": year,
-                            "school_id": sid,
-                            "rule_type": rule_type,
-                            "rule_scope": normalize_text(item.get("rule_scope")),
-                            "rule_raw_text": normalize_text(item.get("rule_raw_text")),
-                            "rule_structured_json": json_compact(item.get("rule_structured_json")),
-                            "source_id": source,
-                            "source_locator": locator,
-                        }
-                    )
+        for year in YEARS:
+            payload = self._staging_payload(year, "admission_rules.json")
+            source = source_id(year, "admission_policy")
+            for item in payload["data"]:
+                rule_type = normalize_text(item["rule_type"])
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="admission_policy",
+                    row_key=rule_type,
+                    section="录取规则",
+                )
+                rows.append(
+                    {
+                        "rule_id": stable_id("RULE", SCHOOL_ID, year, rule_type, item.get("rule_scope", "")),
+                        "year": year,
+                        "school_id": SCHOOL_ID,
+                        "rule_type": rule_type,
+                        "rule_scope": normalize_text(item.get("rule_scope")),
+                        "rule_raw_text": normalize_text(item.get("rule_raw_text")),
+                        "rule_structured_json": json_compact(item.get("rule_structured_json")),
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
         self.admission_rules = sorted(rows, key=lambda row: (row["year"], row["rule_type"]))
         write_csv(
             NORMALIZED_DIR / "admission_rules.csv",
@@ -1032,27 +980,278 @@ class CanonicalBuilder:
             self.admission_rules,
         )
 
-    def build_supporting_tables(self) -> None:
-        # Build schools.csv from all admission schools in institutions config
-        school_rows: list[dict[str, Any]] = []
-        school_admission_websites = {
-            "HFNU": "https://zsb.hfnu.edu.cn/",
-            "AHNU": "https://zsxx.ahnu.edu.cn/",
+    def _professional_subject_for(
+        self,
+        year: int,
+        major_name: str,
+        subject_name: str,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        program = self._program_for_major(year, major_name)
+        expected = normalize_text(subject_name)
+        matches = [
+            row
+            for row in self.exam_subjects
+            if row["program_year_id"] == program["program_year_id"]
+            and row["subject_slot"] in {"professional_1", "professional_2"}
+            and row["subject_name_std"] == expected
+        ]
+        if len(matches) != 1:
+            raise BuildError(
+                "Cannot uniquely resolve professional subject: "
+                f"{year} {normalize_major_name(major_name)} {expected!r} "
+                f"(matches={len(matches)})"
+            )
+        return program, matches[0]
+
+    def build_syllabus(self) -> None:
+        rows: list[dict[str, Any]] = []
+        seen_keys: set[tuple[str, str]] = set()
+        for year in YEARS:
+            payload = self._staging_payload(year, "syllabus.json")
+            source = normalize_text(payload.get("source_document_id"))
+            expected_source = f"SRC-HFNU-{year}-DG"
+            if source != expected_source:
+                raise BuildError(
+                    f"Unexpected syllabus source for {year}: {source!r}, expected {expected_source}"
+                )
+            for item in payload["data"]:
+                program, subject = self._professional_subject_for(
+                    year,
+                    item["major_name_raw"],
+                    item["subject_name_raw"],
+                )
+                natural_key = (program["program_year_id"], subject["subject_id"])
+                if natural_key in seen_keys:
+                    raise BuildError(
+                        "Duplicate syllabus row: "
+                        f"{year} {program['major_name_std']} {subject['subject_name_std']}"
+                    )
+                seen_keys.add(natural_key)
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="exam_syllabus",
+                    row_key=f"{program['major_name_std']}|{subject['subject_name_std']}",
+                    section=subject["subject_name_std"],
+                )
+                rows.append(
+                    {
+                        "syllabus_id": stable_id(
+                            "SYLL",
+                            program["program_year_id"],
+                            subject["subject_id"],
+                        ),
+                        "program_year_id": program["program_year_id"],
+                        "subject_id": subject["subject_id"],
+                        "title": normalize_text(item.get("title_raw")),
+                        "raw_text": normalize_text(item.get("raw_text")),
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
+        self.syllabus = sorted(
+            rows,
+            key=lambda row: (
+                self._major_for_program(row["program_year_id"]),
+                row["subject_id"],
+            ),
+        )
+        write_csv(
+            NORMALIZED_DIR / "syllabus.csv",
+            [
+                "syllabus_id",
+                "program_year_id",
+                "subject_id",
+                "title",
+                "raw_text",
+                "source_id",
+                "source_locator",
+            ],
+            self.syllabus,
+        )
+
+    def build_reference_books(self) -> None:
+        rows: list[dict[str, Any]] = []
+        seen_ids: set[str] = set()
+        for year in YEARS:
+            payload = self._staging_payload(year, "reference_books.json")
+            source = normalize_text(payload.get("source_document_id"))
+            expected_source = f"SRC-HFNU-{year}-DG"
+            if source != expected_source:
+                raise BuildError(
+                    f"Unexpected reference-book source for {year}: {source!r}, expected {expected_source}"
+                )
+            for item in payload["data"]:
+                program, subject = self._professional_subject_for(
+                    year,
+                    item["major_name_raw"],
+                    item["subject_name_raw"],
+                )
+                book_name = normalize_text(item.get("book_name_raw"))
+                reference_key = normalize_text(item.get("reference_key_raw"))
+                if not book_name or not reference_key:
+                    raise BuildError(
+                        f"Reference book lacks official title/key: {year} {program['major_name_std']}"
+                    )
+                reference_book_id = stable_id(
+                    "BOOK",
+                    program["program_year_id"],
+                    subject["subject_id"],
+                    book_name,
+                    reference_key,
+                )
+                if reference_book_id in seen_ids:
+                    raise BuildError(f"Duplicate reference book natural key: {reference_book_id}")
+                seen_ids.add(reference_book_id)
+                locator = normalized_locator(
+                    item.get("source_locator"),
+                    year=year,
+                    document_type="exam_syllabus",
+                    row_key=(
+                        f"{program['major_name_std']}|{subject['subject_name_std']}|{book_name}"
+                    ),
+                    section="参考书目",
+                )
+                rows.append(
+                    {
+                        "reference_book_id": reference_book_id,
+                        "program_year_id": program["program_year_id"],
+                        "subject_id": subject["subject_id"],
+                        "book_name": book_name,
+                        "author": normalize_text(item.get("author_raw")),
+                        "publisher": normalize_text(item.get("publisher_raw")),
+                        "edition": normalize_text(item.get("edition_raw")),
+                        "isbn": normalize_text(item.get("isbn_raw")),
+                        "source_id": source,
+                        "source_locator": locator,
+                    }
+                )
+        self.reference_books = sorted(
+            rows,
+            key=lambda row: (
+                self._major_for_program(row["program_year_id"]),
+                row["subject_id"],
+                row["book_name"],
+                row["reference_book_id"],
+            ),
+        )
+        write_csv(
+            NORMALIZED_DIR / "reference_books.csv",
+            [
+                "reference_book_id",
+                "program_year_id",
+                "subject_id",
+                "book_name",
+                "author",
+                "publisher",
+                "edition",
+                "isbn",
+                "source_id",
+                "source_locator",
+            ],
+            self.reference_books,
+        )
+
+    def _resolve_application_offering(
+        self,
+        year: int,
+        item: dict[str, Any],
+    ) -> dict[str, Any]:
+        major_std = normalize_major_name(item["major_name_raw"])
+        institution_name = normalize_text(item.get("training_institution_name_raw"))
+        if not institution_name:
+            institution_name = "合肥师范学院"
+        institution = self.institution_by_name.get(institution_name)
+        if institution is None:
+            raise BuildError(
+                f"Unknown application-statistics institution: {year} {institution_name}"
+            )
+        key = (year, major_std, institution["institution_id"])
+        try:
+            return self.offering_by_key[key]
+        except KeyError:
+            raise BuildError(
+                f"Cannot resolve application-statistics offering: "
+                f"{year} {major_std} {institution_name}"
+            ) from None
+
+    def build_application_statistics(self) -> None:
+        payload = self._staging_payload(2024, "application_statistics.json")
+        source = normalize_text(payload.get("source_document_id"))
+        if source != "SRC-HFNU-2024-BMRS":
+            raise BuildError(f"Unexpected application-statistics source: {source!r}")
+        total_plan_by_offering = {
+            row["offering_id"]: row
+            for row in self.enrollment_plans
+            if row["plan_type"] == "total"
         }
-        for sid in SCHOOL_IDS:
-            school_name = self._primary_school_name_by_id.get(sid)
-            if school_name and school_name in self.institution_by_name:
-                inst = self.institution_by_name[school_name]
-                school_rows.append({
-                    "school_id": sid,
-                    "school_name_std": inst["institution_name_std"],
-                    "school_name_raw": inst["institution_name_raw"],
-                    "school_nature": "公办",
-                    "school_type": "普通本科",
-                    "city": inst["city"],
-                    "official_website": inst["official_url"],
-                    "admission_website": school_admission_websites.get(sid, ""),
-                })
+        rows: list[dict[str, Any]] = []
+        seen_offerings: set[str] = set()
+        for item in payload["data"]:
+            offering = self._resolve_application_offering(2024, item)
+            offering_id = offering["offering_id"]
+            if offering_id in seen_offerings:
+                raise BuildError(f"Duplicate application-statistics offering: {offering_id}")
+            seen_offerings.add(offering_id)
+            official_plan = int(item["plan_count_raw"])
+            canonical_plan = total_plan_by_offering.get(offering_id)
+            if canonical_plan is None or canonical_plan["value_status"] not in {
+                "explicit_value",
+                "explicit_zero",
+            }:
+                raise BuildError(f"No explicit canonical total plan for {offering_id}")
+            if int(float(canonical_plan["plan_value"])) != official_plan:
+                raise BuildError(
+                    "Application-statistics plan conflict: "
+                    f"{offering_id} official={official_plan} "
+                    f"canonical={canonical_plan['plan_value']}"
+                )
+            applicant_count = item.get("applicant_count_raw")
+            if isinstance(applicant_count, bool) or not isinstance(applicant_count, int):
+                raise BuildError(f"Applicant count is not an official integer: {item!r}")
+            locator = normalized_locator(
+                item.get("source_locator"),
+                year=2024,
+                document_type="application_statistics",
+                row_key=(
+                    f"{self._major_for_program(offering['program_year_id'])}|"
+                    f"{offering['training_institution_name']}"
+                ),
+                section="分专业报考人数",
+            )
+            rows.append(
+                {
+                    "application_statistic_id": stable_id(
+                        "APPSTAT", offering_id, source
+                    ),
+                    "offering_id": offering_id,
+                    "applicant_count": applicant_count,
+                    "qualified_count": item.get("qualified_count_raw"),
+                    "admitted_count": item.get("admitted_count_raw"),
+                    "source_id": source,
+                    "source_locator": locator,
+                }
+            )
+        self.application_statistics = sorted(
+            rows,
+            key=lambda row: self._offering_sort_key(row["offering_id"]),
+        )
+        write_csv(
+            NORMALIZED_DIR / "application_statistics.csv",
+            [
+                "application_statistic_id",
+                "offering_id",
+                "applicant_count",
+                "qualified_count",
+                "admitted_count",
+                "source_id",
+                "source_locator",
+            ],
+            self.application_statistics,
+        )
+
+    def build_supporting_tables(self) -> None:
+        hfnu = self.institution_by_name["合肥师范学院"]
         write_csv(
             NORMALIZED_DIR / "schools.csv",
             [
@@ -1065,46 +1264,42 @@ class CanonicalBuilder:
                 "official_website",
                 "admission_website",
             ],
-            school_rows,
+            [
+                {
+                    "school_id": SCHOOL_ID,
+                    "school_name_std": hfnu["institution_name_std"],
+                    "school_name_raw": hfnu["institution_name_raw"],
+                    "school_nature": "公办",
+                    "school_type": "普通本科",
+                    "city": hfnu["city"],
+                    "official_website": hfnu["official_url"],
+                    "admission_website": "https://zsb.hfnu.edu.cn/",
+                }
+            ],
         )
-        # Build school_years.csv for all schools
-        school_year_rows: list[dict[str, Any]] = []
-        for sid in SCHOOL_IDS:
-            for year in YEARS:
-                school_year_rows.append({
-                    "school_year_id": stable_id("SY", sid, year),
-                    "year": year,
-                    "school_id": sid,
-                    "policy_source_id": source_id(year, "admission_policy", school_id=sid),
-                    "collection_status": "partial" if year == 2026 else "complete_core",
-                })
         write_csv(
             NORMALIZED_DIR / "school_years.csv",
             ["school_year_id", "year", "school_id", "policy_source_id", "collection_status"],
-            school_year_rows,
+            [
+                {
+                    "school_year_id": stable_id("SY", SCHOOL_ID, year),
+                    "year": year,
+                    "school_id": SCHOOL_ID,
+                    "policy_source_id": source_id(year, "admission_policy"),
+                    "collection_status": "partial" if year == 2026 else "complete_core",
+                }
+                for year in YEARS
+            ],
         )
-        # Build dim_school_alias.csv for all schools
-        alias_rows: list[dict[str, Any]] = []
-        school_aliases = {
-            "HFNU": [
-                {"alias_raw": "合肥师范学院", "alias_type": "official", "notes": "学校官方全称"},
-                {"alias_raw": "合师院", "alias_type": "common_alias", "notes": "常用简称"},
-                {"alias_raw": "合肥师范大学", "alias_type": "mistaken_name", "notes": "用户误称，非官方名称"},
-                {"alias_raw": "Hefei Normal University", "alias_type": "english_name", "notes": "英文名称"},
-            ],
-            "AHNU": [
-                {"alias_raw": "安徽师范大学", "alias_type": "official", "notes": "学校官方全称"},
-                {"alias_raw": "安师大", "alias_type": "common_alias", "notes": "常用简称"},
-                {"alias_raw": "Anhui Normal University", "alias_type": "english_name", "notes": "英文名称"},
-            ],
-        }
-        for sid in SCHOOL_IDS:
-            for alias in school_aliases.get(sid, []):
-                alias_rows.append({"school_id": sid, **alias})
         write_csv(
             NORMALIZED_DIR / "dim_school_alias.csv",
             ["school_id", "alias_raw", "alias_type", "notes"],
-            alias_rows,
+            [
+                {"school_id": SCHOOL_ID, "alias_raw": "合肥师范学院", "alias_type": "official", "notes": "学校官方全称"},
+                {"school_id": SCHOOL_ID, "alias_raw": "合师院", "alias_type": "common_alias", "notes": "常用简称"},
+                {"school_id": SCHOOL_ID, "alias_raw": "合肥师范大学", "alias_type": "mistaken_name", "notes": "用户误称，非官方名称"},
+                {"school_id": SCHOOL_ID, "alias_raw": "Hefei Normal University", "alias_type": "english_name", "notes": "英文名称"},
+            ],
         )
         # Preserve useful subject aliases but derive official rows from current subject facts.
         subjects = sorted({row["subject_name_std"] for row in self.exam_subjects})
@@ -1137,17 +1332,8 @@ class CanonicalBuilder:
         )
         # Empty future tables use explicit schemas instead of ambiguous blank files.
         empty_schemas = {
-            "syllabus.csv": [
-                "syllabus_id", "program_year_id", "subject_id", "title", "raw_text", "source_id", "source_locator"
-            ],
-            "reference_books.csv": [
-                "reference_book_id", "program_year_id", "subject_id", "book_name", "author", "publisher", "edition", "isbn", "source_id", "source_locator"
-            ],
             "adjustments.csv": [
                 "adjustment_id", "offering_id", "adjustment_type", "plan_value", "requirements_raw", "source_id", "source_locator"
-            ],
-            "application_statistics.csv": [
-                "application_statistic_id", "offering_id", "applicant_count", "qualified_count", "admitted_count", "source_id", "source_locator"
             ],
         }
         for filename, headers in empty_schemas.items():
@@ -1164,6 +1350,12 @@ class CanonicalBuilder:
             "eligibility_rule_sets": (self.eligibility_rule_sets, "eligibility_rule_set_id"),
             "admission_scores": (self.admission_scores, "admission_score_id"),
             "admission_rules": (self.admission_rules, "rule_id"),
+            "syllabus": (self.syllabus, "syllabus_id"),
+            "reference_books": (self.reference_books, "reference_book_id"),
+            "application_statistics": (
+                self.application_statistics,
+                "application_statistic_id",
+            ),
         }
         rows: list[dict[str, Any]] = []
         for table_name, (records, id_field) in table_specs.items():
@@ -1192,6 +1384,9 @@ class CanonicalBuilder:
         self.build_eligibility()
         self.build_admission_scores()
         self.build_admission_rules()
+        self.build_syllabus()
+        self.build_reference_books()
+        self.build_application_statistics()
         self.build_supporting_tables()
         self.build_fact_sources()
         return {
@@ -1205,6 +1400,9 @@ class CanonicalBuilder:
             "eligibility_rule_items": len(self.eligibility_rule_items),
             "admission_scores": len(self.admission_scores),
             "admission_rules": len(self.admission_rules),
+            "syllabus": len(self.syllabus),
+            "reference_books": len(self.reference_books),
+            "application_statistics": len(self.application_statistics),
         }
 
 

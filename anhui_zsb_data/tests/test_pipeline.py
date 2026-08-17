@@ -52,7 +52,10 @@ class PipelineTestCase(unittest.TestCase):
             "eligibility_rule_items.csv": 295,
             "admission_scores.csv": 445,
             "admission_rules.csv": 15,
-            "fact_sources.csv": 1725,
+            "syllabus.csv": 164,
+            "reference_books.csv": 199,
+            "application_statistics.csv": 30,
+            "fact_sources.csv": 2118,
         }
         self.assertEqual({name: len(read_csv(name)) for name in expected}, expected)
 
@@ -145,6 +148,12 @@ class PipelineTestCase(unittest.TestCase):
         self.assertEqual(detail["tie_break_score"], "69")
         self.assertEqual(parse_score("472.5")["score_value_numeric"], "472.5")
         self.assertEqual(parse_score("472.5")["threshold_detail_json"], "")
+        quality = parse_score("57(素质39)")
+        self.assertEqual(quality["score_value_numeric"], "57")
+        self.assertEqual(
+            json.loads(quality["threshold_detail_json"])["tie_break_metric"],
+            "quality_assessment",
+        )
 
     def test_main_school_training_semantics(self) -> None:
         main_rows = [row for row in read_csv("program_offerings.csv") if row["training_type"] == "main_school"]
@@ -166,7 +175,8 @@ class PipelineTestCase(unittest.TestCase):
     def test_source_assets_hashes_and_all_locators_resolve(self) -> None:
         assets = {row["asset_id"]: row for row in read_csv("source_assets.csv")}
         documents = {row["source_document_id"]: row for row in read_csv("source_documents.csv")}
-        self.assertEqual(len(assets), 16)
+        self.assertEqual(len(assets), 29)
+        self.assertEqual(len(documents), 10)
         for asset in assets.values():
             path = ROOT / asset["local_path"]
             self.assertTrue(path.is_file(), asset["local_path"])
@@ -183,6 +193,9 @@ class PipelineTestCase(unittest.TestCase):
             "eligibility_rule_sets.csv",
             "admission_scores.csv",
             "admission_rules.csv",
+            "syllabus.csv",
+            "reference_books.csv",
+            "application_statistics.csv",
         )
         checked = 0
         for filename in locator_tables:
@@ -195,7 +208,7 @@ class PipelineTestCase(unittest.TestCase):
                 else:
                     self.assertEqual(locator.get("url"), documents[row["source_id"]]["url"])
                 checked += 1
-        self.assertEqual(checked, 1725)
+        self.assertEqual(checked, 2118)
 
     def test_fact_source_links_are_complete(self) -> None:
         specs = {
@@ -208,6 +221,12 @@ class PipelineTestCase(unittest.TestCase):
             "eligibility_rule_sets": ("eligibility_rule_sets.csv", "eligibility_rule_set_id"),
             "admission_scores": ("admission_scores.csv", "admission_score_id"),
             "admission_rules": ("admission_rules.csv", "rule_id"),
+            "syllabus": ("syllabus.csv", "syllabus_id"),
+            "reference_books": ("reference_books.csv", "reference_book_id"),
+            "application_statistics": (
+                "application_statistics.csv",
+                "application_statistic_id",
+            ),
         }
         expected = {
             (table, row[pk])
@@ -233,9 +252,12 @@ class PipelineTestCase(unittest.TestCase):
             self.assertEqual(connection.execute("PRAGMA foreign_key_check").fetchall(), [])
             self.assertEqual(connection.execute("PRAGMA user_version").fetchone()[0], 300)
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM program_years").fetchone()[0], 82)
-            self.assertEqual(connection.execute("SELECT COUNT(*) FROM fact_sources").fetchone()[0], 1725)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM fact_sources").fetchone()[0], 2118)
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM v_program_offerings").fetchone()[0], 89)
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM v_published_admission_scores").fetchone()[0], 281)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM syllabus").fetchone()[0], 164)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM reference_books").fetchone()[0], 199)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM application_statistics").fetchone()[0], 30)
         finally:
             connection.close()
 

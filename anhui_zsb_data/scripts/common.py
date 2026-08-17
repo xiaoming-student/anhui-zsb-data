@@ -31,7 +31,6 @@ DB_DIR = BASE_DIR / "db"
 SCHEMA_VERSION = "0.3.0"
 SCHOOL_ID = "HFNU"
 YEARS = (2024, 2025, 2026)
-SCHOOL_IDS = ("HFNU", "AHNU")
 
 # Fixed namespace: changing this value would change every deterministic ID.
 ID_NAMESPACE = uuid.UUID("465e77c8-7b65-4f02-88ee-f6f71b9d5d38")
@@ -201,7 +200,10 @@ def as_decimal_string(value: Any) -> str:
 _SCORE_RE = re.compile(
     r"^\s*(?P<score>\d+(?:\.\d+)?)"
     r"(?:\s*/\s*(?P<max>\d+(?:\.\d+)?))?"
-    r"(?:\s*[（(]\s*(?P<label>[^:：()（）]+?)\s*[:：]?\s*(?P<detail>\d+(?:\.\d+)?)\s*[）)])?\s*$"
+    r"(?:\s*[（(]\s*(?:"
+    r"(?P<label_colon>[^:：()（）]+)\s*[:：]\s*(?P<detail_colon>\d+(?:\.\d+)?)"
+    r"|(?P<label_plain>[^0-9:：()（）]+?)\s*(?P<detail_plain>\d+(?:\.\d+)?)"
+    r")\s*[）)])?\s*$"
 )
 
 
@@ -218,8 +220,8 @@ def parse_score(raw_value: Any) -> dict[str, str]:
         raise ValueError(f"Unsupported score format: {raw!r}")
 
     detail: dict[str, Any] = {}
-    label = normalize_text(match.group("label"))
-    detail_score = match.group("detail")
+    label = normalize_text(match.group("label_colon") or match.group("label_plain"))
+    detail_score = match.group("detail_colon") or match.group("detail_plain")
     if label and detail_score:
         label_map = {
             "专业课1": "professional_1",
@@ -306,9 +308,9 @@ def parse_eligibility_item(item: str) -> dict[str, str]:
     }
 
 
-def source_id(year: int | str, document_type: str, school_id: str = SCHOOL_ID) -> str:
+def source_id(year: int | str, document_type: str) -> str:
     code = {"admission_policy": "ZC", "admission_scores": "LQ"}[document_type]
-    return f"SRC-{school_id}-{year}-{code}"
+    return f"SRC-HFNU-{year}-{code}"
 
 
 def source_url_for(year: int | str, document_type: str) -> str:

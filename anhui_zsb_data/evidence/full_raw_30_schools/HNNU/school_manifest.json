@@ -1,0 +1,72 @@
+{
+  "school_id": "HNNU",
+  "school_name": "淮南师范学院",
+  "official_domains": [
+    "hnnu.edu.cn"
+  ],
+  "sources": [],
+  "assets": [],
+  "failures": [
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "year": 2024,
+      "url": "https://zsb.hnnu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError(\"HTTPSConnectionPool(host='zsb.hnnu.edu.cn', port=443): Max retries exceeded with url: / (Caused by ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))\"))"
+    },
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "year": 2024,
+      "url": "https://www.hnnu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError(\"HTTPSConnectionPool(host='www.hnnu.edu.cn', port=443): Max retries exceeded with url: / (Caused by ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))\"))"
+    },
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "year": 2025,
+      "url": "https://zsb.hnnu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError(\"HTTPSConnectionPool(host='zsb.hnnu.edu.cn', port=443): Max retries exceeded with url: / (Caused by ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))\"))"
+    },
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "year": 2025,
+      "url": "https://www.hnnu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError(\"HTTPSConnectionPool(host='www.hnnu.edu.cn', port=443): Max retries exceeded with url: / (Caused by ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))\"))"
+    },
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "year": 2026,
+      "url": "https://zsb.hnnu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError(\"HTTPSConnectionPool(host='zsb.hnnu.edu.cn', port=443): Max retries exceeded with url: / (Caused by ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))\"))"
+    },
+    {
+      "school_id": "HNNU",
+      "school_name": "淮南师范学院",
+      "year": 2026,
+      "url": "https://www.hnnu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError(\"HTTPSConnectionPool(host='www.hnnu.edu.cn', port=443): Max retries exceeded with url: / (Caused by ProtocolError('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))\"))"
+    }
+  ],
+  "sanitized": true
+}

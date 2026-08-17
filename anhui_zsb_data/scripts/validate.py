@@ -180,6 +180,9 @@ class Validator:
             "eligibility_rule_items.csv": "eligibility_rule_item_id",
             "admission_scores.csv": "admission_score_id",
             "admission_rules.csv": "rule_id",
+            "syllabus.csv": "syllabus_id",
+            "reference_books.csv": "reference_book_id",
+            "application_statistics.csv": "application_statistic_id",
             "fact_sources.csv": "fact_source_id",
         }
         for filename, key in pk_specs.items():
@@ -196,6 +199,14 @@ class Validator:
             ("eligibility_rule_sets.csv", "program_year_id", "program_years.csv", "program_year_id"),
             ("eligibility_rule_items.csv", "eligibility_rule_set_id", "eligibility_rule_sets.csv", "eligibility_rule_set_id"),
             ("admission_scores.csv", "offering_id", "program_offerings.csv", "offering_id"),
+            ("syllabus.csv", "program_year_id", "program_years.csv", "program_year_id"),
+            ("reference_books.csv", "program_year_id", "program_years.csv", "program_year_id"),
+            (
+                "application_statistics.csv",
+                "offering_id",
+                "program_offerings.csv",
+                "offering_id",
+            ),
         )
         for spec in fk_specs:
             self._fk(*spec)
@@ -211,6 +222,9 @@ class Validator:
             "eligibility_rule_sets.csv",
             "admission_scores.csv",
             "admission_rules.csv",
+            "syllabus.csv",
+            "reference_books.csv",
+            "application_statistics.csv",
             "fact_sources.csv",
         )
         for filename in source_tables:
@@ -230,6 +244,9 @@ class Validator:
             "eligibility_rule_sets.csv",
             "admission_scores.csv",
             "admission_rules.csv",
+            "syllabus.csv",
+            "reference_books.csv",
+            "application_statistics.csv",
         )
         assets = {row["asset_id"]: row for row in self._load("source_assets.csv")}
         documents = {row["source_document_id"]: row for row in self._load("source_documents.csv")}
@@ -392,7 +409,7 @@ class Validator:
         scores = self._load("admission_scores.csv")
         score_counts = Counter(row["offering_id"] for row in scores)
         expected_score_offerings = {
-            row["offering_id"] for row in self._load("program_offerings.csv") if int(row["year"]) in {2024, 2025}
+            row["offering_id"] for row in self._load("program_offerings.csv")
         }
         missing_offerings = expected_score_offerings - set(score_counts)
         if missing_offerings:
@@ -400,8 +417,11 @@ class Validator:
         bad_counts = {key: value for key, value in score_counts.items() if value != len(SCORE_FIELDS)}
         if bad_counts:
             self.result.error(f"Admission score matrix does not have 5 categories for {len(bad_counts)} offerings")
-        if len(scores) != 445:
-            self.result.error(f"admission_scores row count={len(scores)}, expected=445")
+        expected_score_count = len(expected_score_offerings) * len(SCORE_FIELDS)
+        if len(scores) != expected_score_count:
+            self.result.error(
+                f"admission_scores row count={len(scores)}, expected={expected_score_count}"
+            )
         status = Counter(row["value_status"] for row in scores)
         if status != Counter({"published_value": 281, "blank_in_source": 164}):
             self.result.error(f"Unexpected admission score status distribution: {dict(status)}")
@@ -430,6 +450,12 @@ class Validator:
             "eligibility_rule_sets": ("eligibility_rule_sets.csv", "eligibility_rule_set_id"),
             "admission_scores": ("admission_scores.csv", "admission_score_id"),
             "admission_rules": ("admission_rules.csv", "rule_id"),
+            "syllabus": ("syllabus.csv", "syllabus_id"),
+            "reference_books": ("reference_books.csv", "reference_book_id"),
+            "application_statistics": (
+                "application_statistics.csv",
+                "application_statistic_id",
+            ),
         }
         expected: dict[tuple[str, str], dict[str, str]] = {}
         for table_name, (filename, pk) in table_specs.items():
@@ -490,6 +516,127 @@ class Validator:
         if id_mapping:
             self.result.error(f"Legacy id_mapping.json files still exist: {len(id_mapping)}")
 
+    def check_stage2a_hfnu_tables(self) -> None:
+        programs = {row["program_year_id"]: row for row in self._load("program_years.csv")}
+        offerings = {
+            row["offering_id"]: row for row in self._load("program_offerings.csv")
+        }
+        subjects_by_program: dict[str, set[str]] = defaultdict(set)
+        for row in self._load("exam_subjects.csv"):
+            if row["subject_slot"] in {"professional_1", "professional_2"}:
+                subjects_by_program[row["program_year_id"]].add(row["subject_id"])
+
+        syllabus = self._load("syllabus.csv")
+        books = self._load("reference_books.csv")
+        statistics = self._load("application_statistics.csv")
+        if len(syllabus) != 164:
+            self.result.error(f"syllabus row count={len(syllabus)}, expected=164")
+        if len(books) != 199:
+            self.result.error(f"reference_books row count={len(books)}, expected=199")
+        if len(statistics) != 30:
+            self.result.error(
+                f"application_statistics row count={len(statistics)}, expected=30"
+            )
+
+        syllabus_years: Counter[int] = Counter()
+        book_years: Counter[int] = Counter()
+        for table_name, rows, counts in (
+            ("syllabus", syllabus, syllabus_years),
+            ("reference_books", books, book_years),
+        ):
+            for row in rows:
+                program = programs.get(row["program_year_id"])
+                if program is None:
+                    continue
+                counts[int(program["year"])] += 1
+                if row["subject_id"] not in subjects_by_program[row["program_year_id"]]:
+                    self.result.error(
+                        f"{table_name} subject is not a professional subject of its program: "
+                        f"{row.get(table_name.rstrip('s') + '_id', '') or row}"
+                    )
+                expected_source = f"SRC-HFNU-{program['year']}-DG"
+                if row["source_id"] != expected_source:
+                    self.result.error(
+                        f"{table_name} uses unexpected source: {row['source_id']} != {expected_source}"
+                    )
+        if syllabus_years != Counter({2024: 56, 2025: 56, 2026: 52}):
+            self.result.error(f"Unexpected syllabus year counts: {dict(syllabus_years)}")
+        if book_years != Counter({2024: 70, 2025: 70, 2026: 59}):
+            self.result.error(f"Unexpected reference-book year counts: {dict(book_years)}")
+
+        total_plan_by_offering = {
+            row["offering_id"]: row
+            for row in self._load("enrollment_plans.csv")
+            if row["plan_type"] == "total"
+        }
+        for row in statistics:
+            offering = offerings.get(row["offering_id"])
+            if offering is None:
+                continue
+            if offering["year"] != "2024":
+                self.result.error(
+                    f"application statistic is not a 2024 offering: {row['application_statistic_id']}"
+                )
+            if row["source_id"] != "SRC-HFNU-2024-BMRS":
+                self.result.error(
+                    f"application statistic uses unexpected source: {row['application_statistic_id']}"
+                )
+            try:
+                applicants = int(row["applicant_count"])
+            except (TypeError, ValueError):
+                self.result.error(
+                    f"application statistic applicant_count is not an integer: "
+                    f"{row['application_statistic_id']}"
+                )
+                continue
+            if applicants < 0:
+                self.result.error(
+                    f"application statistic applicant_count is negative: "
+                    f"{row['application_statistic_id']}"
+                )
+            if row["qualified_count"] or row["admitted_count"]:
+                self.result.error(
+                    "Official BMRS page did not publish qualified/admitted counts: "
+                    f"{row['application_statistic_id']}"
+                )
+            if row["offering_id"] not in total_plan_by_offering:
+                self.result.error(
+                    f"application statistic has no canonical total plan: {row['application_statistic_id']}"
+                )
+
+        stage2a_sources = {
+            "SRC-HFNU-2024-BMRS",
+            "SRC-HFNU-2024-DG",
+            "SRC-HFNU-2024-LQ",
+            "SRC-HFNU-2024-ZC",
+            "SRC-HFNU-2025-DG",
+            "SRC-HFNU-2025-LQ",
+            "SRC-HFNU-2026-DG",
+            "SRC-HFNU-2026-LQ",
+        }
+        documents = {
+            row["source_document_id"]: row
+            for row in self._load("source_documents.csv")
+        }
+        for source_id_value in stage2a_sources:
+            document = documents.get(source_id_value)
+            if document is None:
+                self.result.error(f"Stage 2A source is missing: {source_id_value}")
+            elif document["status"] != "verified" or not document["primary_asset_id"]:
+                self.result.error(
+                    f"Stage 2A source is not verified with a primary asset: {source_id_value}"
+                )
+        required_stable_assets = {
+            "ASSET-HFNU-2025-ZC-PDF",
+            "ASSET-HFNU-2025-ZC-PARSED-TXT",
+            "ASSET-HFNU-2026-ZC-PDF",
+        }
+        actual_assets = {row["asset_id"] for row in self._load("source_assets.csv")}
+        if not required_stable_assets <= actual_assets:
+            self.result.error(
+                f"Existing stable source assets disappeared: {sorted(required_stable_assets-actual_assets)}"
+            )
+
     def check_state_consistency(self) -> None:
         progress_path = PROGRESS_DIR / "collection_progress.csv"
         task_state_path = PROGRESS_DIR / "task_state.json"
@@ -514,8 +661,32 @@ class Validator:
             "major_eligibility.csv",
             "admission_scores.csv",
             "admission_rules.csv",
+            "syllabus.csv",
+            "reference_books.csv",
+            "application_statistics.csv",
         ):
-            table_by_year[filename] = Counter(int(row["year"]) for row in self._load(filename))
+            if filename in {"syllabus.csv", "reference_books.csv"}:
+                program_year = {
+                    row["program_year_id"]: int(row["year"])
+                    for row in self._load("program_years.csv")
+                }
+                table_by_year[filename] = Counter(
+                    program_year[row["program_year_id"]]
+                    for row in self._load(filename)
+                )
+            elif filename == "application_statistics.csv":
+                offering_year = {
+                    row["offering_id"]: int(row["year"])
+                    for row in self._load("program_offerings.csv")
+                }
+                table_by_year[filename] = Counter(
+                    offering_year[row["offering_id"]]
+                    for row in self._load(filename)
+                )
+            else:
+                table_by_year[filename] = Counter(
+                    int(row["year"]) for row in self._load(filename)
+                )
         plan_offering_year = {row["offering_id"]: int(row["year"]) for row in self._load("program_offerings.csv")}
         plans_by_year = Counter(plan_offering_year[row["offering_id"]] for row in self._load("enrollment_plans.csv"))
         progress_by_year = {int(row["year"]): row for row in progress}
@@ -532,6 +703,11 @@ class Validator:
                 "admission_scores": table_by_year["admission_scores.csv"][year],
                 "major_eligibility": table_by_year["major_eligibility.csv"][year],
                 "admission_rules": table_by_year["admission_rules.csv"][year],
+                "syllabus": table_by_year["syllabus.csv"][year],
+                "reference_books": table_by_year["reference_books.csv"][year],
+                "application_statistics": table_by_year[
+                    "application_statistics.csv"
+                ][year],
             }
             for field_name, expected_value in expected_values.items():
                 if int(row[field_name]) != expected_value:
@@ -541,8 +717,12 @@ class Validator:
         state = load_json(task_state_path)
         if not state.get("stages", {}).get("report_complete"):
             self.result.error("task_state.report_complete is false")
-        if state.get("stage") != "pilot_2_3_complete":
+        if state.get("stage") != "stage2a_hfnu_evidence_integration_complete":
             self.result.error(f"Unexpected task_state.stage: {state.get('stage')}")
+        if state.get("stages", {}).get("batch_ready") is not False:
+            self.result.error("task_state.batch_ready must remain false after Stage 2A")
+        if state.get("completed_schools"):
+            self.result.error("HFNU must not be marked complete after Stage 2A")
 
     def run(self) -> ValidationResult:
         self.check_manifest()
@@ -552,6 +732,7 @@ class Validator:
         self.check_hfnu_core_counts()
         self.check_eligibility_coverage()
         self.check_exam_and_score_matrix()
+        self.check_stage2a_hfnu_tables()
         self.check_fact_sources()
         self.check_no_legacy_canonical_files()
         self.check_state_consistency()

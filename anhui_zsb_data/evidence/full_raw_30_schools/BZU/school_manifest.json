@@ -1,0 +1,72 @@
+{
+  "school_id": "BZU",
+  "school_name": "亳州学院",
+  "official_domains": [
+    "bzuu.edu.cn"
+  ],
+  "sources": [],
+  "assets": [],
+  "failures": [
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "year": 2024,
+      "url": "https://www.bzuu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Read timed out. (read timeout=12)\"))'))"
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "year": 2024,
+      "url": "https://www.bzuu.edu.cn/zzzs/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Max retries exceeded with url: /zzzs/ (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Read timed out. (read timeout=12)\"))'))"
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "year": 2025,
+      "url": "https://www.bzuu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Read timed out. (read timeout=12)\"))'))"
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "year": 2025,
+      "url": "https://www.bzuu.edu.cn/zzzs/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Max retries exceeded with url: /zzzs/ (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Read timed out. (read timeout=12)\"))'))"
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "year": 2026,
+      "url": "https://www.bzuu.edu.cn/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Max retries exceeded with url: / (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Read timed out. (read timeout=12)\"))'))"
+    },
+    {
+      "school_id": "BZU",
+      "school_name": "亳州学院",
+      "year": 2026,
+      "url": "https://www.bzuu.edu.cn/zzzs/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Max retries exceeded with url: /zzzs/ (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'www.bzuu.edu.cn\\', port=443): Read timed out. (read timeout=12)\"))'))"
+    }
+  ],
+  "sanitized": true
+}

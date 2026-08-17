@@ -1,0 +1,92 @@
+{
+  "counts": {
+    "raw_files": 3,
+    "source_assets": 3,
+    "source_documents": 5,
+    "staging_files": 14
+  },
+  "generated_at": "2026-08-15T04:00:06+00:00",
+  "git": {
+    "base_sha": "5d16b24801979c070699514698d4ff9877575593",
+    "branch": "data/stage2a-hfnu-evidence-integration",
+    "head_sha": "f59030c37014194689a047c6f355c69fbcf49283",
+    "main_sha_observed": "5d16b24801979c070699514698d4ff9877575593"
+  },
+  "missing": {
+    "open": 47,
+    "total": 47
+  },
+  "normalized_counts": {
+    "adjustments": 0,
+    "admission_rules": 15,
+    "admission_scores": 305,
+    "application_statistics": 0,
+    "dim_major_alias": 0,
+    "dim_school_alias": 4,
+    "dim_subject_alias": 38,
+    "documents": 5,
+    "eligibility_rule_items": 295,
+    "eligibility_rule_sets": 82,
+    "enrollment_plans": 356,
+    "exam_sessions": 246,
+    "exam_subjects": 328,
+    "fact_sources": 1585,
+    "institutions": 5,
+    "major_eligibility": 82,
+    "program_offerings": 89,
+    "program_years": 82,
+    "reference_books": 0,
+    "school_years": 3,
+    "schools": 1,
+    "source_assets": 3,
+    "source_documents": 5,
+    "source_sites": 1,
+    "sources": 5,
+    "syllabus": 0
+  },
+  "quality": {
+    "clean_rebuild_pass": true,
+    "idempotence_pass": true,
+    "log_sha256": "f5945b3ed5fbabf4f4af457690de99f0cc4099be390514f4e1d593a09d0dbd1a",
+    "p0": 0,
+    "p1": 0,
+    "quality_gate_pass": true,
+    "stage1_guard_pass": true,
+    "stage1_verifier_pass": true,
+    "unit_test_count": 19
+  },
+  "schema_version": "stage2a-baseline-v1",
+  "sqlite_counts": {
+    "admission_rules": 15,
+    "admission_scores": 305,
+    "eligibility_rule_items": 295,
+    "eligibility_rule_sets": 82,
+    "enrollment_plans": 356,
+    "exam_sessions": 246,
+    "exam_subjects": 328,
+    "fact_sources": 1585,
+    "institutions": 5,
+    "major_eligibility": 82,
+    "program_offerings": 89,
+    "program_years": 82,
+    "schema_metadata": 2,
+    "source_assets": 3,
+    "source_documents": 5,
+    "source_sites": 1
+  },
+  "stable_id_snapshot": {
+    "path": "reports/stage2a_stable_ids_baseline.json",
+    "row_count": 1885,
+    "sha256": "17f0e8a59a2188bdd26fca69805c139a67980c7b5ebd56fb97a0c607f2f52a73",
+    "table_count": 11
+  },
+  "stage1_inventory": {
+    "path": "config/phase1_evidence_inventory.json",
+    "sha256": "fcaadc1d3b2d226226c333e8fd79be885612d42c5fe1c01dce1da23b26b1d16a"
+  },
+  "version": {
+    "project_version": "pilot-2.3",
+    "quality_gate": "PASS",
+    "schema_version": "0.3.0"
+  }
+}

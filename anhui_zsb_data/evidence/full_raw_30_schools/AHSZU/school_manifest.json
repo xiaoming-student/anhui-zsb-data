@@ -1,0 +1,72 @@
+{
+  "school_id": "AHSZU",
+  "school_name": "宿州学院",
+  "official_domains": [
+    "ahszu.edu.cn"
+  ],
+  "sources": [],
+  "assets": [],
+  "failures": [
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "year": 2024,
+      "url": "https://www.ahszu.edu.cn/zs/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.ahszu.edu.cn\\', port=443): Max retries exceeded with url: /zs/ (Caused by NameResolutionError(\"HTTPSConnection(host=\\'www.ahszu.edu.cn\\', port=443): Failed to resolve \\'www.ahszu.edu.cn\\' ([Errno -3] Temporary failure in name resolution)\"))'))"
+    },
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "year": 2024,
+      "url": "https://www.ahszu.edu.cn/zs/zhuansb.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.ahszu.edu.cn\\', port=443): Max retries exceeded with url: /zs/zhuansb.htm (Caused by NameResolutionError(\"HTTPSConnection(host=\\'www.ahszu.edu.cn\\', port=443): Failed to resolve \\'www.ahszu.edu.cn\\' ([Errno -3] Temporary failure in name resolution)\"))'))"
+    },
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "year": 2025,
+      "url": "https://www.ahszu.edu.cn/zs/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.ahszu.edu.cn\\', port=443): Max retries exceeded with url: /zs/ (Caused by NameResolutionError(\"HTTPSConnection(host=\\'www.ahszu.edu.cn\\', port=443): Failed to resolve \\'www.ahszu.edu.cn\\' ([Errno -3] Temporary failure in name resolution)\"))'))"
+    },
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "year": 2025,
+      "url": "https://www.ahszu.edu.cn/zs/zhuansb.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.ahszu.edu.cn\\', port=443): Max retries exceeded with url: /zs/zhuansb.htm (Caused by NameResolutionError(\"HTTPSConnection(host=\\'www.ahszu.edu.cn\\', port=443): Failed to resolve \\'www.ahszu.edu.cn\\' ([Errno -3] Temporary failure in name resolution)\"))'))"
+    },
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "year": 2026,
+      "url": "https://www.ahszu.edu.cn/zs/",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.ahszu.edu.cn\\', port=443): Max retries exceeded with url: /zs/ (Caused by NameResolutionError(\"HTTPSConnection(host=\\'www.ahszu.edu.cn\\', port=443): Failed to resolve \\'www.ahszu.edu.cn\\' ([Errno -3] Temporary failure in name resolution)\"))'))"
+    },
+    {
+      "school_id": "AHSZU",
+      "school_name": "宿州学院",
+      "year": 2026,
+      "url": "https://www.ahszu.edu.cn/zs/zhuansb.htm",
+      "parent_url": "",
+      "status": "access_restricted",
+      "http_status": "error",
+      "reason": "ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'www.ahszu.edu.cn\\', port=443): Max retries exceeded with url: /zs/zhuansb.htm (Caused by NameResolutionError(\"HTTPSConnection(host=\\'www.ahszu.edu.cn\\', port=443): Failed to resolve \\'www.ahszu.edu.cn\\' ([Errno -3] Temporary failure in name resolution)\"))'))"
+    }
+  ],
+  "sanitized": true
+}

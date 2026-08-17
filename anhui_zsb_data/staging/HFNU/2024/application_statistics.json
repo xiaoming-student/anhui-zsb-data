@@ -1,0 +1,430 @@
+{
+  "data": [
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 913,
+      "major_name_raw": "学前教育",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 1,
+        "row_key": "学前教育|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 143,
+      "major_name_raw": "商务英语",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 2,
+        "row_key": "商务英语|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 315,
+      "major_name_raw": "电子信息工程",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 3,
+        "row_key": "电子信息工程|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 247,
+      "major_name_raw": "药物制剂",
+      "plan_count_raw": 140,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 4,
+        "row_key": "药物制剂|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 369,
+      "major_name_raw": "人力资源管理",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 5,
+        "row_key": "人力资源管理|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 440,
+      "major_name_raw": "网络与新媒体",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 6,
+        "row_key": "网络与新媒体|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 173,
+      "major_name_raw": "通信工程",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 7,
+        "row_key": "通信工程|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 94,
+      "major_name_raw": "化学工程与工艺",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 8,
+        "row_key": "化学工程与工艺|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 274,
+      "major_name_raw": "软件工程",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 9,
+        "row_key": "软件工程|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 291,
+      "major_name_raw": "数据科学与大数据技术",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 10,
+        "row_key": "数据科学与大数据技术|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 123,
+      "major_name_raw": "互联网金融",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 11,
+        "row_key": "互联网金融|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 175,
+      "major_name_raw": "生物制药",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 12,
+        "row_key": "生物制药|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 170,
+      "major_name_raw": "经济统计学",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 13,
+        "row_key": "经济统计学|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 98,
+      "major_name_raw": "新能源材料与器件",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 14,
+        "row_key": "新能源材料与器件|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 28,
+      "major_name_raw": "材料科学与工程",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 15,
+        "row_key": "材料科学与工程|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 299,
+      "major_name_raw": "视觉传达设计",
+      "plan_count_raw": 60,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 16,
+        "row_key": "视觉传达设计|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 96,
+      "major_name_raw": "服装与服饰设计",
+      "plan_count_raw": 30,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 17,
+        "row_key": "服装与服饰设计|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 96,
+      "major_name_raw": "动画",
+      "plan_count_raw": 30,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 18,
+        "row_key": "动画|合肥师范学院",
+        "table": 1
+      },
+      "training_institution_name_raw": ""
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 101,
+      "major_name_raw": "财务管理",
+      "plan_count_raw": 40,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 19,
+        "row_key": "财务管理|安徽工业经济职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "安徽工业经济职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 78,
+      "major_name_raw": "市场营销",
+      "plan_count_raw": 40,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 20,
+        "row_key": "市场营销|安徽工业经济职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "安徽工业经济职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 80,
+      "major_name_raw": "电气工程及其自动化",
+      "plan_count_raw": 40,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 21,
+        "row_key": "电气工程及其自动化|安徽工业经济职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "安徽工业经济职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 37,
+      "major_name_raw": "网络工程",
+      "plan_count_raw": 40,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 22,
+        "row_key": "网络工程|安徽工业经济职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "安徽工业经济职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 88,
+      "major_name_raw": "计算机科学与技术",
+      "plan_count_raw": 40,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 23,
+        "row_key": "计算机科学与技术|安徽工业经济职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "安徽工业经济职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 181,
+      "major_name_raw": "制药工程",
+      "plan_count_raw": 30,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 24,
+        "row_key": "制药工程|合肥职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "合肥职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 192,
+      "major_name_raw": "运动康复",
+      "plan_count_raw": 30,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 25,
+        "row_key": "运动康复|合肥职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "合肥职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 179,
+      "major_name_raw": "小学教育",
+      "plan_count_raw": 60,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 26,
+        "row_key": "小学教育|淮北职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "淮北职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 53,
+      "major_name_raw": "电气工程及其自动化",
+      "plan_count_raw": 60,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 27,
+        "row_key": "电气工程及其自动化|淮北职业技术学院",
+        "table": 1
+      },
+      "training_institution_name_raw": "淮北职业技术学院"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 177,
+      "major_name_raw": "环境设计",
+      "plan_count_raw": 80,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 28,
+        "row_key": "环境设计|马鞍山师范高等专科学校",
+        "table": 1
+      },
+      "training_institution_name_raw": "马鞍山师范高等专科学校"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 201,
+      "major_name_raw": "计算机科学与技术",
+      "plan_count_raw": 120,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 29,
+        "row_key": "计算机科学与技术|马鞍山师范高等专科学校",
+        "table": 1
+      },
+      "training_institution_name_raw": "马鞍山师范高等专科学校"
+    },
+    {
+      "admitted_count_raw": null,
+      "applicant_count_raw": 86,
+      "major_name_raw": "食品质量与安全",
+      "plan_count_raw": 80,
+      "qualified_count_raw": null,
+      "source_locator": {
+        "asset_id": "ASSET-HFNU-2024-BMRS-HTML",
+        "row": 30,
+        "row_key": "食品质量与安全|马鞍山师范高等专科学校",
+        "table": 1
+      },
+      "training_institution_name_raw": "马鞍山师范高等专科学校"
+    }
+  ],
+  "extracted_at": "2026-08-15T04:00:00+00:00",
+  "extraction_method": "deterministic_parse_of_reviewed_official_html_text",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2024-BMRS",
+  "source_school_id": "HFNU",
+  "source_year": "2024"
+}

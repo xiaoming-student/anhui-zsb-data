@@ -1,0 +1,1258 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>首页</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=1440">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+		<link rel="shortcut icon" href="/static/front/ahyz/basic/images/change_doc/hb/logo.ico" type="image/x-icon">
+		<link rel="stylesheet" href="/static/front/ahyz/basic/css/cms.min.css" type="text/css">
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/j3.js"></script>
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/html5shiv.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/j1.js"></script>
+	<![endif]-->
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/init.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/artTemplate.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/util.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/tplt.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="/static/front/ahyz/basic/css/plugs/swiper.css" />
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/swiper.js"></script>
+		<script type="text/javascript">
+			var OldSwiper = Swiper;
+		</script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/js/json2.js"></script>
+		<script type="text/javascript" src="/static/front/ahyz/basic/plugins/ckplayer/ckplayer.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/static/front/ahyz/basic/plugins/Swiper-3.4.2/css/swiper.min.css" />
+		<script type="text/javascript" src="/static/front/ahyz/basic/plugins/Swiper-3.4.2/js/swiper.min.js"></script>
+		<script>
+			// var scrollLoadMore;
+			$(function() {
+				function bookScroll() {
+					try {
+						if ($(".book-scroll")) {
+							var $book = $(".book-scroll");
+							var $bookWrap = $(".book-scroll-wrap>ul");
+							var $bookPrev = $book.find(".btn-prev");
+							var $bookNext = $book.find(".btn-next");
+							var $bookItem = $bookWrap.find("li");
+							var bookCount = $bookItem.length;
+							var pageNum = 3;
+							var cur = 0;
+							$($bookItem[0]).addClass('open');
+							var play = function() {
+								var $cur = $($bookItem[cur]);
+								$cur.animate({
+									width: 650
+								}, 500, function() {
+									$cur.addClass('open');
+								});
+								$cur.siblings('li.open').stop().animate({
+									width: 265
+								}, 500, function() {
+									$cur.siblings('li.open').removeClass('open');
+								});
+								if (cur - pageNum >= -1) {
+									$bookWrap.stop().animate({
+										"margin-left": (cur - pageNum + 2) * -275
+									}, 500);
+								} else {
+									$bookWrap.stop().animate({
+										"margin-left": 0
+									}, 500);
+								}
+
+							}
+							$bookItem.on("click", function() {
+								cur = $(this).index();
+								play();
+							});
+							$bookPrev.on("click", function() {
+								cur = cur - 1 < 0 ? 0 : cur - 1;
+								play();
+							});
+							$bookNext.on("click", function() {
+								cur = cur + 1 >= bookCount ? 0 : cur + 1;
+								play();
+							});
+
+						}
+					} catch (e) {}
+				}
+
+				bookScroll();
+
+			});
+
+
+
+			$(window).load(function() {
+				function animateDate(parent, child_html, _span_len, _gmrx_index, direction) {
+					//姣忔鐐瑰嚮閮介渶閲嶆柊鑾峰彇left鍊�
+					var cur_left = parseInt(parent.parent().offset().left * 1 - parent.offset().left * 1);
+					for (let index = 0; index < _gmrx_index; index++) {
+						child_html += '>span:last-of-type'
+					}
+					this.cur_obj = parent.find(child_html);
+					//鑾峰彇褰撳墠span涓嬫湀鏁扮殑鏁伴噺
+					this.span_len = this.cur_obj.find(">span").length * 1 - 1;
+
+					if (direction == 'next') {
+						if (_gmrx_index > 1 && _gmrx_index <= _span_len) {
+							if (_gmrx_index == _span_len) {
+								parent.animate({
+									"left": "-" + (span_len1 * 50 - parent.parent().width() + (span_len + 1) * 60 - 10) + "px"
+								}, 300);
+
+							} else {
+								parent.animate({
+									"left": "-" + (cur_left + 175 + this.span_len * 60) + "px"
+								}, 300);
+							}
+
+						} else {
+							_gmrx_index = _span_len - 1;
+
+						}
+					} else if (direction == 'prev') {
+						if (_gmrx_index > 1 && _gmrx_index < _span_len) {
+							parent.animate({
+								"left": "-" + (cur_left + 175 - this.span_len * 60) + "px"
+							}, 300);
+						} else {
+							parent.animate({
+								"left": "0"
+							}, 300);
+							_gmrx_index = 1;
+						}
+					}
+
+				}
+
+
+				// scrollTop();
+
+			});
+		</script>
+	<!--飘窗开始
+	<style>
+		#roll {
+			position: fixed; /*fixed实现绝对定位*/
+			width: 400px;
+			height: 270px;
+			z-index: 20000;
+			cursor: pointer;
+			background-color: #fff;
+			background-position: center;
+			background-repeat: no-repeat;
+			background:red;
+			
+			background-size:100% 100%;
+		}
+		#roll .txt{
+			color:#fff;
+			margin-top:20px;
+		}
+		#roll .title{
+			text-align:center;
+			font-size:20px;
+			font-weight:bold;
+			margin-top:25px;
+			margin-bottom:10px;
+		}
+		#roll .con_text{
+			
+			font-weight:bold;
+			font-size:18px;
+			padding:0 20px;
+			box-sizing:border-box;
+			margin-top:5px;
+			
+		}
+		#roll .date{
+			float:right;
+			margin-top:30px;
+			font-weight:bold;
+			margin-right:30px;
+		}
+	</style>
+	-->
+<!--
+	<script type="text/javascript">
+		$(function(){
+			var ggRoll = {                                          //创建对象直接量
+					roll: $("#roll")[0],          //获取id属性为roll的对象
+					speed: 20,                                      //飘动速度，即为定时器函数多长时间执行一次
+					statusX: 1,                                     //规定每执行一次函数，left属性值变化的幅度
+					statusY: 1,                                     //规定每执行一次函数，top属性值变化的幅度
+					x: 100,                                         //规定初始状态下left属性的值
+					y: 300,                                         //规定初始状态下top属性的值
+					//差值用来测算left属性值的极限
+					winW: document.documentElement.clientWidth-document.getElementById("roll").offsetWidth, 
+					//差值用来测算top属性值的极限
+					winH: document.documentElement.clientHeight-document.getElementById("roll").offsetHeight, 
+					//声明函数
+					Go: function () {
+						//设置div的left属性值
+						this.roll.style.left = this.x + 'px';
+						//设置div的top属性值
+						this.roll.style.top = this.y + 'px';
+						//如果statusX=1则每次减少1px,否则减少1px
+						this.x = this.x + (this.statusX ? -1 : 1)
+						//如果left属性值小于0，也就是div要超出左边界了，就将statusX设置为0
+						if (this.x < 0) { this.statusX = 0 }
+						//如果top属性值大于winW，也就是div要超出右边界了，就将statusX设置为1
+						if (this.x > this.winW) { this.statusX = 1 }
+						this.y = this.y + (this.statusY ? -1 : 1)
+						if (this.y < 0) { this.statusY = 0 }
+						if (this.y > this.winH) { this.statusY = 1 }
+					}
+				};
+			var interval = setInterval(function(){
+				ggRoll.Go();
+			},ggRoll.speed);
+			$("#roll").on('mouseenter',function(){
+				clearInterval(interval);
+			});
+			$("#roll").on('mouseleave',function(){
+				interval = setInterval(function(){
+					ggRoll.Go();
+				},ggRoll.speed);
+			});
+		})
+	</script>
+
+
+
+	<a href="#" target="_blank">
+	<div id="roll">
+
+		<div class="txt">
+		<h3 style="text-align:center;display:block;">声明</h3>
+		<p class="con_text">各位考生、家长：</p>
+		<p class="con_text" style="font-size:16px;text-indent:2em;">我校招生坚持公开、公平、阳光招生，全程接受上级主管部门、社会、考生监督。文理科投档线以安徽省教育招生考试院公布为准。请广大考生、家长注意甄别，切勿相信谣言。招生咨询电话：0551-62860000</p>
+			<p class="con_text" style="text-align:right;">特此声明！</p>
+			<p class="con_text" style="text-align:right;">安徽医学高等专科学校招生办</p>
+		</div>
+	</div>
+	</a>
+-->	
+
+			<style>
+				.piaochuang{
+					display: block;
+					width: 200px;
+					height: 150px;
+					position: fixed;
+					z-index: 11111;
+				}
+				.piaochuang img{
+					width: 100%;
+					height: 100%;
+				}
+				.piaochuang {
+				/* Firefox */
+				-webkit-animation: rotate 5s linear infinite;
+				-moz-animation: rotate 5s linear infinite;
+				/* Safari 和 Chrome */
+				-o-animation: rotate 5s linear infinite;
+				animation: rotate 5s linear infinite;
+				/* Opera */
+			}
+	
+			@keyframes rotate {
+				0% {
+					/* Firefox */
+					-webkit-transform: rotate(0deg);
+					/* IE 9 */
+					-moz-transform: rotate(0deg);
+					-ms-transform: rotate(0deg);
+					/* Safari 和 Chrome */
+					-o-transform: rotate(0deg);
+					transform: rotate(0deg);
+					/* Opera */
+				}
+	
+				100% {
+					/* Firefox */
+					-webkit-transform: rotate(0deg);
+					/* IE 9 */
+					-moz-transform: rotate(0deg);
+					-ms-transform: rotate(0deg);
+					/* Safari 和 Chrome */
+					-o-transform: rotate(0deg);
+					transform: rotate(0deg);
+					/* Opera */
+				}
+			}
+			</style>
+	</head>
+	<body>
+	<script id="eda_bar_script" src="https://answer.eol.cn/school/pc/school1795.js"></script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+			
+			
+				
+		
+
+		
+		
+		
+		
+		<div class="wrapper page_index">
+			<div class="header">
+				<div class="h_banner">
+					<div class="bg"></div>
+					<div class="cover">
+						<div class="l_con">
+							<div class="logo"></div>
+							<div class="right">
+								
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="nav_bar">
+					<div class="l_con">
+						<ul class="navs">
+							
+								<li>
+									<a href="/" target="">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home0.png" alt="">
+										<span>网站首页</span>
+									</a>
+									
+								</li>
+							
+								<li>
+									<a href="http://www.ahyz.edu.cn/xxgk/xxjj.htm" target="">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home1.png" alt="">
+										<span>学校概况</span>
+									</a>
+									
+								</li>
+							
+								<li>
+									<a href="/static/front/ahyz/basic/html_web/zyjs_list.html" target="_blank">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home2.png" alt="">
+										<span>招生专业</span>
+									</a>
+									
+								</li>
+							
+								<li>
+									<a href="/f/newsCenter/movies/267d315cb24a4bbe95191b65640f1634" target="_blank">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home3.png" alt="">
+										<span>校园视频</span>
+									</a>
+									
+								</li>
+							
+								<li>
+									<a href="http://ahyz.bysjy.com.cn/" target="_blank">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home4.png" alt="">
+										<span>就业信息</span>
+									</a>
+									
+								</li>
+							
+								<li>
+									<a href="/f/newsCenter/articles/3b03baf9ef814e96b848b2331b55a536" target="">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home5.png" alt="">
+										<span>本科招生</span>
+									</a>
+									
+								</li>
+							
+								<li>
+									<a href="/f/newsCenter/article/9e668041c8204357b7de9d9bb031ffb4" target="">
+										<img src="/static/front/ahyz/basic/images/change_doc/hb/home6.png" alt="">
+										<span>联系我们</span>
+									</a>
+									
+								</li>
+							
+						</ul>
+						<!-- <script type="text/javascript">
+							$('.header .nav_bar .navs>li').css('width','auto');
+							var container_width = $('.header .nav_bar .l_con').width();
+							var count_width = 0;
+							var count_num = 0;
+							$('.header .nav_bar .navs>li').each(function(){
+								count_width += $(this).width();
+								count_num ++ ;
+							});
+							var h_padd = parseInt((container_width - count_width)/count_num/2);
+							h_padd = h_padd > 85? 85:h_padd
+							$('.header .nav_bar .navs li').css({
+								'padding-left' : h_padd,
+								'padding-right' : h_padd
+							});
+						</script> -->
+					</div>
+				</div>
+			</div>
+
+			
+			
+
+			
+				<div class="swiper-container banner">
+					<ul class="swiper-wrapper">
+						
+							<li class="swiper-slide">
+								<a href="https://zsw.ahyz.edu.cn/f/newsCenter/movie/5e15d3f281e14ad1beb2b5c2aa8449a2">
+									<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/lbt/2026/07/%E6%88%91%E7%9A%84%E7%99%BD%E5%A4%A7%E8%A4%82(4).jpg" />
+								</a>
+							</li>
+						
+							<li class="swiper-slide">
+								<a href="https://zsw.ahyz.edu.cn/f/newsCenter/movie/785bc91d6c9842e390926fcc414cddcb">
+									<img src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/lbt/2026/06/2026%E9%AB%98%E8%80%83%E5%8A%A0%E6%B2%B9(2).png" />
+								</a>
+							</li>
+						
+							<li class="swiper-slide">
+								<a href="https://zsw.ahyz.edu.cn/f/newsCenter/movie/785bc91d6c9842e390926fcc414cddcb">
+									<img src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/lbt/2025/06/%E8%BD%AE%E6%92%AD%E5%9B%BE(1).jpg" />
+								</a>
+							</li>
+						
+							<li class="swiper-slide">
+								<a href="https://zsw.ahyz.edu.cn/f/newsCenter/movie/44fd8f0028b1419cb58c5f524e52ba94">
+									<img src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/lbt/2026/06/QQ20260604-103657(1).png" />
+								</a>
+							</li>
+						
+							<li class="swiper-slide">
+								<a href="javascript:void(0);">
+									<img src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/lbt/2025/06/%E8%BD%AE%E6%92%AD%E5%9B%BE3.jpg" />
+								</a>
+							</li>
+						
+					</ul>
+					<div class="pagination"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+					<script type="text/javascript">
+						$(function() {
+							var swiper = new OldSwiper('.banner.swiper-container', {
+								slidesPerView: 1,
+								loop: true,
+								autoplay: 5000,
+								pagination: '.banner .pagination'
+							});
+							$('body').on('click', '.banner .pagination .swiper-pagination-switch', function() {
+								var len = $(this).prevAll('.swiper-pagination-switch').length;
+								swiper.swipeTo(len, 700, true);
+							});
+						});
+					</script>
+				</div>
+			
+
+			<div class="fun_menu">
+				<div class="container">
+					<ul>
+						<li class="l1">
+							<a href="/f/newsCenter/movies/267d315cb24a4bbe95191b65640f1634">
+								<div class="img"></div>
+								<div class="txt">我的大学</div>
+							</a>
+						</li>
+						<li class="l2">
+							<a href="/static/front/ahyz/basic/html_web/zsjh.html">
+								<div class="img"></div>
+								<div class="txt">招生计划</div>
+							</a>
+						</li>
+
+						<li class="l3">
+							<a href="/f/newsCenter/articles/59873326a5484bcda6034e51ce90342e">
+								<div class="img"></div>
+								<div class="txt">招生政策</div>
+							</a>
+						</li>
+						<li class="l4">
+							<a href="/static/front/ahyz/basic/html_web/lnfs.html">
+								<div class="img"></div>
+								<div class="txt">历年分数</div>
+							</a>
+						</li>
+						<li class="l5">
+							<a href="http://ahyz.enroll.net.cn/zs_mobile/index.html#/crEnrollResult" target="_blank">
+								<div class="img"></div>
+								<div class="txt">录取查询</div>
+							</a>
+						</li>
+						<li class="l6">
+							<a href="https://answer.eol.cn/fillmess/index?id=1795&source=schoolwpp">
+								<div class="img"></div>
+								<div class="txt">智能咨询</div>
+							</a>
+						</li>
+						<li class="l7">
+							<a href="/f/newsCenter/articles/3a107bec255f468c958cb16fd8942e95">
+								<div class="img"></div>
+								<div class="txt">分类招生</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function() {
+					$('body').on('click', '.sec_3 .tab_tit .item', function() {
+						if ($(this).hasClass('active')) {
+							return false;
+						}
+						$(this).parent().find('.active').removeClass('active');
+						var ind = $(this).addClass('active').index();
+						console.log(ind)
+
+						if (ind == 0) {
+							$(this).parent().siblings('.tab_page').children('li').hide().eq(ind).fadeIn();
+						} else {
+							$(this).parent().siblings('.tab_page').children('li').hide().eq(ind - 1).fadeIn();
+						}
+					});
+				});
+			</script>
+			<!-- <div class="box_bott"> -->
+			<div class="sec_3">
+				<div class="container">
+					
+					
+					
+						
+						<div class="module_1">
+							<div class="m_header">
+								<div class="m_tit">
+									新闻资讯
+								</div>
+								<a href="/f/newsCenter/articles/e5daa085babd4cd49779e61acee5e773" class="see_more">MORE</a>
+							</div>
+							<div class="m_con">
+								<a class="new_strong" href="https://mp.weixin.qq.com/s/Xp5DpSWsyQKLRG4N2cczRw">
+									
+										
+											<div class="img" style="background-image: url('/static/front/ahyz/basic/images/cms/index/new_default.png');"></div>
+										
+										
+									
+									<div class="bott_content" style="overflow: hidden; word-break: normal; word-wrap: break-word; max-width: 100%">录取快讯第6期 | 安徽第二医学院完成山东省专科批录取</div>
+								</a>
+								<ul class="list">
+									
+										<a href="https://mp.weixin.qq.com/s/Xp5DpSWsyQKLRG4N2cczRw">
+											<li>
+												<div class="tit">
+													<span class="title">录取快讯第6期 | 安徽第二医学院完成山东省专科批录取</span>
+													<span class="xian"></span>
+													<span class="date">
+														2026-07-28</span>
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/YpuPqTBZPOwauY92SzvFkw">
+											<li>
+												<div class="tit">
+													<span class="title">校领导调研指导2026年招生录取工作</span>
+													<span class="xian"></span>
+													<span class="date">
+														2026-07-27</span>
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/26Pi4axdWKm3mN_ouaNfOw">
+											<li>
+												<div class="tit">
+													<span class="title">关于2026年安徽省农村订单定向免费培养医学生签订协议的通知（安徽专科提前批）</span>
+													<span class="xian"></span>
+													<span class="date">
+														2026-07-27</span>
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/g6KgUFuKO2geTuLbZB5AGA">
+											<li>
+												<div class="tit">
+													<span class="title">安徽省普通高职（专科）批志愿填报今日开启！安二医招生计划一览</span>
+													<span class="xian"></span>
+													<span class="date">
+														2026-07-25</span>
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/YCIlEXMcWzQKL8Pmt_7tug">
+											<li>
+												<div class="tit">
+													<span class="title">录取快讯第5期 | 安徽第二医学院完成安徽省本科批录取</span>
+													<span class="xian"></span>
+													<span class="date">
+														2026-07-24</span>
+												</div>
+											</li>
+										</a>
+									
+								</ul>
+							</div>
+						</div>
+					
+					
+						
+						<div class="module_2">
+							<div class="m_header">
+								<div class="m_tit">
+									招生政策
+								</div>
+								<a href="/f/newsCenter/articles/59873326a5484bcda6034e51ce90342e" class="see_more">MORE</a>
+							</div>
+							<div class="m_con">
+								<ul class="list">
+									
+										<a href="https://mp.weixin.qq.com/s/33dNj5cU_i7M1FV8095BIw">
+											<li>
+												<div class="date">
+													<div class="day">
+														22
+													</div>
+													<div class="yy_mm">
+														2026.05
+													</div>
+												</div>
+												<div class="tit">
+													安徽第二医学院2026年招生章程
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/p8rCgSgCIOzCrYiUxqjgNg">
+											<li>
+												<div class="date">
+													<div class="day">
+														20
+													</div>
+													<div class="yy_mm">
+														2026.03
+													</div>
+												</div>
+												<div class="tit">
+													2026年普通高校专升本招生章程
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/AcvYjeT69f1H8bSFbxq-QQ">
+											<li>
+												<div class="date">
+													<div class="day">
+														11
+													</div>
+													<div class="yy_mm">
+														2026.03
+													</div>
+												</div>
+												<div class="tit">
+													2026年分类考试招生章程
+												</div>
+											</li>
+										</a>
+									
+										<a href="/f/newsCenter/article/7f0a41760cc24c7fb702c9b92ce90703">
+											<li>
+												<div class="date">
+													<div class="day">
+														19
+													</div>
+													<div class="yy_mm">
+														2025.06
+													</div>
+												</div>
+												<div class="tit">
+													安徽第二医学院2025年招生政策问答
+												</div>
+											</li>
+										</a>
+									
+										<a href="https://mp.weixin.qq.com/s/4kp09fiz4CSOG5ZpBW6U9Q">
+											<li>
+												<div class="date">
+													<div class="day">
+														19
+													</div>
+													<div class="yy_mm">
+														2025.05
+													</div>
+												</div>
+												<div class="tit">
+													安徽医学高等专科学校2025年招生章程
+												</div>
+											</li>
+										</a>
+									
+								</ul>
+							</div>
+						</div>
+					
+				</div>
+			</div>
+
+			<!-- <div class="sec_4">
+				<div class="container">
+					<div class="m_header">
+						<div class="m_tit">
+							特殊类招生
+						</div>
+						<a href="/f/newsCenter/articles/3a107bec255f468c958cb16fd8942e95" class="see_more">MORE</a>
+					</div>
+					<div class="list">
+						<li>
+							<div class="img_box"><img src="/static/front/ahyz/basic/images/cms/index/teshu_1.png" alt=""></div>
+							<div class="right_box">
+								<div class="sanjiao"></div>
+								<a href="/f/newsCenter/articles/3a107bec255f468c958cb16fd8942e95">
+									<img src="/static/front/ahyz/basic/images/cms/index/icon_tslzs_1.png" alt="">
+									<p>分类招生</p>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="img_box"><img src="/static/front/ahyz/basic/images/cms/index/teshu_2.png" alt=""></div>
+							<div class="right_box">
+								<div class="sanjiao"></div>
+								<a href="/f/newsCenter/articles/8c225f5af3244075bc30c4117dfcfec0">
+									<img src="/static/front/ahyz/basic/images/cms/index/icon_tslzs_2.png" alt="">
+									<p>社会扩招</p>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="img_box2"><img src="/static/front/ahyz/basic/images/cms/index/teshu_3.png" alt=""></div>
+							<div class="left_box">
+								<div class="sanjiao" style="right: -5px;left: none;"></div>
+								<a href="/f/newsCenter/articles/60bda611d4374162878d14f28480cddc">
+									<img src="/static/front/ahyz/basic/images/cms/index/icon_tslzs_3.png" alt="">
+									<p>五年制高职</p>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div class="img_box2"><img src="/static/front/ahyz/basic/images/cms/index/teshu_4.png" alt=""></div>
+							<div class="left_box">
+								<div class="sanjiao" style="right: -5px;left: none;"></div>
+								<a href="/f/newsCenter/articles/8c34c21b08d347958cd21659225e61e9">
+									<img src="/static/front/ahyz/basic/images/cms/index/icon_tslzs_4.png" alt="">
+									<p>专升本招生</p>
+								</a>
+							</div>
+						</li>
+					</div>
+				</div>
+			</div> -->
+			
+			
+				<div class="sec_5">
+					<div class="container">
+						<div class="m_header">
+							<div class="m_tit">
+								学院介绍
+							</div>
+							<a href="/static/front/ahyz/basic/html_web/zyjs_list.html" class="see_more">MORE</a>
+						</div>
+						<div class="swiper-container yxzy">
+							<ul class="swiper-wrapper">
+								
+									<li class="swiper-slide">
+										<a href="/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=c0619321e4514c7fa717540b3af3316d">
+											
+												
+												
+													<div class="img" style="background-image: url('/userfiles/95d9eb944c1e41908923a0c9f23797df/images/major/majorGuideXy/image/2025/04/742E488145ABAD2C9D9255341AC1199E.jpg');"></div>
+												
+											
+											<div class="txt">临床医学院（全科医学院）</div>
+										</a>
+									</li>
+								
+									<li class="swiper-slide">
+										<a href="/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=a89def8f0a4c4d25b8f91b582f008285">
+											
+												
+												
+													<div class="img" style="background-image: url('/userfiles/c0189778331e45d6970d48e0ee83a870/images/major/majorGuideXy/image/2022/06/QQ%E6%88%AA%E5%9B%BE20220610150001.jpg');"></div>
+												
+											
+											<div class="txt">口腔医学院(附属口腔医院）</div>
+										</a>
+									</li>
+								
+									<li class="swiper-slide">
+										<a href="/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=513215e6b7564cca9f2825d6a964f462">
+											
+												
+												
+													<div class="img" style="background-image: url('/userfiles/c0189778331e45d6970d48e0ee83a870/images/major/majorGuideXy/image/2022/06/QQ%E6%88%AA%E5%9B%BE20220610150423.jpg');"></div>
+												
+											
+											<div class="txt">护理学院</div>
+										</a>
+									</li>
+								
+									<li class="swiper-slide">
+										<a href="/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=c668617f43f441c9a28f755a821e71fb">
+											
+												
+												
+													<div class="img" style="background-image: url('/userfiles/217252c20e534424ba7a50d6934f07ce/images/major/majorGuide/2022/03/image(3).png');"></div>
+												
+											
+											<div class="txt">药学院</div>
+										</a>
+									</li>
+								
+									<li class="swiper-slide">
+										<a href="/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=0ce3c6e19fa84028ac254cba464e6aae">
+											
+												
+												
+													<div class="img" style="background-image: url('/userfiles/c0189778331e45d6970d48e0ee83a870/images/major/majorGuideXy/image/2022/06/QQ%E6%88%AA%E5%9B%BE20220610152809.jpg');"></div>
+												
+											
+											<div class="txt">医学技术学院</div>
+										</a>
+									</li>
+								
+									<li class="swiper-slide">
+										<a href="/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=846f5599a9684e0e8edfc84398c19b94">
+											
+												
+												
+													<div class="img" style="background-image: url('/userfiles/c0189778331e45d6970d48e0ee83a870/images/major/majorGuideXy/image/2022/01/%E5%85%AC%E5%8D%AB%E5%AD%A6%E9%99%A2logo.jpg');"></div>
+												
+											
+											<div class="txt">公共卫生与健康管理学院</div>
+										</a>
+									</li>
+								
+
+							</ul>
+
+						</div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</div>
+			
+			<script type="text/javascript">
+				var swiper = new OldSwiper('.sec_5 .swiper-container', {
+					slidesPerView: 4,
+					spaceBetween: 20
+				});
+				$('.sec_5 .swiper-button-prev').click(function() {
+					swiper.swipePrev();
+				});
+				$('.sec_5 .swiper-button-next').click(function() {
+					swiper.swipeNext();
+				});
+			</script>
+
+			
+			
+			
+			
+			
+			<div class="sec_6">
+				<div class="container">
+					<div class="m_header">
+						<div class="m_tit">
+							视听安二医
+						</div>
+						<a href="/f/newsCenter/movies/267d315cb24a4bbe95191b65640f1634" class="see_more see_a">MORE</a>
+					</div>
+					<div class="module_2">
+						<div class="m_con">
+							<div class="video swiper-container">
+								<ul class="swiper-wrapper">
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/5e15d3f281e14ad1beb2b5c2aa8449a2">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E6%88%91%E7%9A%84%E7%99%BD%E5%A4%A7%E8%A4%82.jpg" alt="" data-urltext="/f/newsCenter/movie/5e15d3f281e14ad1beb2b5c2aa8449a2">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/5e15d3f281e14ad1beb2b5c2aa8449a2"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/eb0369f7fa0a4b8bbf006ea11d62c481">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E4%B8%8B%20%E5%B0%81%E9%9D%A2.png" alt="" data-urltext="/f/newsCenter/movie/eb0369f7fa0a4b8bbf006ea11d62c481">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/eb0369f7fa0a4b8bbf006ea11d62c481"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/ff4648b2b4034cd19807e2c344d192fa">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E4%B8%8A%20%E5%B0%81%E9%9D%A2.png" alt="" data-urltext="/f/newsCenter/movie/ff4648b2b4034cd19807e2c344d192fa">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/ff4648b2b4034cd19807e2c344d192fa"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/3303092fde8d45b38a8efc11187cf5b7">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E7%94%9F%E7%89%A9%E5%88%B6%E8%8D%AF%E5%9B%BE%E7%89%87.png" alt="" data-urltext="/f/newsCenter/movie/3303092fde8d45b38a8efc11187cf5b7">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/3303092fde8d45b38a8efc11187cf5b7"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/0093ba7347d8403db4ab72a7a557d320">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E9%A2%84%E9%98%B2%E5%8C%BB%E5%AD%A6%E5%9B%BE%E7%89%87.png" alt="" data-urltext="/f/newsCenter/movie/0093ba7347d8403db4ab72a7a557d320">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/0093ba7347d8403db4ab72a7a557d320"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/1bd62243bb0e456d8fe21605e8bb4964">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E7%9C%BC%E8%A7%86%E5%85%89%E5%AD%A6.png" alt="" data-urltext="/f/newsCenter/movie/1bd62243bb0e456d8fe21605e8bb4964">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/1bd62243bb0e456d8fe21605e8bb4964"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/2490b162e36346e788118b06b7b29028">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2026/07/%E5%BA%B7%E5%A4%8D%E6%B2%BB%E7%96%97%E5%AD%A6.png" alt="" data-urltext="/f/newsCenter/movie/2490b162e36346e788118b06b7b29028">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/2490b162e36346e788118b06b7b29028"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/785bc91d6c9842e390926fcc414cddcb">
+												
+													
+													
+														<img src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/video/poster/2026/06/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260602174537_187_868.png" alt="" data-urltext="/f/newsCenter/movie/785bc91d6c9842e390926fcc414cddcb">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/785bc91d6c9842e390926fcc414cddcb"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/44fd8f0028b1419cb58c5f524e52ba94">
+												
+													
+													
+														<img src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/video/poster/2026/06/QQ20260604-095928.png" alt="" data-urltext="/f/newsCenter/movie/44fd8f0028b1419cb58c5f524e52ba94">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/44fd8f0028b1419cb58c5f524e52ba94"></i>
+											</a>
+										</li>
+									
+										<li class="one item_0 swiper-slide">
+											<a href="/f/newsCenter/movie/a646a986fc554e9a8d275d0d09e1d3c3">
+												
+													
+													
+														<img src="/userfiles/4c6f6fff34cd42308dd448db642c0c95/images/cms/video/poster/2025/12/%E8%8D%AF%E5%AD%A6.png" alt="" data-urltext="/f/newsCenter/movie/a646a986fc554e9a8d275d0d09e1d3c3">
+													
+												
+												<i class="icon_play" data-urltext="/f/newsCenter/movie/a646a986fc554e9a8d275d0d09e1d3c3"></i>
+											</a>
+										</li>
+									
+								</ul>
+							</div>
+							<script type="text/javascript">
+								$(function() {
+									var swiper = new Swiper('.video.swiper-container', {
+										slidesPerView: 1,
+										loop: true,
+										autoplay: 5000,
+									});
+								});
+							</script>
+						</div>
+					</div>
+					<div class="module_1">
+						<div class="m_con">
+							
+								
+								<div class="photo swiper-container">
+									<ul class="swiper-wrapper">
+										<div class="con plugs_images" id="imgsListPlace">
+										
+										</div>
+										<div id="content" style="display: none;">
+											<p><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/DJI_0569.jpg" style="width: 2048px; height: 1364px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/DJI_0558.jpg" style="width: 2048px; height: 1364px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/DJI_0585.jpg" style="width: 2048px; height: 1364px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/DJI_0589.jpg" style="width: 2048px; height: 1364px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/J91A5183.JPG" style="width: 2048px; height: 1365px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/J91A4956.JPG" style="width: 2048px; height: 1365px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/%E7%BB%BC%E5%90%88%E6%A5%BC.JPG" style="width: 2048px; height: 1365px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/J91A5007.JPG" style="width: 2048px; height: 1365px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/01/%E5%8D%8E%E4%BD%97%E5%83%8F.JPG" style="width: 2048px; height: 1365px;" /></p>
+
+<p><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2022/03/9CC58B3A28BD839889AA549D43D97B53.png" style="width: 441px; height: 588px;" /></p>
+
+<p><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%891.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%896.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%897.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%898.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%8910.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%8911.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%8913.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E9%A3%8E%E5%85%8914.jpg" style="width: 1920px; height: 1080px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E9%A3%8E%E5%85%8916.jpg" style="width: 2048px; height: 1152px;" /><img alt="" src="/userfiles/c0189778331e45d6970d48e0ee83a870/images/cms/article/2023/04/%E6%A0%A1%E5%9B%AD%E9%A3%8E%E5%85%895.jpg" style="width: 2048px; height: 1152px;" /></p>
+										</div>
+										
+									</ul>
+								</div>
+							
+								<script type="text/html" id="imgsList">
+									{{if !isEmpty(list)}}
+										{{each list}}
+											{{if $index}}
+													<li class="swiper-slide">
+															<a href="/f/newsCenter/article/e93c5b157cfa410e9166a456e53cbf7f">
+															<img src="{{$value.src}}" alt="">
+															</a>
+													</li>
+											{{/if}}
+										{{/each}}		
+									{{/if}}
+								</script>
+								<script>
+									var content = $('#content').html();
+									var imgList = [];
+									var $imgList = $('<div/>')
+										.html(content)
+										.find('img');
+									$imgList.each(function() {
+										var obj = {};
+										obj.src = $(this).attr('src');
+										obj.content = $(this).attr('alt');
+										imgList.push(obj);
+									});
+									tplt.draw('imgsList', {
+										list: imgList
+									});
+								</script>
+							<script type="text/javascript">
+								$(function() {
+									var swiper = new Swiper('.photo.swiper-container', {
+										slidesPerView: 1,
+										loop: true,
+										autoplay: 5000,
+									});
+								});
+							</script>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function() {
+					$('body').on('click', '.sec_6 .list_tab li', function() {
+						if ($(this).hasClass('active')) {
+							return false;
+						}
+						$(this).parent().find('.active').removeClass('active');
+						var ind = $(this).addClass('active').index();
+						console.log(ind)
+						$(this).children('.con').css('display', 'block');
+						$(this).siblings('li').children('.con').css('display', 'none');
+						if (ind > 0) {
+							$(this).children('.con').css('left', -122 * ind + 'px');
+						}
+					});
+					$('body').on('click', '.sec_6 .list_tab li .con div img', function() {
+						console.log($(this).data("urltext"))
+						window.location.href = $(this).data("urltext");
+					});
+					$('body').on('click', '.sec_6 .list_tab li .con div .icon_play', function() {
+						console.log($(this).data("urltext"))
+						window.location.href = $(this).data("urltext");
+					});
+				});
+			</script>
+			<div class="footer">
+				<img src="/static/front/ahyz/basic/images/change_doc/hb/footer_bg.png" alt="" class="footer_bg">
+				<img src="/static/front/ahyz/basic/images/change_doc/hb/logo_footer.png" alt="" class="logo_footer">
+				<div class="solid"></div>
+				<div class="info">
+					<div class="l_con">
+						<!-- <div class="chunk_1">
+								<div class="logo"></div>
+							</div> -->
+						<div class="chunk_2">
+							<div class="tit">常用链接</div>
+							<div class="con">
+								<div class="list_1">
+									
+										<a href="http://www.ahyz.edu.cn">安徽第二医学院官网</a>
+									
+										<a href="http://wjw.ah.gov.cn/">安徽省卫生健康委员会</a>
+									
+										<a href="http://jyt.ah.gov.cn/">安徽省教育厅</a>
+									
+										<a href="http://ahyz.bysjy.com.cn/">安徽第二医学院就业信息网</a>
+									
+										<a href="http://www.ahzsks.cn">安徽省教育招生考试院</a>
+									
+								</div>
+							</div>
+						</div>
+						<div class="chunk_5">
+							   <div class="tit">学院导航与专业咨询</div>
+							   <div class="con" id="fLinksPlace2">
+								<div class="list_1">
+								 
+								  <a href="http://zsw.ahyz.edu.cn/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=c0619321e4514c7fa717540b3af3316d">临床医学院：0551-63818630</a>
+								 
+								  <a href="http://zsw.ahyz.edu.cn/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=a89def8f0a4c4d25b8f91b582f008285">口腔医学院：0551-63862275</a>
+								 
+								  <a href="http://zsw.ahyz.edu.cn/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=0ce3c6e19fa84028ac254cba464e6aae">医学技术学院：0551-63818295</a>
+								 
+								  <a href="http://zsw.ahyz.edu.cn/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=513215e6b7564cca9f2825d6a964f462">护理学院：0551-63818306</a>
+								 
+								  <a href="http://zsw.ahyz.edu.cn/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=846f5599a9684e0e8edfc84398c19b94">公共卫生与健康管理学院：0551-63862329</a>
+								 
+								  <a href="http://zsw.ahyz.edu.cn/static/front/ahyz/basic/html_web/zyjs_xy.html?xyId=c668617f43f441c9a28f755a821e71fb">药学院：0551- 63818285</a>
+								 
+								</div>
+							   </div>
+						</div>
+						<div class="chunk_3">
+							<div class="tit">联系方式</div>
+							<div class="con">
+								
+									<span class="item_1">
+										电话：
+										0551-62860000      0551-62861790
+									</span><br>
+								
+								
+								
+								
+									<span class="item_4">
+										地址：
+										合肥市芙蓉路632号/芜湖路387号/新桥国际产业园迎宾大道与寿州大道交口
+									</span><br>
+								
+							</div>
+						</div>
+						<div class="chunk_4">
+							<div class="code">
+								<img src="/static/front/ahyz/basic/images/change_doc/hb/code_wb.png" alt="" class="img">
+								<div class="txt">扫一扫关注招办微信公众号</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bottom">
+					<span class="copyright">
+						版权所有：安徽第二医学院  Copyright  &copy; All rights reserved.皖ICP备:11004322号-1&nbsp; &nbsp;
+					</span>&nbsp;&nbsp;
+					
+				</div>
+			</div>
+			<!-- </div> -->
+		</div>
+	</body>
+</html>

@@ -1,0 +1,285 @@
+{
+  "generated_at": "2026-08-15T05:47:05+00:00",
+  "row_count": 30,
+  "rows": [
+    {
+      "canonical_plan_count": 120,
+      "major": "学前教育",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-0cea55c4-0162-5c49-adf4-b170df56aca6",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "商务英语",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-a7bf120a-dc4a-5ec9-aced-e4651a795afe",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "电子信息工程",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-cf5f58a7-03e9-528e-9334-2c2054574cb4",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 140,
+      "major": "药物制剂",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-68ee766e-a958-5e4d-908d-864ee94290aa",
+      "official_plan_count": 140,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "人力资源管理",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-227f8508-ec1f-5fc5-b9b6-43ba177e5400",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "网络与新媒体",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-b367c94d-0b02-55e7-b8ec-4af69600c0ee",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "通信工程",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-02b45d53-3476-53d0-b88a-b74856070dea",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "化学工程与工艺",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-19b89cef-9ee2-5b13-8029-ec7d83c2e38b",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "软件工程",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-68a7c64f-fe94-5123-a3db-c94792c44787",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "数据科学与大数据技术",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-f76c6c80-b9d0-5782-a18b-0ea301825262",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "互联网金融",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-3999de16-3537-573e-9704-e82f3cb0409f",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "生物制药",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-af318d31-e77c-53ab-be9f-571d14f8bc96",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "经济统计学",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-a16f69bd-4821-507f-b34c-12e9fe334e0e",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "新能源材料与器件",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-69e46ff6-0cb7-5333-8024-1be76ba32d9e",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "材料科学与工程",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-73444fc2-6c3c-55cc-ba0f-e19ab7460a72",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 60,
+      "major": "视觉传达设计",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-43881998-59b5-5099-8b34-4886838b1331",
+      "official_plan_count": 60,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 30,
+      "major": "服装与服饰设计",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-6ea19789-72a7-5a48-aeaa-57ccaa31b7c1",
+      "official_plan_count": 30,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 30,
+      "major": "动画",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-466442ff-30db-54dc-838c-f7fca01e0584",
+      "official_plan_count": 30,
+      "status": "consistent",
+      "training_institution": "合肥师范学院"
+    },
+    {
+      "canonical_plan_count": 40,
+      "major": "财务管理",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-e230a334-b7cd-57ef-863f-cf2565ef45d5",
+      "official_plan_count": 40,
+      "status": "consistent",
+      "training_institution": "安徽工业经济职业技术学院"
+    },
+    {
+      "canonical_plan_count": 40,
+      "major": "市场营销",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-bd3de362-2399-561b-a7c9-2e5227676c3a",
+      "official_plan_count": 40,
+      "status": "consistent",
+      "training_institution": "安徽工业经济职业技术学院"
+    },
+    {
+      "canonical_plan_count": 40,
+      "major": "电气工程及其自动化",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-7918aed3-8a9b-5618-ab5a-9eb8a382781b",
+      "official_plan_count": 40,
+      "status": "consistent",
+      "training_institution": "安徽工业经济职业技术学院"
+    },
+    {
+      "canonical_plan_count": 40,
+      "major": "网络工程",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-a02655f6-3bc4-5d92-b4ff-839b057ccd76",
+      "official_plan_count": 40,
+      "status": "consistent",
+      "training_institution": "安徽工业经济职业技术学院"
+    },
+    {
+      "canonical_plan_count": 40,
+      "major": "计算机科学与技术",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-526bb7a2-7cbb-5542-a51a-9e6a4caa60d0",
+      "official_plan_count": 40,
+      "status": "consistent",
+      "training_institution": "安徽工业经济职业技术学院"
+    },
+    {
+      "canonical_plan_count": 30,
+      "major": "制药工程",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-8153285e-8b08-59c0-95da-4b14770854e4",
+      "official_plan_count": 30,
+      "status": "consistent",
+      "training_institution": "合肥职业技术学院"
+    },
+    {
+      "canonical_plan_count": 30,
+      "major": "运动康复",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-f3b32e27-406d-5c7a-838b-bde8628de9f1",
+      "official_plan_count": 30,
+      "status": "consistent",
+      "training_institution": "合肥职业技术学院"
+    },
+    {
+      "canonical_plan_count": 60,
+      "major": "小学教育",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-9ede7d69-d5cc-5ccb-8967-b105266703a9",
+      "official_plan_count": 60,
+      "status": "consistent",
+      "training_institution": "淮北职业技术学院"
+    },
+    {
+      "canonical_plan_count": 60,
+      "major": "电气工程及其自动化",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-c945fa15-9041-5415-913b-66750f82e0ad",
+      "official_plan_count": 60,
+      "status": "consistent",
+      "training_institution": "淮北职业技术学院"
+    },
+    {
+      "canonical_plan_count": 80,
+      "major": "环境设计",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-b1bacb76-fa85-533b-9dba-b5d3f6107662",
+      "official_plan_count": 80,
+      "status": "consistent",
+      "training_institution": "马鞍山师范高等专科学校"
+    },
+    {
+      "canonical_plan_count": 120,
+      "major": "计算机科学与技术",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-f6bedd2a-e542-5dd3-b6d1-94f3b4753246",
+      "official_plan_count": 120,
+      "status": "consistent",
+      "training_institution": "马鞍山师范高等专科学校"
+    },
+    {
+      "canonical_plan_count": 80,
+      "major": "食品质量与安全",
+      "note": "BMRS公告计划数与招生章程canonical total一致",
+      "offering_id": "OFF-e663011d-a2ba-5dcb-8359-0611b0650a45",
+      "official_plan_count": 80,
+      "status": "consistent",
+      "training_institution": "马鞍山师范高等专科学校"
+    }
+  ],
+  "schema_version": "stage2a-application-plan-reconciliation-v1",
+  "source_document_id": "SRC-HFNU-2024-BMRS",
+  "summary": {
+    "canonical_missing": 0,
+    "conflict": 0,
+    "consistent": 30,
+    "official_missing": 0,
+    "unmapped": 0
+  }
+}

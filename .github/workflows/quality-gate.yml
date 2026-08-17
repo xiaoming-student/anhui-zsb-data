@@ -1,0 +1,92 @@
+name: Quality Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+    defaults:
+      run:
+        shell: bash
+        working-directory: anhui_zsb_data
+    env:
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run complete quality gate
+        run: |
+          mkdir -p ci-logs
+          log_file="ci-logs/quality-gate-python-${{ matrix.python-version }}.log"
+
+          # Do not let a previously committed report mask a failure that occurs
+          # before the current run can generate a fresh report.
+          rm -f reports/quality_gate_report.json reports/quality_gate_report.md
+
+          {
+            echo "Repository: ${GITHUB_REPOSITORY}"
+            echo "Ref: ${GITHUB_REF}"
+            echo "SHA: ${GITHUB_SHA}"
+            python3 --version
+          } | tee "${log_file}"
+
+          set +e
+          python3 scripts/run_quality_gate.py 2>&1 | tee -a "${log_file}"
+          gate_status=${PIPESTATUS[0]}
+          set -e
+
+          # run_quality_gate.py captures each subprocess in the report. Append it
+          # to the plain-text CI log so failures retain complete step output.
+          if [[ -f reports/quality_gate_report.md ]]; then
+            {
+              printf '\n===== reports/quality_gate_report.md =====\n'
+              cat reports/quality_gate_report.md
+            } | tee -a "${log_file}"
+          fi
+
+          exit "${gate_status}"
+
+      - name: Upload QA, reports, and complete logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: quality-gate-python-${{ matrix.python-version }}
+          path: |
+            anhui_zsb_data/ci-logs/*.log
+            anhui_zsb_data/qa/*.csv
+            anhui_zsb_data/reports/*.json
+            anhui_zsb_data/reports/*.md
+          if-no-files-found: warn
+          retention-days: 14

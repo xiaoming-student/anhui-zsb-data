@@ -1,0 +1,123 @@
+name: Archive Full 30 Raw Evidence To Main
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/archive-full-30-raw-to-main.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: archive-full-30-raw-to-main
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download and unpack audited acquisition artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="anhui_zsb_data/evidence/full_raw_30_schools"
+          TMP="$RUNNER_TEMP/full30-artifacts"
+          mkdir -p "$ROOT/_acquisition_reports" "$ROOT/_targeted_supplement" "$TMP"
+
+          # Final/superseding artifacts selected from PR #6 acquisition runs:
+          # groups 1,2,4,5 = full run; group 3 = successful fast fallback;
+          # group 6 = successful UWH supplement; plus curated targeted supplement.
+          artifacts=(
+            "group1:9248222748"
+            "group2:9248136714"
+            "group3:9248124749"
+            "group4:9248158038"
+            "group5:9248408152"
+            "group6:9248010560"
+            "targeted:9247931032"
+          )
+
+          for spec in "${artifacts[@]}"; do
+            name="${spec%%:*}"
+            id="${spec##*:}"
+            zip="$TMP/$name.zip"
+            out="$TMP/$name"
+            mkdir -p "$out"
+            echo "Downloading artifact $name ($id)"
+            curl --fail --location --retry 3 \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" \
+              -o "$zip"
+            unzip -q "$zip" -d "$out"
+          done
+
+          # Expand each five-school archive. The school ZIPs contain paths rooted at SCHOOL_ID/.
+          for name in group1 group2 group3 group4 group5 group6; do
+            src="$TMP/$name/anhui_zsb_data/evidence/full_raw_30_schools"
+            test -d "$src"
+            if compgen -G "$src/*_official_raw_2024_2026.zip" > /dev/null; then
+              for schoolzip in "$src"/*_official_raw_2024_2026.zip; do
+                echo "Expanding $(basename "$schoolzip")"
+                unzip -oq "$schoolzip" -d "$ROOT"
+              done
+            fi
+            if test -f "$TMP/$name/reports/group_${name#group}_result.json"; then
+              cp "$TMP/$name/reports/group_${name#group}_result.json" "$ROOT/_acquisition_reports/"
+            fi
+          done
+
+          # Preserve curated supplement separately; filenames encode school/year and remain auditable.
+          targeted="$TMP/targeted"
+          find "$targeted" -maxdepth 1 -type f -exec cp {} "$ROOT/_targeted_supplement/" \;
+
+          # Record exactly which short-lived Actions artifacts were materialized.
+          cat > "$ROOT/ARCHIVE_PROVENANCE.md" <<'EOF'
+          # Full 30 raw evidence archive provenance
+
+          Materialized from the PR #6 acquisition Actions artifacts on 2026-08-15.
+
+          | Logical group | Artifact ID | Selection reason |
+          |---|---:|---|
+          | group 1 | 9248222748 | successful full checkpoint |
+          | group 2 | 9248136714 | successful full checkpoint |
+          | group 3 | 9248124749 | successful fast fallback replacing cancelled full checkpoint |
+          | group 4 | 9248158038 | successful full checkpoint |
+          | group 5 | 9248408152 | successful full checkpoint |
+          | group 6 | 9248010560 | successful UWH-supplemented checkpoint; supersedes base group 6 |
+          | targeted | 9247931032 | successful curated official-page supplement |
+
+          Candidate-level personal records were excluded by the acquisition/sanitization workflow before these artifacts were produced. The files here are the materialized raw evidence and audit metadata, not canonical normalized data.
+          EOF
+
+          echo "School directories:"
+          find "$ROOT" -mindepth 1 -maxdepth 1 -type d ! -name '_*' -printf '%f\n' | sort
+          echo "File count: $(find "$ROOT" -type f | wc -l)"
+          echo "Size: $(du -sh "$ROOT" | cut -f1)"
+
+      - name: Commit raw evidence to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add anhui_zsb_data/evidence/full_raw_30_schools
+          if git diff --cached --quiet; then
+            echo "No new raw evidence to commit."
+            exit 0
+          fi
+          git commit -m "data: materialize 30-school raw evidence artifacts"
+          git push origin HEAD:main

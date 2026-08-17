@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>安徽师范大学2025年普通本科招生章程-安徽师范大学本科招生信息网</title><meta name="pageType" content="3">
+<meta name="pageTitle" content="安徽师范大学2025年普通本科招生章程">
+<META Name="keywords" Content="安徽师范大学本科招生信息网,师范大学,招生,本科,普通,安徽,章程" />
+<META Name="description" Content="第一章　总则第一条　为规范我校普通本科招生工作，切实维护学校和考生合法权益，根据《中华人民共和国教育法》《中华人民共和国高等教育法》以及上级有关文件规定，特制定本章程。第二条　我校是国家公办全日制普通高等学校，是安徽省人民政府与教育部共建高校、安徽省委省政府优先建设的省属重点综合性大学和安徽省特色高水平大学重点建设高校。办学地址：安徽省芜湖市北京中路2号（赭山校区），芜湖市九华南路189号（花津校区），..." />
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="description" content="">
+<meta name="viewport" content="width=1440">
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+<link rel="shortcut icon" href="../../images/com/logo.ico" type="image/x-icon">
+<link rel="stylesheet" href="../../css/cms.css" type="text/css">
+<link rel="stylesheet" href="../../css/list.css" type="text/css">
+<script type="text/javascript" src="../../js/j3.js"></script>
+<script type="text/javascript" src="../../js/vsbscreen.min.js" id="_vsbscreen" devices="pc|pad"></script>
+<script type="text/javascript" src="../../js/BigSlide.js"></script>
+<!--Announced by Visual SiteBuilder 9-->
+<link rel="stylesheet" type="text/css" href="../../_sitegray/_sitegray_d.css" />
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307678475d505a5742000300034451 -->
+<link rel="stylesheet" type="text/css" href="../../cont.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/vsbscreen.min.js" id="_vsbscreen" devices="pc|pad"></script>
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1042,'/cont.jsp',3723,1625903994)</script>
+</head>
+<body>
+        <div class="wrapper page_index">
+        <div class="header">
+    <div class="l_con">
+         <div class="left">
+            <a class="logo" href="http://www.ahnu.edu.cn" target=""></a>
+            <a class="logo_jy" href="../../index.htm" target=""></a>
+
+        </div>
+        <div class="right">
+
+
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script>
+<div id="divu0"></div>
+<script type="text/html" id="htmlu0">
+    <div id="appu0">
+        <div v-if="!isError" class="search">
+            <input type="text" class="btn_input" placeholder="请输入搜索关键词" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+            <input class="btn_search" name="submit_button" type="submit" value="" v-on:click="onSubmit()"/>
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu0").html($("#htmlu0").text());
+</script>
+<script>
+    var appOwner = "1625903994";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu0",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "https://openlab.ahnu.edu.cn/" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+            <div class="menus">
+                <ul>    <li><a href="../../index.htm" title="首页">首页</a>
+</li>
+    <li><a href="http://www.ahnu.edu.cn/xxgk/xxjj.htm" title="师大概况">师大概况</a>
+   
+<ul class="subs">
+<li><a href="http://www.ahnu.edu.cn/xxgk/xxjj.htm" title="学校概况">学校概况</a></li>
+<li><a href="http://www.ahnu.edu.cn/xxgk/xxyg.htm" title="历史沿革">历史沿革</a></li>
+<li><a href="http://www.ahnu.edu.cn/xxgk/xrlin.htm" title="现任领导">现任领导</a></li>
+<li><a href="http://www.ahnu.edu.cn/xxgk/lrld.htm" title="历任领导">历任领导</a></li>
+<li><a href="http://www.ahnu.edu.cn/xxgk/jbsj.htm" title="基本数据">基本数据</a></li>
+</ul>
+</li>
+    <li><a href="../../zsxx.htm" title="招生信息">招生信息</a>
+   
+<ul class="subs">
+<li><a href="../../zsxx/zszc1.htm" title="招生章程">招生章程</a></li>
+<li><a href="https://zsjy2.ahnu.edu.cn/recruit/viewLngk/enrollmentHistoryProvinceList.html" title="招生计划">招生计划</a></li>
+<li><a href="https://zsjy2.ahnu.edu.cn/recruit/viewLngk/indexNew.html" title="历年分数">历年分数</a></li>
+<li><a href="../../zsxx/tzgg.htm" title="通知公告">通知公告</a></li>
+<li><a href="../../zsxx/zszc.htm" title="招生政策">招生政策</a></li>
+<li><a href="https://zsjy2.ahnu.edu.cn/recruit/recruitOnline/signUp.html?current=1 " title="网上报名">网上报名</a></li>
+<li><a href="https://zsjy2.ahnu.edu.cn/recruit/recruitOnline/signUp.html?current=1" title="查询中心">查询中心</a></li>
+</ul>
+</li>
+    <li><a href="../../zyfc.htm" title="专业风采">专业风采</a>
+   
+</li>
+    <li><a href="../../gysd.htm" title="光影师大">光影师大</a>
+   
+<ul class="subs">
+<li><a href="../../gysd/tssd.htm" title="图说师大">图说师大</a></li>
+<li><a href="../../gysd/stsd.htm" title="视听师大">视听师大</a></li>
+</ul>
+</li>
+    <li><a href="../../lxwm.htm" title="联系我们">联系我们</a>
+   
+<ul class="subs">
+<li><a href="http://www.ahnu.edu.cn/xxgk/xxdt.htm" title="学校地图">学校地图</a></li>
+<li><a href="http://www.ahnu.edu.cn/xxgk/xqqj.htm" title="全景校园">全景校园</a></li>
+</ul>
+</li>
+</li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $(window).on('scroll',scrollFixed);
+            scrollFixed();
+            function scrollFixed(){
+                var stop = $(window).scrollTop();
+                if( stop > 115 ){
+                    $('.wrapper .header').addClass('header_fixed');
+                }else{
+                    $('.wrapper .header').removeClass('header_fixed');
+                }
+            }
+        });
+    </script>
+</div>
+        <div class="swiper-container erbanner">
+            <ul class="swiper-wrapper">    <script language="javascript" src="/system/resource/js/dynclicks.js"></script>    
+                <li class="swiper-slide">
+                        <img src="../../images/index.files/erdbg.png">
+                </li>
+</ul>
+        </div>
+        <div class="main">
+            <div class="navTit">
+招生章程</div>
+            <div class="localbox mart90">
+                <div class="local left">        
+                <a href="../../index.htm">首页</a>
+
+                >>
+                <a href="../../zsxx.htm">招生信息</a>
+
+                >>
+                <a href="../../zsxx/zszc1.htm">招生章程</a>
+
+                >>
+                正文
+</div>
+                <div class="clear"></div>
+            </div>
+            <div class="contbox">
+
+
+
+
+
+
+<script language="javascript" src="../../_dwr/interface/NewsvoteDWR.js"></script><script language="javascript" src="../../_dwr/engine.js"></script><script language="javascript" src="/system/resource/js/news/newscontent.js"></script><script language="javascript" src="/system/resource/js/ajax.js"></script><form name="_newscontent_fromname">
+<div>
+    <div class="tit" align="center">安徽师范大学2025年普通本科招生章程</div>
+    <div class="summ">发文日期：2025-05-16 08:57:36   <span>编辑：招生办公室</span>
+                        <span>预审：汪贻洋</span>
+                        <span>终审：聂全高</span> 点击量：<script>_showDynClicks("wbnews", 1625903994, 3723)</script></div>
+    
+    <div class="zwcont" id="vsb_content"><div class="v_news_content">
+<p style="text-align:center;line-height:40px"><span style="font-size:21px;font-family:黑体">第一章　总则</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第一条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">为规范我校普通本科招生工作，切实维护学校和考生合法权益，根据《中华人民共和国教育法》《中华人民共和国高等教育法》以及上级有关文件规定，特制定本章程。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第二条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">我校是国家公办全日制普通高等学校，是安徽省人民政府与教育部共建高校、安徽省委省政府优先建设的省属重点综合性大学和安徽省特色高水平大学重点建设高校。办学地址：安徽省芜湖市北京中路<span lang="EN-US">2</span>号（赭山校区），芜湖市九华南路<span lang="EN-US">189</span>号（花津校区），芜湖市九华北路<span lang="EN-US">171</span>号（天门山校区）。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第三条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">本章程适用办学层次：全日制普通本科。在规定的年限内达到所在专业毕业要求者，颁发安徽师范大学本科毕业证书；符合学校学位授予有关规定者，颁发安徽师范大学学士学位证书。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第四条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">普通本科招生工作遵循“公平竞争、公正选拔、公开透明、全面考核、综合评价、择优录取”的原则，接受上级主管部门、纪检监察部门、新闻媒体、考生、家长以及社会各界的监督。</span></p><p style="text-align:center;line-height:40px"><span style="font-size:21px;font-family:黑体">第二章　组织机构</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第五条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">我校设立招生委员会，负责贯彻落实教育部及各省（自治区、直辖市）有关招生工作政策；负责制定招生章程、招生政策、招生计划并报校长办公会、校党委常委会审定；协调处理各类招生工作中的重大问题。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第六条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">招生就业处作为我校招生职能部门，具体负责全日制普通本科招生工作的组织和实施。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第七条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">学校纪委全程监督普通本科招生工作。</span></p><p style="text-align:center;line-height:40px"><span style="font-size:21px;font-family:黑体">第三章　录取</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第八条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">在符合我校投档要求的情况下，认可各省（自治区、直辖市）的投档规则；投档比例按照有关省（自治区、直辖市）规定执行。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第九条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">对于进档考生，按照分数优先的原则，根据考生的投档成绩，从高分到低分依次安排录取专业，各专业志愿之间无分数级差。投档成绩相同时按各省（自治区、直辖市）确定的同分排序规则进行排序录取。以院校专业组为填报单位的志愿，只能在同一院校专业组内调剂，对于所有专业志愿都无法满足且不服从调剂的考生，予以退档。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">艺术类和体育类专业招生均不组织校考，认可各省（自治区、直辖市）专业统考或联考成绩，对于进档考生均按其投档成绩从高分到低分安排录取专业。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十一条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">高考综合改革省份考生报考我校，其高中学业水平选考科目应符合我校相应专业选考科目要求。</span></p><p style="text-align:center;line-height:40px"><span style="font-size:21px;font-family:黑体">第四章　体检和学费</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十二条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">我校招生体检标准按照《普通高等学校招生体检工作指导意见》（教学〔<span lang="EN-US">2003</span>〕<span lang="EN-US">3</span>号）及有关补充规定执行。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十三条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">各专业学费标准执行皖发改价费〔<span lang="EN-US">2021</span>〕<span lang="EN-US">348</span>号及相关收费文件规定。</span></p><p style="text-align:center;line-height:40px"><span style="font-size:21px;font-family:黑体">第五章　附则</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十四条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">我校运动训练专业、音乐表演专业、定向生、国家专项、地方专项、内地新疆班、华侨港澳台等招生事宜，依据上级有关规定和相关招生简章执行。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十五条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">我校提供英语、俄语、日语、法语等语种教学，非外语语言类专业学生可根据高中学习情况选择其中一种作为大学外语课程修读。报考英语专业的考生外语语种须为英语。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十六条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">我校建立了完善的“奖、助、贷、勤、补、免”学生资助体系，家庭经济困难学生可以通过个人申请、学院审核、学校审批等程序申请相关资助项目。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十七条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">新生报到入学后，在三个月内进行入学资格复查。经复查不合格者，将视不同情况予以处理，直至取消入学资格。凡发现弄虚作假者，即取消其入学资格，并报生源所在省（自治区、直辖市）招生办公室。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十八条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">在籍全日制普通本科生在规定修业年限内，均可以在修读主修专业（即学籍注册专业）的同时辅修其他本科专业，获得主修专业学士学位且达到辅修学士学位要求的，授予辅修专业学士学位，并在主修专业的学士学位证书中标注。具体要求和程序参见《安徽师范大学普通全日制本科生辅修管理暂行办法》。</span></p><p style="text-indent:43px;line-height:40px"><span style="font-size:21px;font-family:仿宋_gb2312">在籍在校普通全日制本科一年级或二年级学生均可以申请转专业，具体条件和程序参见《安徽师范大学普通全日制本科生转专业管理办法（修订）》。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第十九条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">招生咨询电话：<span lang="EN-US">0553-5910161</span>，电子邮箱：<span lang="EN-US">asdzsb@ahnu.edu.cn</span>，微信公众号：安师大招生就业，招生网址：<span lang="EN-US">https://zsxx.ahnu.edu.cn/</span>。</span></p><p style="text-indent:43px;line-height:40px"><strong><span style="font-size:21px;font-family:仿宋_gb2312">第二十条　</span></strong><span style="font-size:21px;font-family:仿宋_gb2312">本章程由我校招生就业处负责解释。章程公布后，如遇教育部、相关省份高考招生政策调整，将执行相应的政策。</span></p><p><br></p>
+</div></div><div id="div_vote_id"></div>
+        <div class="xgwz">
+        <p>上一篇：<a href="4043.htm">安徽师范大学2026年依据台湾地区大学入学考试学科能力测试成绩招收台湾高中毕业生简章</a></p>
+        <p>下一篇：<a href="3583.htm">安徽师范大学2025年普通专升本招生章程</a></p>
+    </div>
+</div>
+</form></div>
+        </div>
+      <div class="footer">
+    <div class="info">
+    <div class="yqlj l_con">
+     <b style="font-size:14px;color:#fff;margin-left:10px;">友情链接：</b><script language="javascript" src="/system/resource/js/openlink.js"></script><select id="ddl01" name="ddl01" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0" style="font-size: 14px;    margin: 0px 10px;    border: none;    background: #ece8e8;    height: 26px;line-height:26px;    width: 160px;    padding: 0 5px;color:#333;">
+    <option selected="selected" value="#" style="font-size:14px;color:#333;"> — —  校内链接 — — </option>  
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.ahnu.edu.cn/" style="font-size:14px;">安徽师范大学</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://wxy.ahnu.edu.cn" style="font-size:14px;">文学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://marx.ahnu.edu.cn" style="font-size:14px;">马克思主义学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://law.ahnu.edu.cn" style="font-size:14px;">法学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://jgxy.ahnu.edu.cn" style="font-size:14px;">经济管理学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://music.ahnu.edu.cn" style="font-size:14px;">音乐学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://msxy.ahnu.edu.cn" style="font-size:14px;">美术学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://social.ahnu.edu.cn" style="font-size:14px;">历史与社会学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://edu.ahnu.edu.cn" style="font-size:14px;">教育科学学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://flc.ahnu.edu.cn" style="font-size:14px;">外国语学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://ty.ahnu.edu.cn" style="font-size:14px;">体育学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://chm.ahnu.edu.cn" style="font-size:14px;">新闻与传播学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://math.ahnu.edu.cn" style="font-size:14px;">数学与统计学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://ci.ahnu.edu.cn/" style="font-size:14px;">计算机与信息学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://physics.ahnu.edu.cn/" style="font-size:14px;">物理与电子信息学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://chem.ahnu.edu.cn/" style="font-size:14px;">化学与材料科学学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://tourism.ahnu.edu.cn/" style="font-size:14px;">地理与旅游学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://biology.ahnu.edu.cn/" style="font-size:14px;">生命科学学院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://envirsci.ahnu.edu.cn/" style="font-size:14px;">环境科学与工程学院</option>
+</select>
+              <select id="ddl01" name="ddl01" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0" style="font-size: 14px;    margin: 0px 10px;    border: none;    background: #ece8e8;    height: 26px;line-height:26px;    width: 160px;    padding: 0 5px;text-align:center;color:#333;">
+    <option selected="selected" value="#" style="font-size:14px;"> — —  招生考试院 — —  </option>  
+                
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://jyt.ah.gov.cn/" style="font-size:14px;">安徽省教育厅</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="https://www.ahzsks.cn/index.htm" style="font-size:14px;">安徽省教育招生考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.cqksy.cn/site/index.html" style="font-size:14px;">重庆市教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.sceea.cn/" style="font-size:14px;">四川省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.hneao.edu.cn/" style="font-size:14px;">湖南省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.eeafj.cn/" style="font-size:14px;">福建省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.heao.com.cn/" style="font-size:14px;">河南招生考试信息网</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.hbea.edu.cn/" style="font-size:14px;">湖北省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.jseea.cn/" style="font-size:14px;">江苏省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.sdzs.gov.cn/" style="font-size:14px;">山东省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://ea.hainan.gov.cn/" style="font-size:14px;">海南省考试局</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.jxeea.cn/" style="font-size:14px;">江西省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.gxeea.cn/" style="font-size:14px;">广西招生考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.hebeea.edu.cn/" style="font-size:14px;">河北省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.lnzsks.com/" style="font-size:14px;">辽宁招生考试之窗</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.jleea.edu.cn/" style="font-size:14px;">吉林省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.ynzs.cn/" style="font-size:14px;">云南省招考频道</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.sneac.com/" style="font-size:14px;">陕西招生考试信息网</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.ganseea.cn/" style="font-size:14px;">甘肃省教育考试院</option>
+
+    <option vsbhrefname="value" aa245822aa="57394" value="http://www.qhjyks.com/" style="font-size:14px;">青海省教育考试网</option>
+</select>
+                 <select id="ddl01" name="ddl01" onchange="javascript:window.open(this.options[this.selectedIndex].value);this.selectedIndex=0" style="font-size: 14px;    margin: 0px 10px;    border: none;    background: #ece8e8;    height: 26px;line-height:26px;    width: 160px;    padding: 0 5px;color:#333;">
+    <option selected="selected" value="#" style="font-size:14px;"> — —  示范高中 — —  </option>  
+</select>
+    </div>
+        <div class="l_con">
+            <div class="chunk_3">
+                <div class="con"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p><a href="../1006/1433.htm" target="_blank">联系我们</a> &nbsp;| <a href="https://zsjy2.ahnu.edu.cn/login.html" target="_blank">管理</a> &nbsp;| &nbsp; 皖ICP备15022060号-1 &nbsp;皖公网安备34020202000153号</p><p>本科招生及咨询电话：0553-5910161 &nbsp;学校纪检监察电话：0553-5910017</p><p>电邮：asdzsb@ahnu.edu.cn &nbsp; &nbsp;&nbsp; 地址：芜湖市九华南路189号 &nbsp; &nbsp; &nbsp;邮编：241000&nbsp; &nbsp; &nbsp;&nbsp;</p><p>版权所有：安徽师范大学本科生院&nbsp; &nbsp; Copyright 2007 Anhui Normal University. All rights reserved.</p></div>
+            </div>
+            <div class="chunk_4">    
+<div class="code1">
+<div class="code_img">
+                        <img src="../../images/index.files/ewm1.png" width="100">
+</div>
+                    <div class="txt">师大官方微信二维码</div>
+                </div>
+
+<div class="code2">
+<div class="code_img">
+                        <img src="../../images/ewm1.png" width="100">
+</div>
+                    <div class="txt">师大本科生院微信二维码</div>
+                </div>
+</div>
+        </div>
+    </div>
+</div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
