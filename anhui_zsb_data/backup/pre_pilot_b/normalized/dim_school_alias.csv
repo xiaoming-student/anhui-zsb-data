@@ -1,0 +1,5 @@
+﻿school_id,alias_raw,alias_type,notes
+HFNU,合肥师范学院,official,学校官方全称
+HFNU,合师院,common_alias,常用简称
+HFNU,合肥师范大学,mistaken_name,用户误称，非官方名称
+HFNU,Hefei Normal University,english_name,英文名称

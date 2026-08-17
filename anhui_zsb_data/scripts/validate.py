@@ -400,10 +400,10 @@ class Validator:
         bad_counts = {key: value for key, value in score_counts.items() if value != len(SCORE_FIELDS)}
         if bad_counts:
             self.result.error(f"Admission score matrix does not have 5 categories for {len(bad_counts)} offerings")
-        if len(scores) != 305:
-            self.result.error(f"admission_scores row count={len(scores)}, expected=305")
+        if len(scores) != 445:
+            self.result.error(f"admission_scores row count={len(scores)}, expected=445")
         status = Counter(row["value_status"] for row in scores)
-        if status != Counter({"published_value": 200, "blank_in_source": 105}):
+        if status != Counter({"published_value": 281, "blank_in_source": 164}):
             self.result.error(f"Unexpected admission score status distribution: {dict(status)}")
         self.result.metrics["admission_score_status"] = dict(status)
         for row in scores:

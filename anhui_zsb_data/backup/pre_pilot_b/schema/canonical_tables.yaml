@@ -1,0 +1,31 @@
+schema_version: 0.3.0
+canonical_tables:
+  - institutions.csv
+  - source_sites.csv
+  - source_documents.csv
+  - source_assets.csv
+  - schools.csv
+  - school_years.csv
+  - program_years.csv
+  - program_offerings.csv
+  - enrollment_plans.csv
+  - exam_subjects.csv
+  - exam_sessions.csv
+  - major_eligibility.csv
+  - eligibility_rule_sets.csv
+  - eligibility_rule_items.csv
+  - admission_scores.csv
+  - admission_rules.csv
+  - fact_sources.csv
+  - syllabus.csv
+  - reference_books.csv
+  - adjustments.csv
+  - application_statistics.csv
+  - dim_school_alias.csv
+  - dim_major_alias.csv
+  - dim_subject_alias.csv
+compatibility_exports:
+  - sources.csv
+  - documents.csv
+non_canonical_legacy_exports:
+  - legacy_exports/school_major_years_pilot_v1.csv

@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.3.0",
+  "institutions": [
+    {
+      "institution_id": "HFNU",
+      "institution_name_std": "合肥师范学院",
+      "institution_name_raw": "合肥师范学院",
+      "institution_type": "本科",
+      "institution_role": "admission_school",
+      "city": "合肥市",
+      "official_code": "11305",
+      "official_url": "https://www.hfnu.edu.cn/",
+      "address": "合肥市经济技术开发区莲花路1688号（锦绣校区）；合肥市黄麓科教园区书香路（滨湖校区）；合肥市金寨路327号（三孝口校区）",
+      "address_source_id": "SRC-HFNU-2026-ZC",
+      "address_source_locator": {"asset_id": "ASSET-HFNU-2026-ZC-PDF", "page": 1, "section": "办学地址"}
+    },
+    {
+      "institution_name_std": "安徽工业经济职业技术学院",
+      "institution_name_raw": "安徽工业经济职业技术学院",
+      "institution_type": "高职",
+      "institution_role": "joint_training_school",
+      "city": "合肥市",
+      "official_code": "",
+      "official_url": "",
+      "address": "安徽省合肥市包河区祁门路66号",
+      "address_source_id": "SRC-HFNU-2026-ZC",
+      "address_source_locator": {"asset_id": "ASSET-HFNU-2026-ZC-PDF", "page": 1, "section": "联合培养院校"}
+    },
+    {
+      "institution_name_std": "合肥职业技术学院",
+      "institution_name_raw": "合肥职业技术学院",
+      "institution_type": "高职",
+      "institution_role": "joint_training_school",
+      "city": "合肥市",
+      "official_code": "",
+      "official_url": "",
+      "address": "合肥市新站区岱河路2号（汇心湖校区）；合肥市巢湖市凤凰山路（鼓山校区）",
+      "address_source_id": "SRC-HFNU-2025-ZC",
+      "address_source_locator": {"asset_id": "ASSET-HFNU-2025-ZC-PDF", "page": 1, "section": "联合培养院校"}
+    },
+    {
+      "institution_name_std": "淮北职业技术学院",
+      "institution_name_raw": "淮北职业技术学院",
+      "institution_type": "高职",
+      "institution_role": "joint_training_school",
+      "city": "淮北市",
+      "official_code": "",
+      "official_url": "",
+      "address": "安徽省淮北市烈山区职教园区元培路1号",
+      "address_source_id": "SRC-HFNU-2026-ZC",
+      "address_source_locator": {"asset_id": "ASSET-HFNU-2026-ZC-PDF", "page": 1, "section": "联合培养院校"}
+    },
+    {
+      "institution_name_std": "马鞍山师范高等专科学校",
+      "institution_name_raw": "马鞍山师范高等专科学校",
+      "institution_type": "高职",
+      "institution_role": "joint_training_school",
+      "city": "马鞍山市",
+      "official_code": "",
+      "official_url": "",
+      "address": "安徽省马鞍山市雨山区湖西中路85号",
+      "address_source_id": "SRC-HFNU-2026-ZC",
+      "address_source_locator": {"asset_id": "ASSET-HFNU-2026-ZC-PDF", "page": 1, "section": "联合培养院校"}
+    }
+  ]
+}

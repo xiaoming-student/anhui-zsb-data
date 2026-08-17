@@ -1,0 +1,220 @@
+{
+  "data": [
+    {
+      "major_name_raw": "学前教育",
+      "score_normal_raw": "466",
+      "score_registered_poor_family_raw": "420.5",
+      "score_retired_culture_exam_exempt_raw": "71.8",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": "82.98",
+      "notes_raw": "师范",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "小学教育",
+      "score_normal_raw": "479.5",
+      "score_registered_poor_family_raw": "456",
+      "score_retired_culture_exam_exempt_raw": "77",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": "88.28",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "特殊教育",
+      "score_normal_raw": "479.5",
+      "score_registered_poor_family_raw": "491",
+      "score_retired_culture_exam_exempt_raw": "79.54",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "体育教育",
+      "score_normal_raw": "421.85",
+      "score_registered_poor_family_raw": "445.35",
+      "score_retired_culture_exam_exempt_raw": "79",
+      "score_retired_non_exempt_raw": "234.09",
+      "score_skill_competition_raw": "83.94",
+      "notes_raw": "师范；与安徽体育运动职业技术学院联合培养",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "英语",
+      "score_normal_raw": "503",
+      "score_registered_poor_family_raw": "461.5",
+      "score_retired_culture_exam_exempt_raw": "76.76",
+      "score_retired_non_exempt_raw": "382.5",
+      "score_skill_competition_raw": "91.8",
+      "notes_raw": "师范；与合肥幼儿师范高等专科学校联合培养",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "网络与新媒体",
+      "score_normal_raw": "483.5",
+      "score_registered_poor_family_raw": "477",
+      "score_retired_culture_exam_exempt_raw": "84.2",
+      "score_retired_non_exempt_raw": "310.5",
+      "score_skill_competition_raw": "84.4",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "新能源材料与器件",
+      "score_normal_raw": "182.5",
+      "score_registered_poor_family_raw": "443",
+      "score_retired_culture_exam_exempt_raw": "70.92",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": "76",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "通信工程",
+      "score_normal_raw": "168",
+      "score_registered_poor_family_raw": "228.5",
+      "score_retired_culture_exam_exempt_raw": "77.78",
+      "score_retired_non_exempt_raw": "467",
+      "score_skill_competition_raw": null,
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "软件工程",
+      "score_normal_raw": "458",
+      "score_registered_poor_family_raw": "441.5",
+      "score_retired_culture_exam_exempt_raw": "82.48",
+      "score_retired_non_exempt_raw": "409.5",
+      "score_skill_competition_raw": "71.52",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "环境工程",
+      "score_normal_raw": "250.5",
+      "score_registered_poor_family_raw": "221",
+      "score_retired_culture_exam_exempt_raw": "77.44",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": "82.8",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "食品质量与安全",
+      "score_normal_raw": "396.5",
+      "score_registered_poor_family_raw": "159.5",
+      "score_retired_culture_exam_exempt_raw": "77.36",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": "73.84",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "生物制药",
+      "score_normal_raw": "371.5",
+      "score_registered_poor_family_raw": "279",
+      "score_retired_culture_exam_exempt_raw": "68.2",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": "70.1",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "会计学",
+      "score_normal_raw": "489",
+      "score_registered_poor_family_raw": "492",
+      "score_retired_culture_exam_exempt_raw": "80.96",
+      "score_retired_non_exempt_raw": "426.5",
+      "score_skill_competition_raw": "82.6",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "供应链管理",
+      "score_normal_raw": "383",
+      "score_registered_poor_family_raw": "265",
+      "score_retired_culture_exam_exempt_raw": "80.72",
+      "score_retired_non_exempt_raw": "263",
+      "score_skill_competition_raw": "77.4",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    },
+    {
+      "major_name_raw": "旅游管理",
+      "score_normal_raw": "451",
+      "score_registered_poor_family_raw": "458.5",
+      "score_retired_culture_exam_exempt_raw": "81.1",
+      "score_retired_non_exempt_raw": "323.5",
+      "score_skill_competition_raw": "78.8",
+      "notes_raw": "",
+      "source_locator": {
+        "url": "https://zsxx.ahnu.edu.cn/info/1009/3753.htm",
+        "title": "2025年普通专升本招生拟录取结果查询",
+        "publish_date": "2025-05-26"
+      }
+    }
+  ],
+  "extracted_at": "2026-08-14T16:16:05.485061+00:00",
+  "extraction_method": "official_website_verified",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-AHNU-2025-LQ",
+  "source_school_id": "AHNU",
+  "source_year": "2025"
+}

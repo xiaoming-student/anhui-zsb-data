@@ -1,0 +1,120 @@
+{
+  "data": [
+    {
+      "major_name_raw": "学前教育、特殊教育、小学教育、英语",
+      "eligible_category_raw": "教育与体育大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "体育教育",
+      "eligible_category_raw": "教育与体育大类（限体育类中所有专业和教育类中的体育教育专业）",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "网络与新媒体",
+      "eligible_category_raw": "新闻传播大类、教育与体育大类、文化艺术大类、电子与信息大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "会计学",
+      "eligible_category_raw": "财经商贸大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "供应链管理",
+      "eligible_category_raw": "财经商贸大类、公共管理与服务大类、电子与信息大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "通信工程、软件工程",
+      "eligible_category_raw": "电子与信息大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "新能源材料与器件",
+      "eligible_category_raw": "能源动力与材料大类、生物与化工大类、轻工纺织大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "生物制药",
+      "eligible_category_raw": "农林牧渔大类、生物与化工大类、食品药品与粮食大类、医药卫生大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "食品质量与安全",
+      "eligible_category_raw": "农林牧渔大类、生物与化工大类、食品药品与粮食大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "环境工程",
+      "eligible_category_raw": "农林牧渔大类、资源环境与安全大类、土木建筑大类、水利大类、生物与化工大类、食品药品与粮食大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    },
+    {
+      "major_name_raw": "旅游管理",
+      "eligible_category_raw": "旅游大类、财经商贸大类、公共管理与服务大类",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.2 招生专业范围",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF",
+        "page": 2
+      }
+    }
+  ],
+  "extracted_at": "2026-08-14T16:16:05.485061+00:00",
+  "extraction_method": "pdfplumber_verified",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-AHNU-2025-ZC",
+  "source_school_id": "AHNU",
+  "source_year": "2025"
+}

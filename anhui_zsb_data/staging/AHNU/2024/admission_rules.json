@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "rule_type_raw": "志愿批次",
+      "rule_detail_raw": "一志愿批次、调剂志愿批次均先进行A段录取，再进行B段录取。已被任何院校A段录取的考生，不再具备我校B段录取资格。",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "A段-免文化课考试退役士兵",
+      "rule_detail_raw": "参加综合考查，考查成绩合格从高分到低分排序，按专项招生计划数择优录取",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "A段-非免试退役士兵/建档立卡",
+      "rule_detail_raw": "达到公共课省控合格线基础上，根据考试总成绩从高分到低分排序，按专项招生计划数择优录取",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "B段-普通类录取规则",
+      "rule_detail_raw": "达到公共课省控合格线基础上，根据考试总成绩（体育教育专业按综合分）和计划数，从高分到低分排序，择优录取",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "体育教育综合分公式",
+      "rule_detail_raw": "综合分=公共课总成绩*80%+专业课总成绩*120%",
+      "notes_raw": "同分时按专业课总成绩、专业课科目一、专业实践100米跑排序"
+    },
+    {
+      "rule_type_raw": "同分排序规则",
+      "rule_detail_raw": "专业课总成绩→专业课科目一→公共课英语→高职（专科）期间学业考试成绩",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "计划调整原则",
+      "rule_detail_raw": "A段专业内→A段专业间→B段专业间→A-B段间→外校生源调剂",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "技能大赛免试",
+      "rule_detail_raw": "免试条件：中华人民共和国职业技能大赛铜牌及以上，全国职业院校技能大赛/中国国际'互联网+'大学生创新创业大赛二等奖及以上，世界技能大赛/世界职业院校技能大赛奖项。面试条件：全省职业院校技能大赛一等奖或全国职业院校技能大赛三等奖及以上",
+      "notes_raw": ""
+    },
+    {
+      "rule_type_raw": "三等功免试",
+      "rule_detail_raw": "服役期间荣立三等功以上奖励，免试就学",
+      "notes_raw": ""
+    }
+  ],
+  "extracted_at": "2026-08-14T15:07:08.844410+00:00",
+  "extraction_method": "pdf_text_extraction",
+  "schema_version": "0.3.0",
+  "source_school_id": "AHNU",
+  "source_document_id": "SRC-AHNU-2024-ZC",
+  "source_year": "2024"
+}

@@ -50,9 +50,9 @@ class PipelineTestCase(unittest.TestCase):
             "major_eligibility.csv": 82,
             "eligibility_rule_sets.csv": 82,
             "eligibility_rule_items.csv": 295,
-            "admission_scores.csv": 305,
+            "admission_scores.csv": 445,
             "admission_rules.csv": 15,
-            "fact_sources.csv": 1585,
+            "fact_sources.csv": 1725,
         }
         self.assertEqual({name: len(read_csv(name)) for name in expected}, expected)
 
@@ -127,7 +127,7 @@ class PipelineTestCase(unittest.TestCase):
         self.assertEqual(len(natural_keys), len(scores))
         self.assertEqual(
             Counter(row["value_status"] for row in scores),
-            Counter({"published_value": 200, "blank_in_source": 105}),
+            Counter({"published_value": 281, "blank_in_source": 164}),
         )
         counts = Counter(row["offering_id"] for row in scores)
         self.assertTrue(all(count == 5 for count in counts.values()))
@@ -166,7 +166,7 @@ class PipelineTestCase(unittest.TestCase):
     def test_source_assets_hashes_and_all_locators_resolve(self) -> None:
         assets = {row["asset_id"]: row for row in read_csv("source_assets.csv")}
         documents = {row["source_document_id"]: row for row in read_csv("source_documents.csv")}
-        self.assertEqual(len(assets), 3)
+        self.assertEqual(len(assets), 16)
         for asset in assets.values():
             path = ROOT / asset["local_path"]
             self.assertTrue(path.is_file(), asset["local_path"])
@@ -195,7 +195,7 @@ class PipelineTestCase(unittest.TestCase):
                 else:
                     self.assertEqual(locator.get("url"), documents[row["source_id"]]["url"])
                 checked += 1
-        self.assertEqual(checked, 1585)
+        self.assertEqual(checked, 1725)
 
     def test_fact_source_links_are_complete(self) -> None:
         specs = {
@@ -233,9 +233,9 @@ class PipelineTestCase(unittest.TestCase):
             self.assertEqual(connection.execute("PRAGMA foreign_key_check").fetchall(), [])
             self.assertEqual(connection.execute("PRAGMA user_version").fetchone()[0], 300)
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM program_years").fetchone()[0], 82)
-            self.assertEqual(connection.execute("SELECT COUNT(*) FROM fact_sources").fetchone()[0], 1585)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM fact_sources").fetchone()[0], 1725)
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM v_program_offerings").fetchone()[0], 89)
-            self.assertEqual(connection.execute("SELECT COUNT(*) FROM v_published_admission_scores").fetchone()[0], 200)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM v_published_admission_scores").fetchone()[0], 281)
         finally:
             connection.close()
 

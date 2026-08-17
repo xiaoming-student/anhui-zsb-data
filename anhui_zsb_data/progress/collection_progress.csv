@@ -1,4 +1,4 @@
 ﻿year,school_id,program_years,program_offerings,enrollment_plans,enrollment_plans_explicit,enrollment_plans_blank,exam_subjects,exam_sessions,admission_scores,admission_scores_published,major_eligibility,admission_rules,conflicts_open,missing_items_open,status,last_checked_at
-2024,HFNU,28,30,120,120,0,112,84,150,116,28,5,0,6,partial,2026-08-14T13:35:50+00:00
-2025,HFNU,28,31,124,124,0,112,84,155,84,28,5,0,9,partial,2026-08-14T13:35:50+00:00
-2026,HFNU,26,28,112,91,21,104,78,0,0,26,5,0,32,partial,2026-08-14T13:35:50+00:00
+2024,HFNU,28,30,120,120,0,112,84,150,116,28,5,0,4,partial,2026-08-14T22:24:04+08:00
+2025,HFNU,28,31,124,124,0,112,84,155,84,28,5,0,8,partial,2026-08-14T22:24:04+08:00
+2026,HFNU,26,28,112,91,21,104,78,140,81,26,5,0,32,partial,2026-08-14T22:24:04+08:00

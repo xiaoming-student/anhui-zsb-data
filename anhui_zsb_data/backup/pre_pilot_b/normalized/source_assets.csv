@@ -1,0 +1,4 @@
+﻿asset_id,source_document_id,local_path,file_name,original_file_name,asset_type,mime_type,file_size,sha256,retrieved_at,parent_asset_id,parser_name,parser_version,generated_at
+ASSET-HFNU-2025-ZC-PARSED-TXT,SRC-HFNU-2025-ZC,raw/2025/HFNU/DOC-HFNU-2025-ZC_parsed.txt,DOC-HFNU-2025-ZC_parsed.txt,2025_招生章程_parsed.txt,parsed_text,text/plain,42871,739172ebf8877b594ef586e39f1969ebd7bc6c72c0135c113b37e344879182ab,2026-08-14,ASSET-HFNU-2025-ZC-PDF,legacy_pdf_parser,unknown,2026-08-14
+ASSET-HFNU-2025-ZC-PDF,SRC-HFNU-2025-ZC,raw/2025/HFNU/DOC-HFNU-2025-ZC.pdf,DOC-HFNU-2025-ZC.pdf,2025_合肥师范学院_招生章程_官方.pdf,raw_document,application/pdf,405194,52259c218fdb48295fb782c99244dbeb4af8efe237d8ddb63bf27f46af59168e,2026-08-14,,,,
+ASSET-HFNU-2026-ZC-PDF,SRC-HFNU-2026-ZC,raw/2026/HFNU/DOC-HFNU-2026-ZC.pdf,DOC-HFNU-2026-ZC.pdf,2026_合肥师范学院_招生章程_官方.pdf,raw_document,application/pdf,460853,dc078db203863ceaf67cab0ccd3ad89b88305753c3604709dd17f2b0c80d7a0d,2026-08-14,,,,

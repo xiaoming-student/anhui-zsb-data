@@ -1,0 +1,1643 @@
+[
+  {
+    "school": "亳州学院",
+    "year": 2026,
+    "pdf": "2026_亳州学院_招生章程.pdf",
+    "text_length": 10503,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文",
+      "管理学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true
+  },
+  {
+    "school": "合肥城市学院",
+    "year": 2026,
+    "pdf": "2026_合肥城市学院_招生章程.pdf",
+    "text_length": 16177,
+    "has_major_list": true,
+    "exam_keywords": [
+      "大学语文",
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "C语言"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "合肥大学",
+    "year": 2026,
+    "pdf": "2026_合肥大学_招生章程.pdf",
+    "text_length": 13085,
+    "has_major_list": true,
+    "exam_keywords": [
+      "程序设计",
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "合肥师范学院",
+    "year": 2026,
+    "pdf": "2026_合肥师范学院_招生章程.pdf",
+    "text_length": 17220,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "院校名称          办学类型            ",
+      "与淮北职业",
+      "院校内进行",
+      "院校间按调剂"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "合肥经济学院",
+    "year": 2026,
+    "pdf": "2026_合肥经济学院_招生章程.pdf",
+    "text_length": 15023,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安庆师范大学",
+    "year": 2026,
+    "pdf": "2026_安庆师范大学_招生章程.pdf",
+    "text_length": 10335,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：桐城师范高等专科学校（公办普通高等专科学校）",
+      "的新生到联合培养院校"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽三联学院",
+    "year": 2026,
+    "pdf": "2026_安徽三联学院_招生章程.pdf",
+    "text_length": 16034,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽中医药大学",
+    "year": 2026,
+    "pdf": "2026_安徽中医药大学_招生章程.pdf",
+    "text_length": 14482,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校："
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽农业大学",
+    "year": 2026,
+    "pdf": "2026_安徽农业大学_招生章程.pdf",
+    "text_length": 12154,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文",
+      "管理学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：1、安徽水利水电职业技术学院",
+      "地点",
+      "点内进行。",
+      "学校。无故不按期报到的一律取消入学资格。报到时",
+      "院校严格执行国家招生"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽医科大学",
+    "year": 2026,
+    "pdf": "2026_安徽医科大学_招生章程.pdf",
+    "text_length": 15247,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "/办学地点",
+      "点）、",
+      "点）、B 段专业间计划",
+      "点）、A-B 段间计划调整（不跨联合培"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽医科大学临床医学院",
+    "year": 2026,
+    "pdf": "2026_安徽医科大学临床医学院_招生章程.pdf",
+    "text_length": 11833,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "计算机基础",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽外国语学院",
+    "year": 2026,
+    "pdf": "2026_安徽外国语学院_招生章程.pdf",
+    "text_length": 15184,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽工业大学",
+    "year": 2026,
+    "pdf": "2026_安徽工业大学_招生章程.pdf",
+    "text_length": 15897,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "点对应专业总计划的10%（文理兼招",
+      "点内进行。校内调整的计划数",
+      "点内B",
+      "点内进行A-B段间计划调整。当未完成计划从A段调整到B段时"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽师范大学",
+    "year": 2026,
+    "pdf": "2026_安徽师范大学_招生章程.pdf",
+    "text_length": 11378,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校及地址：",
+      "小学教育    100     4     1     8 ",
+      "合计    1900    160    30   152"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽建筑大学",
+    "year": 2026,
+    "pdf": "2026_安徽建筑大学_招生章程.pdf",
+    "text_length": 14851,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "）总计划的 10%",
+      "院校对应专",
+      "院校）择优录取。考生综合考查成绩相同且同",
+      "院校）择优录取。考生总成绩相同"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽文达信息工程学院",
+    "year": 2026,
+    "pdf": "2026_安徽文达信息工程学院_招生章程.pdf",
+    "text_length": 16928,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽新华学院",
+    "year": 2026,
+    "pdf": "2026_安徽新华学院_招生章程.pdf",
+    "text_length": 14728,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽科技工程大学",
+    "year": 2026,
+    "pdf": "2026_安徽科技工程大学_招生章程.pdf",
+    "text_length": 11669,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "tuition_fees": [
+      "20000"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "学校：",
+      "招生专业"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽第二医学院",
+    "year": 2026,
+    "pdf": "2026_安徽第二医学院_招生章程.pdf",
+    "text_length": 10135,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文",
+      "管理学"
+    ],
+    "tuition_fees": [
+      "3700",
+      "5000",
+      "3500",
+      "6000",
+      "10000",
+      "2500"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "与安徽卫生健康职",
+      "医学检验技术   100    10   1     8  "
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽艺术学院",
+    "year": 2026,
+    "pdf": "2026_安徽艺术学院_招生章程.pdf",
+    "text_length": 13384,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "学校名称：安徽艺术职业学院",
+      "学校名称：安徽广播影视职业技术学院",
+      "学校名称：安徽新闻出版职业技术学院",
+      "点间招生计划均不互调。"
+    ],
+    "public_course_science": "文科:大学语文+英语",
+    "has_eligibility_scope": true
+  },
+  {
+    "school": "安徽财经大学",
+    "year": 2026,
+    "pdf": "2026_安徽财经大学_招生章程.pdf",
+    "text_length": 14506,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "点对应专业总",
+      "点对应",
+      "点内进行。校内调整的计划数",
+      "点内A段其他合格生源充足的招生专业进行录取"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "宿州学院",
+    "year": 2026,
+    "pdf": "2026_宿州学院_招生章程.pdf",
+    "text_length": 13659,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "巢湖学院",
+    "year": 2026,
+    "pdf": "2026_巢湖学院_招生章程.pdf",
+    "text_length": 10446,
+    "has_major_list": true,
+    "exam_keywords": [
+      "高等数学",
+      "英语",
+      "管理学",
+      "大学语文"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "淮北理工学院",
+    "year": 2026,
+    "pdf": "2026_淮北理工学院_招生章程.pdf",
+    "text_length": 19859,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "淮南师范学院",
+    "year": 2026,
+    "pdf": "2026_淮南师范学院_招生章程.pdf",
+    "text_length": 13703,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "学校：淮南联合大学（公办普通高等专科学校）",
+      "学校办学地址：安徽省淮南市田家庵区洞山西路",
+      "与淮南联合大",
+      "与淮南联合大",
+      "与淮南联合大"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "滁州学院",
+    "year": 2026,
+    "pdf": "2026_滁州学院_招生章程.pdf",
+    "text_length": 11072,
+    "has_major_list": true,
+    "exam_keywords": [
+      "高等数学",
+      "英语",
+      "管理学",
+      "大学语文"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "皖南医科大学",
+    "year": 2026,
+    "pdf": "2026_皖南医科大学_招生章程.pdf",
+    "text_length": 12121,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "学校）进行录取",
+      "学校）剩余合格生源数确定计划分配比例",
+      "学校）",
+      "学校）剩余合格生源数确定计划分配比例"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "皖江工学院",
+    "year": 2026,
+    "pdf": "2026_皖江工学院_招生章程.pdf",
+    "text_length": 18030,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "皖西学院",
+    "year": 2026,
+    "pdf": "2026_皖西学院_招生章程.pdf",
+    "text_length": 12503,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校名称:安徽国防科技职业学院",
+      "院校办学属性:公办全日制普通高等职业院校",
+      "院校办学地址:安徽省六安市金安区梅山中路 56 号",
+      "的四个专业以外的所有专业均为本部培养。",
+      "“专升本”新生入学后"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "芜湖学院",
+    "year": 2026,
+    "pdf": "2026_芜湖学院_招生章程.pdf",
+    "text_length": 11286,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校及培养地址：",
+      "大学语文+ 与安徽扬子职业技",
+      "合计      600   52     10     52",
+      "点专业间计划调整",
+      "点的招生专业间出现生源不均衡的情况"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true
+  },
+  {
+    "school": "芜湖职业技术大学",
+    "year": 2026,
+    "pdf": "2026_芜湖职业技术大学_招生章程.pdf",
+    "text_length": 10450,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文",
+      "管理学"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true
+  },
+  {
+    "school": "蚌埠医科大学",
+    "year": 2026,
+    "pdf": "2026_蚌埠医科大学_招生章程.pdf",
+    "text_length": 11777,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "专业招生计划专业间调整顺序：校本部招生计划内部互",
+      "招生计划内部互调、校本部招生计划和联合培养招生计划之间互调。"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "蚌埠学院",
+    "year": 2026,
+    "pdf": "2026_蚌埠学院_招生章程.pdf",
+    "text_length": 11899,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校 1：名称：安徽粮食工程职业学院",
+      "院校 2：名称：安徽电子信息职业技术学院",
+      "食品科学                          "
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "蚌埠工商学院",
+    "year": 2026,
+    "pdf": "2026_蚌埠工商学院_招生章程.pdf",
+    "text_length": 14960,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "铜陵学院",
+    "year": 2026,
+    "pdf": "2026_铜陵学院_招生章程.pdf",
+    "text_length": 13116,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：【安徽国际商务职业学院】公办全日制普通高等学校"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "阜阳师范大学",
+    "year": 2026,
+    "pdf": "2026_阜阳师范大学_招生章程.pdf",
+    "text_length": 10756,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "的新生到联合培养学校报到入学、就读。",
+      "的新生到联合培养学校报到入"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "马鞍山学院",
+    "year": 2026,
+    "pdf": "2026_马鞍山学院_招生章程.pdf",
+    "text_length": 18398,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "黄山学院",
+    "year": 2026,
+    "pdf": "2026_黄山学院_招生章程.pdf",
+    "text_length": 13197,
+    "has_major_list": true,
+    "exam_keywords": [
+      "大学语文",
+      "英语",
+      "管理学",
+      "高等数学",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "的新生到联合培养学校报到入学、就读。",
+      "的新生到联合培养学",
+      "的学生",
+      "学校的学生管理办法实"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "亳州学院",
+    "year": 2025,
+    "pdf": "2025_亳州学院_招生章程.pdf",
+    "text_length": 10784,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文",
+      "管理学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true
+  },
+  {
+    "school": "合肥城市学院",
+    "year": 2025,
+    "pdf": "2025_合肥城市学院_招生章程.pdf",
+    "text_length": 14902,
+    "has_major_list": true,
+    "exam_keywords": [
+      "大学语文",
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "C语言"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "合肥大学",
+    "year": 2025,
+    "pdf": "2025_合肥大学_招生章程.pdf",
+    "text_length": 12190,
+    "has_major_list": true,
+    "exam_keywords": [
+      "程序设计",
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "合肥师范学院",
+    "year": 2025,
+    "pdf": "2025_合肥师范学院_招生章程.pdf",
+    "text_length": 17163,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "院校名称          办学类型            ",
+      "与淮北职业",
+      "院校内进行",
+      "院校间按调剂"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "合肥经济学院",
+    "year": 2025,
+    "pdf": "2025_合肥经济学院_招生章程.pdf",
+    "text_length": 16159,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安庆师范大学",
+    "year": 2025,
+    "pdf": "2025_安庆师范大学_招生章程.pdf",
+    "text_length": 10753,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：桐城师范高等专科学校（公办普通高等专科学校）",
+      "的新生到联合培养院校报到"
+    ],
+    "has_eligibility_scope": true
+  },
+  {
+    "school": "安徽三联学院",
+    "year": 2025,
+    "pdf": "2025_安徽三联学院_招生章程.pdf",
+    "text_length": 16683,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽中医药大学",
+    "year": 2025,
+    "pdf": "2025_安徽中医药大学_招生章程.pdf",
+    "text_length": 13940,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校："
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽信息工程学院",
+    "year": 2025,
+    "pdf": "2025_安徽信息工程学院_招生章程.pdf",
+    "text_length": 12107,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "大学语文",
+      "会计学"
+    ],
+    "tuition_fees": [
+      "20000",
+      "5000",
+      "4000",
+      "6000",
+      "10000"
+    ],
+    "public_course_science": "文科:大学语文+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true
+  },
+  {
+    "school": "安徽农业大学",
+    "year": 2025,
+    "pdf": "2025_安徽农业大学_招生章程.pdf",
+    "text_length": 13083,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文",
+      "管理学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：1、安徽水利水电职业技术学院",
+      "地点",
+      "点内进行。",
+      "学校。无故不按期报到的一律取消入学资格。报到时",
+      "院校严格执行国家招生"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽医科大学",
+    "year": 2025,
+    "pdf": "2025_安徽医科大学_招生章程.pdf",
+    "text_length": 15269,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "/办学地点",
+      "点）、A",
+      "点）、B 段专业间计划调整",
+      "点）、A-B 段间计划调整（不跨联合培养点）、"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽医科大学临床医学院",
+    "year": 2025,
+    "pdf": "2025_安徽医科大学临床医学院_招生章程.pdf",
+    "text_length": 11533,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "计算机基础",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽外国语学院",
+    "year": 2025,
+    "pdf": "2025_安徽外国语学院_招生章程.pdf",
+    "text_length": 15244,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽工业大学",
+    "year": 2025,
+    "pdf": "2025_安徽工业大学_招生章程.pdf",
+    "text_length": 20008,
+    "has_major_list": true,
+    "exam_keywords": [
+      "大学语文",
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "点对应专业总计划的10%（",
+      "点内进行。校内调整的计划数",
+      "点内B",
+      "点内进行A-B段间计划调整。当未完成计划从A段调整到B段时"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽师范大学",
+    "year": 2025,
+    "pdf": "2025_安徽师范大学_招生章程.pdf",
+    "text_length": 10211,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校及地址：",
+      "学前教育    200   13    3    16   ",
+      "合计     2000   165   35   160"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽建筑大学",
+    "year": 2025,
+    "pdf": "2025_安徽建筑大学_招生章程.pdf",
+    "text_length": 14592,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "院校对应专业总计划的 10%。考生面试成绩相同且同时录取将超",
+      "院校）择优录取。考生综合考查成绩相同",
+      "院校）择优录取。考生总成",
+      "院校"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽文达信息工程学院",
+    "year": 2025,
+    "pdf": "2025_安徽文达信息工程学院_招生章程.pdf",
+    "text_length": 17140,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽新华学院",
+    "year": 2025,
+    "pdf": "2025_安徽新华学院_招生章程.pdf",
+    "text_length": 15055,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽理工大学",
+    "year": 2025,
+    "pdf": "2025_安徽理工大学_招生章程.pdf",
+    "text_length": 10216,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "学校名称：淮南职业技术学院"
+    ],
+    "public_course_science": "文科:大学语文+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽科技工程大学",
+    "year": 2025,
+    "pdf": "2025_安徽科技工程大学_招生章程.pdf",
+    "text_length": 11853,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "tuition_fees": [
+      "20000"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "学校：",
+      "招生专业"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "安徽艺术学院",
+    "year": 2025,
+    "pdf": "2025_安徽艺术学院_招生章程.pdf",
+    "text_length": 13054,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "学校名称：安徽艺术职业学院",
+      "学校名称：安徽广播影视职业技术学院",
+      "学校名称：安徽新闻出版职业技术学院",
+      "点间招生计划均不互调。"
+    ],
+    "has_eligibility_scope": true
+  },
+  {
+    "school": "宿州学院",
+    "year": 2025,
+    "pdf": "2025_宿州学院_招生章程.pdf",
+    "text_length": 13022,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "巢湖学院",
+    "year": 2025,
+    "pdf": "2025_巢湖学院_招生章程.pdf",
+    "text_length": 10445,
+    "has_major_list": true,
+    "exam_keywords": [
+      "高等数学",
+      "英语",
+      "管理学",
+      "大学语文"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "池州学院",
+    "year": 2025,
+    "pdf": "2025_池州学院_招生章程.pdf",
+    "text_length": 13460,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "的学生",
+      "学校的学生管理办法实施",
+      "学校在",
+      "的同时颁发南京信息工程大学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "淮北理工学院",
+    "year": 2025,
+    "pdf": "2025_淮北理工学院_招生章程.pdf",
+    "text_length": 18074,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "淮南师范学院",
+    "year": 2025,
+    "pdf": "2025_淮南师范学院_招生章程.pdf",
+    "text_length": 8739,
+    "has_major_list": true,
+    "exam_keywords": [
+      "高等数学",
+      "英语",
+      "管理学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "学校：淮南联合大学",
+      "电气工程及其自动化     50     5      1 ",
+      "学校报到。如考生因不能按期毕业",
+      "）按教学计划修完规定课程"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "滁州学院",
+    "year": 2025,
+    "pdf": "2025_滁州学院_招生章程.pdf",
+    "text_length": 10784,
+    "has_major_list": true,
+    "exam_keywords": [
+      "高等数学",
+      "英语",
+      "管理学",
+      "大学语文"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "皖南医科大学",
+    "year": 2025,
+    "pdf": "2025_皖南医科大学_招生章程.pdf",
+    "text_length": 12489,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "招生院校招生计划调整顺序：联合培养招生计划",
+      "招生计划之间"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "皖江工学院",
+    "year": 2025,
+    "pdf": "2025_皖江工学院_招生章程.pdf",
+    "text_length": 13995,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "皖西学院",
+    "year": 2025,
+    "pdf": "2025_皖西学院_招生章程.pdf",
+    "text_length": 12838,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校名称:安徽国防科技职业学院",
+      "院校办学属性:公办全日制普通高等职业院校",
+      "院校办学地址:安徽省六安市金安区梅山中路 56 号",
+      "的四个专业以外的所有专业均为本部培养。",
+      "“专升本”新生入学后"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "芜湖学院",
+    "year": 2025,
+    "pdf": "2025_芜湖学院_招生章程.pdf",
+    "text_length": 11571,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校及地址：",
+      "与安徽扬子",
+      "合计      800     70     15     ",
+      "点专业间计划调整",
+      "点的招生专业间出现生源不均衡的情况"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "蚌埠医科大学",
+    "year": 2025,
+    "pdf": "2025_蚌埠医科大学_招生章程.pdf",
+    "text_length": 11463,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：名称：滁州城市职业学院",
+      "专业招生计划专业间调整顺序：校本部招生计划内部互",
+      "招生计划内部互调、校本部招生计划和联合培养招生计划之间互调。"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "蚌埠学院",
+    "year": 2025,
+    "pdf": "2025_蚌埠学院_招生章程.pdf",
+    "text_length": 12038,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校 1：名称：安徽粮食工程职业学院",
+      "院校 2：名称：安徽电子信息职业技术学院"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "蚌埠工商学院",
+    "year": 2025,
+    "pdf": "2025_蚌埠工商学院_招生章程.pdf",
+    "text_length": 14496,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "铜陵学院",
+    "year": 2025,
+    "pdf": "2025_铜陵学院_招生章程.pdf",
+    "text_length": 13072,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "tuition_fees": [
+      "20000"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：【安徽国际商务职业学院】公办全日制普通高等学校"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "阜阳师范大学",
+    "year": 2025,
+    "pdf": "2025_阜阳师范大学_招生章程.pdf",
+    "text_length": 11355,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "的新生到联合培养学校报到入学、就读。",
+      "的新生到联合培养学校报到入学、就读）。无故不按期报到的一律"
+    ],
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "阜阳理工学院",
+    "year": 2025,
+    "pdf": "2025_阜阳理工学院_招生章程.pdf",
+    "text_length": 11272,
+    "has_major_list": true,
+    "exam_keywords": [
+      "程序设计",
+      "英语",
+      "高等数学",
+      "大学语文"
+    ],
+    "tuition_fees": [
+      "20000"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true
+  },
+  {
+    "school": "马鞍山学院",
+    "year": 2025,
+    "pdf": "2025_马鞍山学院_招生章程.pdf",
+    "text_length": 16821,
+    "has_major_list": true,
+    "exam_keywords": [
+      "英语",
+      "程序设计",
+      "管理学",
+      "高等数学",
+      "大学语文",
+      "会计学"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  },
+  {
+    "school": "黄山学院",
+    "year": 2025,
+    "pdf": "2025_黄山学院_招生章程.pdf",
+    "text_length": 12755,
+    "has_major_list": true,
+    "exam_keywords": [
+      "大学语文",
+      "英语",
+      "管理学",
+      "高等数学",
+      "会计学"
+    ],
+    "has_joint_training": true,
+    "training_partners": [
+      "院校：",
+      "的新生到联合培养学校报到入学、就读。",
+      "的新生到联合培养学",
+      "的学生",
+      "学校的学生管理办法实"
+    ],
+    "public_course_science": "文科:大学语文+英语 理科:高等数学+英语",
+    "has_eligibility_scope": true,
+    "mentions_syllabus": true,
+    "mentions_reference_books": true
+  }
+]

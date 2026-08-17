@@ -1,0 +1,413 @@
+{
+  "data": [
+    {
+      "major_name_raw": "商务英语",
+      "notes_raw": "",
+      "score_normal_raw": "454.5(专业课1:115.5)",
+      "score_registered_poor_family_raw": "427.5",
+      "score_retired_culture_exam_exempt_raw": "64",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "电子信息工程",
+      "notes_raw": "",
+      "score_normal_raw": "417(专业课1:127.5)",
+      "score_registered_poor_family_raw": "351",
+      "score_retired_culture_exam_exempt_raw": "72.5",
+      "score_retired_non_exempt_raw": "205",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "药物制剂",
+      "notes_raw": "",
+      "score_normal_raw": "205.5",
+      "score_registered_poor_family_raw": "264.5",
+      "score_retired_culture_exam_exempt_raw": "58",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "人力资源管理",
+      "notes_raw": "",
+      "score_normal_raw": "423.5",
+      "score_registered_poor_family_raw": "422",
+      "score_retired_culture_exam_exempt_raw": "62.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "市场营销",
+      "notes_raw": "",
+      "score_normal_raw": "413",
+      "score_registered_poor_family_raw": "305",
+      "score_retired_culture_exam_exempt_raw": "62",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "网络与新媒体",
+      "notes_raw": "",
+      "score_normal_raw": "416.5",
+      "score_registered_poor_family_raw": "411.5",
+      "score_retired_culture_exam_exempt_raw": "76.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "通信工程",
+      "notes_raw": "",
+      "score_normal_raw": "419",
+      "score_registered_poor_family_raw": "227",
+      "score_retired_culture_exam_exempt_raw": "70.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "化学工程与工艺",
+      "notes_raw": "",
+      "score_normal_raw": "283.5",
+      "score_registered_poor_family_raw": "343.5",
+      "score_retired_culture_exam_exempt_raw": "64.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "软件工程",
+      "notes_raw": "",
+      "score_normal_raw": "439",
+      "score_registered_poor_family_raw": "388",
+      "score_retired_culture_exam_exempt_raw": "68.5",
+      "score_retired_non_exempt_raw": "272.5",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "数据科学与大数据技术",
+      "notes_raw": "",
+      "score_normal_raw": "333",
+      "score_registered_poor_family_raw": "320.5",
+      "score_retired_culture_exam_exempt_raw": "68.5",
+      "score_retired_non_exempt_raw": "393.5",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "互联网金融",
+      "notes_raw": "",
+      "score_normal_raw": "293.5",
+      "score_registered_poor_family_raw": "258",
+      "score_retired_culture_exam_exempt_raw": "67.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "学前教育",
+      "notes_raw": "",
+      "score_normal_raw": "472.5",
+      "score_registered_poor_family_raw": "453",
+      "score_retired_culture_exam_exempt_raw": "69",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "生物制药",
+      "notes_raw": "",
+      "score_normal_raw": "321.5",
+      "score_registered_poor_family_raw": "187",
+      "score_retired_culture_exam_exempt_raw": "44",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "经济统计学",
+      "notes_raw": "",
+      "score_normal_raw": "403.5",
+      "score_registered_poor_family_raw": "272",
+      "score_retired_culture_exam_exempt_raw": "50",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "新能源材料与器件",
+      "notes_raw": "",
+      "score_normal_raw": "230",
+      "score_registered_poor_family_raw": "262",
+      "score_retired_culture_exam_exempt_raw": "57",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "音乐学",
+      "notes_raw": "",
+      "score_normal_raw": "406",
+      "score_registered_poor_family_raw": "389",
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "视觉传达设计",
+      "notes_raw": "",
+      "score_normal_raw": "458.5(专业课1:126.5)",
+      "score_registered_poor_family_raw": "410",
+      "score_retired_culture_exam_exempt_raw": "73",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "服装与服饰设计",
+      "notes_raw": "",
+      "score_normal_raw": "460",
+      "score_registered_poor_family_raw": "415",
+      "score_retired_culture_exam_exempt_raw": "71.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "动画",
+      "notes_raw": "",
+      "score_normal_raw": "465.5",
+      "score_registered_poor_family_raw": "365",
+      "score_retired_culture_exam_exempt_raw": "68",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "财务管理",
+      "notes_raw": "安徽工业经济职业技术学院",
+      "score_normal_raw": "454.5",
+      "score_registered_poor_family_raw": "431",
+      "score_retired_culture_exam_exempt_raw": "72",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "电气工程及其自动化",
+      "notes_raw": "安徽工业经济职业技术学院",
+      "score_normal_raw": "415",
+      "score_registered_poor_family_raw": "270",
+      "score_retired_culture_exam_exempt_raw": "66.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "网络工程",
+      "notes_raw": "安徽工业经济职业技术学院",
+      "score_normal_raw": "327",
+      "score_registered_poor_family_raw": null,
+      "score_retired_culture_exam_exempt_raw": "50",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "计算机科学与技术",
+      "notes_raw": "安徽工业经济职业技术学院",
+      "score_normal_raw": "402",
+      "score_registered_poor_family_raw": "269",
+      "score_retired_culture_exam_exempt_raw": "68",
+      "score_retired_non_exempt_raw": "379",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "网络工程",
+      "notes_raw": "合肥职业技术学院",
+      "score_normal_raw": "351.5(专业课1:108.5)",
+      "score_registered_poor_family_raw": "261",
+      "score_retired_culture_exam_exempt_raw": "51",
+      "score_retired_non_exempt_raw": "406.5",
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "制药工程",
+      "notes_raw": "合肥职业技术学院",
+      "score_normal_raw": "239.5",
+      "score_registered_poor_family_raw": "315",
+      "score_retired_culture_exam_exempt_raw": "47.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "运动康复",
+      "notes_raw": "合肥职业技术学院",
+      "score_normal_raw": "340",
+      "score_registered_poor_family_raw": "282.5",
+      "score_retired_culture_exam_exempt_raw": "47.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "小学教育",
+      "notes_raw": "淮北职业技术学院",
+      "score_normal_raw": "454",
+      "score_registered_poor_family_raw": "403.5",
+      "score_retired_culture_exam_exempt_raw": "67.5",
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "电气工程及其自动化",
+      "notes_raw": "淮北职业技术学院",
+      "score_normal_raw": null,
+      "score_registered_poor_family_raw": null,
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "环境设计",
+      "notes_raw": "马鞍山师范高等专科学校",
+      "score_normal_raw": null,
+      "score_registered_poor_family_raw": null,
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "计算机科学与技术",
+      "notes_raw": "马鞍山师范高等专科学校",
+      "score_normal_raw": null,
+      "score_registered_poor_family_raw": null,
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    },
+    {
+      "major_name_raw": "食品质量与安全",
+      "notes_raw": "马鞍山师范高等专科学校",
+      "score_normal_raw": null,
+      "score_registered_poor_family_raw": null,
+      "score_retired_culture_exam_exempt_raw": null,
+      "score_retired_non_exempt_raw": null,
+      "score_skill_competition_raw": null,
+      "source_locator": {
+        "table": 1,
+        "url": "https://zsb.hfnu.edu.cn/info/1002/3475.htm"
+      }
+    }
+  ],
+  "extracted_at": "2026-08-14T19:51:12.060291",
+  "extraction_method": "manual_verified_from_official_source",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-HFNU-2025-LQ",
+  "source_school_id": "HFNU",
+  "source_year": "2025"
+}

@@ -1,0 +1,20 @@
+{
+  "completed_schools": [],
+  "last_checkpoint": "2026-08-14T13:35:50+00:00",
+  "next_action": "人工复核后，选择1所结构明显不同的院校执行 Pilot B；不要直接进入39所Batch。",
+  "partial_schools": [
+    "HFNU"
+  ],
+  "run_mode": "pilot",
+  "schema_version": "0.3.0",
+  "school_id": "HFNU",
+  "stage": "pilot_2_3_complete",
+  "stages": {
+    "batch_ready": false,
+    "normalization_complete": true,
+    "qa_complete": true,
+    "report_complete": true,
+    "source_fetch_complete": false,
+    "staging_complete": true
+  }
+}

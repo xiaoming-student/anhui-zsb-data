@@ -1,51 +1,51 @@
 # 安徽专升本数据系统质量门禁报告
 
-> 生成时间：2026-08-14T13:35:54+00:00
-> Python：3.13.5
-> 平台：Linux-6.18.35-x86_64-with-glibc2.41
+> 生成时间：2026-08-14T14:24:05+00:00
+> Python：3.13.12
+> 平台：macOS-14.6-arm64-arm-64bit-Mach-O
 
 ## 总结：PASS
 
 | 检查项 | 结果 | 耗时 |
 |---|---:|---:|
-| Python 语法编译 | PASS | 0.643s |
-| Staging 只读验证 | PASS | 0.626s |
-| 完整 canonical 流水线 | PASS | 0.879s |
-| 单元与集成测试 | PASS | 1.742s |
-| 连续重建幂等测试 | PASS | 1.115s |
-| Clean-room 完整重建测试 | PASS | 1.587s |
+| Python 语法编译 | PASS | 0.074s |
+| Staging 只读验证 | PASS | 0.057s |
+| 完整 canonical 流水线 | PASS | 0.439s |
+| 单元与集成测试 | PASS | 0.462s |
+| 连续重建幂等测试 | PASS | 0.242s |
+| Clean-room 完整重建测试 | PASS | 0.249s |
 
 ## 执行详情
 
 ### Python 语法编译 — PASS
 
 ```text
-$ /opt/pyvenv/bin/python3 -m compileall -q run_pipeline.py normalize.py extract.py scripts tests
+$ /Users/fuhaikui/.workbuddy/binaries/python/versions/3.13.12/bin/python3 -m compileall -q run_pipeline.py normalize.py extract.py scripts tests
 
 ```
 
 ### Staging 只读验证 — PASS
 
 ```text
-$ /opt/pyvenv/bin/python3 extract.py
+$ /Users/fuhaikui/.workbuddy/binaries/python/versions/3.13.12/bin/python3 extract.py
 HFNU/2024: staging checked
 HFNU/2025: staging checked
 HFNU/2026: staging checked
-Staging verification passed: 14 JSON files checked; no files were modified.
+Staging verification passed: 15 JSON files checked; no files were modified.
 ```
 
 ### 完整 canonical 流水线 — PASS
 
 ```text
-$ /opt/pyvenv/bin/python3 run_pipeline.py
-QA/report generated: conflicts=0, missing=47
+$ /Users/fuhaikui/.workbuddy/binaries/python/versions/3.13.12/bin/python3 run_pipeline.py
+QA/report generated: conflicts=0, missing=44
 ========================================================================
 安徽专升本数据系统验证报告
 ========================================================================
-[INFO] Raw manifest verified: 3 assets
+[INFO] Raw manifest verified: 16 assets
 [INFO] PK unique: source_sites.csv.source_site_id (1 rows)
-[INFO] PK unique: source_documents.csv.source_document_id (5 rows)
-[INFO] PK unique: source_assets.csv.asset_id (3 rows)
+[INFO] PK unique: source_documents.csv.source_document_id (6 rows)
+[INFO] PK unique: source_assets.csv.asset_id (16 rows)
 [INFO] FK valid: source_documents.csv.source_site_id -> source_sites.csv.source_site_id
 [INFO] FK valid: source_assets.csv.source_document_id -> source_documents.csv.source_document_id
 [INFO] PK unique: institutions.csv.institution_id (5 rows)
@@ -57,9 +57,9 @@ QA/report generated: conflicts=0, missing=47
 [INFO] PK unique: major_eligibility.csv.eligibility_id (82 rows)
 [INFO] PK unique: eligibility_rule_sets.csv.eligibility_rule_set_id (82 rows)
 [INFO] PK unique: eligibility_rule_items.csv.eligibility_rule_item_id (295 rows)
-[INFO] PK unique: admission_scores.csv.admission_score_id (305 rows)
+[INFO] PK unique: admission_scores.csv.admission_score_id (445 rows)
 [INFO] PK unique: admission_rules.csv.rule_id (15 rows)
-[INFO] PK unique: fact_sources.csv.fact_source_id (1585 rows)
+[INFO] PK unique: fact_sources.csv.fact_source_id (1725 rows)
 [INFO] FK valid: program_years.csv.admission_school_id -> institutions.csv.institution_id
 [INFO] FK valid: program_offerings.csv.program_year_id -> program_years.csv.program_year_id
 [INFO] FK valid: program_offerings.csv.training_institution_id -> institutions.csv.institution_id
@@ -83,22 +83,22 @@ Pipeline complete:
   exam_sessions: 246
   major_eligibility: 82
   eligibility_rule_items: 295
-  admission_scores: 305
+  admission_scores: 445
   admission_rules: 15
 ```
 
 ### 单元与集成测试 — PASS
 
 ```text
-$ /opt/pyvenv/bin/python3 -m unittest discover -s tests -v
-QA/report generated: conflicts=0, missing=47
+$ /Users/fuhaikui/.workbuddy/binaries/python/versions/3.13.12/bin/python3 -m unittest discover -s tests -v
+QA/report generated: conflicts=0, missing=44
 ========================================================================
 安徽专升本数据系统验证报告
 ========================================================================
-[INFO] Raw manifest verified: 3 assets
+[INFO] Raw manifest verified: 16 assets
 [INFO] PK unique: source_sites.csv.source_site_id (1 rows)
-[INFO] PK unique: source_documents.csv.source_document_id (5 rows)
-[INFO] PK unique: source_assets.csv.asset_id (3 rows)
+[INFO] PK unique: source_documents.csv.source_document_id (6 rows)
+[INFO] PK unique: source_assets.csv.asset_id (16 rows)
 [INFO] FK valid: source_documents.csv.source_site_id -> source_sites.csv.source_site_id
 [INFO] FK valid: source_assets.csv.source_document_id -> source_documents.csv.source_document_id
 [INFO] PK unique: institutions.csv.institution_id (5 rows)
@@ -110,9 +110,9 @@ QA/report generated: conflicts=0, missing=47
 [INFO] PK unique: major_eligibility.csv.eligibility_id (82 rows)
 [INFO] PK unique: eligibility_rule_sets.csv.eligibility_rule_set_id (82 rows)
 [INFO] PK unique: eligibility_rule_items.csv.eligibility_rule_item_id (295 rows)
-[INFO] PK unique: admission_scores.csv.admission_score_id (305 rows)
+[INFO] PK unique: admission_scores.csv.admission_score_id (445 rows)
 [INFO] PK unique: admission_rules.csv.rule_id (15 rows)
-[INFO] PK unique: fact_sources.csv.fact_source_id (1585 rows)
+[INFO] PK unique: fact_sources.csv.fact_source_id (1725 rows)
 [INFO] FK valid: program_years.csv.admission_school_id -> institutions.csv.institution_id
 [INFO] FK valid: program_offerings.csv.program_year_id -> program_years.csv.program_year_id
 [INFO] FK valid: program_offerings.csv.training_institution_id -> institutions.csv.institution_id
@@ -136,7 +136,7 @@ Pipeline complete:
   exam_sessions: 246
   major_eligibility: 82
   eligibility_rule_items: 295
-  admission_scores: 305
+  admission_scores: 445
   admission_rules: 15
 
 [stderr]
@@ -156,7 +156,7 @@ test_validator_and_staging_verifier (test_pipeline.PipelineTestCase.test_validat
 test_yearly_counts (test_pipeline.PipelineTestCase.test_yearly_counts) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 1.124s
+Ran 14 tests in 0.371s
 
 OK
 ```
@@ -164,14 +164,14 @@ OK
 ### 连续重建幂等测试 — PASS
 
 ```text
-$ /opt/pyvenv/bin/python3 scripts/check_idempotence.py
+$ /Users/fuhaikui/.workbuddy/binaries/python/versions/3.13.12/bin/python3 scripts/check_idempotence.py
 Idempotence: PASS (27 files)
 ```
 
 ### Clean-room 完整重建测试 — PASS
 
 ```text
-$ /opt/pyvenv/bin/python3 scripts/check_clean_rebuild.py
+$ /Users/fuhaikui/.workbuddy/binaries/python/versions/3.13.12/bin/python3 scripts/check_clean_rebuild.py
 Clean rebuild: PASS (27 files)
 ```
 

@@ -1,0 +1,235 @@
+{
+  "data": [
+    {
+      "major_name_raw": "会计学",
+      "plan_total_raw": "120",
+      "plan_exempt_retired_raw": "7",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "9",
+      "tuition_raw": "4900",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "供应链管理",
+      "plan_total_raw": "160",
+      "plan_exempt_retired_raw": "11",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "13",
+      "tuition_raw": "4900",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "旅游管理",
+      "plan_total_raw": "200",
+      "plan_exempt_retired_raw": "13",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "16",
+      "tuition_raw": "4900",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "网络与新媒体",
+      "plan_total_raw": "100",
+      "plan_exempt_retired_raw": "13",
+      "plan_retired_non_exempt_raw": "2",
+      "plan_registered_poor_family_raw": "8",
+      "tuition_raw": "4900",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "英语",
+      "plan_total_raw": "90",
+      "plan_exempt_retired_raw": "5",
+      "plan_retired_non_exempt_raw": "2",
+      "plan_registered_poor_family_raw": "7",
+      "tuition_raw": "5390",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "师范；与合肥幼儿师范高等专科学校联合培养",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "特殊教育",
+      "plan_total_raw": "50",
+      "plan_exempt_retired_raw": "2",
+      "plan_retired_non_exempt_raw": "1",
+      "plan_registered_poor_family_raw": "4",
+      "tuition_raw": "4900",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "小学教育",
+      "plan_total_raw": "100",
+      "plan_exempt_retired_raw": "4",
+      "plan_retired_non_exempt_raw": "1",
+      "plan_registered_poor_family_raw": "8",
+      "tuition_raw": "4900",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "学前教育",
+      "plan_total_raw": "200",
+      "plan_exempt_retired_raw": "13",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "16",
+      "tuition_raw": "5390",
+      "program_category_raw": "文",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "师范",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "通信工程",
+      "plan_total_raw": "160",
+      "plan_exempt_retired_raw": "16",
+      "plan_retired_non_exempt_raw": "2",
+      "plan_registered_poor_family_raw": "13",
+      "tuition_raw": "5200",
+      "program_category_raw": "理",
+      "public_exam_subjects_raw": "高等数学+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "软件工程",
+      "plan_total_raw": "160",
+      "plan_exempt_retired_raw": "13",
+      "plan_retired_non_exempt_raw": "2",
+      "plan_registered_poor_family_raw": "13",
+      "tuition_raw": "5720",
+      "program_category_raw": "理",
+      "public_exam_subjects_raw": "高等数学+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "新能源材料与器件",
+      "plan_total_raw": "160",
+      "plan_exempt_retired_raw": "11",
+      "plan_retired_non_exempt_raw": "2",
+      "plan_registered_poor_family_raw": "13",
+      "tuition_raw": "5200",
+      "program_category_raw": "理",
+      "public_exam_subjects_raw": "高等数学+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "生物制药",
+      "plan_total_raw": "140",
+      "plan_exempt_retired_raw": "13",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "11",
+      "tuition_raw": "5200",
+      "program_category_raw": "理",
+      "public_exam_subjects_raw": "高等数学+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "食品质量与安全",
+      "plan_total_raw": "100",
+      "plan_exempt_retired_raw": "12",
+      "plan_retired_non_exempt_raw": "2",
+      "plan_registered_poor_family_raw": "8",
+      "tuition_raw": "5200",
+      "program_category_raw": "理",
+      "public_exam_subjects_raw": "高等数学+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "环境工程",
+      "plan_total_raw": "160",
+      "plan_exempt_retired_raw": "16",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "13",
+      "tuition_raw": "5200",
+      "program_category_raw": "理",
+      "public_exam_subjects_raw": "高等数学+英语",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    },
+    {
+      "major_name_raw": "体育教育",
+      "plan_total_raw": "100",
+      "plan_exempt_retired_raw": "16",
+      "plan_retired_non_exempt_raw": "3",
+      "plan_registered_poor_family_raw": "8",
+      "tuition_raw": "5720",
+      "program_category_raw": "体育（文）",
+      "public_exam_subjects_raw": "大学语文+英语",
+      "notes_raw": "师范；与安徽体育运动职业技术学院联合培养",
+      "source_locator": {
+        "table": "1.1 招生专业与计划",
+        "asset_id": "ASSET-AHNU-2025-ZC-PDF"
+      }
+    }
+  ],
+  "extracted_at": "2026-08-14T16:16:05.485061+00:00",
+  "extraction_method": "pdfplumber_verified",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-AHNU-2025-ZC",
+  "source_school_id": "AHNU",
+  "source_year": "2025"
+}

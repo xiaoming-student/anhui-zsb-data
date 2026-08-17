@@ -1,20 +1,42 @@
 {
   "completed_schools": [],
-  "last_checkpoint": "2026-08-14T13:35:50+00:00",
-  "next_action": "人工复核后，选择1所结构明显不同的院校执行 Pilot B；不要直接进入39所Batch。",
+  "last_checkpoint": "2026-08-14T22:24:04+08:00",
+  "next_action": "人工确认 Pilot B 候选院校后，将 RUN_MODE 改为 EXECUTE 并重新执行。推荐：安徽师范大学 (AHNU)。",
   "partial_schools": [
     "HFNU"
   ],
   "run_mode": "pilot",
   "schema_version": "0.3.0",
   "school_id": "HFNU",
-  "stage": "pilot_2_3_complete",
+  "stage": "select_mode_complete",
   "stages": {
     "batch_ready": false,
+    "evidence_closure_complete": true,
     "normalization_complete": true,
+    "pilot_b_candidate_selection_complete": true,
     "qa_complete": true,
     "report_complete": true,
-    "source_fetch_complete": false,
+    "source_fetch_complete": true,
     "staging_complete": true
-  }
+  },
+  "pilot_b_candidates": [
+    {
+      "school_name": "安徽师范大学",
+      "school_id": "AHNU",
+      "score": 21,
+      "recommended": true
+    },
+    {
+      "school_name": "安徽新华学院",
+      "school_id": "AXHU",
+      "score": 20,
+      "recommended": false
+    },
+    {
+      "school_name": "巢湖学院",
+      "school_id": "CHU",
+      "score": 16,
+      "recommended": false
+    }
+  ]
 }

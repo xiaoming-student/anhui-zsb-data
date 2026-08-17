@@ -1,0 +1,208 @@
+{
+  "data": [
+    {
+      "major_name_raw": "体育教育",
+      "subject_1_raw": "体育教学论",
+      "subject_2_raw": "专业实践",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "英语",
+      "subject_1_raw": "综合英语",
+      "subject_2_raw": "英美概况",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "汉语言文学",
+      "subject_1_raw": "中国文学史",
+      "subject_2_raw": "写作",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "会计学",
+      "subject_1_raw": "管理学原理",
+      "subject_2_raw": "基础会计学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "供应链管理",
+      "subject_1_raw": "管理学原理",
+      "subject_2_raw": "智慧物流与供应链基础",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "旅游管理",
+      "subject_1_raw": "管理学原理",
+      "subject_2_raw": "旅游学概论",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "历史学",
+      "subject_1_raw": "中国史",
+      "subject_2_raw": "世界史",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "新闻学",
+      "subject_1_raw": "新闻学概论",
+      "subject_2_raw": "新闻采访与写作",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "教育技术学",
+      "subject_1_raw": "教育技术学导论",
+      "subject_2_raw": "信息技术教学论",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "学前教育",
+      "subject_1_raw": "学前教育学",
+      "subject_2_raw": "学前儿童发展心理学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "特殊教育",
+      "subject_1_raw": "特殊教育学",
+      "subject_2_raw": "学前儿童发展心理学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "小学教育",
+      "subject_1_raw": "小学教育学",
+      "subject_2_raw": "发展与教育心理学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "新能源材料与器件",
+      "subject_1_raw": "机械设计基础",
+      "subject_2_raw": "工程力学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "生物制药",
+      "subject_1_raw": "微生物学",
+      "subject_2_raw": "生物化学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "食品质量与安全",
+      "subject_1_raw": "微生物学",
+      "subject_2_raw": "生物化学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "环境工程",
+      "subject_1_raw": "环境学",
+      "subject_2_raw": "基础化学",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "通信工程",
+      "subject_1_raw": "电路分析",
+      "subject_2_raw": "数字电子技术",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    },
+    {
+      "major_name_raw": "软件工程",
+      "subject_1_raw": "计算机专业基础",
+      "subject_2_raw": "C 语言程序设计",
+      "notes_raw": "",
+      "source_locator": {
+        "table": "3.1 考试科目",
+        "asset_id": "ASSET-AHNU-2024-ZC-PDF",
+        "page": 8
+      }
+    }
+  ],
+  "extracted_at": "2026-08-14T15:07:08.844410+00:00",
+  "extraction_method": "pdfplumber_verified",
+  "schema_version": "0.3.0",
+  "source_document_id": "SRC-AHNU-2024-ZC",
+  "source_school_id": "AHNU",
+  "source_year": "2024"
+}

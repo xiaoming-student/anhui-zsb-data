@@ -31,6 +31,7 @@ DB_DIR = BASE_DIR / "db"
 SCHEMA_VERSION = "0.3.0"
 SCHOOL_ID = "HFNU"
 YEARS = (2024, 2025, 2026)
+SCHOOL_IDS = ("HFNU", "AHNU")
 
 # Fixed namespace: changing this value would change every deterministic ID.
 ID_NAMESPACE = uuid.UUID("465e77c8-7b65-4f02-88ee-f6f71b9d5d38")
@@ -200,7 +201,7 @@ def as_decimal_string(value: Any) -> str:
 _SCORE_RE = re.compile(
     r"^\s*(?P<score>\d+(?:\.\d+)?)"
     r"(?:\s*/\s*(?P<max>\d+(?:\.\d+)?))?"
-    r"(?:\s*[（(]\s*(?P<label>[^:：()（）]+)\s*[:：]\s*(?P<detail>\d+(?:\.\d+)?)\s*[）)])?\s*$"
+    r"(?:\s*[（(]\s*(?P<label>[^:：()（）]+?)\s*[:：]?\s*(?P<detail>\d+(?:\.\d+)?)\s*[）)])?\s*$"
 )
 
 
@@ -224,6 +225,7 @@ def parse_score(raw_value: Any) -> dict[str, str]:
             "专业课1": "professional_1",
             "专业课一": "professional_1",
             "职测": "vocational_assessment",
+            "素质": "quality_assessment",
         }
         detail = {
             "tie_break_label_raw": label,
@@ -304,9 +306,9 @@ def parse_eligibility_item(item: str) -> dict[str, str]:
     }
 
 
-def source_id(year: int | str, document_type: str) -> str:
+def source_id(year: int | str, document_type: str, school_id: str = SCHOOL_ID) -> str:
     code = {"admission_policy": "ZC", "admission_scores": "LQ"}[document_type]
-    return f"SRC-HFNU-{year}-{code}"
+    return f"SRC-{school_id}-{year}-{code}"
 
 
 def source_url_for(year: int | str, document_type: str) -> str:

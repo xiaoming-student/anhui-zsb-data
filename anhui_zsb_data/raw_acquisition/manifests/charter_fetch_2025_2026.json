@@ -1,0 +1,1116 @@
+{
+  "total": 81,
+  "success": 77,
+  "failed": 4,
+  "attachment_links_found": 77,
+  "results": [
+    {
+      "school": "安徽师范大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8782.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "dee1b1935f6fcb2630c03812bb31b13c0763d6b8ff858bc7f0c7cf11012b0921",
+      "attachments": 1
+    },
+    {
+      "school": "安徽农业大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8783.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "de808dca8e4349d9766d54d32d8c97c0b199723dd9453c4897d49d573712355d",
+      "attachments": 1
+    },
+    {
+      "school": "安徽医科大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8784.htm",
+      "status": "downloaded",
+      "size": 7488,
+      "sha256": "4272fc817f399a97e841cea196d7f5cfe07e741d43bae0af8621fca044bf96a7",
+      "attachments": 1
+    },
+    {
+      "school": "安徽工业大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8785.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "9cbce93156b4b3efa02f54c366c5ed30e624c4524a91329a55a9795094e968d7",
+      "attachments": 1
+    },
+    {
+      "school": "安徽财经大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8786.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "14181f916489c658485830b93f48f343f5e43e8ba4c483de71012b256e491cff",
+      "attachments": 1
+    },
+    {
+      "school": "安徽中医药大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8787.htm",
+      "status": "downloaded",
+      "size": 7492,
+      "sha256": "a97653b522cc277466d1151316438ad1985a6cd88da822bb7f0996f7b5d6e386",
+      "attachments": 1
+    },
+    {
+      "school": "安徽建筑大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8788.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "f54d626b823d6ed08bd00a68c180929312c24e851872f6fde48d01101944591b",
+      "attachments": 1
+    },
+    {
+      "school": "安庆师范大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8789.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "f0a777c11984e010413b6d4133080de452eb635157b6f0679ec52bb574024244",
+      "attachments": 1
+    },
+    {
+      "school": "阜阳师范大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyx/8790.htm",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "school": "蚌埠医科大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8791.htm",
+      "status": "downloaded",
+      "size": 7485,
+      "sha256": "f7277468acdc2eec5a217cbd446974bc23e3b6c2be66b4a48c63d08667bc4636",
+      "attachments": 1
+    },
+    {
+      "school": "皖南医科大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8792.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "7477dc9eb4615d39bf3d1f7d92634e9fcf9c38e94ec855996b84351aea7493d6",
+      "attachments": 1
+    },
+    {
+      "school": "安徽科技工程大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8793.htm",
+      "status": "downloaded",
+      "size": 7498,
+      "sha256": "ea18b2dd2a494f5ed2e46afcb8868aa0c571f522ac5c76532be3150d5a4c44e5",
+      "attachments": 1
+    },
+    {
+      "school": "合肥师范学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8794.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "8d0c431ce9582722f0f121064b93e6397421c37783d5d8e4b4a0f3fa79fdf491",
+      "attachments": 1
+    },
+    {
+      "school": "皖西学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8795.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "12a140643e5a28ce67d2483cb1f10f2d3c1233d05b7192c1ac4c4da55e547e65",
+      "attachments": 1
+    },
+    {
+      "school": "淮南师范学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8796.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "c7fe26d69bc37942af07320afad9141ce12a90e08149a9de5cc7da01b9f182f2",
+      "attachments": 1
+    },
+    {
+      "school": "合肥大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8797.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "4b0c6043df6fe9dc955fca18d5e7485f0d7a9ba4eed819909728b20c39130c66",
+      "attachments": 1
+    },
+    {
+      "school": "巢湖学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8798.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "90a16f8f2c2c0b68dfdde3d070b1c588baabf3f4d2f56bb785ebfbb837317c6a",
+      "attachments": 1
+    },
+    {
+      "school": "黄山学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8799.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "8c9677ade24940fc0a9bbf379e6d96d6b6e9776d6a37fd15218da68b6dd3de2f",
+      "attachments": 1
+    },
+    {
+      "school": "铜陵学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8800.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "1fb717caf3287639242a3bc750c94e0e7275386e864fbe9e8d41a2094bdfdf85",
+      "attachments": 1
+    },
+    {
+      "school": "滁州学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8801.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "eb8c8b91fc53a4f6c340211d366f6c12989822f8c02dc33036914bcc2dc5377e",
+      "attachments": 1
+    },
+    {
+      "school": "宿州学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8802.htm",
+      "status": "downloaded",
+      "size": 7473,
+      "sha256": "7618ff5094ac664d797ac921618e8dda7bd8415a3c973a64eadaa87e93edab44",
+      "attachments": 1
+    },
+    {
+      "school": "蚌埠学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8803.htm",
+      "status": "downloaded",
+      "size": 7473,
+      "sha256": "f6f21fa04b5183e774083c01b1ce7ae05249abc1d565bf61ef54066569f2c127",
+      "attachments": 1
+    },
+    {
+      "school": "池州学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyx/8804.htm",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "school": "亳州学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8805.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "b7c369157d1d273315e3a0737d906328fb20b0c515659e343d796eef9bffa60b",
+      "attachments": 1
+    },
+    {
+      "school": "安徽艺术学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8806.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "8d2f45d3af5fcb5299fbc7f3837532ce5dec34fe7583617f91d90cefbe19cd59",
+      "attachments": 1
+    },
+    {
+      "school": "安徽第二医学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8807.htm",
+      "status": "downloaded",
+      "size": 7492,
+      "sha256": "891175514e7eb27b057ba2d2c38072705ffe96dd6dd685f8fe7411d5791d3c53",
+      "attachments": 1
+    },
+    {
+      "school": "安徽职业技术大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8825.htm",
+      "status": "downloaded",
+      "size": 7498,
+      "sha256": "e07d4cd61d5f6f7e84ade6544ebf5ffbf5892e09f8d428618082529de2b1ce5d",
+      "attachments": 1
+    },
+    {
+      "school": "芜湖职业技术大学",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8823.htm",
+      "status": "downloaded",
+      "size": 7498,
+      "sha256": "1ae9c85b345591df62ddaab168d1cac78a958160144cbbe5022634cba6a17363",
+      "attachments": 1
+    },
+    {
+      "school": "安徽新华学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8808.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "2d3948448e8ffb9664591d3479dab6f1757dbefdddf287819382a6824fb39760",
+      "attachments": 1
+    },
+    {
+      "school": "安徽三联学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8809.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "15e77f70426f8024eb2232953974b52a3d9da8af9773b6124cb8c387252220fa",
+      "attachments": 1
+    },
+    {
+      "school": "安徽文达信息工程学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8810.htm",
+      "status": "downloaded",
+      "size": 7510,
+      "sha256": "5057fbb246f5293e09878ee5ab3a4206ba07a898954f59973fc057bbbdbc816f",
+      "attachments": 1
+    },
+    {
+      "school": "安徽外国语学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8811.htm",
+      "status": "downloaded",
+      "size": 7492,
+      "sha256": "ba3a3bced2cd6c12fbc46dc347036c7fb1d8a3ea5c938cab5cf7f82783e94be4",
+      "attachments": 1
+    },
+    {
+      "school": "安徽信息工程学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyx/8812.htm",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "school": "皖江工学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8813.htm",
+      "status": "downloaded",
+      "size": 7480,
+      "sha256": "917c48d119694bf2763270d4046b6fff275d2a9f5b053844742212f215e840dc",
+      "attachments": 1
+    },
+    {
+      "school": "马鞍山学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8814.htm",
+      "status": "downloaded",
+      "size": 7480,
+      "sha256": "dd543bb69e4a89d663c02bacab143412b9eb40a2d90b9d17b5152ddae3f9d2ee",
+      "attachments": 1
+    },
+    {
+      "school": "合肥经济学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8815.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "c47eaa789249723b90a0d30352d53e0e61caba68fb9749dc9e3015e5a12def58",
+      "attachments": 1
+    },
+    {
+      "school": "蚌埠工商学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8816.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "a7b1436ea1ffa2ed8f26d686386c7ba313c11b3fced449b26dcd1110125140c3",
+      "attachments": 1
+    },
+    {
+      "school": "淮北理工学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8817.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "f689c097d4e59eb0694836f403ccaf8abe7893ee41b2f3638e733dd61aa0145e",
+      "attachments": 1
+    },
+    {
+      "school": "合肥城市学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8818.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "e7db8f3c81b86906aa8bedaca59e55edb3506e04cdf144903bfb7dae9e7a3401",
+      "attachments": 1
+    },
+    {
+      "school": "芜湖学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8819.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "e60508e6c5b2360dc951961ade8128309d25d55b67fa202ac3a9524707ac7da1",
+      "attachments": 1
+    },
+    {
+      "school": "阜阳理工学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyx/8820.htm",
+      "status": "failed",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "school": "安徽医科大学临床医学院",
+      "year": 2026,
+      "url": "https://www.ahzsks.cn/zyyx/8821.htm",
+      "status": "downloaded",
+      "size": 7516,
+      "sha256": "775200fd732cc7414bb4504ffe318f7934677dc4ae9fe4d303aef0d07a93960e",
+      "attachments": 1
+    },
+    {
+      "school": "安徽师范大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8095.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "5d3e117422c13c1e5a33022f5f2a4c8482fa079d6bda2a6178cc8ce24ad1edf5",
+      "attachments": 1
+    },
+    {
+      "school": "安徽农业大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8096.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "a9f318a46f2308904b6cbd79e35bcb31ec1f7a104c22b96842d5613c78048a08",
+      "attachments": 1
+    },
+    {
+      "school": "安徽医科大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8097.htm",
+      "status": "downloaded",
+      "size": 7485,
+      "sha256": "4e3b611639faef842304d150711b81b7228c32a67fb817de62d89e6858c37360",
+      "attachments": 1
+    },
+    {
+      "school": "安徽工业大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8098.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "63cb6d76a4a94618da356da2aa0b6319ec6fad76fc860302519f42d1cb81e684",
+      "attachments": 1
+    },
+    {
+      "school": "安徽理工大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8099.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "e1c9c3caa7dd883c1bb562dd83c436c31f463f89fc07c87c51b2ef7107c15221",
+      "attachments": 1
+    },
+    {
+      "school": "安徽中医药大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8100.htm",
+      "status": "downloaded",
+      "size": 7492,
+      "sha256": "9340f9282cbf4958870c2befd9f916528e29f1769445961f661945cd57a9b788",
+      "attachments": 1
+    },
+    {
+      "school": "安徽建筑大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8101.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "2d15eca23918aeccb39454fc864c51cfefe9813c456a7895d3160e297a921c69",
+      "attachments": 1
+    },
+    {
+      "school": "安庆师范大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8102.htm",
+      "status": "downloaded",
+      "size": 7485,
+      "sha256": "9bb13b394c4d6b5ba13e559d565aa7d70648ab226b3f09c1d9941991939bad42",
+      "attachments": 1
+    },
+    {
+      "school": "阜阳师范大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8103.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "6d338eabba860d1f799be0c940b00f6ba100a440b5ed0e50875dc0519bdaa0ad",
+      "attachments": 1
+    },
+    {
+      "school": "蚌埠医科大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8104.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "30014d7b46c6706c353be3217c3dd4d957d47d836835e8379be0bcc01f444794",
+      "attachments": 1
+    },
+    {
+      "school": "皖南医科大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8105.htm",
+      "status": "downloaded",
+      "size": 7480,
+      "sha256": "6b6e7e9d89a0acea7d3e51ff096b1f41983d2442c9fc633fd28a4d8481ac995a",
+      "attachments": 1
+    },
+    {
+      "school": "安徽科技工程大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8106.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "485c6ac2c3a7b3e3ba3b7c6ecd52df75f12b4f6a91607584c15d0e4ac66e2120",
+      "attachments": 1
+    },
+    {
+      "school": "合肥师范学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8107.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "e587ed0516a22a37a17d0b3a706ec37a8bddf32da24050669237fd331abac1d6",
+      "attachments": 1
+    },
+    {
+      "school": "皖西学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8108.htm",
+      "status": "downloaded",
+      "size": 7480,
+      "sha256": "dcf90c1196e06e0d4174d2f583d0ce164d784b69a6300ea3ac22cf64cac5a450",
+      "attachments": 1
+    },
+    {
+      "school": "淮南师范学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8109.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "a82a1360b26ef2deebb8e628ead5561599646dac19efedd1f2de356a2d88714b",
+      "attachments": 1
+    },
+    {
+      "school": "合肥大学",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8110.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "12e43a81047e4d4c1d6e01645dc24574bbe572882f7e99ec96c4afa104e40b97",
+      "attachments": 1
+    },
+    {
+      "school": "巢湖学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8111.htm",
+      "status": "downloaded",
+      "size": 7475,
+      "sha256": "bf86ef3fa80213af3ad4f13dee41808dcd825c0f1d0a94b9041fb3b630f8d7b2",
+      "attachments": 1
+    },
+    {
+      "school": "黄山学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8112.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "a9d9c19defcc972a2efec39e500d830de2852f02f53f1104e76da5130af5c181",
+      "attachments": 1
+    },
+    {
+      "school": "铜陵学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8113.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "686b68d32f28090a23d952f0dde76f0cc08601e57f411644530c24d6a0b1abf6",
+      "attachments": 1
+    },
+    {
+      "school": "滁州学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8114.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "7283c02c799a28bc5046950e1338e117e9fa4de7a68e467d957a99ba537939f3",
+      "attachments": 1
+    },
+    {
+      "school": "宿州学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8115.htm",
+      "status": "downloaded",
+      "size": 7472,
+      "sha256": "35c1f4a890538ad16b68844478272154fdbbf16ce7733310fb2a38de3a134e26",
+      "attachments": 1
+    },
+    {
+      "school": "蚌埠学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8116.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "67422799081fcc282c2cb6cf79d24c7c63e9cf961e4ed8713547501fed419198",
+      "attachments": 1
+    },
+    {
+      "school": "池州学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8117.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "dc88ea7f6307f399a9e0ba1d423e034a99c2debfea308e008a9aab7910382664",
+      "attachments": 1
+    },
+    {
+      "school": "亳州学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8118.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "023f05b657f2f8a7c3134f7c1047b9d55fe3c470ca4982616b7afc3c1dff1e91",
+      "attachments": 1
+    },
+    {
+      "school": "安徽艺术学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8119.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "fb3174c5fba638ce1d9037f3fa55874383d8c3efd8b5d2d5d286ad54cac79c81",
+      "attachments": 1
+    },
+    {
+      "school": "安徽新华学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8120.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "8074d184d2272d44012ef2b3f611691df16f9ea7458bc04c805e6c9371b73b88",
+      "attachments": 1
+    },
+    {
+      "school": "安徽三联学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8121.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "bb7ac2360992918db76162274a600a3a7005c373a8ecfb13f5767ba2072bf0cf",
+      "attachments": 1
+    },
+    {
+      "school": "安徽文达信息工程学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8122.htm",
+      "status": "downloaded",
+      "size": 7510,
+      "sha256": "355333b71df97c6669375ed682753b785b88cda7817c0d9a776e956ad028b159",
+      "attachments": 1
+    },
+    {
+      "school": "安徽外国语学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8123.htm",
+      "status": "downloaded",
+      "size": 7492,
+      "sha256": "b59a8f1f6771d73bcbece1febc962069cfc77f9327365b732a7de43de608749f",
+      "attachments": 1
+    },
+    {
+      "school": "安徽信息工程学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8124.htm",
+      "status": "downloaded",
+      "size": 7498,
+      "sha256": "a73bada885e5de6e3ba98a02cc32adb82dbf605eb1c2ab55436ab74f25e329e9",
+      "attachments": 1
+    },
+    {
+      "school": "皖江工学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8125.htm",
+      "status": "downloaded",
+      "size": 7480,
+      "sha256": "69fa79e045e6a9cb24e5aedae94d6d86f816ba3a9c88291a3400272eb1a55b50",
+      "attachments": 1
+    },
+    {
+      "school": "马鞍山学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8126.htm",
+      "status": "downloaded",
+      "size": 7480,
+      "sha256": "5c13dc14126e03ed4c0ef4edc530de9874d0caae9c928f13b26c1c0c50b543da",
+      "attachments": 1
+    },
+    {
+      "school": "合肥经济学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8127.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "9f3e7de8aa91e9d446642a0c70da7abae710ead6ec18b378cc31b1e05ea070fe",
+      "attachments": 1
+    },
+    {
+      "school": "蚌埠工商学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8128.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "3442ebca80da3250e42feaddb68cbde3a0a5f9491a29cbc95348cea90df1b2dc",
+      "attachments": 1
+    },
+    {
+      "school": "淮北理工学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8129.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "074ecd27b44df7800ead87174ce446448f14a297f202dfcef95dc0a57356e3fc",
+      "attachments": 1
+    },
+    {
+      "school": "合肥城市学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8130.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "7097def87b2b0f4816adfc902295ba2a75234be0b6cc8236596ee16830174677",
+      "attachments": 1
+    },
+    {
+      "school": "芜湖学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8131.htm",
+      "status": "downloaded",
+      "size": 7474,
+      "sha256": "b6e220d13c6590ebc5ebeb1ed059749cb99c30d232547cb2ca423a0157286da5",
+      "attachments": 1
+    },
+    {
+      "school": "阜阳理工学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8133.htm",
+      "status": "downloaded",
+      "size": 7486,
+      "sha256": "5a419540eaa5218f19da5897fcaa54886792130d519f0edb87078a6f72c52d9a",
+      "attachments": 1
+    },
+    {
+      "school": "安徽医科大学临床医学院",
+      "year": 2025,
+      "url": "https://www.ahzsks.cn/zyyx/8134.htm",
+      "status": "downloaded",
+      "size": 7515,
+      "sha256": "feb091c3bbd0fbff680c9c53ffb235ac9cd242f5d8e45bcc281f332ab60e9817",
+      "attachments": 1
+    }
+  ],
+  "attachment_links": [
+    [
+      "安徽师范大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318164109_803.pdf"
+    ],
+    [
+      "安徽农业大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318164144_157.pdf"
+    ],
+    [
+      "安徽医科大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318181806_383.pdf"
+    ],
+    [
+      "安徽工业大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318164808_595.pdf"
+    ],
+    [
+      "安徽财经大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318164842_122.pdf"
+    ],
+    [
+      "安徽中医药大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318164908_320.pdf"
+    ],
+    [
+      "安徽建筑大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318164942_340.pdf"
+    ],
+    [
+      "安庆师范大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165014_787.pdf"
+    ],
+    [
+      "蚌埠医科大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165059_18.pdf"
+    ],
+    [
+      "皖南医科大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165140_109.pdf"
+    ],
+    [
+      "安徽科技工程大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165202_287.pdf"
+    ],
+    [
+      "合肥师范学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165223_469.pdf"
+    ],
+    [
+      "皖西学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165251_807.pdf"
+    ],
+    [
+      "淮南师范学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165339_688.pdf"
+    ],
+    [
+      "合肥大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165357_706.pdf"
+    ],
+    [
+      "巢湖学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165422_668.pdf"
+    ],
+    [
+      "黄山学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165442_399.pdf"
+    ],
+    [
+      "铜陵学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165513_619.pdf"
+    ],
+    [
+      "滁州学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165531_767.pdf"
+    ],
+    [
+      "宿州学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165605_32.pdf"
+    ],
+    [
+      "蚌埠学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165631_12.pdf"
+    ],
+    [
+      "亳州学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165736_968.pdf"
+    ],
+    [
+      "安徽艺术学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165753_168.pdf"
+    ],
+    [
+      "安徽第二医学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165810_564.pdf"
+    ],
+    [
+      "安徽职业技术大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318174101_234.pdf"
+    ],
+    [
+      "芜湖职业技术大学",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170440_185.pdf"
+    ],
+    [
+      "安徽新华学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165840_997.pdf"
+    ],
+    [
+      "安徽三联学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165902_433.pdf"
+    ],
+    [
+      "安徽文达信息工程学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165923_604.pdf"
+    ],
+    [
+      "安徽外国语学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318165939_898.pdf"
+    ],
+    [
+      "皖江工学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170038_774.pdf"
+    ],
+    [
+      "马鞍山学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170105_986.pdf"
+    ],
+    [
+      "合肥经济学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170126_876.pdf"
+    ],
+    [
+      "蚌埠工商学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170202_938.pdf"
+    ],
+    [
+      "淮北理工学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170223_515.pdf"
+    ],
+    [
+      "合肥城市学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170244_225.pdf"
+    ],
+    [
+      "芜湖学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170303_997.pdf"
+    ],
+    [
+      "安徽医科大学临床医学院",
+      2026,
+      "https://www.ahzsks.cn/pic/file/20260318/20260318170354_220.pdf"
+    ],
+    [
+      "安徽师范大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317203614_964.pdf"
+    ],
+    [
+      "安徽农业大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317203719_849.pdf"
+    ],
+    [
+      "安徽医科大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317203816_15.pdf"
+    ],
+    [
+      "安徽工业大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317203900_704.pdf"
+    ],
+    [
+      "安徽理工大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317203946_458.pdf"
+    ],
+    [
+      "安徽中医药大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204039_813.pdf"
+    ],
+    [
+      "安徽建筑大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204123_575.pdf"
+    ],
+    [
+      "安庆师范大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204204_34.pdf"
+    ],
+    [
+      "阜阳师范大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204249_327.pdf"
+    ],
+    [
+      "蚌埠医科大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204337_519.pdf"
+    ],
+    [
+      "皖南医科大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204439_423.pdf"
+    ],
+    [
+      "安徽科技工程大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204542_517.pdf"
+    ],
+    [
+      "合肥师范学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204634_419.pdf"
+    ],
+    [
+      "皖西学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317213837_952.pdf"
+    ],
+    [
+      "淮南师范学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204841_794.pdf"
+    ],
+    [
+      "合肥大学",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317204931_704.pdf"
+    ],
+    [
+      "巢湖学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205135_523.pdf"
+    ],
+    [
+      "黄山学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205310_898.pdf"
+    ],
+    [
+      "铜陵学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205428_691.pdf"
+    ],
+    [
+      "滁州学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205513_775.pdf"
+    ],
+    [
+      "宿州学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205554_3.pdf"
+    ],
+    [
+      "蚌埠学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205638_410.pdf"
+    ],
+    [
+      "池州学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205718_107.pdf"
+    ],
+    [
+      "亳州学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205804_606.pdf"
+    ],
+    [
+      "安徽艺术学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205846_614.pdf"
+    ],
+    [
+      "安徽新华学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317205937_319.pdf"
+    ],
+    [
+      "安徽三联学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210021_618.pdf"
+    ],
+    [
+      "安徽文达信息工程学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210109_859.pdf"
+    ],
+    [
+      "安徽外国语学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210200_661.pdf"
+    ],
+    [
+      "安徽信息工程学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210250_910.pdf"
+    ],
+    [
+      "皖江工学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210334_828.pdf"
+    ],
+    [
+      "马鞍山学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210418_517.pdf"
+    ],
+    [
+      "合肥经济学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210510_117.pdf"
+    ],
+    [
+      "蚌埠工商学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210616_428.pdf"
+    ],
+    [
+      "淮北理工学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210705_431.pdf"
+    ],
+    [
+      "合肥城市学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210745_737.pdf"
+    ],
+    [
+      "芜湖学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210837_640.pdf"
+    ],
+    [
+      "阜阳理工学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317210921_742.pdf"
+    ],
+    [
+      "安徽医科大学临床医学院",
+      2025,
+      "https://www.ahzsks.cn/pic/file/20250317/20250317211001_24.pdf"
+    ]
+  ]
+}
